@@ -14,17 +14,16 @@
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
-			<h2>매일지식 상세내용</h2>
 			<div>
 				<table>
-					<tr>
-						<td>제목</td>
+				<tr><td>IT > 프로그래밍언어 > JAVA</td></tr>
+					<tr style="height:100px;">
+						<td>${title}</td>
 					</tr>
 					<tr>
-						<td>내용${contents }</td>
+						<td>${contents }</td>
 					</tr>
 				</table>
-
 			</div>
 		</div>
 		<%@include file="../common/footer.jsp"%>

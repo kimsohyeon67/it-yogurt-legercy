@@ -12,4 +12,6 @@ public interface KnowledgeService {
 
 	String contents(int knowSeq);
 
+	String title(int knowSeq);
+
 }

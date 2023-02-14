@@ -31,4 +31,9 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 		return dao.contents(knowSeq);
 	}
 
+	@Override
+	public String title(int knowSeq) {
+		return dao.title(knowSeq);
+	}
+
 }

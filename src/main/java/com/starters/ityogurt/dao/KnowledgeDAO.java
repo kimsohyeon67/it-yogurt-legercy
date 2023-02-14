@@ -17,5 +17,7 @@ public interface KnowledgeDAO {
 	int totalCnt(int userSeq);
 
 	String contents(int knowSeq);
+
+	String title(int knowSeq);
 	
 }

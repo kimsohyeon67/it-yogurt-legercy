@@ -15,6 +15,10 @@
 	select count(*) from knowledge where user_seq=#{userSeq}
 </select>
 
+<select id="title" resultType="String" parameterType="int">
+	select title from knowledge where know_seq=#{knowSeq}
+</select>
+
 <select id="contents" resultType="String" parameterType="int">
 	select content from knowledge where know_seq=#{knowSeq}
 </select>

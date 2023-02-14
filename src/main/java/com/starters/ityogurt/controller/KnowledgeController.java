@@ -45,7 +45,9 @@ public class KnowledgeController {
 	@GetMapping("/detail") //매일지식 폼 확인
 	public ModelAndView detail(int knowSeq) {
 		ModelAndView mv = new ModelAndView();
+		String title = service.title(knowSeq);
 		String contents = service.contents(knowSeq);
+		mv.addObject("title",title);
 		mv.addObject("contents",contents);
 		mv.setViewName("knowledge/detail");
 		return mv;
