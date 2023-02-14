@@ -26,10 +26,24 @@ text-align: center;
 <td><a href="<%=request.getContextPath()%>/detail?knowSeq=${list.knowSeq}">${list.title}</a></td>
 <td>${list.insertDate }</td>
 <td>${list.viewcount }</td>
-
 </tr>
 </c:forEach>
-
 </table>
+<div id="page">
+        <%
+            int totalCnt = (int) request.getAttribute("totalCnt");
+            int totalPage = 0;
+            if (totalCnt % 9 == 0) {
+                totalPage = totalCnt / 9;
+            } else {
+                totalPage = totalCnt / 9 + 1;
+            }
+            for (int i = 1; i <= totalPage; i++) {
+        %>
+        <a href="list?page=<%=i%>"><%=i%>페이지</a>
+        <%
+            }
+        %>
+</div>
 </body>
 </html>

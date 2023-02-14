@@ -28,16 +28,15 @@ public class KnowledgeController {
 //	}
 
 	@GetMapping("/list") //매일지식 list 불러오기
-	public ModelAndView list2() {
+	public ModelAndView list2(int page) {
 		ModelAndView mv = new ModelAndView();
-		int page=1;
 //      KnowledgeDTO dto = service.getOneNovel(id);
 		int userSeq = 2;
 		int limit = (page - 1) * 9; // page처리 위해서
 		int totalCnt = service.totalCnt(userSeq); // 매일지식 몇 개인지 불러오기
         List<KnowledgeDTO> knowledgeList = service.list(userSeq,limit);
         mv.addObject("knowledgeList", knowledgeList);
-//        mv.addObject("dto", noveldto);
+        mv.addObject("totalCnt",totalCnt);
         mv.setViewName("knowledge/list");
 		
 		return mv;

@@ -8,7 +8,7 @@
 
 
 <select id="list" resultType="knowledgedto" parameterType="int">
-	select * from knowledge where user_seq=#{userSeq}
+	select * from knowledge where user_seq=#{userSeq} order by know_seq limit #{limit},9
 </select>
 
 <select id="totalCnt" resultType="int" parameterType="int">
