@@ -5,5 +5,21 @@
         
 <mapper namespace="com.starters.ityogurt.dao.UserDAO">
 
+<!-- <select id="getAllUserlist" parameterType="">
+	select * 
+	from user
+</select>
+
+<select id="getUserByUserSeq" parameterType="">
+	select * 
+	from user
+	where user_seq = #{userSeq}
+</select>
+
+<select id="declarationUser" parameterType="">
+	select * 
+	from user
+	where declaration >= #{declarationNum}
+</select> -->
 
 </mapper>

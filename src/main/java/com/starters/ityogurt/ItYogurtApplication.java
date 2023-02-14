@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan(basePackages = {"controller","dao","dto","service","serviceimpl"})
+//@ComponentScan(basePackages = {"controller","dao","dto","service","serviceimpl"})
 
 @SpringBootApplication
 public class ItYogurtApplication {

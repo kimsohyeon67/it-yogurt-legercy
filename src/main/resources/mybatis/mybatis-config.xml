@@ -6,6 +6,6 @@
         <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>   
 	<typeAliases>
-
+		<typeAlias type="com.starters.ityogurt.dto.QuizDTO" alias="quizdto"/>
 	</typeAliases>
 </configuration>
