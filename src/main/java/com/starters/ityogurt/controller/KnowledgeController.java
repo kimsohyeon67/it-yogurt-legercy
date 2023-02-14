@@ -42,7 +42,14 @@ public class KnowledgeController {
 		return mv;
 	}
 	
-	
+	@GetMapping("/detail") //매일지식 폼 확인
+	public ModelAndView detail(int knowSeq) {
+		ModelAndView mv = new ModelAndView();
+		String contents = service.contents(knowSeq);
+		mv.addObject("contents",contents);
+		mv.setViewName("knowledge/detail");
+		return mv;
+	}
 	
 	
 	

@@ -15,5 +15,7 @@ public interface KnowledgeDAO {
 	List<KnowledgeDTO> list(@Param("userSeq")int userSeq, @Param("limit")int limit);
 
 	int totalCnt(int userSeq);
+
+	String contents(int knowSeq);
 	
 }
