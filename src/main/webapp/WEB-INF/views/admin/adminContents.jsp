@@ -5,10 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <meta charset="UTF-8">
+    <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/container.css" rel="stylesheet">
+    <link href="/css/admin.css" rel="stylesheet">
 <title>문제 관리</title>
 </head>
 <body>
-
+<div class="container">
+<%@include file="../common/header.jsp" %>
+    <div class="content">
 <form action ="contents" method="post">
 <div>
 <h4>카테고리</h4>
@@ -51,6 +58,8 @@
 	<input type="hidden" id="know_seq" name="know_seq" value="1">
 	<input type="submit" value="등록">
 </form>
-
+</div>
+<%@include file="../common/footer.jsp" %>
+</div>
 </body>
 </html>
