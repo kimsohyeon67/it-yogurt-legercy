@@ -1,0 +1,22 @@
+@media screen {
+
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  /*min-height: 1080px;*/
+  margin: 0px 20% 0px 20%;
+  background-color: #F9F2ED;
+  max-width: 800px;
+  padding: 0px;
+  font-family: "NEXON Lv1 Gothic OTF";
+  font-weight: normal;
+  font-style: normal;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
