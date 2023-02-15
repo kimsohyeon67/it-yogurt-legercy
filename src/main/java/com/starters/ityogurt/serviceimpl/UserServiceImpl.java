@@ -28,6 +28,8 @@ public class UserServiceImpl implements UserService {
 		return dao.countAllUser();
 	}
 	
-	
-	
+	@Override
+  public int insertUser(UserDTO dto){
+      return dao.InsertUser(dto);
+  }
 }

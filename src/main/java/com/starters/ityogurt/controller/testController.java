@@ -11,8 +11,4 @@ public class testController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
 }

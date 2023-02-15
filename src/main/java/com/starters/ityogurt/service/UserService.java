@@ -11,5 +11,9 @@ public interface UserService {
 	List<UserDTO> getAllUserlistLimit(int limit);
 	
 	int countAllUser();
+  
+  public int insertUser(UserDTO dto);
+  
+  //public UserDTO selectUser(UserDTO dto);
 
 }

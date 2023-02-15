@@ -1,11 +1,9 @@
 package com.starters.ityogurt.dao;
 
+import com.starters.ityogurt.dto.UserDTO;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-
-import com.starters.ityogurt.dto.UserDTO;
 
 @Mapper
 @Repository
@@ -18,5 +16,8 @@ public interface UserDAO {
 	int countAllUser();
 	
 	void deleteUser(int userSeq);
-
+  
+  public int InsertUser(UserDTO dto);
+  
+  public int SelectUserOne(UserDTO dto);
 }

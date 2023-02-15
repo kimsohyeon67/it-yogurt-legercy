@@ -1,5 +1,10 @@
 package com.starters.ityogurt.dto;
 
+import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Component;
+
 public class UserDTO { 
 	
 	int userSeq, declaration, allQuizCount, attendance, categorySeq, isPass;
@@ -103,6 +108,5 @@ public class UserDTO {
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
 	}
-	
 
 }
