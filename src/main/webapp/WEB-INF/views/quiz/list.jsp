@@ -14,12 +14,12 @@
 <title>퀴즈 풀기</title>
 <script>
 
-$(document).click(function(){
-	if($("#hideDiv").css("display") == "none"){
-	    $("#hideDiv").show();
-	} else {
-	    $("#hideDiv").hide();
-	}	
+$(document).ready(function(){
+	$("input:submit").click(function(){
+		if($("#hideDiv").css("display") == "none"){
+		    $("#hideDiv").show();
+		}	
+	});
 });
 
 </script>
@@ -32,6 +32,7 @@ $(document).click(function(){
 			<div style="margin: auto;">
 				<form action="<%=request.getContextPath()%>/answer?knowSeq=${knowSeq}">
 				<c:forEach items="${quizList }" var="list">
+				<input type="hidden" value="${list.knowSeq}" name="knowSeq">
 				<div>
 				<c:set var="i" value="${i+1}"></c:set>
 					<table>
@@ -39,15 +40,15 @@ $(document).click(function(){
 								${i} 번 퀴즈<br><br> ${list.question}<br><br>
 							</td></tr>
 						<div id="${i}" >
-							<tr><td><input type="radio" value="1" id="radio1" name="radio">1. ${list.choice1}</td></tr>
-							<tr><td><input type="radio" value="2" id="radio2" name="radio">2. ${list.choice2}</td></tr>
-							<tr><td><input type="radio" value="3" id="radio3" name="radio">3. ${list.choice3}</td></tr>
+							<tr><td><input type="radio" value="1" id="radio1" name="radio${i}">1. ${list.choice1}</td></tr>
+							<tr><td><input type="radio" value="2" id="radio2" name="radio${i}">2. ${list.choice2}</td></tr>
+							<tr><td><input type="radio" value="3" id="radio3" name="radio${i}">3. ${list.choice3}</td></tr>
 								<c:if test="${list.choice4 ne ''}">
 									<tr><td><input type="radio" value="4" id="radio4" name="radio">4. ${list.choice4}</td></tr>
 								</c:if>
 						</div>
 						<tr><td>
-						<div id="hideDiv">
+						<div id="hideDiv" style="display: none;">
 							<br>정답입니당<br>
 							왜냐하면 어쩌구 저쩌구라서 입니당<br>
 						</div>
@@ -57,7 +58,6 @@ $(document).click(function(){
 				</c:forEach>	
 				<div>
 					<br><input type="submit" value="정답 확인">
-						<input type="hidden" value="${knowSeq}" name="knowSeq">
 				</div>
 				</form>	
 			</div>
