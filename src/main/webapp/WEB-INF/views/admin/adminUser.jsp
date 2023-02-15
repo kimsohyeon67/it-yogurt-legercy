@@ -21,13 +21,14 @@
 		<button id="" onclick="location.href='/admin/user/1'">회원관리</button>
 		<button onclick="location.href='/admin/contents'">컨텐츠 관리</button> <br><br>
 		<h3 id="main" > 전체 회원 </h3> <br>
-		<table class="form">
+		<table class="form" border=3>
 			<tr>
 				<th> 번호 </th>
 				<th> 이메일 </th>
 				<th> 닉네임 </th>
 				<th> 신고 </th>
 				<th> 마지막 로그인 </th>
+				<th> 탈퇴  </th>
 			</tr>
 			<c:forEach items="${userList }" var="list">
 			<tr>
@@ -36,10 +37,11 @@
 				<td>${list.nickname }</td>
 				<td>${list.declaration }</td>
 				<td>${list.lastloginDate }</td>
+				<td><button id= "black" onclick="location.href=''">블랙</button></td>
 			</tr>
 			</c:forEach>
 			<tr>
-			<td colspan="5">
+			<td colspan="6">
 				<%
 				int totalCnt = (int) request.getAttribute("totalCnt");
 				int totalPage = 0;

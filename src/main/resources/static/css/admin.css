@@ -36,3 +36,22 @@
   font-size: 20px;
 }
 
+.form td {
+	border: 1px solid grey;
+	text-align: center;
+}
+.form th {
+	border: 1px solid grey;
+	text-align: center;
+}
+#black {
+  width: 80px;
+  height: 40px;
+  border-style: solid;
+  border-width: medium;
+  border-color: #91ACCC;
+  font-size: 15px;
+  margin-bottom: 0px;
+  align-items: center;
+}
+
