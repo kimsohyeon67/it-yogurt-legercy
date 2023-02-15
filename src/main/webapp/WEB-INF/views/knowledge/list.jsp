@@ -10,18 +10,26 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
-<script
-	src="<%=request.getContextPath()%>resources/static/js/jquery-3.6.1.min.js"></script>
+
 <style type="text/css">
+h1{
+	margin: 30px;
+}
+
 table {
 	border: 1px solid grey;
 	border-collapse: collapse;
-	width: 70%;
+	width: 100%;
 	text-align: center;
 }
 
 #page {
+	margin: 40px;
 	text-align: center;
+}
+
+#tblDiv{
+	margin:auto;
 }
 </style>
 <title>매일지식 컨텐츠</title>
@@ -30,6 +38,7 @@ table {
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
+			<div id="tblDiv">
 			<h1 style="text-align: center;">매일지식 목록</h1>
 			<table border=3>
 				<tr>
@@ -66,6 +75,7 @@ table {
 			</div>
 		</div>
 		<%@include file="../common/footer.jsp"%>
+		</div>
 	</div>
 </body>
 </html>

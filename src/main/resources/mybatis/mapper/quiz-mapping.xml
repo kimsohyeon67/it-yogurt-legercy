@@ -10,5 +10,8 @@
 	values (#{question}, #{answer}, #{commentary},now() ,#{choice1},#{choice2},#{choice3},#{choice4},#{know_seq})
 </insert>
 
+<select id="quiz" resultType="quizdto" parameterType="int">
+	select * from quiz where know_seq=#{knowSeq}
+</select>
 
 </mapper>

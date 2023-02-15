@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.starters.ityogurt.dao.KnowledgeDAO;
+import com.starters.ityogurt.dao.QuizDAO;
 import com.starters.ityogurt.dto.KnowledgeDTO;
+import com.starters.ityogurt.dto.QuizDTO;
 import com.starters.ityogurt.service.KnowledgeService;
 
 
@@ -22,8 +24,8 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 	}
 
 	@Override
-	public int totalCnt(int userSeq) {
-		return dao.totalCnt(userSeq);
+	public int totalCnt() {
+		return dao.totalCnt();
 	}
 
 	@Override
@@ -40,5 +42,7 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 	public void uploadKnowledge(KnowledgeDTO dto) {
 		dao.uploadKnowledge(dto);
 	}
+
+
 
 }

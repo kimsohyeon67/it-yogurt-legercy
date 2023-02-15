@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dao.KnowledgeDAO;
 import com.starters.ityogurt.dto.KnowledgeDTO;
+import com.starters.ityogurt.dto.QuizDTO;
 import com.starters.ityogurt.service.KnowledgeService;
 
 @Controller
@@ -33,7 +33,7 @@ public class KnowledgeController {
 //      KnowledgeDTO dto = service.getOneNovel(id);
 		int userSeq = 2;
 		int limit = (page - 1) * 9; // page처리 위해서
-		int totalCnt = service.totalCnt(userSeq); // 매일지식 몇 개인지 불러오기
+		int totalCnt = service.totalCnt(); // 매일지식 몇 개인지 불러오기
         List<KnowledgeDTO> knowledgeList = service.list(userSeq,limit);
         mv.addObject("knowledgeList", knowledgeList);
         mv.addObject("totalCnt",totalCnt);
@@ -47,14 +47,17 @@ public class KnowledgeController {
 		ModelAndView mv = new ModelAndView();
 		String title = service.title(knowSeq);
 		String contents = service.contents(knowSeq);
+		mv.addObject("knowSeq",knowSeq);
 		mv.addObject("title",title);
 		mv.addObject("contents",contents);
 		mv.setViewName("knowledge/detail");
 		return mv;
 	}
 	
-	
-	
+//	@GetMapping("/quiz") //매일지식 폼 확인
+//	public String quiz() {
+//		return "quiz/list";
+//	}
 	
 	
 	
