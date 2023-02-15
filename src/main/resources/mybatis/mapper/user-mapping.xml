@@ -36,4 +36,11 @@
 	where declaration >= #{declaration}
 </select>
 
+<delete id="deleteUser" parameterType="int">
+	delete 
+	from user
+	where user_seq = #{userSeq}
+</delete>
+
+
 </mapper>
