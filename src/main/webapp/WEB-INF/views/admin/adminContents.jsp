@@ -16,7 +16,10 @@
 
 <div class="container">
 <%@include file="../common/header.jsp" %>
-	
+	<div class="form">
+		<button id="" onclick="location.href='/admin/user/1'">회원관리</button>
+		<button onclick="location.href='/admin/contents'">컨텐츠 관리</button>
+	</div>
 		<form action ="contents" method="post" class="form">
 
 				<h4>카테고리</h4>
