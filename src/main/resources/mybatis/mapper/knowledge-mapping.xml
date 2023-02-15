@@ -23,7 +23,5 @@
 	select content from knowledge where know_seq=#{knowSeq}
 </select>
 
-<select id="list" resultType="quizdto" parameterType="int">
-	select * from quiz where know_seq=#{knowSeq}
-</select>
+
 </mapper>

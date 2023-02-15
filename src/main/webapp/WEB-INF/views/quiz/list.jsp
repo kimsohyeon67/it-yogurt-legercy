@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +19,20 @@
 		<div class="content">
 			<div>
 				<form action=" ">
+				<c:forEach items="${quizList }" var="list">
+				<div>
 					<table>
 						<tr><th style="height:70px;">몇 번 문제!</th></tr>
-						<tr><td style="height:70px;">퀴즈 제목</td></tr>
-						<tr><td>퀴즈 보기1</td></tr>
-						<tr><td>퀴즈 보기2</td></tr>
-						<tr><td>퀴즈 보기3</td></tr>
-						<tr><td>퀴즈 보기4</td></tr>
+						<tr><td style="height:70px;">퀴즈 ${list.question}</td></tr>
+						<tr><td>${list.choice1}</td></tr>
+						<tr><td>${list.choice2}</td></tr>
+						<tr><td>${list.choice3}</td></tr>
+						<c:if test="${fn:length(list)>0}">
+						<tr><td>${list.choice4}</td></tr>
+						</c:if>
 					</table>
+				</div>	
+				</c:forEach>	
 				</form>	
 			</div>
 		</div>

@@ -59,14 +59,6 @@ public class KnowledgeController {
 //		return "quiz/list";
 //	}
 	
-	@GetMapping("/quiz") //매일지식 폼 확인
-	public ModelAndView quiz(int knowSeq) {
-		ModelAndView mv = new ModelAndView();
-		List<QuizDTO> quizList = service.quiz(knowSeq);
-		mv.addObject("knowSeq",knowSeq);
-		mv.setViewName("quiz/list");
-		return mv;
-	}
 	
 	
 	

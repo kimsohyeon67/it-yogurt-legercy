@@ -21,6 +21,5 @@ public interface KnowledgeDAO {
 
 	String title(int knowSeq);
 
-	List<QuizDTO> quiz(int knowSeq);
 	
 }

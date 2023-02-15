@@ -1,5 +1,7 @@
 package com.starters.ityogurt.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,8 @@ public class QuizServiceImpl implements QuizService {
 		dao.uploadContents(dto);
 		
 	}
-	
+	@Override
+	public List<QuizDTO> quiz(int knowSeq) {
+		return dao.quiz(knowSeq);
+	}
 }

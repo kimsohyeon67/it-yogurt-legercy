@@ -38,9 +38,6 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 		return dao.title(knowSeq);
 	}
 
-	@Override
-	public List<QuizDTO> quiz(int knowSeq) {
-		return dao.quiz(knowSeq);
-	}
+
 
 }

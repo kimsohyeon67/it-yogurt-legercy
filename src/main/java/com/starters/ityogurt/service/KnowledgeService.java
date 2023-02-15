@@ -15,6 +15,5 @@ public interface KnowledgeService {
 
 	String title(int knowSeq);
 
-	List<QuizDTO> quiz(int knowSeq);
 
 }
