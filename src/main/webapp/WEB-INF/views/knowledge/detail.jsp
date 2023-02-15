@@ -15,15 +15,22 @@
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 			<div>
-				<table>
-				<tr><td>IT > 프로그래밍언어 > JAVA</td></tr>
-					<tr style="height:100px;">
-						<td>${title}</td>
-					</tr>
-					<tr>
-						<td>${contents }</td>
-					</tr>
-				</table>
+				<form action="<%-- <%=request.getContextPath()%> --%>">
+					<table>
+						<tr>
+							<td>IT > 프로그래밍언어 > JAVA</td>
+						</tr>
+						<tr style="height: 100px;">
+							<td>${title}</td>
+						</tr>
+						<tr>
+							<td>${contents }</td>
+						</tr>
+						<tr>
+							<td><input type="submit" value="퀴즈 풀러가기"></td>
+						</tr>
+					</table>
+				</form>	
 			</div>
 		</div>
 		<%@include file="../common/footer.jsp"%>
