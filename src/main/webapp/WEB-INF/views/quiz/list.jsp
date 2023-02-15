@@ -12,6 +12,17 @@
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
 <title>퀴즈 풀기</title>
+<style type="text/css">
+#hideDiv{
+ display: none;
+}
+
+#num{
+ height:90px;
+}
+
+
+</style>
 <script>
 
 $(document).ready(function(){
@@ -36,7 +47,7 @@ $(document).ready(function(){
 				<div>
 				<c:set var="i" value="${i+1}"></c:set>
 					<table>
-						<tr><td style="height:90px;"><br><br><br>
+						<tr><td id="num"><br><br><br>
 								${i} 번 퀴즈<br><br> ${list.question}<br><br>
 							</td></tr>
 						<div id="${i}" >
@@ -48,7 +59,7 @@ $(document).ready(function(){
 								</c:if>
 						</div>
 						<tr><td>
-						<div id="hideDiv" style="display: none;">
+						<div id="hideDiv">
 							<br>정답입니당<br>
 							왜냐하면 어쩌구 저쩌구라서 입니당<br>
 						</div>

@@ -31,9 +31,10 @@ public class QuizController {
 	}
 	
 	@GetMapping("/answer") //매일지식 폼 확인
-	public String answer(int knowSeq) {
-		
-		return "quiz/list";
+	public ModelAndView answer(int knowSeq) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("quiz/list");
+		return mv;
 	}
 	
 }
