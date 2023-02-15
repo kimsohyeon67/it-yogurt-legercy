@@ -19,25 +19,29 @@
 		<div class="content">
 			<div>
 				<form action=" ">
-				<c:forEach items="${quizList }" var="list">
 				<div>
+				<c:forEach items="${quizList }" var="list">
+				<c:set var="i" value="${i+1}"></c:set>
 					<table>
-						<tr><th style="height:70px;">몇 번 문제!</th></tr>
-						<tr><td style="height:70px;">퀴즈 ${list.question}</td></tr>
-						<tr><td>${list.choice1}</td></tr>
-						<tr><td>${list.choice2}</td></tr>
-						<tr><td>${list.choice3}</td></tr>
-						<c:if test="${fn:length(list)>0}">
-						<tr><td>${list.choice4}</td></tr>
+						<tr><td style="height:90px;"><br>
+								${i} 번 퀴즈<br><br> ${list.question}<br><br>
+							</td></tr>
+						<tr><td><input type="checkbox" value="1">1. ${list.choice1}</td></tr>
+						<tr><td><input type="checkbox" value="2">2. ${list.choice2}</td></tr>
+						<tr><td><input type="checkbox" value="3">3. ${list.choice3}</td></tr>
+						<c:if test="${list.choice4 ne ''}">
+						<tr><td><input type="checkbox" value="4">4. ${list.choice4}</td></tr>
 						</c:if>
 					</table>
-				</div>	
 				</c:forEach>	
+				</div>	
+				<div>
+					<br><input type="submit" value="정답 확인">
+				</div>
 				</form>	
 			</div>
 		</div>
 		<%@include file="../common/footer.jsp"%>
 	</div>
-
 </body>
 </html>
