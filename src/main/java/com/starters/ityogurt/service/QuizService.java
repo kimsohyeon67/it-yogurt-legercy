@@ -5,8 +5,9 @@ import java.util.List;
 import com.starters.ityogurt.dto.QuizDTO;
 
 public interface QuizService {
-	void uploadContents (QuizDTO dto);
-	
+
 	List<QuizDTO> quiz(int knowSeq);
+
+	void uploadQuiz (QuizDTO dto);
 	
 }

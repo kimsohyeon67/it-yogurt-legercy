@@ -5,14 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.starters.ityogurt.dto.QuizDTO;
+import com.starters.ityogurt.dto.UserDTO;
 
 @Mapper
 @Repository
-public interface QuizDAO {
-
-	List<QuizDTO> quiz(int knowSeq);
-
-	void uploadQuiz(QuizDTO dto);
+public interface BlacklistDAO {
+	
+	String insertBlackUser (String email);
 
 }

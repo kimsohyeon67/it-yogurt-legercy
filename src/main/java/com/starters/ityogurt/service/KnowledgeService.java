@@ -15,5 +15,6 @@ public interface KnowledgeService {
 
 	String title(int knowSeq);
 
+	void uploadKnowledge(KnowledgeDTO dto);
 
 }

@@ -2,10 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-
 <mapper namespace="com.starters.ityogurt.dao.KnowledgeDAO">
-
 
 <select id="list" resultType="knowledgedto" parameterType="int">
 	select * from knowledge where user_seq=#{userSeq} order by know_seq limit #{limit},9
@@ -23,5 +20,9 @@
 	select content from knowledge where know_seq=#{knowSeq}
 </select>
 
+<insert id="uploadKnowledge" parameterType="knowledgedto">
+	insert into knowledge(title, content, img, insert_date, update_date, category_seq, user_seq)
+	values (#{title},#{content},#{img}, now(), now(),#{categorySeq},#{userSeq})
+</insert>
 
 </mapper>

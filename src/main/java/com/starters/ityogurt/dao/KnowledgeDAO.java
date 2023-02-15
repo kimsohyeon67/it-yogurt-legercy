@@ -22,4 +22,6 @@ public interface KnowledgeDAO {
 	String title(int knowSeq);
 
 	
+	void uploadKnowledge(KnowledgeDTO dto);
+	
 }

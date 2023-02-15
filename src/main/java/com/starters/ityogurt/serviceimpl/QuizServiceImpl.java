@@ -16,8 +16,8 @@ public class QuizServiceImpl implements QuizService {
 	QuizDAO dao;
 	
 	@Override
-	public void uploadContents(QuizDTO dto) {
-		dao.uploadContents(dto);
+	public void uploadQuiz(QuizDTO dto) {
+		dao.uploadQuiz(dto);
 		
 	}
 	@Override

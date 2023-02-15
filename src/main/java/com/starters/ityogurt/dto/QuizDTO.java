@@ -1,10 +1,11 @@
 package com.starters.ityogurt.dto;
 
-public class QuizDTO { //
-	int quizSeq, answer, deleted, knowSeq;
+public class QuizDTO { 
+
+	int quizSeq,answer,deleted, knowSeq;
 	String question, commentary, insertDate;
 	String choice1, choice2, choice3, choice4;
-
+	
 	public int getQuizSeq() {
 		return quizSeq;
 	}
