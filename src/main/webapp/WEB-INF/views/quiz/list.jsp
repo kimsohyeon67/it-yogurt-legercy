@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,33 +8,28 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
-<title>매일지식</title>
+<title>퀴즈 풀기</title>
 </head>
 <body>
-	<div class="container">
+<h1>퀴즈풀기</h1>
+<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 			<div>
-				<form action=" <%=request.getContextPath()%>/quiz?knowSeq=${knowSeq}">
+				<form action=" ">
 					<table>
-						<tr>
-							<td>IT > 프로그래밍언어 > JAVA</td>
-						</tr>
-						<tr style="height: 100px;">
-							<td><b>${title}</b></td>
-						</tr>
-						<tr>
-							<td>${contents }</td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="퀴즈 풀러가기">
-							<input type="hidden" value="${knowSeq}" name="knowSeq"></td>
-						</tr>
+						<tr><th style="height:70px;">몇 번 문제!</th></tr>
+						<tr><td style="height:70px;">퀴즈 제목</td></tr>
+						<tr><td>퀴즈 보기1</td></tr>
+						<tr><td>퀴즈 보기2</td></tr>
+						<tr><td>퀴즈 보기3</td></tr>
+						<tr><td>퀴즈 보기4</td></tr>
 					</table>
 				</form>	
 			</div>
 		</div>
 		<%@include file="../common/footer.jsp"%>
 	</div>
+
 </body>
 </html>
