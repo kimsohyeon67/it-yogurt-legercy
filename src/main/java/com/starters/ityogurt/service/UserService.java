@@ -1,4 +1,8 @@
 package com.starters.ityogurt.service;
 
-public class UserService {
+import com.starters.ityogurt.dto.UserDTO;
+
+public interface UserService {
+    public int insertUser(UserDTO dto);
+    //public UserDTO selectUser(UserDTO dto);
 }
