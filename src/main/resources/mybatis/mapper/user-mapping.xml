@@ -4,21 +4,43 @@
         
 <mapper namespace="com.starters.ityogurt.dao.UserDAO">
 
-<!-- <select id="getAllUserlist" parameterType="">
+ <select id="getAllUserlist" resultType="userdto">
 	select * 
-	from user
-</select>
-
-<select id="getUserByUserSeq" parameterType="">
+	from user order by user_seq
+	where admin is null
+ </select>
+ 
+ <select id="getAllUserlistLimit" resultType="userdto" parameterType="int">
+	select * 
+	from user 
+	where admin is null
+	order by user_seq
+	limit #{limit}, 10	
+ </select>
+ 
+ <select id="getUserByUserSeq" resultType="userdto" parameterType="int">
 	select * 
 	from user
 	where user_seq = #{userSeq}
 </select>
 
-<select id="declarationUser" parameterType="">
+ <select id="countAllUser" resultType="int">
+	select count(*) 
+	from user 
+	where admin is null
+</select>
+
+ <select id="declarationUser" resultType="userdto" parameterType="int">
 	select * 
 	from user
-	where declaration >= #{declarationNum}
-</select> -->
+	where declaration >= #{declaration}
+</select>
+
+<delete id="deleteUser" parameterType="int">
+	delete 
+	from user
+	where user_seq = #{userSeq}
+</delete>
+
 
 </mapper>

@@ -2,7 +2,12 @@
 
 }
 
-.content input {
+.form {
+  margin-top: 50px;
+  width: 100%;
+  text-align: center;
+}
+.form input {
   width: 250px;
   height: 40px;
   border-style: solid;
@@ -12,7 +17,7 @@
   font-size: 20px;
 }
 
-.content textarea {
+.form textarea {
   border-style: solid;
   border-width: medium;
   margin-bottom: 35px;
@@ -20,12 +25,8 @@
   font-size: 20px;
 }
 
-.content h3 {
-  text-align: center;
-  
-}
 
-.content button {
+.form button {
   width: 250px;
   height: 40px;
   border-style: solid;
@@ -34,3 +35,23 @@
   border-color: #91ACCC;
   font-size: 20px;
 }
+
+.form td {
+	border: 1px solid grey;
+	text-align: center;
+}
+.form th {
+	border: 1px solid grey;
+	text-align: center;
+}
+#black {
+  width: 80px;
+  height: 40px;
+  border-style: solid;
+  border-width: medium;
+  border-color: #91ACCC;
+  font-size: 15px;
+  margin-bottom: 0px;
+  align-items: center;
+}
+

@@ -9,14 +9,8 @@ import com.starters.ityogurt.dto.UserDTO;
 
 @Mapper
 @Repository
-public interface UserDAO {
+public interface BlacklistDAO {
 	
-	List<UserDTO> getAllUserlist();
-	
-	List<UserDTO> getAllUserlistLimit(int limit);
-
-	int countAllUser();
-	
-	void deleteUser(int userSeq);
+	String insertBlackUser (String email);
 
 }

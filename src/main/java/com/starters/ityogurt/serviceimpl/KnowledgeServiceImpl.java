@@ -35,5 +35,10 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 	public String title(int knowSeq) {
 		return dao.title(knowSeq);
 	}
+	
+	@Override
+	public void uploadKnowledge(KnowledgeDTO dto) {
+		dao.uploadKnowledge(dto);
+	}
 
 }
