@@ -16,7 +16,7 @@
 
 <div class="container">
 <%@include file="../common/header.jsp" %>
-    <div class="content">
+    <div class="form">
 		<h3 id="main" > 회원 관리 </h3> <br>
 		<button id="" onclick="location.href='user'">회원관리</button>
 		<button onclick="location.href='contents'">컨텐츠 관리</button>
