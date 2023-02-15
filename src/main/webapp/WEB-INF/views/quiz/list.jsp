@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@include file="../common/tag.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,17 +12,16 @@
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
 <title>퀴즈 풀기</title>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
-$(document).ready(function(){
-	$('input[type="checkbox"][name="chk"]').click(function(){
-	    if($(this).prop('checked')){
-	    	$('input[type="checkbox"][name="chk"]').prop('checked',false);
-	    	$(this).prop('checked',true);
-	    }
-	});
-	
+
+$(document).click(function(){
+	if($("#hideDiv").css("display") == "none"){
+	    $("#hideDiv").show();
+	} else {
+	    $("#hideDiv").hide();
+	}	
 });
+
 </script>
 </head>
 <body>
@@ -29,26 +29,35 @@ $(document).ready(function(){
 <div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
-			<div>
-				<form action=" ">
-				<div>
+			<div style="margin: auto;">
+				<form action="<%=request.getContextPath()%>/answer?knowSeq=${knowSeq}">
 				<c:forEach items="${quizList }" var="list">
+				<div>
 				<c:set var="i" value="${i+1}"></c:set>
 					<table>
-						<tr><td style="height:90px;"><br>
+						<tr><td style="height:90px;"><br><br><br>
 								${i} 번 퀴즈<br><br> ${list.question}<br><br>
 							</td></tr>
-						<tr><td><input type="checkbox" value="1" id="chk1" name="chk">1. ${list.choice1}</td></tr>
-						<tr><td><input type="checkbox" value="2" id="chk2" name="chk">2. ${list.choice2}</td></tr>
-						<tr><td><input type="checkbox" value="3" id="chk3" name="chk">3. ${list.choice3}</td></tr>
-						<c:if test="${list.choice4 ne ''}">
-						<tr><td><input type="checkbox" value="4" id="chk4" name="chk">4. ${list.choice4}</td></tr>
-						</c:if>
+						<div id="${i}" >
+							<tr><td><input type="radio" value="1" id="radio1" name="radio">1. ${list.choice1}</td></tr>
+							<tr><td><input type="radio" value="2" id="radio2" name="radio">2. ${list.choice2}</td></tr>
+							<tr><td><input type="radio" value="3" id="radio3" name="radio">3. ${list.choice3}</td></tr>
+								<c:if test="${list.choice4 ne ''}">
+									<tr><td><input type="radio" value="4" id="radio4" name="radio">4. ${list.choice4}</td></tr>
+								</c:if>
+						</div>
+						<tr><td>
+						<div id="hideDiv">
+							<br>정답입니당<br>
+							왜냐하면 어쩌구 저쩌구라서 입니당<br>
+						</div>
+						</td></tr>
 					</table>
-				</c:forEach>	
 				</div>	
+				</c:forEach>	
 				<div>
 					<br><input type="submit" value="정답 확인">
+						<input type="hidden" value="${knowSeq}" name="knowSeq">
 				</div>
 				</form>	
 			</div>

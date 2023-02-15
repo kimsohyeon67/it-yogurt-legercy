@@ -25,13 +25,15 @@ public class QuizController {
 	public ModelAndView quiz(int knowSeq) {
 		ModelAndView mv = new ModelAndView();
 		List<QuizDTO> quizList = service.quiz(knowSeq);
-		for(QuizDTO q : quizList) {
-			System.out.println(q.getQuestion());
-		}
 		mv.addObject("quizList", quizList);
 		mv.setViewName("quiz/list");
 		return mv;
 	}
 	
+	@GetMapping("/answer") //매일지식 폼 확인
+	public String answer(int knowSeq) {
+		
+		return "quiz/list";
+	}
 	
 }
