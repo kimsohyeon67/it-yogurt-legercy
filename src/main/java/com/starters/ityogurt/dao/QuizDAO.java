@@ -8,5 +8,5 @@ import com.starters.ityogurt.dto.QuizDTO;
 @Mapper
 @Repository
 public interface QuizDAO {
-	void uploadContents(QuizDTO dto);
+	void uploadQuiz(QuizDTO dto);
 }

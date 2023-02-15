@@ -19,18 +19,19 @@
 <form action ="contents" method="post">
 <div>
 <h4>카테고리</h4>
-
+	<input type="hidden" name ="categorySeq" value="2" >
+	<input type="hidden" name ="userSeq" value="2" >
 </div>
 	<div>
 		정보글 등록
 	</div>
 	<div>
 		제목 <br>
-		<input type="text" id="title" >
+		<input type="text" id="title" name="title">
 	</div>
 	<div>
 		내용 등록 <br>
-		<textarea rows="8" cols="50" id="content"></textarea>
+		<textarea rows="8" cols="50" id="content" name="content"></textarea>
 	</div>
 	
 	<div>
