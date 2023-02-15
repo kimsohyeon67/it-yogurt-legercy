@@ -34,15 +34,19 @@ public class AdminController {
 	        return "admin/adminUser";
 	    }
 	 @GetMapping("/contents")
-	    public String adminContents() {
-	        return "admin/adminContents";
+	    public ModelAndView adminContents() {
+		 	ModelAndView mv = new ModelAndView();
+		 	int knowSeq = knowledgeService.totalCnt(2) + 1;
+		 	mv.addObject("knowSeq", knowSeq);
+		 	mv.setViewName("admin/adminContents");
+	        return mv; 
 	    }
 	 
 	 @PostMapping("/contents")
 	 	public ModelAndView UploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
 		 	ModelAndView mv = new ModelAndView();
-		 	quizService.uploadQuiz(quizDto);
 		 	knowledgeService.uploadKnowledge(knowledgeDto);
+		 	quizService.uploadQuiz(quizDto);
 		 	mv.setViewName("redirect:page");
 		 	return mv;
 	 }
