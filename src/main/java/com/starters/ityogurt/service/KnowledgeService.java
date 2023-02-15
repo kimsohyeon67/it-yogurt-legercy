@@ -10,4 +10,8 @@ public interface KnowledgeService {
 
 	int totalCnt(int userSeq);
 
+	String contents(int knowSeq);
+
+	String title(int knowSeq);
+
 }

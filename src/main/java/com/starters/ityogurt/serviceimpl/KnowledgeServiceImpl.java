@@ -26,4 +26,14 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 		return dao.totalCnt(userSeq);
 	}
 
+	@Override
+	public String contents(int knowSeq) {
+		return dao.contents(knowSeq);
+	}
+
+	@Override
+	public String title(int knowSeq) {
+		return dao.title(knowSeq);
+	}
+
 }
