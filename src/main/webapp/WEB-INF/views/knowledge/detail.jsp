@@ -8,32 +8,52 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
+<style type="text/css">
+#contents{
+	margin: 400px;
+}
+
+#subBtn{
+    margin-left: 38%;
+	width:150px;
+ 	margin-top: 50px;
+ 	margin-bottom: 50px;
+}
+
+#category{
+	height:50px;
+}
+</style>
 <title>매일지식</title>
 </head>
 <body>
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
-			<div>
 				<form action=" <%=request.getContextPath()%>/quiz?knowSeq=${knowSeq}">
-					<table>
-						<tr>
-							<td>IT > 프로그래밍언어 > JAVA</td>
-						</tr>
-						<tr style="height: 100px;">
-							<td><b>${title}</b></td>
-						</tr>
-						<tr>
-							<td>${contents }</td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="퀴즈 풀러가기">
-							<input type="hidden" value="${knowSeq}" name="knowSeq"></td>
-						</tr>
-					</table>
+					<div>
+						<table>
+						<div>
+							<tr>
+								<td id="category">IT > 프로그래밍언어 > JAVA</td>
+							</tr>
+							</div>
+							<div>
+							<tr style="height: 100px;">
+								<td><b>${title}</b></td>
+							</tr>
+							</div>
+							<tr>
+								<td id="contents">${contents }</td>
+							</tr>
+							<tr>
+								<td><input type="submit" value="퀴즈 풀러가기" id="subBtn">
+								<input type="hidden" value="${knowSeq}" name="knowSeq"></td>
+							</tr>
+						</table>
+					</div>
 				</form>	
 			</div>
-		</div>
 		<%@include file="../common/footer.jsp"%>
 	</div>
 </body>
