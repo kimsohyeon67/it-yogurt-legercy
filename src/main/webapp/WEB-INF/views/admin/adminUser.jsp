@@ -29,6 +29,7 @@
 				<th> 신고 </th>
 				<th> 마지막 로그인 </th>
 				<th> 탈퇴  </th>
+				<th> 블랙 </th>
 			</tr>
 			<c:forEach items="${userList }" var="list">
 			<tr>
@@ -37,11 +38,12 @@
 				<td>${list.nickname }</td>
 				<td>${list.declaration }</td>
 				<td>${list.lastloginDate }</td>
+				<td><button id= "black" style="border-color: #C0D8C0" onclick="location.href=''">탈퇴</button></td>
 				<td><button id= "black" onclick="location.href=''">블랙</button></td>
 			</tr>
 			</c:forEach>
 			<tr>
-			<td colspan="6">
+			<td colspan="7">
 				<%
 				int totalCnt = (int) request.getAttribute("totalCnt");
 				int totalPage = 0;
