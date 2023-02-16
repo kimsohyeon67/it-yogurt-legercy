@@ -78,7 +78,9 @@ public class QuizController {
 		
 		//답 보여줘야 하니 learn_record 불러오기
 		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq[0],quizSeq[1],quizSeq[2]);
-		
+		for(LearnRecordDTO d:learnList) {
+			System.out.println(d);
+		}
 		//퀴즈 내용 불러와야 하니까 리스트 가져옴
 		List<QuizDTO> quizList = service.quiz(knowSeq);
 		
