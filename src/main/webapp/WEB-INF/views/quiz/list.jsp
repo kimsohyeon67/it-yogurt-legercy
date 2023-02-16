@@ -28,13 +28,13 @@
 $(document).ready(function(){
 	//해설
 	$("input:submit").click(function(e){
+		var inputValue = $("input[name='radio${i}']:checked").val(); 
+		alert(inputValue);
 		//답이 모두 체크되었을때
 		if($("#hideDiv").css("display") == "none"){
 			e.preventDefault();
 		    $("#hideDiv").show();
-		} else{//답이 하나라도 체크되어 있지 않을때
-			
-		}	
+		} 	
 		
 		
 	});
@@ -64,10 +64,10 @@ $(document).ready(function(){
 								Q. ${i}번<br><br> ${list.question}<br><br>
 							</td></tr>
 						<div id="${i}" >
-							<tr><td><input type="radio" value="1" id="radio1" name="radio${i}">1. ${list.choice1}</td></tr>
-							<tr><td><input type="radio" value="2" id="radio2" name="radio${i}">2. ${list.choice2}</td></tr>
-							<tr><td><input type="radio" value="3" id="radio3" name="radio${i}">3. ${list.choice3}</td></tr>
-								<c:if test="${list.choice4 ne ''}">
+									<tr><td><input type="radio" value="1" id="radio1" name="radio${i}">1. ${list.choice1}</td></tr>
+									<tr><td><input type="radio" value="2" id="radio2" name="radio${i}">2. ${list.choice2}</td></tr>
+								<c:if test="${list.choice4 ne '' ||list.choice3 ne '' }">
+									<tr><td><input type="radio" value="3" id="radio3" name="radio${i}">3. ${list.choice3}</td></tr>
 									<tr><td><input type="radio" value="4" id="radio4" name="radio">4. ${list.choice4}</td></tr>
 								</c:if>
 						</div>
