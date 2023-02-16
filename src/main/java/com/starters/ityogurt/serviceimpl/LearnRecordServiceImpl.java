@@ -20,6 +20,11 @@ public class LearnRecordServiceImpl implements LearnRecordService{
 		dao.learnDate(userChoice, isRight, userSeq, quizSeq);
 		
 	}
+
+	@Override
+	public List<LearnRecordDTO> getLearn(int quizSeq1, int quizSeq2, int quizSeq3) {
+		return dao.getLearn(quizSeq1, quizSeq2, quizSeq3);
+	}
 	
 	
 

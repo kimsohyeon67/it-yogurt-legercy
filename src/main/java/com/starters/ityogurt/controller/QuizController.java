@@ -74,16 +74,14 @@ public class QuizController {
 			learnRecordService.learnData(userChoice[i], isRight[i], userSeq, quizSeq[i]);
 		}
 		
-		//
+		//답 보여줘야 하니 learn_record 불러오기
+		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq[0],quizSeq[1],quizSeq[2]);
 		
 		//퀴즈 내용 불러와야 하니까 리스트 가져옴
 		List<QuizDTO> quizList = service.quiz(knowSeq);
 		
 		mv.addObject("quizList", quizList);
-		
-		
-		
-		
+		mv.addObject("learnList", learnList);
 		request.setAttribute("quizList", quizList);
 		
 		
@@ -91,16 +89,16 @@ public class QuizController {
 //		String[] chk1 = request.getParameterValues("chk");
 //		int[] chk = new int[chk1.length]; 
 		
-		for(int i = 0;i<quizSeq.length;i++) {
-			quizSeq[i]=Integer.parseInt(s1[i]);
-		}
+//		for(int i = 0;i<quizSeq.length;i++) {
+//			quizSeq[i]=Integer.parseInt(s1[i]);
+//		}
 //		for(int i:chk) {
 //			System.out.println("선택한 보기 값: "+i);
 //		}
-	
-		for(int a : quizSeq) {
-			System.out.println(a);
-		}
+//	
+//		for(int a : quizSeq) {
+//			System.out.println(a);
+//		}
 		
 		
 //		System.out.println(quizSeq);
