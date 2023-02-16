@@ -57,7 +57,7 @@
 				<textarea rows="3" cols="50" id="commentary" name="commentary"></textarea>
 			
 			
-			<input type="hidden" id="know_seq" name="know_seq" value=${knowSeq }>
+			<input type="hidden" id="knowSeq" name="knowSeq" value=${knowSeq }>
 		<input type="submit" value="등록">
 		
 		</form>
