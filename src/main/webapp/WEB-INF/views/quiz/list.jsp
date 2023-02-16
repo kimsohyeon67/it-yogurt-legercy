@@ -26,29 +26,42 @@
 <script>
 
 $(document).ready(function(){
-	$("input:submit").click(function(){
+	//해설
+	$("input:submit").click(function(e){
+		//답이 모두 체크되었을때
 		if($("#hideDiv").css("display") == "none"){
+			e.preventDefault();
 		    $("#hideDiv").show();
+		} else{//답이 하나라도 체크되어 있지 않을때
+			
 		}	
+		
+		
 	});
+	
+	
+	
 });
 
 </script>
 </head>
 <body>
-<h1>퀴즈풀기</h1>
 <div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 			<div style="margin: auto;">
+				<div>
+					<h2>퀴즈풀기</h2>
+				</div>
 				<form action="<%=request.getContextPath()%>/answer?knowSeq=${knowSeq}">
 				<c:forEach items="${quizList }" var="list">
 				<input type="hidden" value="${list.knowSeq}" name="knowSeq">
+				<input type="hidden" value="${list.quizSeq}" name="quizSeq">
 				<div>
 				<c:set var="i" value="${i+1}"></c:set>
 					<table>
 						<tr><td id="num"><br><br><br>
-								${i} 번 퀴즈<br><br> ${list.question}<br><br>
+								Q. ${i}번<br><br> ${list.question}<br><br>
 							</td></tr>
 						<div id="${i}" >
 							<tr><td><input type="radio" value="1" id="radio1" name="radio${i}">1. ${list.choice1}</td></tr>
@@ -68,7 +81,7 @@ $(document).ready(function(){
 				</div>	
 				</c:forEach>	
 				<div>
-					<br><input type="submit" value="정답 확인">
+					<br><input type="submit" id="checkAnswer" value="정답 확인">
 				</div>
 				</form>	
 			</div>

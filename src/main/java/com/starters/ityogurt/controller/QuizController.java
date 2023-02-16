@@ -12,6 +12,8 @@ import com.starters.ityogurt.dao.QuizDAO;
 import com.starters.ityogurt.dto.QuizDTO;
 import com.starters.ityogurt.service.QuizService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class QuizController {
 
@@ -27,12 +29,15 @@ public class QuizController {
 		List<QuizDTO> quizList = service.quiz(knowSeq);
 		mv.addObject("quizList", quizList);
 		mv.setViewName("quiz/list");
+//		
 		return mv;
 	}
 	
-	@GetMapping("/answer") //매일지식 폼 확인
-	public ModelAndView answer(int knowSeq) {
+	@GetMapping("/answer") 
+	public ModelAndView answer(int knowSeq, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
+		int quizSeq = Integer.parseInt(request.getParameter("quizSeq"));
+		System.out.println(quizSeq);
 		mv.setViewName("quiz/list");
 		return mv;
 	}
