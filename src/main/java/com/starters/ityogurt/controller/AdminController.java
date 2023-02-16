@@ -35,16 +35,16 @@ public class AdminController {
 	@Qualifier("userservice")
 	UserService userService;
 
-	 @GetMapping("/page")
+	 @GetMapping("/page")  //관리자 마이페이지
 	    public String admin() {
 	        return "admin/adminPage";
 	    }
-	 @GetMapping(value ={"/user","/user/" ,"/user/{page}"})
-	    public ModelAndView adminUser(@PathVariable(value = "page", required=false) Optional<String> page) {
+	 @GetMapping(value ={"/user","/user/" ,"/user/{userpage}"})  // 관리자 회원 조회 
+	    public ModelAndView adminUser(@PathVariable(value = "userpage", required=false) Optional<String> userPage) {
 		 	ModelAndView mv = new ModelAndView();
 		 	int pageInt=0;
-		 	if (page!=null) {
-		 		pageInt =Integer.parseInt(page.get()) ;
+		 	if (userPage!=null) {
+		 		pageInt =Integer.parseInt(userPage.get()) ;
 		 	}
 		 	else {
 		 		pageInt= 1;
@@ -58,16 +58,16 @@ public class AdminController {
 		 	mv.setViewName("admin/adminUser");
 		 	return mv;
 	    }
-	 @GetMapping("/contents")
+	 @GetMapping("/contents") // 컨텐츠 업로드 화면
 	    public ModelAndView adminContents() {
 		 	ModelAndView mv = new ModelAndView();
-		 	int knowSeq = knowledgeService.totalCnt(2) + 1;
+		 	int knowSeq = knowledgeService.totalCnt() + 1;
 		 	mv.addObject("knowSeq", knowSeq);
 		 	mv.setViewName("admin/adminContents");
 	        return mv; 
 	    }
 	 
-	 @PostMapping("/contents")
+	 @PostMapping("/contents") // 컨텐츠 업로드 
 	 	public ModelAndView UploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
 		 	ModelAndView mv = new ModelAndView();
 		 	knowledgeService.uploadKnowledge(knowledgeDto);
