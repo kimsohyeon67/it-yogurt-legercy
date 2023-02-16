@@ -62,9 +62,9 @@ public class AdminController {
 		 	}
 		 	
 		 	int limit = (pageInt- 1) * 10;
-		 	int totalCnt = userService.countAllUser();
+		 	int totalUserCnt = userService.countAllUser();
 		 	List<UserDTO> userList = userService.getAllUserlistLimit(limit);
-		 	mv.addObject("totalCnt", totalCnt);
+		 	mv.addObject("totalUserCnt", totalUserCnt);
 		 	mv.addObject("userList", userList);
 		 	mv.setViewName("admin/adminUser");
 		 	return mv;
