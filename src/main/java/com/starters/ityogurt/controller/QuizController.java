@@ -62,9 +62,11 @@ public class QuizController {
 		int[] isRight = new int[3];
 		for(int i=0;i<isRight.length;i++) {
 			if(userChoice[i] == answer[i]) {
-				isRight[i] = 1;							
+				isRight[i] = 1;						
+				System.out.println(isRight[i]);
 			}else {
 				isRight[i] = 0;
+				System.out.println(isRight[i]);
 			}
 		}
 		

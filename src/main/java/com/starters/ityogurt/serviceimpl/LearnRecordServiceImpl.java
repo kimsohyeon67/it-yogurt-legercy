@@ -17,7 +17,7 @@ public class LearnRecordServiceImpl implements LearnRecordService{
 
 	@Override
 	public void learnData(int userChoice, int isRight, int userSeq, int quizSeq) {
-		dao.learnDate(userChoice, isRight, userSeq, quizSeq);
+		dao.learnData(userChoice, isRight, userSeq, quizSeq);
 		
 	}
 
