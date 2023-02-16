@@ -40,15 +40,15 @@ public class QuizController {
 		String[] s1 = request.getParameterValues("quizSeq");
 		int[] quizSeq = new int[s1.length]; 
 		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
-		String[] chk1 = request.getParameterValues("chk");
-		int[] chk = new int[chk1.length]; 
+//		String[] chk1 = request.getParameterValues("chk");
+//		int[] chk = new int[chk1.length]; 
 		
 		for(int i = 0;i<quizSeq.length;i++) {
 			quizSeq[i]=Integer.parseInt(s1[i]);
 		}
-		for(int i:chk) {
-			System.out.println("선택한 보기 값: "+i);
-		}
+//		for(int i:chk) {
+//			System.out.println("선택한 보기 값: "+i);
+//		}
 	
 		for(int a : quizSeq) {
 			System.out.println(a);
@@ -61,7 +61,7 @@ public class QuizController {
 //			System.out.println(a);
 //		}
 		
-		mv.setViewName("quiz/list");
+		mv.setViewName("quiz/answer");
 		return mv;
 	}
 	

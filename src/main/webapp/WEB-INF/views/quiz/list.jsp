@@ -26,24 +26,40 @@
 		//해설  n
 		$("input:submit").click(function(e) {
 			var length = $('input[name=length]').val(); //문제 길이
-			var chk = $('input[name=radio1]:checked').val(); //체크된 보기 번호
-			console.log(length);
-			console.log(chk);
-			//답이 모두 체크되었을때
-
-			if ($(".hideDiv").css("display") == "none") {
-		//		e.preventDefault();
-				$(".hideDiv").show();
-
-				$("#checkAnswer").hide();
-				$(".radio").hide();
+			var chk1 = $('input[name=radio1]:checked').val(); //체크된 보기 번호
+			var chk2 = $('input[name=radio2]:checked').val(); //체크된 보기 번호
+			var chk3 = $('input[name=radio3]:checked').val(); //체크된 보기 번호
+			var chk4 = $('input[name=radio4]:checked').val(); //체크된 보기 번호
+			var answer = 0;
+			
+			if(chk1 != undefined){
+				answer+=1;
 			}
-				$("form").attr("action","/answer?knowSeq="${knowSeq});
+			if(chk2 != undefined){
+				answer+=1;
+			}
+			if(chk3 != undefined){
+				answer+=1;
+			}
+			if(chk4 != undefined){
+				answer+=1;
+			}
+			
+			if(length != answer){
+				alert('답을 체크하세요.');
+				e.preventDefault();
+			}
+// 			alert('답 길이'+answer);
+			
+// 			console.log('문제 길이'+length);
+// 			alert(chk1);
+// 			alert(chk2);
+// 			alert(chk3);
+// 			alert(chk4);
 			
 			
 
 		});
-
 		
 	});
 </script>
@@ -55,16 +71,16 @@
 <!-- 			<div> -->
 <!-- 				<h2>퀴즈풀기</h2> -->
 <!-- 			</div> -->
-				<form action="<%=request.getContextPath()%>" id="quizForm">
-					<div>
-						<table>
+				<div>
+				<form action="<%=request.getContextPath()%>/answer?knowSeq=${list.knowSeq}" id="quizForm">
+					<c:forEach items="${quizList }" var="list">
 						<c:set var="length" value="${fn:length(quizList) }" />
-						<c:forEach items="${quizList }" var="list">
 							<input type="hidden" value="${list.knowSeq}" name="knowSeq">
 							<input type="hidden" value="${list.quizSeq}" name="quizSeq">
 							<input type="hidden" value="1" name="userSeq">
 							<input type="hidden" value="${length}" name="length"><!-- 퀴즈 몇 개인지 -->
 							<c:set var="i" value="${i+1}" />
+						<table>
 									<tr>
 										<td id="num"><br> <br> <br> Q. ${i}번<br>
 											<br> ${list.question}<br> <br></td>
@@ -103,11 +119,11 @@
 <!-- 											</div> -->
 <!-- 										</td> -->
 <!-- 									</tr> -->
-									</c:forEach>
 								</table>
+							</c:forEach>
 						<br> <input type="submit" id="checkAnswer" value="정답 확인">
-					</div><!-- 전체 div -->
 				</form>
+					</div><!-- 전체 div -->
 		</div><!-- content -->
 		<%@include file="../common/footer.jsp"%>
 	</div>

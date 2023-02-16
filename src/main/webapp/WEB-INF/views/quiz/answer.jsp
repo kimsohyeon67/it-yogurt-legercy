@@ -24,25 +24,25 @@
 <script>
 	$(document).ready(function() {
 		//해설  n
-		$("input:submit").click(function(e) {
-			var length = $('input[name=length]').val(); //문제 길이
-			var chk = $('input[name=radio1]:checked').val(); //체크된 보기 번호
-			console.log(length);
-			console.log(chk);
-			//답이 모두 체크되었을때
+// 		$("input:submit").click(function(e) {
+// 			var length = $('input[name=length]').val(); //문제 길이
+// 			var chk = $('input[name=radio1]:checked').val(); //체크된 보기 번호
+// 			console.log(length);
+// 			console.log(chk);
+// 			//답이 모두 체크되었을때
 
-			if ($(".hideDiv").css("display") == "none") {
-		//		e.preventDefault();
-				$(".hideDiv").show();
+// 			if ($(".hideDiv").css("display") == "none") {
+// 		//		e.preventDefault();
+// 				$(".hideDiv").show();
 
-				$("#checkAnswer").hide();
-				$(".radio").hide();
-			}
-				$("form").attr("action","/answer?knowSeq="${knowSeq});
+// 				$("#checkAnswer").hide();
+// 				$(".radio").hide();
+// 			}
+// 				$("form").attr("action","/answer?knowSeq="${knowSeq});
 			
 			
 
-		});
+// 		});
 
 		
 	});
@@ -55,7 +55,6 @@
 <!-- 			<div> -->
 <!-- 				<h2>퀴즈풀기</h2> -->
 <!-- 			</div> -->
-				<form action="<%=request.getContextPath()%>" id="quizForm">
 					<div>
 						<table>
 						<c:set var="length" value="${fn:length(quizList) }" />
@@ -105,9 +104,7 @@
 									</tr>
 									</c:forEach>
 								</table>
-						<br> <input type="submit" id="checkAnswer" value="정답 확인">
 					</div><!-- 전체 div -->
-				</form>
 		</div><!-- content -->
 		<%@include file="../common/footer.jsp"%>
 	</div>
