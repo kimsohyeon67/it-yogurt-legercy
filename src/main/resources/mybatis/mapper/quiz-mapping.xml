@@ -14,4 +14,8 @@
 	select * from quiz where know_seq=#{knowSeq}
 </select>
 
+<select id="getAnswer" resultType="int" parameterType="int">
+ 	select answer from quiz where quiz_seq=#{quizSeq}
+</select>
+
 </mapper>

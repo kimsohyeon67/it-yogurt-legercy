@@ -48,6 +48,8 @@
 			if(length != answer){
 				alert('답을 체크하세요.');
 				e.preventDefault();
+			}else{
+				 $("form").attr("action","/answer");
 			}
 // 			alert('답 길이'+answer);
 			
@@ -57,7 +59,7 @@
 // 			alert(chk3);
 // 			alert(chk4);
 			
-			
+// 			/answer?knowSeq=${list.knowSeq}
 
 		});
 		
@@ -72,7 +74,7 @@
 <!-- 				<h2>퀴즈풀기</h2> -->
 <!-- 			</div> -->
 				<div>
-				<form action="<%=request.getContextPath()%>/answer?knowSeq=${list.knowSeq}" id="quizForm">
+				<form action="<%=request.getContextPath()%>" id="quizForm">
 					<c:forEach items="${quizList }" var="list">
 						<c:set var="length" value="${fn:length(quizList) }" />
 							<input type="hidden" value="${list.knowSeq}" name="knowSeq">

@@ -9,5 +9,8 @@ public interface QuizService {
 	List<QuizDTO> quiz(int knowSeq);
 
 	void uploadQuiz (QuizDTO dto);
+
+	int getAnswer(int quizSeq);
+
 	
 }

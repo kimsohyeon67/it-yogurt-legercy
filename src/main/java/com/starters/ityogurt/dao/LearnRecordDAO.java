@@ -5,15 +5,17 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.starters.ityogurt.dto.LearnRecordDTO;
 import com.starters.ityogurt.dto.QuizDTO;
 
 @Mapper
 @Repository
-public interface QuizDAO {
+public interface LearnRecordDAO {
 
-	List<QuizDTO> quiz(int knowSeq);
+	List<LearnRecordDTO> learnData(int i);
 
-	void uploadQuiz(QuizDTO dto);
+	void learnDate(int userChoice, int isRight, int userSeq, int quizSeq);
 
-	int getAnswer(int quizSeq);
+
+	
 }
