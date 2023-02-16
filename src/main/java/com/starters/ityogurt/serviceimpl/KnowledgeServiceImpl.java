@@ -43,6 +43,11 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 		dao.uploadKnowledge(dto);
 	}
 
+	@Override
+	public void viewCnt(int knowSeq) {
+		dao.viewCnt(knowSeq);
+	}
+
 
 
 }

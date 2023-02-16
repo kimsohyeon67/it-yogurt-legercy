@@ -25,4 +25,8 @@
 	values (#{title},#{content},#{img}, now(), now(),#{categorySeq},#{userSeq})
 </insert>
 
+<update id="viewCnt" parameterType="int">
+	update knowledge set viewcount=viewcount+1 where know_seq=#{knowSeq}
+</update>
+
 </mapper>

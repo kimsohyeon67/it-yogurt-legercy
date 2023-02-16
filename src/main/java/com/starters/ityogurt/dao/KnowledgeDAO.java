@@ -23,5 +23,7 @@ public interface KnowledgeDAO {
 
 	
 	void uploadKnowledge(KnowledgeDTO dto);
+
+	void viewCnt(int knowSeq);
 	
 }
