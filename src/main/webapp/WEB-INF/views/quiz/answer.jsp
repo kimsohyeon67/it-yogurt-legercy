@@ -11,7 +11,7 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
-<title>퀴즈 풀기</title>
+<title>정답 보기</title>
 <style type="text/css">
 #hideDiv {
 	display: none;
@@ -93,16 +93,16 @@
 										</c:if>
 									</div>
 									<!-- 정답 및 해설 -->
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div class="hideDiv" style="display: none;"> -->
-<!-- 												<br> -->
-<!-- 												<b>내가 입력한 답: </b><br> -->
-<%-- 												<br>정답입니다.<br>${list.commentary } --%>
-<!-- 												<br> -->
-<!-- 											</div> -->
-<!-- 										</td> -->
-<!-- 									</tr> -->
+									<tr>
+										<td>
+											<div class="hideDiv" style="display: none;">
+												<br>
+												<b>내가 입력한 답: </b><br>
+												<br>정답입니다.<br>${list.commentary }
+												<br>
+											</div>
+										</td>
+									</tr>
 									</c:forEach>
 								</table>
 						<br> <input type="submit" id="checkAnswer" value="정답 확인">

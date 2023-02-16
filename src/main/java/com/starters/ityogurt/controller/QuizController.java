@@ -35,19 +35,26 @@ public class QuizController {
 	}
 	
 	@GetMapping("/answer") 
-	public ModelAndView answer(int[] check, int knowSeq, HttpServletRequest request) {
+	public ModelAndView answer( int knowSeq, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		String[] s1 = request.getParameterValues("quizSeq");
 		int[] quizSeq = new int[s1.length]; 
 		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
+		String[] chk1 = request.getParameterValues("chk");
+		int[] chk = new int[chk1.length]; 
 		
 		for(int i = 0;i<quizSeq.length;i++) {
 			quizSeq[i]=Integer.parseInt(s1[i]);
+		}
+		for(int i:chk) {
+			System.out.println("선택한 보기 값: "+i);
 		}
 	
 		for(int a : quizSeq) {
 			System.out.println(a);
 		}
+		
+		
 //		System.out.println(quizSeq);
 //		System.out.println(userSeq);
 //		for(int a : check) {
