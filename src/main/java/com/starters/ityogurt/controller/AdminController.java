@@ -58,6 +58,7 @@ public class AdminController {
 		 	mv.setViewName("admin/adminUser");
 		 	return mv;
 	    }
+		/*
 	 @GetMapping("/contents")
 	    public ModelAndView adminContents() {
 		 	ModelAndView mv = new ModelAndView();
@@ -66,7 +67,7 @@ public class AdminController {
 		 	mv.setViewName("admin/adminContents");
 	        return mv; 
 	    }
-	 
+	 */
 	 @PostMapping("/contents")
 	 	public ModelAndView UploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
 		 	ModelAndView mv = new ModelAndView();
