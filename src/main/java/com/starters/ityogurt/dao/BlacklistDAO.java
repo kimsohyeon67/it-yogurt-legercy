@@ -11,6 +11,6 @@ import com.starters.ityogurt.dto.UserDTO;
 @Repository
 public interface BlacklistDAO {
 	
-	String insertBlackUser (String email);
+	void insertBlackUser (String email);
 
 }

@@ -10,14 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dto.KnowledgeDTO;
 import com.starters.ityogurt.dto.QuizDTO;
 import com.starters.ityogurt.dto.UserDTO;
+import com.starters.ityogurt.service.BlacklistService;
 import com.starters.ityogurt.service.KnowledgeService;
 import com.starters.ityogurt.service.QuizService;
 import com.starters.ityogurt.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,10 +34,14 @@ public class AdminController {
 	@Autowired
 	@Qualifier("knowledgeservice")
 	KnowledgeService knowledgeService;
-	
+
 	@Autowired
 	@Qualifier("userservice")
 	UserService userService;
+	
+	@Autowired
+	@Qualifier("blacklistservice")
+	BlacklistService blacklistService;
 
 	//관리자 마이페이지
 	 @GetMapping("/page")  
@@ -65,6 +73,14 @@ public class AdminController {
 	 //관리자가 유저 탈퇴 시키기
 	 @GetMapping("/user/manage/{userseq}")  
 	 public String deleteUser(@PathVariable("userseq") int userSeq) {
+		 userService.deleteUser(userSeq);
+		 return "redirect:/admin/user/1";
+	 }
+	 
+	 //관리자가 유저 블랙
+	 @GetMapping("/user/manage/{userseq}/{email}")  
+	 public String blackUser(@PathVariable("userseq") int userSeq, @PathVariable("email") String email) {
+		 blacklistService.insertBlackUser(email);
 		 userService.deleteUser(userSeq);
 		 return "redirect:/admin/user/1";
 	 }
