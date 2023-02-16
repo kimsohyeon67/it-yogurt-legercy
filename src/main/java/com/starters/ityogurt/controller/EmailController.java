@@ -5,10 +5,7 @@ import java.util.*;
 import com.starters.ityogurt.dto.CategoryDTO;
 import com.starters.ityogurt.dto.KnowledgeDTO;
 import com.starters.ityogurt.dto.UserDTO;
-import com.starters.ityogurt.service.EmailService;
-import com.starters.ityogurt.service.KnowledgeService;
-import com.starters.ityogurt.service.QuizService;
-import com.starters.ityogurt.service.UserService;
+import com.starters.ityogurt.service.*;
 import com.starters.ityogurt.serviceimpl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,19 +29,25 @@ public class EmailController {
     @Autowired
     EmailService emailService;
 
+    @Autowired
+    CategoryService categoryService;
+
        // private final EmailService emailService;
 
     //이메일 전송 API
     @RequestMapping("/aws/email")
-    @Scheduled(cron = "0 30 7 * * ?", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 0 6 * * ?", zone = "Asia/Seoul")
     public String sendEmail() throws Exception {
-        List<String> receivers = emailService.getAllEmails();       // 받는 사람
-        String subject = "오늘은 " + knowledgeService.title(4) + "에 대해 알아보자!";     // 제목
-        String content = headerText() + knowledgeService.contents(4) + buttonText(4) + footerText();      // 본문
+        int categorySeq = emailService.getSendDetail().getCategorySeq();
+        int knowledgeSeq = emailService.getSendDetail().getKnowSeq();
+
+        List<String> javaReceivers = emailService.getSendEmailsSubJava();       // 자바 카테고리를 구독한 사람
+        String subject = "오늘은 " + emailService.getSendDetail().getTitle() + "에 대해 알아보자!";     // 제목
+        String content = headerText() + emailService.getSendDetail().getContent() + buttonText(knowledgeSeq) + footerText();      // 본문
 
         System.out.println("테스트!");
-
-        emailService.send(subject, content, receivers);
+        emailService.updateSendDate(categorySeq);
+        emailService.send(subject, content, javaReceivers);
 
         return "true";
     }
@@ -53,7 +56,7 @@ public class EmailController {
     public String headerText() {
         String headerText = "<div style=\"text-align : center;\">\n" +
                 "  <h1>IT-Yogurt!</h1>\n" +
-                "  <img style=\"width:300px; height: 300px; \"  src=\"/static/image/yogurt.jpg\">\n" +
+                // "  <img style=\"width:300px; height: 300px; \"  src=\"/static/image/yogurt.jpg\">\n" +
                 "  </div>" +
                 "  <br><br><hr><br><br>";
         return headerText;

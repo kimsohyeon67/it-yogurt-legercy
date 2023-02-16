@@ -2,12 +2,9 @@ package com.starters.ityogurt.serviceimpl;
 
 import java.util.List;
 
-import com.amazonaws.services.simpleemail.model.CreateTemplateRequest;
-import com.amazonaws.services.simpleemail.model.CreateTemplateResult;
-import com.amazonaws.services.simpleemail.model.Template;
 import com.starters.ityogurt.dao.EmailDAO;
 import com.starters.ityogurt.dto.EmailDTO;
-import com.starters.ityogurt.dto.UserDTO;
+import com.starters.ityogurt.dto.KnowledgeDTO;
 import com.starters.ityogurt.service.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +42,21 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public List<String> getAllEmails() {
         return dao.getAllEmails();
+    }
+
+    @Override
+    public List<String> getSendEmailsSubJava() {
+        return dao.getSendEmailsSubJava();
+    }
+
+    @Override
+    public KnowledgeDTO getSendDetail() {
+        return dao.getSendDetail();
+    }
+
+    @Override
+    public void updateSendDate(int categorySeq) {
+        dao.updateSendDate(categorySeq);
     }
 
     private void sendingResultMustSuccess(SendEmailResult sendEmailResult) {
