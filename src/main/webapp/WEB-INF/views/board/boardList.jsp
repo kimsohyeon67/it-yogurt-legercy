@@ -12,6 +12,13 @@
     <link href="/css/container.css" rel="stylesheet">
      <link href="/css/admin.css" rel="stylesheet">
 <title>관리자</title>
+<style>
+.tableList:hover {
+	background-color: #91ACCC;
+	color: white;
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 
@@ -28,10 +35,10 @@
 				<th> 조회수 </th>
 			</tr>
 			<c:forEach items="${boardList }" var="list">
-			<tr>
+			<tr class="tableList" onClick="location.href=''">
 				<td id ="boardSeq">${list.boardSeq }</td>
 				<td>${list.category }</td>
-				<td style="display : flex" >${list.title }</td>
+				<td style="display : flex;">${list.title }</td>
 				<td>${list.nickname }</td>
 				<td>${list.viewcount }</td>
 			</tr>
