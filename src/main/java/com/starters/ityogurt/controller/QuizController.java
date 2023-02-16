@@ -34,7 +34,7 @@ public class QuizController {
 	}
 	
 	@GetMapping("/answer") 
-	public ModelAndView answer(int[] check, int knowSeq, HttpServletRequest request) {
+	public ModelAndView answer(/* int[] check, */int knowSeq, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		int quizSeq = Integer.parseInt(request.getParameter("quizSeq"));
 		System.out.println(quizSeq);
