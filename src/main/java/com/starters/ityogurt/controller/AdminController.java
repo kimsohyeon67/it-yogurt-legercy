@@ -35,11 +35,14 @@ public class AdminController {
 	@Qualifier("userservice")
 	UserService userService;
 
-	 @GetMapping("/page")  //관리자 마이페이지
+	//관리자 마이페이지
+	 @GetMapping("/page")  
 	    public String admin() {
 	        return "admin/adminPage";
 	    }
-	 @GetMapping(value ={"/user","/user/" ,"/user/{userpage}"})  // 관리자 회원 조회 
+	 
+	// 관리자 회원 조회 
+	 @GetMapping(value ={"/user","/user/" ,"/user/{userpage}"})  
 	    public ModelAndView adminUser(@PathVariable(value = "userpage", required=false) Optional<String> userPage) {
 		 	ModelAndView mv = new ModelAndView();
 		 	int pageInt=0;
@@ -59,13 +62,17 @@ public class AdminController {
 		 	return mv;
 	    }
 	 
-	 @GetMapping("/user/manage/{userseq}")
+	 //관리자가 유저 탈퇴 시키기
+	 @GetMapping("/user/manage/{userseq}")  
 	 public String deleteUser(@PathVariable("userseq") int userSeq) {
 		 userService.deleteUser(userSeq);
 		 return "redirect:/admin/user/1";
 	 }
 	 
-	 @GetMapping("/contents") // 컨텐츠 업로드 화면
+	 
+	 
+	 //컨텐츠 업로드 화면
+	 @GetMapping("/contents") 
 	    public ModelAndView adminContents() {
 		 	ModelAndView mv = new ModelAndView();
 		 	int knowSeq = knowledgeService.totalCnt() + 1;
@@ -74,7 +81,8 @@ public class AdminController {
 	        return mv; 
 	    }
 	 
-	 @PostMapping("/contents") // 컨텐츠 업로드 
+	 //컨텐츠 업로드 
+	 @PostMapping("/contents") 
 	 	public ModelAndView uploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
 		 	ModelAndView mv = new ModelAndView();
 		 	knowledgeService.uploadKnowledge(knowledgeDto);
