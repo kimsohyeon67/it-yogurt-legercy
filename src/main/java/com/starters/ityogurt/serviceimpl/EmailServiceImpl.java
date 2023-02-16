@@ -53,14 +53,4 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
-    public void createTemplate(String subjectPart, String templateName, String textPart, String htmlPart) {
-        Template template = new Template();
-        template.setSubjectPart(subjectPart);
-        template.setTemplateName(templateName);
-        template.setTextPart(textPart);
-        template.setHtmlPart(htmlPart);
-        CreateTemplateRequest request = new CreateTemplateRequest().withTemplate(template);
-        CreateTemplateResult result = amazonSimpleEmailService.createTemplate(request);
-    }
-
 }
