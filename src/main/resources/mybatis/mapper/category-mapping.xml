@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.starters.ityogurt.dao.CategoryDAO">
+
+ <select id="getAllCategoryList" resultType="categorydto">
+	SELECT *
+	FROM category ORDER BY category_seq
+ </select>
+
+	<select id="getCategoryByCategorySeq" resultType="categorydto">
+		SELECT *	FROM category WHERE category_seq = #{categorySeq}  ORDER BY category_seq
+	</select>
+
+</mapper>
