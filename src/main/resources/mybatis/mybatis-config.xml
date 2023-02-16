@@ -9,5 +9,6 @@
 		<typeAlias type="com.starters.ityogurt.dto.KnowledgeDTO" alias="knowledgedto" />
 		<typeAlias type="com.starters.ityogurt.dto.QuizDTO" alias="quizdto"/>
 		<typeAlias type="com.starters.ityogurt.dto.UserDTO" alias="userdto"/>
+		<typeAlias type="com.starters.ityogurt.dto.CategoryDTO" alias="categorydto"/>
 	</typeAliases>
 </configuration>
