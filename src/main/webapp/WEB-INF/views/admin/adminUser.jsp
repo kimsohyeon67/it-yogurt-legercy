@@ -46,12 +46,12 @@
 			<tr>
 			<td colspan="7">
 				<%
-				int totalCnt = (int) request.getAttribute("totalCnt");
+				int totalUserCnt = (int) request.getAttribute("totalUserCnt");
 				int totalPage = 0;
-				if (totalCnt % 10 == 0) {
-					totalPage = totalCnt / 10;
+				if (totalUserCnt % 10 == 0) {
+					totalPage = totalUserCnt / 10;
 				} else {
-					totalPage = totalCnt / 10 + 1;
+					totalPage = totalUserCnt / 10 + 1;
 				}
 				for (int i = 1; i <= totalPage; i++) {
 				%>
