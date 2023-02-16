@@ -17,7 +17,7 @@ public interface UserDAO {
 	
 	void deleteUser(int userSeq);
   
-  public int InsertUser(UserDTO dto);
+	public int InsertUser(UserDTO dto);
   
-  public int SelectUserOne(UserDTO dto);
+	public int SelectUserOne(UserDTO dto);
 }

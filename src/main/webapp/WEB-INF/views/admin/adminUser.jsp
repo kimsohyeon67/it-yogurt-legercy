@@ -11,6 +11,16 @@
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/container.css" rel="stylesheet">
      <link href="/css/admin.css" rel="stylesheet">
+<script>
+$(document).ready(function(){
+	$("#delUserBtn").click(function(){
+		var userSeq = $("#userSeq").val();
+		consile.log(userSeq);
+		location.href="/admin/user/manage/"+userSeq;
+	})
+})
+
+</script>
 <title>유저 관리</title>
 </head>
 <body>
@@ -33,12 +43,12 @@
 			</tr>
 			<c:forEach items="${userList }" var="list">
 			<tr>
-				<td>${list.userSeq }</td>
+				<td id ="userSeq">${list.userSeq }</td>
 				<td>${list.email }</td>
 				<td>${list.nickname }</td>
 				<td>${list.declaration }</td>
 				<td>${list.lastloginDate }</td>
-				<td><button id= "black" style="border-color: #C0D8C0" onclick="location.href=''">탈퇴</button></td>
+				<td><button id= "delUserBtn" style="border-color: #C0D8C0" onclick="location.href='/admin/user/manage/${list.userSeq }'">탈퇴</button></td>
 				<td><button id= "black" onclick="location.href=''">블랙</button></td>
 			</tr>
 			</c:forEach>

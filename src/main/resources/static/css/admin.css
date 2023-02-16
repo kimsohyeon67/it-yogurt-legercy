@@ -44,7 +44,7 @@
 	border: 1px solid grey;
 	text-align: center;
 }
-#black {
+.form td button {
   width: 80px;
   height: 40px;
   border-style: solid;

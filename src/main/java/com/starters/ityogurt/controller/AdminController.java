@@ -58,6 +58,13 @@ public class AdminController {
 		 	mv.setViewName("admin/adminUser");
 		 	return mv;
 	    }
+	 
+	 @GetMapping("/user/manage/{userseq}")
+	 public String deleteUser(@PathVariable("userseq") int userSeq) {
+		 userService.deleteUser(userSeq);
+		 return "redirect:/admin/user/1";
+	 }
+	 
 	 @GetMapping("/contents") // 컨텐츠 업로드 화면
 	    public ModelAndView adminContents() {
 		 	ModelAndView mv = new ModelAndView();
@@ -68,11 +75,12 @@ public class AdminController {
 	    }
 	 
 	 @PostMapping("/contents") // 컨텐츠 업로드 
-	 	public ModelAndView UploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
+	 	public ModelAndView uploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
 		 	ModelAndView mv = new ModelAndView();
 		 	knowledgeService.uploadKnowledge(knowledgeDto);
 		 	quizService.uploadQuiz(quizDto);
 		 	mv.setViewName("redirect:page");
 		 	return mv;
 	 }
+	 
 }
