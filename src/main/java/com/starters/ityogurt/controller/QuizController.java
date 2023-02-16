@@ -34,10 +34,13 @@ public class QuizController {
 	}
 	
 	@GetMapping("/answer") 
-	public ModelAndView answer(int knowSeq, HttpServletRequest request) {
+	public ModelAndView answer(int[] check, int knowSeq, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		int quizSeq = Integer.parseInt(request.getParameter("quizSeq"));
 		System.out.println(quizSeq);
+//		for(int a : check) {
+//			System.out.println(a);
+//		}
 		mv.setViewName("quiz/list");
 		return mv;
 	}
