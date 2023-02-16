@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class userController {
+public class UserController {
 
     @Autowired
     @Qualifier("userservice")
