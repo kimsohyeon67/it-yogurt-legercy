@@ -13,6 +13,8 @@ import com.starters.ityogurt.dto.BoardDTO;
 public interface BoardDAO {
 	
 	List<Map<String,String>> getBoardJoinUser(int limit);
+	
+	Map<String,String> getOneBoardJoinUser(int boardSeq);
 
 	int countAllBoard();
 	

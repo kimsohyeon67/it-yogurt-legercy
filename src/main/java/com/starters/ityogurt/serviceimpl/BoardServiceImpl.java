@@ -23,9 +23,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public Map<String, String> getOneBoardJoinUser(int boardSeq) {
+		return dao.getOneBoardJoinUser(boardSeq);
+	}
+
+	@Override
 	public int countAllBoard() {
 		return dao.countAllBoard();
 	}
+
 	
 	
 }

@@ -9,6 +9,8 @@ public interface BoardService {
 	
 	List<Map<String,String>> getBoardJoinUser(int limit);
 	
+	Map<String,String> getOneBoardJoinUser(int boardSeq);
+	
 	int countAllBoard();
 
 }

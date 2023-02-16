@@ -34,4 +34,16 @@
 	from board 
   </select>
 
+  <select id="getOneBoardJoinUser" resultMap="getBoardlist" parameterType="int">
+  	select board_seq, title, content, viewcount,
+		b.category_seq category ,b.img img, b.insert_date insert_date,
+		u.user_seq user_seq, u.nickname nickname
+	from board b
+	JOIN user u 
+	ON b.user_seq = u.user_seq	
+	where  board_seq = #{boardSeq}
+  </select>
+
+
+
 </mapper>

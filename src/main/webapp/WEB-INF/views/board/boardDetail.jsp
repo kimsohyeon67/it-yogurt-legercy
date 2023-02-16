@@ -26,16 +26,19 @@
 <%@include file="../common/header.jsp" %>
      <div class="form">
 		<h3 id="main" > 게시판 </h3> <br>
+		<button id= "black" onclick="location.href='/board/list/1'">목록</button>
 		<table class="form" border=3>
+		<c:set value="${oneBoard }" var="oneboard"/>
 			<tr>
-				<th> 번호 </th>
-				<th> 카테고리 </th>
 				<th> 제목 </th>
+				<td> ${oneboard.title } </td>
 				<th> 작성자 </th>
-				<th> 조회수 </th>
+				<td> ${oneboard.nickname } </td>
 			</tr>
-			<c:forEach items="${boardList }" var="list">
-			<tr class="tableList" onClick="location.href='/board/${list.boardSeq}'">
+			<tr >
+				<td colspan=4>${oneboard.content }<td>
+			</tr>
+			<%-- <tr class="tableList" onClick="location.href=''">
 				<td id ="boardSeq">${list.boardSeq }</td>
 				<td>${list.category }</td>
 				<td style="display : flex;">${list.title }</td>
@@ -60,7 +63,7 @@
 				}
 				%>
 			</td>
-			</tr>
+			</tr> --%>
 		</table>
 	</div>
 <%@include file="../common/footer.jsp" %>

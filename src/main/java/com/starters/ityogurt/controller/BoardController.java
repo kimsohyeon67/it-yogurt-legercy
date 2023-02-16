@@ -31,20 +31,10 @@ public class BoardController {
 	@Qualifier("userservice")
 	UserService userService;
 	
-	@GetMapping("/list")
-		public ModelAndView boardlisttest() {
-			ModelAndView mv = new ModelAndView();
-			int limit =10;
-			List<Map<String,String>> boardlist = boardService.getBoardJoinUser(limit);
-			
-			mv.addObject("boardList", boardlist);
-			mv.setViewName("board/boardList");
-			return mv;
-	}
 	
 
 	//게시판 리스트 화면
-	 @GetMapping(value = { "/list/", "/list/{boardpage}"})  
+	 @GetMapping(value = { "/list", "/list/", "/list/{boardpage}"})  
 	    public ModelAndView boardList(@PathVariable(value = "boardpage", required=false) Optional<String> boardPage) {
 			ModelAndView mv = new ModelAndView();
 			int bordPageInt=0;
@@ -64,6 +54,18 @@ public class BoardController {
 		 	return mv;
 	 
 	    }
+	 
+	 //게시판 글 화면
+	 @GetMapping("/{boardSeq}")
+	 public ModelAndView boardlisttest(@PathVariable("boardSeq") int boardSeq) {
+		 ModelAndView mv = new ModelAndView();
+		 int limit =0;
+		 Map<String,String> oneBoard = boardService.getOneBoardJoinUser(boardSeq);
+		 
+		 mv.addObject("oneBoard", oneBoard);
+		 mv.setViewName("board/boardDetail");
+		 return mv;
+	 }
 	
 	 
 }
