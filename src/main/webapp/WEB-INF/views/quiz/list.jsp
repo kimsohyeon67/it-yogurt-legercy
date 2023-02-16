@@ -27,19 +27,19 @@
 		$("input:submit").click(function(e) {
 			//답이 모두 체크되었을때
 			if ($(".hideDiv").css("display") == "none") {
-				e.preventDefault();
+	//			e.preventDefault();
 				$(".hideDiv").show();
 
 				$("#checkAnswer").hide();
-				$("#radio1").hide();
-				$("#radio2").hide();
-				$("#radio3").hide();
-				$("#radio4").hide();
+				$(".radio").hide();
 				$("form").attr("action","/answer?knowSeq="${knowSeq});
 			}
+			
+			
 
 		});
 
+		
 	});
 </script>
 </head>
@@ -56,6 +56,7 @@
 						<c:forEach items="${quizList }" var="list">
 							<input type="hidden" value="${list.knowSeq}" name="knowSeq">
 							<input type="hidden" value="${list.quizSeq}" name="quizSeq">
+							<input type="hidden" value="1" name="userSeq">
 							<c:set var="i" value="${i+1}" />
 									<tr>
 										<td id="num"><br> <br> <br> Q. ${i}번<br>
@@ -65,22 +66,22 @@
 									<div id="${i}">
 										<tr>
 											<td><input type="radio" value="1" id="radio1"
-												name="radio${i}"> 1. ${list.choice1}</td>
+												name="radio${i}" class="radio"> 1. ${list.choice1}</td>
 										</tr>
 										<tr>
 											<td><input type="radio" value="2" id="radio2"
-												name="radio${i}"> 2. ${list.choice2}</td>
+												name="radio${i}" class="radio"> 2. ${list.choice2}</td>
 										</tr>
 										<c:if test="${list.choice3 ne '' }">
 											<tr>
 												<td><input type="radio" value="3" id="radio3"
-													name="radio${i}"> 3. ${list.choice3}</td>
+													name="radio${i}" class="radio"> 3. ${list.choice3}</td>
 											</tr>
 										</c:if>
 										<c:if test="${list.choice4 ne '' }">
 											<tr>
 												<td><input type="radio" value="4" id="radio4"
-													name="radio${i}"> 4. ${list.choice4}</td>
+													name="radio${i}" class="radio"> 4. ${list.choice4}</td>
 											</tr>
 										</c:if>
 									</div>

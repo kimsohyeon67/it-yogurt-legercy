@@ -24,23 +24,36 @@ public class QuizController {
 	QuizService service;
 	
 	@GetMapping("/quiz") //매일지식 폼 확인
-	public ModelAndView quiz(int knowSeq) {
+	public ModelAndView quiz(int knowSeq, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		List<QuizDTO> quizList = service.quiz(knowSeq);
 		mv.addObject("quizList", quizList);
+		request.setAttribute("quizList", quizList);
 		mv.setViewName("quiz/list");
 //		
 		return mv;
 	}
 	
 	@GetMapping("/answer") 
-	public ModelAndView answer(/* int[] check, */int knowSeq, HttpServletRequest request) {
+	public ModelAndView answer(int[] check, int knowSeq, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
-		int quizSeq = Integer.parseInt(request.getParameter("quizSeq"));
-		System.out.println(quizSeq);
+		String[] s1 = request.getParameterValues("quizSeq");
+		int[] quizSeq = new int[s1.length]; 
+		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
+		
+		for(int i = 0;i<quizSeq.length;i++) {
+			quizSeq[i]=Integer.parseInt(s1[i]);
+		}
+	
+		for(int a : quizSeq) {
+			System.out.println(a);
+		}
+//		System.out.println(quizSeq);
+//		System.out.println(userSeq);
 //		for(int a : check) {
 //			System.out.println(a);
 //		}
+		
 		mv.setViewName("quiz/list");
 		return mv;
 	}
