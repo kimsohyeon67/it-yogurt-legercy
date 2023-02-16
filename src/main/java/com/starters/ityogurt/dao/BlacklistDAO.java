@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface BlacklistDAO {
 	
 	void insertBlackUser (String email);
+	
+	int countBoard();
 
 }
