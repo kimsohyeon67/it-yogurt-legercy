@@ -2,6 +2,7 @@ package com.starters.ityogurt.serviceimpl;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class BoardServiceImpl implements BoardService {
 	BoardDAO dao;
 
 	@Override
-	public List<BoardDTO> getBoardlistLimit(int limit) {
-		return dao.getBoardlistLimit(limit);
+	public List<Map<String,String>> getBoardJoinUser(int limit) {
+		return dao.getBoardJoinUser(limit);
 	}
 
 	@Override

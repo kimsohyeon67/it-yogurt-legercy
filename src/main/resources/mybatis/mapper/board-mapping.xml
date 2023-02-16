@@ -4,11 +4,29 @@
         
 <mapper namespace="com.starters.ityogurt.dao.BoardDAO">
 
- <select id="getBoardlistLimit" resultType="boarddto" parameterType="int">
-	select * 
-	from board 
-	order by board_seq
-	limit #{limit}, 10	
+<resultMap type="HashMap" id="getBoardlist">
+	<id column="board_seq" property="boardSeq"/>
+	<id column="title" property="title"/>
+	<id column="content" property="content"/>
+	<id column="viewcount" property="viewcount"/>
+	<id column="category" property="category"/>
+	<id column="img" property="img"/>
+	<id column="insert_date" property="insertDate"/>
+	<id column="user_seq" property="userSeq"/>
+	<id column="nickname" property="nickname"/>
+
+</resultMap>
+
+
+ <select id="getBoardJoinUser" resultMap="getBoardlist" parameterType="int">
+	select board_seq, title, content, viewcount,
+		b.category_seq category ,b.img img, b.insert_date insert_date,
+		u.user_seq user_seq, u.nickname nickname
+	from board b
+	JOIN user u 
+	ON b.user_seq = u.user_seq	
+	order BY board_seq
+	LIMIT #{limit}, 10		
  </select>
  
   <select id="countAllBoard" resultType="int">

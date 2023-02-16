@@ -1,6 +1,7 @@
 package com.starters.ityogurt.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,7 @@ import com.starters.ityogurt.dto.BoardDTO;
 @Repository
 public interface BoardDAO {
 	
-	List<BoardDTO> getBoardlistLimit(int limit);
+	List<Map<String,String>> getBoardJoinUser(int limit);
 
 	int countAllBoard();
 	

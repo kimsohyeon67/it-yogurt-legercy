@@ -1,6 +1,7 @@
 package com.starters.ityogurt.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.starters.ityogurt.dto.BoardDTO;
 import com.starters.ityogurt.dto.UserDTO;
 import com.starters.ityogurt.service.BoardService;
+import com.starters.ityogurt.service.UserService;
 
 
 @Controller
@@ -25,11 +27,15 @@ public class BoardController {
 	@Qualifier("boardservice")
 	BoardService boardService;
 	
+	@Autowired
+	@Qualifier("userservice")
+	UserService userService;
+	
 	@GetMapping("/list")
 		public ModelAndView boardlisttest() {
 			ModelAndView mv = new ModelAndView();
 			int limit =10;
-			List<BoardDTO> boardlist = boardService.getBoardlistLimit(limit);
+			List<Map<String,String>> boardlist = boardService.getBoardJoinUser(limit);
 			
 			mv.addObject("boardList", boardlist);
 			mv.setViewName("board/boardList");
@@ -50,8 +56,7 @@ public class BoardController {
 			}
 			int limit = (bordPageInt- 1) * 10;
 			int totalBoardCnt = boardService.countAllBoard();
-			System.out.println(totalBoardCnt);
-		 	List<BoardDTO> boardlist = boardService.getBoardlistLimit(limit);
+			List<Map<String,String>> boardlist = boardService.getBoardJoinUser(limit);
 		 	
 		 	mv.addObject("totalBoardCnt", totalBoardCnt);
 		 	mv.addObject("boardList", boardlist);

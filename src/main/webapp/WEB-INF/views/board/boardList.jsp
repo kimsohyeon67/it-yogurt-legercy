@@ -24,15 +24,15 @@
 				<th> 번호 </th>
 				<th> 카테고리 </th>
 				<th> 제목 </th>
-				<th> 닉네임 </th>
+				<th> 작성자 </th>
 				<th> 조회수 </th>
 			</tr>
 			<c:forEach items="${boardList }" var="list">
 			<tr>
 				<td id ="boardSeq">${list.boardSeq }</td>
-				<td>${list.categorySeq }</td>
+				<td>${list.category }</td>
 				<td style="display : flex" >${list.title }</td>
-				<td>${list.userSeq }</td>
+				<td>${list.nickname }</td>
 				<td>${list.viewcount }</td>
 			</tr>
 			</c:forEach>
