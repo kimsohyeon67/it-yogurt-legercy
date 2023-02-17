@@ -69,7 +69,7 @@ public class AdminController {
 		 	mv.setViewName("admin/adminUser");
 		 	return mv;
 	    }
-	 
+ 
 	 //관리자가 유저 탈퇴 시키기
 	 @GetMapping("/user/manage/{userseq}")  
 	 public String deleteUser(@PathVariable("userseq") int userSeq) {
@@ -88,7 +88,7 @@ public class AdminController {
 	 
 	 
 	 //컨텐츠 업로드 화면
-	 @GetMapping("/contents") 
+	 @GetMapping("/contents")
 	    public ModelAndView adminContents() {
 		 	ModelAndView mv = new ModelAndView();
 		 	int knowSeq = knowledgeService.totalCnt() + 1;
@@ -96,10 +96,10 @@ public class AdminController {
 		 	mv.setViewName("admin/adminContents");
 	        return mv; 
 	    }
-	 
+ 
 	 //컨텐츠 업로드 
-	 @PostMapping("/contents") 
-	 	public ModelAndView uploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
+   @PostMapping("/contents")
+	  	public ModelAndView UploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
 		 	ModelAndView mv = new ModelAndView();
 		 	knowledgeService.uploadKnowledge(knowledgeDto);
 		 	quizService.uploadQuiz(quizDto);
