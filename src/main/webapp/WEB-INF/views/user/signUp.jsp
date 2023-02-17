@@ -1,5 +1,6 @@
 <%--<%@ include file="common/tag.jsp" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -16,17 +17,27 @@
 <body>
 <div class="container">
     <%@include file="../common/header.jsp" %>
+    <%
+        String email = (String) session.getAttribute("email");
+        String isSNS = (String) session.getAttribute("isSNS");
+        session.removeAttribute("email");
+        session.removeAttribute("isSNS");
+    %>
+    <c:set var="email" value="<%=email%>"></c:set>
+    <c:set var="isSNS" value="<%=isSNS%>"></c:set>
+
     <div class="content">
         <form id="signup_form" class="form" type="POST" href="/user/1">
-            <div class="form-input">
+            <div class="form-input-email">
                 <label for="email">이메일</label>
-                <input type="text" name="email" id="email" placeholder="이메일을 입력해주세요.">
+                <input type="text" name="email" id="email" placeholder="이메일을 입력해주세요."
+                       value=${email}>
             </div>
-            <div class="form-input">
+            <div class="form-input-password">
                 <label for="password">비밀번호</label>
                 <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
             </div>
-            <div class="form-input">
+            <div class="form-input-password-check">
                 <label for="password_check">비밀번호 확인</label>
                 <input type="password" name="password_check" id="password_check"
                        placeholder="비밀번호를 한번 더 입력해주세요">
@@ -65,4 +76,5 @@
     <%@include file="../common/footer.jsp" %>
 </div>
 </body>
+<script> isSNSUser = <%=isSNS != null ? true : false %>; </script>
 </html>

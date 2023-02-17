@@ -34,23 +34,23 @@ public class AdminController {
 	@Autowired
 	@Qualifier("knowledgeservice")
 	KnowledgeService knowledgeService;
-
+	
 	@Autowired
 	@Qualifier("userservice")
 	UserService userService;
-	
+
 	@Autowired
 	@Qualifier("blacklistservice")
 	BlacklistService blacklistService;
 
 	//관리자 마이페이지
-	 @GetMapping("/page")  
+	 @GetMapping("/page")
 	    public String admin() {
 	        return "admin/adminPage";
 	    }
-	 
-	// 관리자 회원 조회 
-	 @GetMapping(value ={"/user","/user/" ,"/user/{userpage}"})  
+
+	// 관리자 회원 조회
+	 @GetMapping(value ={"/user","/user/" ,"/user/{userpage}"})
 	    public ModelAndView adminUser(@PathVariable(value = "userpage", required=false) Optional<String> userPage) {
 		 	ModelAndView mv = new ModelAndView();
 		 	int pageInt=0;
@@ -69,24 +69,24 @@ public class AdminController {
 		 	mv.setViewName("admin/adminUser");
 		 	return mv;
 	    }
- 
+
 	 //관리자가 유저 탈퇴 시키기
-	 @GetMapping("/user/manage/{userseq}")  
+	 @GetMapping("/user/manage/{userseq}")
 	 public String deleteUser(@PathVariable("userseq") int userSeq) {
 		 userService.deleteUser(userSeq);
 		 return "redirect:/admin/user/1";
 	 }
-	 
+
 	 //관리자가 유저 블랙
-	 @GetMapping("/user/manage/{userseq}/{email}")  
+	 @GetMapping("/user/manage/{userseq}/{email}")
 	 public String blackUser(@PathVariable("userseq") int userSeq, @PathVariable("email") String email) {
 		 blacklistService.insertBlackUser(email);
 		 userService.deleteUser(userSeq);
 		 return "redirect:/admin/user/1";
 	 }
-	 
-	 
-	 
+
+
+
 	 //컨텐츠 업로드 화면
 	 @GetMapping("/contents")
 	    public ModelAndView adminContents() {
@@ -96,8 +96,8 @@ public class AdminController {
 		 	mv.setViewName("admin/adminContents");
 	        return mv; 
 	    }
- 
-	 //컨텐츠 업로드 
+
+	 //컨텐츠 업로드
    @PostMapping("/contents")
 	  	public ModelAndView UploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
 		 	ModelAndView mv = new ModelAndView();
@@ -106,5 +106,4 @@ public class AdminController {
 		 	mv.setViewName("redirect:page");
 		 	return mv;
 	 }
-	 
 }

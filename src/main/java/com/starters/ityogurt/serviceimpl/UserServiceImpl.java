@@ -27,15 +27,20 @@ public class UserServiceImpl implements UserService {
 	public int countAllUser(){
 		return dao.countAllUser();
 	}
-	
-	@Override
-	public int insertUser(UserDTO dto){
-      return dao.InsertUser(dto);
-	}
+
 	@Override
 	public void deleteUser(int userSeq) {
 		dao.deleteUser(userSeq);
-		
 	}
-	
+
+	@Override
+	public int insertUser(UserDTO dto){
+		return dao.insertUser(dto);
+	}
+
+	@Override
+	public UserDTO getUserByUserEmail(String email) {
+		return dao.getUserByUserEmail(email);
+	}
+
 }

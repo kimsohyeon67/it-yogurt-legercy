@@ -1,4 +1,4 @@
-.content{
+.content {
   margin-top: 10px;
 }
 
@@ -35,14 +35,15 @@
   color: #ffffff;
 }
 
-#signup_form input[type="submit"]:focus{
-  outline-style:solid;
-  outline-color:#fcae60;
+#signup_form input[type="submit"]:focus {
+  outline-style: solid;
+  outline-color: #fcae60;
 }
-#signup_form label{
- display: flex;
-  font-size: 17px;
- }
+
+#signup_form label {
+  display: flex;
+  font-size: 12px;
+}
 
 .subscribe {
   font-size: 10px;

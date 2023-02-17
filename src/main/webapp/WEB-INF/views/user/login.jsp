@@ -32,13 +32,13 @@
             </div>
         </form>
         <div class="sns_login">
-            <div class="sns_login_kakao_btn">
+            <div id="kakao" class="sns_login_btn">
                 <img src="/image/kakao.png">
             </div>
-            <div class="sns_login_naver_btn">
+            <div id="naver" class="sns_login_btn">
                 <img src="/image/naver.png">
             </div>
-            <div class="sns_login_google_btn">
+            <div id="google" class="sns_login_btn">
                 <img src="/image/google.png">
             </div>
         </div>
