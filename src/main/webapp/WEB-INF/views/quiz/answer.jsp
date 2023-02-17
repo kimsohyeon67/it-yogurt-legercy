@@ -105,5 +105,6 @@
 		</div><!-- content -->
 		<%@include file="../common/footer.jsp"%>
 	</div>
+//script
 </body>
 </html>

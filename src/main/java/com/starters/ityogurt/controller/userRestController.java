@@ -7,13 +7,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
+@Slf4j
 public class userRestController {
 
     @Autowired
@@ -22,6 +26,7 @@ public class userRestController {
 
     // 로그인
     @PostMapping("/user")
+    @ResponseBody // RESPONSEENTITY
     public String Login(UserDTO dto, HttpServletRequest request) {
         String error = "";
         try {
@@ -48,7 +53,10 @@ public class userRestController {
             }
 
         } catch (Exception e) {
-
+            // http status를 모우 200으로 내리고 바디에 코드를 넣어서, 1이면 정상 5면 어쩌고 이렇게 ...
+            // 2. 아니면 httpstatus에 넣어서 넣는 경ㅇ.
+            // api를 어떻게 구현하느냐에 따라 1과 2가 다르다. ->명세서에 쓰자
+            log.info("internal server error",e);
         }
         return error;
     }
