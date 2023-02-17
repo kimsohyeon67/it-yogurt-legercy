@@ -91,12 +91,11 @@
 									<tr>
 										<td>
 											<div class="hideDiv">
-<%-- 											<c:forEach items="${learnList}" var="learnlist"> --%>
+											
 												<br>
 												<b>내가 입력한 답: </b><br>
 												<br>정답입니다.<br>${list.commentary }
 												<br>
-<%-- 												</c:forEach> --%>
 											</div>
 										</td>
 									</tr>
