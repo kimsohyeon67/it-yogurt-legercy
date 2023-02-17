@@ -12,8 +12,10 @@ public interface UserService {
 	
 	int countAllUser();
   
-  public int insertUser(UserDTO dto);
+	public int insertUser(UserDTO dto);
   
   //public UserDTO selectUser(UserDTO dto);
+	
+	void deleteUser(int userSeq);
 
 }

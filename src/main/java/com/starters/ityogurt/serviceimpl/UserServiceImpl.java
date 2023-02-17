@@ -29,7 +29,13 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-  public int insertUser(UserDTO dto){
+	public int insertUser(UserDTO dto){
       return dao.InsertUser(dto);
-  }
+	}
+	@Override
+	public void deleteUser(int userSeq) {
+		dao.deleteUser(userSeq);
+		
+	}
+	
 }

@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.starters.ityogurt.dto.KnowledgeDTO;
-import com.starters.ityogurt.dto.QuizDTO;
 
 @Mapper
 @Repository
@@ -21,7 +20,6 @@ public interface KnowledgeDAO {
 
 	String title(int knowSeq);
 
-	
 	void uploadKnowledge(KnowledgeDTO dto);
 	
 }
