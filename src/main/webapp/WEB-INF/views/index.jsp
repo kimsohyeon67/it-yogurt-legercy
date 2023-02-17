@@ -1,45 +1,65 @@
-<%@ include file="common/tag.jsp"%>
+<%--<%@ include file="common/tag.jsp" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <link href="/css/header.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/container.css" rel="stylesheet">
+    <link href="/css/user/login.css" rel="stylesheet">
+    <script src="/js/jquery-3.6.1.min.js"></script>
+    <script src="/js/util/ajax.js"></script>
+    <script src="/js/util/util.js"></script>
     <title>Title</title>
 </head>
 <body>
 <div class="container">
-    <div class="row mt-5 md" id="box-detail">
-        <div id="box-boardbtn" class="btn-right col-10">
-            <button type="button" class="btn btn-primary btn-sm" id="btn-modify-board" onclick="location.href='updateboard/${board.boardSeq}'">수정하기</button>
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" >삭제하기</button>
+    <%@include file="common/header.jsp" %>
+    <div class="content">
+        <img id="logo" src="/image/logo.png">
+        <div class="button">
+            <div id="login" onclick="window.location.href='/user'">로그인</div>
         </div>
     </div>
-
-    <br><br><hr><br><br>
-
-    <div id="box-comment-list">
-        <div class="col-10 btn-right">
-            <button type="button" class="btn btn-primary btn-sm" id="btn-modify-${comment.commentSeq}" onclick="location.href='/comment/update/${comment.commentSeq}'">수정하기</button>
-            <button type="button" class="btn btn-danger btn-sm" id="btn-delete-${comment.commentSeq}" onclick="location.href='/comment/delete/${comment.commentSeq}'">삭제하기</button>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
-                </div>
-                <div class="modal-body" style="text-align: center">
-                    <h4><strong>정말 삭제하시겠습니까?</strong><h4>
-                        <p class="fs-5 mb-5">삭제 후 복구는 불가합니다.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary" id="btn-delete-board">확인</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <%@include file="common/footer.jsp" %>
 </div>
 </body>
 </html>
+<style>
+  .content {
+    height: 500px;
+  }
+
+  #logo {
+    width: 50%;
+  }
+
+  #login {
+    width: 250px;
+    height: 40px;
+    border-style: solid;
+    border-width: medium;
+    /*margin-bottom: 35px;*/
+    margin-bottom: 0px;
+    border-color: #fab46e;
+    background-color: #fab46e;
+    font-size: 15px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 40px;
+  }
+
+  #login:focus {
+    outline-style: solid;
+    outline-color: #fcae60;
+    margin: 0px;
+    text-align: center;
+    line-height: 40px;
+  }
+  .button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

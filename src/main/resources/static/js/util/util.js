@@ -1,5 +1,5 @@
 window.util = {
-  emptyAlert: (target) => {
+  emptyAlert: (target, isSNS = false) => {
     let value = target.val();
     if (!value || value == "") {
       var label_txt = $("label[for='" + target.attr('id') + "']").text();

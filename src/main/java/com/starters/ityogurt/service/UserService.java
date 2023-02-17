@@ -12,10 +12,10 @@ public interface UserService {
 	
 	int countAllUser();
   
-	public int insertUser(UserDTO dto);
-  
-  //public UserDTO selectUser(UserDTO dto);
-	
+	int insertUser(UserDTO dto);
+
 	void deleteUser(int userSeq);
+
+	UserDTO getUserByUserEmail(String email);
 
 }

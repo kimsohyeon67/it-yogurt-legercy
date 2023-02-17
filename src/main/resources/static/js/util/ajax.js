@@ -6,33 +6,35 @@ const DEFAULT = {
 }
 
 window.ajax = {
-  sendForm: async (path, data) => {
-    return new Promise((resolve, reject) => {
-      let url = window.location.origin;
-      if (path.startsWith('http')) {
-        url = path;
-      } else if (path.startsWith('/')) {
-        url += path;
-      } else {
-        url += '/' + path;
-      }
+  sendForm: (path, data) => {
+    let sendFromResult;
+    let url = window.location.origin;
+    if (path.startsWith('http')) {
+      url = path;
+    } else if (path.startsWith('/')) {
+      url += path;
+    } else {
+      url += '/' + path;
+    }
 
-      $.ajax({
-        url,
-        enctype: 'multipart/form-data',
-        type: 'POST',
-        cache: false,
-        processData: false,
-        contentType: false,
-        data: data,
-        success: result => {
-          resolve(result);
-        },
-        error: async (request, status, error) => {
-        }
-      });
-    })
+    $.ajax({
+      url,
+      enctype: 'multipart/form-data',
+      type: 'POST',
+      cache: false,
+      processData: false,
+      contentType: false,
+      data: data,
+      success: result => {
+       sendFromResult = result;
+      },
+      error: (request, status, error) => {
+        return error;
+      }
+    });
+    return sendFromResult;
   },
+
   request: async (path, options) => {
     var url = window.location.origin;
     if (path.startsWith('http')) {
