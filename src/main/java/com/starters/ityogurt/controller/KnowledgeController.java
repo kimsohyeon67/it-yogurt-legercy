@@ -47,6 +47,7 @@ public class KnowledgeController {
 		ModelAndView mv = new ModelAndView();
 		String title = service.title(knowSeq);
 		String contents = service.contents(knowSeq);
+        service.viewCnt(knowSeq);
 		mv.addObject("knowSeq",knowSeq);
 		mv.addObject("title",title);
 		mv.addObject("contents",contents);

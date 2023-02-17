@@ -17,4 +17,7 @@ public interface KnowledgeService {
 
 	void uploadKnowledge(KnowledgeDTO dto);
 
+	void viewCnt(int knowSeq);
+
+
 }

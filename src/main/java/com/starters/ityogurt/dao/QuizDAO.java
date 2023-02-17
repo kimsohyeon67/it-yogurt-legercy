@@ -15,4 +15,5 @@ public interface QuizDAO {
 
 	void uploadQuiz(QuizDTO dto);
 
+	int getAnswer(int quizSeq);
 }
