@@ -7,8 +7,32 @@
     <select id="getAllEmails" resultType="String">
         select email
         from user
-        WHERE user_seq IN (31, 32, 33, 34)
+    where is_pass = 1;
     </select>
 
+    <select id="getSendEmailsSubJava" resultType="String">
+        SELECT email
+        FROM user
+        WHERE category_seq = (SELECT category_seq
+                              FROM category
+                              WHERE detail IS NULL
+                              AND sub = 'java')
+        AND is_pass = true
+    </select>
+
+    <select id="getSendDetail" resultType="knowledgedto">
+        SELECT *
+        FROM knowledge
+        WHERE category_seq = (select category_seq
+                              from category
+                              where sub='java'
+                              AND detail IS NOT null
+                              order by send_date , category_seq
+                              limit 0, 1)
+    </select>
+
+    <update id="updateSendDate" parameterType="int">
+        UPDATE category set send_date = NOW() WHERE category_seq =  #{categorySeq}
+    </update>
 
 </mapper>
