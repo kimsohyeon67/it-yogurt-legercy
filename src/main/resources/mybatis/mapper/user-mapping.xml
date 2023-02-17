@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.starters.ityogurt.dao.UserDAO">
+
+ <select id="getAllUserlist" resultType="userdto">
+	select *
+	from user order by user_seq
+	where admin is null
+ </select>
+
+ <select id="getAllUserlistLimit" resultType="userdto" parameterType="int">
+	select *
+	from user
+	where admin is null
+	order by user_seq
+	limit #{limit}, 10
+ </select>
+
+ <select id="getUserByUserSeq" resultType="userdto" parameterType="int">
+	select *
+	from user
+	where user_seq = #{userSeq}
+</select>
+
+ <select id="countAllUser" resultType="int">
+	select count(*)
+	from user
+	where admin is null
+</select>
+
+ <select id="declarationUser" resultType="userdto" parameterType="int">
+	select *
+	from user
+	where declaration >= #{declaration}
+</select>
+
+<delete id="deleteUser" parameterType="int">
+	delete
+	from user
+	where user_seq = #{userSeq}
+</delete>
+
+<insert id="insertUser" parameterType="userdto">
+    insert into user(email, nickname, insert_date, phone, lastlogin_date,
+                     category_seq, password, access_token, refresh_token)
+    values (#{email}, #{nickname}, now(), #{phone}, now(),
+            1, #{password}, #{accessToken}, #{refreshToken})
+</insert>
+
+	<select id="getUserByUserEmail" resultType="userdto" parameterType="String">
+		select *
+		from user
+		where email = #{email}
+	</select>
+
+</mapper>
