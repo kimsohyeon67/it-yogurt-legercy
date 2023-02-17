@@ -26,12 +26,13 @@
         WHERE category_seq = (select category_seq
                               from category
                               where sub='java'
+                              AND detail IS NOT null
                               order by send_date , category_seq
-                              limit 0, 1);
+                              limit 0, 1)
     </select>
 
     <update id="updateSendDate" parameterType="int">
-        UPDATE category set send_date = NOW() WHERE category_seq =  #{categorySeq};
+        UPDATE category set send_date = NOW() WHERE category_seq =  #{categorySeq}
     </update>
 
 </mapper>

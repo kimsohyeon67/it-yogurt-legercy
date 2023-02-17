@@ -35,8 +35,8 @@ public class EmailController {
        // private final EmailService emailService;
 
     //이메일 전송 API
-    @RequestMapping("/aws/email")
-    @Scheduled(cron = "0 0 6 * * ?", zone = "Asia/Seoul")
+    // @RequestMapping("/aws/email")
+    @Scheduled(cron = "0 30 7 * * ?", zone = "Asia/Seoul")
     public String sendEmail() throws Exception {
         int categorySeq = emailService.getSendDetail().getCategorySeq();
         int knowledgeSeq = emailService.getSendDetail().getKnowSeq();
