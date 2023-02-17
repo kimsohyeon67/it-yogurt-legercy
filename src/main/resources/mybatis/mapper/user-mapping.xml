@@ -42,5 +42,11 @@
 	where user_seq = #{userSeq}
 </delete>
 
+<insert id="InsertUser" parameterType="UserDTO">
+    insert into user(email, nickname, insert_date, phone, lastlogin_date,
+                     category_seq, password, access_token, refresh_token)
+    values (#{email}, #{nickname}, now(), #{phone}, now(),
+            1, #{password}, #{accessToken}, #{refreshToken})
+  </insert>
 
 </mapper>

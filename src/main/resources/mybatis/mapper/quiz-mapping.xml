@@ -6,8 +6,10 @@
 <mapper namespace="com.starters.ityogurt.dao.QuizDAO">
 
 <insert id="uploadQuiz" parameterType="quizdto">
-	insert into quiz(question, answer, commentary, insert_date,choice1,choice2,choice3,choice4,know_seq) 
-	values (#{question}, #{answer}, #{commentary},now() ,#{choice1},#{choice2},#{choice3},#{choice4},#{know_seq})
+	insert into quiz(question, answer, commentary, insert_date,
+					choice1,choice2,choice3,choice4,know_seq) 
+	values (#{question}, #{answer}, #{commentary},now() ,
+			#{choice1},#{choice2},#{choice3},#{choice4},#{knowSeq})
 </insert>
 
 <select id="quiz" resultType="quizdto" parameterType="int">

@@ -11,6 +11,7 @@
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/container.css" rel="stylesheet">
      <link href="/css/admin.css" rel="stylesheet">
+
 <title>유저 관리</title>
 </head>
 <body>
@@ -29,26 +30,28 @@
 				<th> 신고 </th>
 				<th> 마지막 로그인 </th>
 				<th> 탈퇴  </th>
+				<th> 블랙 </th>
 			</tr>
 			<c:forEach items="${userList }" var="list">
 			<tr>
-				<td>${list.userSeq }</td>
+				<td id ="userSeq">${list.userSeq }</td>
 				<td>${list.email }</td>
 				<td>${list.nickname }</td>
 				<td>${list.declaration }</td>
 				<td>${list.lastloginDate }</td>
-				<td><button id= "black" onclick="location.href=''">블랙</button></td>
+				<td><button id= "delUserBtn" style="border-color: #C0D8C0" onclick="location.href='/admin/user/manage/${list.userSeq }'">탈퇴</button></td>
+				<td><button id= "black" onclick="location.href='/admin/user/manage/${list.userSeq }/${list.email }'">블랙</button></td>
 			</tr>
 			</c:forEach>
 			<tr>
-			<td colspan="6">
+			<td colspan="7">
 				<%
-				int totalCnt = (int) request.getAttribute("totalCnt");
+				int totalUserCnt = (int) request.getAttribute("totalUserCnt");
 				int totalPage = 0;
-				if (totalCnt % 10 == 0) {
-					totalPage = totalCnt / 10;
+				if (totalUserCnt % 10 == 0) {
+					totalPage = totalUserCnt / 10;
 				} else {
-					totalPage = totalCnt / 10 + 1;
+					totalPage = totalUserCnt / 10 + 1;
 				}
 				for (int i = 1; i <= totalPage; i++) {
 				%>

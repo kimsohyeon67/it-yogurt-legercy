@@ -21,8 +21,11 @@
 </select>
 
 <insert id="uploadKnowledge" parameterType="knowledgedto">
-	insert into knowledge(title, content, img, insert_date, update_date, category_seq, user_seq)
-	values (#{title},#{content},#{img}, now(), now(),#{categorySeq},#{userSeq})
+	insert into knowledge(title, content, img, 
+						insert_date, update_date, 
+						category_seq, user_seq)
+	values (#{title},#{content},#{img}, 
+			now(), now(),#{categorySeq},#{userSeq})
 </insert>
 
 <update id="viewCnt" parameterType="int">
