@@ -57,7 +57,7 @@ public class UserController {
         return mv;
     }
 
-    // 비밀번호 암호화 -> UserService 안으로
+    // 비밀번호 암호화
     String ConvertPassword(String pw) throws Exception {
         Encrypt crypto = new Encrypt();
         pw = crypto.encryptAES256(pw);
