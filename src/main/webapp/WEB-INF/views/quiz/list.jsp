@@ -105,7 +105,7 @@
 <!-- 				<h2>퀴즈풀기</h2> -->
 <!-- 			</div> -->
 				<div>
-				<form action="<%=request.getContextPath()%>" id="quizForm">
+				<form action="<%=request.getContextPath()%>" id="quizForm" method=post>
 					<c:forEach items="${quizList }" var="list">
 						<c:set var="length" value="${fn:length(quizList) }" />
 							<input type="hidden" value="${list.knowSeq}" name="knowSeq">
