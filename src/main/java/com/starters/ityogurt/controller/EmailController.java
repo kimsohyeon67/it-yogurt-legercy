@@ -9,6 +9,7 @@ import com.starters.ityogurt.service.*;
 import com.starters.ityogurt.serviceimpl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,10 @@ public class EmailController {
     @Autowired
     CategoryService categoryService;
 
-       // private final EmailService emailService;
+    @Value("${live.ip}")
+    private String liveIp;
+
+    // private final EmailService emailService;
 
     //이메일 전송 API
     // @RequestMapping("/aws/email")
@@ -63,7 +67,7 @@ public class EmailController {
     }
 
     public String buttonText(@RequestParam(value = "knowseq")int knowseq) {
-        String buttonText = "<br><a href='http://localhost:8818/quiz?knowSeq="+knowseq +"'><button class=\"btn btn-primary\">문제 풀기!</button></a>";
+        String buttonText = "<br><a href='http://"+ liveIp + ":8818/quiz?knowSeq="+knowseq +"'><button class=\"btn btn-primary\">문제 풀기!</button></a>";
         return buttonText;
     }
     public String footerText() {
