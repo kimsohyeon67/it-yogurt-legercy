@@ -91,6 +91,7 @@ public class QuizController {
 		for(LearnRecordDTO d:learnList) {
 			System.out.println(d);
 		}
+		
 		//퀴즈 내용 불러와야 하니까 리스트 가져옴
 		List<QuizDTO> quizList = service.getQuiz(knowSeq);
 		
