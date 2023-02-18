@@ -8,7 +8,7 @@ h1{
 }
 
 #list_tbl {
-	border: 1px solid grey;
+	border: 3px solid black;
 	border-collapse: collapse;
 	width: 100%;
 	text-align: center;
@@ -20,9 +20,14 @@ h1{
 }
 
 #tblDiv{
-	margin:auto;
+	width: 100%;
+	margin: auto;
 }
 
+#list_tbl td{
+	height: 40px;
+	border: 1px solid gray;
+}
 
 /* detail */
 
