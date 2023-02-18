@@ -90,13 +90,24 @@
 									<!-- 정답 및 해설 -->
 									<tr>
 										<td>
+											<c:forEach items="${learnList}" var="learn">
 											<div class="hideDiv">
-											
 												<br>
 												<b>내가 입력한 답: </b><br>
-												<br>정답입니다.<br>${list.commentary }
-												<br>
+												<c:choose>
+													<c:when test="${learn.usercoice eq 1}">
+														<br>정답입니다.<br>
+														${list.commentary }<br>
+													</c:when>
+													<c:otherwise>
+														틀렸습니다.<br>
+														${list.commentary }
+													</c:otherwise>
+												</c:choose>
+													
+												
 											</div>
+											</c:forEach>
 										</td>
 									</tr>
 									</c:forEach>

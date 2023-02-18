@@ -40,7 +40,7 @@ table {
 		<div class="content">
 			<div id="tblDiv">
 			<h1 style="text-align: center;">매일지식 목록</h1>
-			<table border=3>
+			<table>
 				<tr>
 					<td>번호</td>
 					<td>제목</td>
