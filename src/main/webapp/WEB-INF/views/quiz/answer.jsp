@@ -11,38 +11,11 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
+<link href="/css/quiz.css" rel="stylesheet">
 <title>정답 보기</title>
-<style type="text/css">
-#hideDiv {
-	display: none;
-}
 
-#num {
-	height: 90px;
-}
-</style>
 <script>
 	$(document).ready(function() {
-		//해설  n
-// 		$("input:submit").click(function(e) {
-// 			var length = $('input[name=length]').val(); //문제 길이
-// 			var chk = $('input[name=radio1]:checked').val(); //체크된 보기 번호
-// 			console.log(length);
-// 			console.log(chk);
-// 			//답이 모두 체크되었을때
-
-// 			if ($(".hideDiv").css("display") == "none") {
-// 		//		e.preventDefault();
-// 				$(".hideDiv").show();
-
-// 				$("#checkAnswer").hide();
-// 				$(".radio").hide();
-// 			}
-// 				$("form").attr("action","/answer?knowSeq="${knowSeq});
-			
-			
-
-// 		});
 
 		
 	});
@@ -52,9 +25,6 @@
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
-<!-- 			<div> -->
-<!-- 				<h2>퀴즈풀기</h2> -->
-<!-- 			</div> -->
 					<div>
 						<table>
 						<c:set var="length" value="${fn:length(quizList) }" />

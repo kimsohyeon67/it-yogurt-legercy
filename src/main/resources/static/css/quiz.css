@@ -1,0 +1,22 @@
+@media screen {
+
+}
+
+
+#num {
+	height: 90px;
+}
+
+#hideDiv {
+	display: none;
+}
+
+#checkAnswer{
+  width: 250px;
+  height: 40px;
+  border-style: solid;
+  border-width: medium;
+  margin: auto;
+  border-color: #91ACCC;
+  font-size: 20px;	
+}

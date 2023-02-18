@@ -10,28 +10,8 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
+<link href="/css/knowledge.css" rel="stylesheet">
 
-<style type="text/css">
-h1{
-	margin: 30px;
-}
-
-table {
-	border: 1px solid grey;
-	border-collapse: collapse;
-	width: 100%;
-	text-align: center;
-}
-
-#page {
-	margin: 40px;
-	text-align: center;
-}
-
-#tblDiv{
-	margin:auto;
-}
-</style>
 <title>매일지식 컨텐츠</title>
 </head>
 <body>
@@ -40,7 +20,7 @@ table {
 		<div class="content">
 			<div id="tblDiv">
 			<h1 style="text-align: center;">매일지식 목록</h1>
-			<table>
+			<table id="list_tbl">
 				<tr>
 					<td>번호</td>
 					<td>제목</td>
