@@ -18,4 +18,6 @@ public interface BoardDAO {
 
 	int countAllBoard();
 	
+	void deleteBoard(int userSeq);
+	
 }

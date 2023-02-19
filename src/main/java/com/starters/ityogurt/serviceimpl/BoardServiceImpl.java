@@ -32,6 +32,11 @@ public class BoardServiceImpl implements BoardService {
 		return dao.countAllBoard();
 	}
 
+	@Override
+	public void deleteBoard(int userSeq) {
+		dao.deleteBoard(userSeq);
+	}
+
 	
 	
 }

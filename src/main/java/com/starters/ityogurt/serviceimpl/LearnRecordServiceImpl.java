@@ -25,6 +25,11 @@ public class LearnRecordServiceImpl implements LearnRecordService{
 	public List<LearnRecordDTO> getLearn(int quizSeq1, int quizSeq2, int quizSeq3) {
 		return dao.getLearn(quizSeq1, quizSeq2, quizSeq3);
 	}
+
+	@Override
+	public void deleteLearnData(int userSeq) {
+		dao.deleteLearnData(userSeq);
+	}
 	
 	
 

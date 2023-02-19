@@ -17,7 +17,10 @@ import com.starters.ityogurt.dto.KnowledgeDTO;
 import com.starters.ityogurt.dto.QuizDTO;
 import com.starters.ityogurt.dto.UserDTO;
 import com.starters.ityogurt.service.BlacklistService;
+import com.starters.ityogurt.service.BoardService;
+import com.starters.ityogurt.service.CommentService;
 import com.starters.ityogurt.service.KnowledgeService;
+import com.starters.ityogurt.service.LearnRecordService;
 import com.starters.ityogurt.service.QuizService;
 import com.starters.ityogurt.service.UserService;
 
@@ -42,6 +45,20 @@ public class AdminController {
 	@Autowired
 	@Qualifier("blacklistservice")
 	BlacklistService blacklistService;
+	
+	@Autowired
+	@Qualifier("boardservice")
+	BoardService boardService;
+	
+	@Autowired
+	@Qualifier("commentservice")
+	CommentService commentService;
+	
+	@Autowired
+	@Qualifier("learnrecordservice")
+	LearnRecordService learnRecordService;
+	
+	
 
 	//관리자 마이페이지
 	 @GetMapping("/page")
@@ -73,6 +90,9 @@ public class AdminController {
 	 //관리자가 유저 탈퇴 시키기
 	 @GetMapping("/user/manage/{userseq}")
 	 public String deleteUser(@PathVariable("userseq") int userSeq) {
+		 commentService.deleteComment(userSeq);
+		 boardService.deleteBoard(userSeq);
+		 learnRecordService.deleteLearnData(userSeq);
 		 userService.deleteUser(userSeq);
 		 return "redirect:/admin/user/1";
 	 }
@@ -81,6 +101,9 @@ public class AdminController {
 	 @GetMapping("/user/manage/{userseq}/{email}")
 	 public String blackUser(@PathVariable("userseq") int userSeq, @PathVariable("email") String email) {
 		 blacklistService.insertBlackUser(email);
+		 commentService.deleteComment(userSeq);
+		 boardService.deleteBoard(userSeq);
+		 learnRecordService.deleteLearnData(userSeq);
 		 userService.deleteUser(userSeq);
 		 return "redirect:/admin/user/1";
 	 }

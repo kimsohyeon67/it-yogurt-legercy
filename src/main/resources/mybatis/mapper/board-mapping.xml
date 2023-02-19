@@ -44,6 +44,10 @@
 	where  board_seq = #{boardSeq}
   </select>
 
-
+<delete id="deleteBoard" parameterType="int">
+	delete
+	from board
+	where user_seq = #{userSeq}
+</delete>
 
 </mapper>

@@ -12,5 +12,7 @@ public interface BoardService {
 	Map<String,String> getOneBoardJoinUser(int boardSeq);
 	
 	int countAllBoard();
+	
+	void deleteBoard(int userSeq);
 
 }
