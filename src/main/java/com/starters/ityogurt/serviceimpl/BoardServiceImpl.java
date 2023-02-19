@@ -37,6 +37,11 @@ public class BoardServiceImpl implements BoardService {
 		dao.deleteBoard(userSeq);
 	}
 
+	@Override
+	public void viewCntBoard(int boardSeq) {
+		dao.viewCntBoard(boardSeq);
+	}
+
 	
 	
 }

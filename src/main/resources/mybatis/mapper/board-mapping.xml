@@ -50,4 +50,10 @@
 	where user_seq = #{userSeq}
 </delete>
 
+<update id="viewCntBoard" parameterType="int">
+	update board 
+	set viewcount=viewcount+1 
+	where board_seq=#{boardSeq}
+</update>
+
 </mapper>

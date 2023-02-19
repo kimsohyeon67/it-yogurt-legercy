@@ -14,5 +14,7 @@ public interface BoardService {
 	int countAllBoard();
 	
 	void deleteBoard(int userSeq);
+	
+	void viewCntBoard(int boardSeq);
 
 }

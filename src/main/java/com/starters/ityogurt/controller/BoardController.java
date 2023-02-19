@@ -60,6 +60,7 @@ public class BoardController {
 	 public ModelAndView boardlisttest(@PathVariable("boardSeq") int boardSeq) {
 		 ModelAndView mv = new ModelAndView();
 		 int limit =0;
+		 boardService.viewCntBoard(boardSeq);
 		 Map<String,String> oneBoard = boardService.getOneBoardJoinUser(boardSeq);
 		 
 		 mv.addObject("oneBoard", oneBoard);

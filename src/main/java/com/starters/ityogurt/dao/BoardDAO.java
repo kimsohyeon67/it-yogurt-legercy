@@ -20,4 +20,5 @@ public interface BoardDAO {
 	
 	void deleteBoard(int userSeq);
 	
+	void viewCntBoard(int boardSeq);
 }
