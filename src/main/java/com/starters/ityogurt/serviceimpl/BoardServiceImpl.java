@@ -43,6 +43,11 @@ public class BoardServiceImpl implements BoardService {
 		dao.viewCntBoard(boardSeq);
 	}
 
+	@Override
+	public int insertBoard(BoardDTO dto) {
+		return dao.insertBoard(dto);
+	}
+
 	
 	
 }

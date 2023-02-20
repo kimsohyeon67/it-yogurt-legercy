@@ -66,6 +66,23 @@ public class BoardController {
 		 mv.setViewName("board/boardDetail");
 		 return mv;
 	 }
+	 
+	 
+	 //게시글 업로드 폼
+	 @GetMapping("/form")
+	 public String boardInsertForm() {
+		return "board/boardForm";
+	 }
+	 
+	 //게시글 업로드
+	 @PostMapping("/form")
+	 public ModelAndView boardInsert(BoardDTO boardDto) {
+		 ModelAndView mv = new ModelAndView();
+		 boardService.insertBoard(boardDto);
+		 mv.setViewName("redirect:list");
+		 return mv;
+	 }
+	
 	
 	 
 }

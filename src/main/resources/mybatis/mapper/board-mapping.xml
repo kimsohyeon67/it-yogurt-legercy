@@ -56,4 +56,9 @@
 	where board_seq=#{boardSeq}
 </update>
 
+<insert id="insertBoard" parameterType="boarddto">
+	insert into board(title, content, insert_date, img, user_seq, category_seq)
+	values(#{title}, #{content}, now(), #{img}, #{userSeq}, #{categorySeq})
+</insert>
+
 </mapper>
