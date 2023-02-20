@@ -14,5 +14,6 @@
 		<typeAlias type="com.starters.ityogurt.dto.BoardDTO" alias="boarddto"/>
 		<typeAlias type="com.starters.ityogurt.dto.CategoryDTO" alias="categorydto"/>
 		<typeAlias type="com.starters.ityogurt.util.Criteria" alias="criteria"/>
+		<typeAlias type="com.starters.ityogurt.dto.LearnRecordQuizDTO" alias="recordquizdto"/>
 	</typeAliases>
 </configuration>
