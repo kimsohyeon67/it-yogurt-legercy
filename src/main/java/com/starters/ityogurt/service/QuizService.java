@@ -12,5 +12,4 @@ public interface QuizService {
 
 	int getAnswer(int quizSeq);
 
-	
 }
