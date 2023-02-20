@@ -32,4 +32,8 @@
 	update knowledge set viewcount=viewcount+1 where know_seq=#{knowSeq}
 </update>
 
+<select id="getKnowledgeByCategorySeq" parameterType="int" resultType="knowledgedto">
+	SELECT * FROM knowledge WHERE category_seq = #{categorySeq}
+</select>
+
 </mapper>

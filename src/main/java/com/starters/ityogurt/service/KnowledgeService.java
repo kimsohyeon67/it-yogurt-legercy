@@ -19,5 +19,7 @@ public interface KnowledgeService {
 
 	void viewCnt(int knowSeq);
 
+	KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq);
+
 
 }
