@@ -40,7 +40,7 @@
 						<td>${list.insertDate }</td>
 						<td>${list.viewcount }</td>
 						<td>관리자</td>	
-						<td><input type="button" value="퀴즈 풀러가기" onClick="location.href='<%=request.getContextPath()%>/quiz?knowSeq=${list.knowSeq}'"></td>
+						<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href='<%=request.getContextPath()%>/quiz?knowSeq=${list.knowSeq}'"></td>
 					</tr>
 				</c:forEach>
 				
@@ -57,7 +57,7 @@
 				}
 				for (int i = 1; i <= totalPage; i++) {
 				%>
-				<a href="list?page=<%=i%>"><%=i%>페이지</a>
+				<a href="list?page=<%=i%>" class="page-link"><%=i%></a>
 				<%
 				}
 				%>

@@ -3,6 +3,15 @@
 }
 
 /* list.jsp */
+#quizBtn{
+  width: 100%;
+  height: 40px;
+  border-style: solid;
+  border-width: medium;
+  border-color: #91ACCC;
+  font-size: 20px;
+}
+
 h1{
 	margin: 30px;
 }
@@ -27,6 +36,23 @@ h1{
 #listTbl th, td{
 	height: 40px;
 	border: 1px solid gray;
+}
+
+.page-link {
+  color: #fff; 
+  background-color: #91ACCC;
+  border: 1px solid #ccc; 
+  display: inline-block;
+  width:35px;
+  z-index: 1;
+  font-weight:bold;
+ 
+}
+
+.page-link:focus, .page-link:hover {
+  color: #000;
+  background-color: #fafafa; 
+  border-color: #ccc;
 }
 
 /* detail */
