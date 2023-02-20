@@ -25,11 +25,12 @@
 			<table id="listTbl">
 			
 				<tr>
-					<td>번호</td>
-					<td>제목</td>
-					<td>작성일자</td>
-					<td>조회수</td>
-					<td>작성자</td>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성일자</th>
+					<th>조회수</th>
+					<th>작성자</th>
+					<th>퀴즈풀러가기</th>
 				</tr>
 				
 				<c:forEach items="${knowledgeList }" var="list">
