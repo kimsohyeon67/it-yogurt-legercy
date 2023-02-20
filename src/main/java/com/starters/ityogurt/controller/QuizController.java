@@ -105,11 +105,14 @@ public class QuizController {
 		
 		//퀴즈 내용 불러와야 하니까 리스트 가져옴
 		List<QuizDTO> quizList = service.getQuiz(knowSeq);
-		
 		mv.addObject("quizList", quizList);
 		mv.addObject("learnList", learnList);
-	//	request.setAttribute("quizList", quizList);
-		
+//		mv.addObject("isRight1",learnList.get(0).getIsRight());
+//		mv.addObject("isRight2",learnList.get(1).getIsRight());
+//		mv.addObject("isRight3",learnList.get(2).getIsRight());
+//		mv.addObject("userChoice1",learnList.get(0).getUserChoice());
+//		mv.addObject("userChoice2",learnList.get(1).getUserChoice());
+//		mv.addObject("userChoice3",learnList.get(2).getUserChoice());
 		mv.setViewName("quiz/answer");
 		return mv;
 	}

@@ -18,15 +18,15 @@
 	$(document).ready(function() {
 		//해설  n
 		$("input:submit").click(function(e) {
-			var length = $('input[name=length]').val(); //문제 길이
-			var chk1 = $('input[name=radio1]:checked').val(); //체크된 보기 번호
-			var chk2 = $('input[name=radio2]:checked').val(); //체크된 보기 번호
-			var chk3 = $('input[name=radio3]:checked').val(); //체크된 보기 번호
-			var chk4 = $('input[name=radio4]:checked').val(); //체크된 보기 번호
+			var length = $('input[name=length]').val(); //문제 길이 3
+			var chk1 = $('input[name=radio1]:checked').val(); //1번 문제 체크된 값 가져오기
+			var chk2 = $('input[name=radio2]:checked').val(); //2번 문제 체크된 값 가져오기
+			var chk3 = $('input[name=radio3]:checked').val(); //3번 문제 체크된 값 가져오기
+
 			var answer = 0;
 			
-			if(chk1 != undefined){
-				answer+=1;
+			if(chk1 != undefined){ //1번 문제 체크되어있으면
+				answer+=1; // +=1해주기
 			}
 			if(chk2 != undefined){
 				answer+=1;
@@ -34,10 +34,8 @@
 			if(chk3 != undefined){
 				answer+=1;
 			}
-			if(chk4 != undefined){
-				answer+=1;
-			}
 			
+			//문제 길이(3)와 체크된 값(answer) 길이가 동일하지 않으면 체크되지 않은 값이 있다는 것 
 			if(length != answer){
 				alert('답을 체크하세요.');
 				e.preventDefault();
@@ -77,30 +75,15 @@
 											<td><input type="radio" value="2" id="radio2"
 												name="radio${i}" class="radio"> 2. ${list.choice2}</td>
 										</tr>
-										<c:if test="${list.choice3 ne '' }">
 											<tr>
 												<td><input type="radio" value="3" id="radio3"
 													name="radio${i}" class="radio"> 3. ${list.choice3}</td>
 											</tr>
-										</c:if>
-										<c:if test="${list.choice4 ne '' }">
 											<tr>
 												<td><input type="radio" value="4" id="radio4"
 													name="radio${i}" class="radio"> 4. ${list.choice4}</td>
 											</tr>
-										</c:if>
 									</div>
-									<!-- 정답 및 해설 -->
-<!-- 									<tr> -->
-<!-- 										<td> -->
-<!-- 											<div class="hideDiv" style="display: none;"> -->
-<!-- 												<br> -->
-<!-- 												<b>내가 입력한 답: </b><br> -->
-<%-- 												<br>정답입니다.<br>${list.commentary } --%>
-<!-- 												<br> -->
-<!-- 											</div> -->
-<!-- 										</td> -->
-<!-- 									</tr> -->
 								</table>
 							</c:forEach>
 						<br> <input type="submit" id="checkAnswer" value="정답 확인" >

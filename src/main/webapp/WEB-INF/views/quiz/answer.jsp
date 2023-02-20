@@ -14,12 +14,6 @@
 <link href="/css/quiz.css" rel="stylesheet">
 <title>정답 보기</title>
 
-<script>
-	$(document).ready(function() {
-
-		
-	});
-</script>
 </head>
 <body>
 	<div class="container">
@@ -29,16 +23,15 @@
 				<table>
 					<c:set var="length" value="${fn:length(quizList) }" />
 					<c:forEach items="${quizList }" var="list">
-						<input type="hidden" value="${list.knowSeq}" name="knowSeq">
-						<input type="hidden" value="${list.quizSeq}" name="quizSeq">
-						<input type="hidden" value="1" name="userSeq">
-						<input type="hidden" value="${length}" name="length"><!-- 퀴즈 몇 개인지 -->
+					
+						<!-- 퀴즈번호 기재하기 위한 변수 선언 -->
 						<c:set var="i" value="${i+1}" />
 							<tr>
 								<td id="num"><br> <br> <br> 
 								Q. ${i}번<br><br>
 								문제: ${list.question}<br> <br></td>
 							</tr>
+							
 								<!-- 보기화면 -->
 								<div id="${i}">
 									<tr><td> 1. ${list.choice1}</td></tr>
@@ -46,24 +39,28 @@
 									<tr><td> 3. ${list.choice3}</td></tr>
 									<tr><td> 4. ${list.choice4}</td></tr>
 								</div>
-									<!-- 정답 및 해설 -->
+								
+								<!-- 정답 및 해설 -->
 								<tr>
 									<td>
 										<div class="hideDiv">
-										<c:forEach items="${learnList}" var="learn">
-												<br><b>내가 입력한 답: ${learn.userChoice }</b><br>
+										<br><b>정답: ${list.answer }</b><br>
+										<c:forEach items="${learnList}" var="learn" begin="${i-1}" end="${i-1}">
+												<br><b>내가 입력한 답: ${learn.userChoice}</b><br>
+												
+												<!-- isRight가 1이면 정답 0이면 오답 -->
 												<c:choose>
-													<c:when test="${learn.userChoice eq 1}">
+													<c:when test="${learn.isRight == 1}">
 														<br>정답입니다.<br>
-														${list.commentary }<br>
 													</c:when>
 													<c:otherwise>
-														틀렸습니다.<br>
-														${list.commentary }
+														<br>틀렸습니다.<br>
 													</c:otherwise>
 												</c:choose>
-													
 											</c:forEach>
+											
+												${list.commentary }
+											
 											</div>
 										</td>
 									</tr>
