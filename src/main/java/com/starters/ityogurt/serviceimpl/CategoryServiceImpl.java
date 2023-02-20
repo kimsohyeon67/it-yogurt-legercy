@@ -22,4 +22,9 @@ public class CategoryServiceImpl implements CategoryService {
         return dao.getCategoryByCategorySeq(categorySeq);
     }
 
+    @Override
+    public int countAllSub() {
+        return dao.countAllSub();
+    }
+
 }

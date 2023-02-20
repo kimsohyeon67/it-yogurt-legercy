@@ -13,4 +13,10 @@
 		SELECT *	FROM category WHERE category_seq = #{categorySeq}  ORDER BY category_seq
 	</select>
 
+	<select id="countAllSub" resultType="int">
+		SELECT count(sub)
+		FROM category
+		WHERE detail IS NULL
+	</select>
+
 </mapper>
