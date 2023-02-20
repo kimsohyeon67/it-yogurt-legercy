@@ -63,7 +63,7 @@
 							<input type="hidden" value="${length}" name="length"><!-- 퀴즈 몇 개인지 -->
 							<c:set var="i" value="${i+1}" />
 						<table>
-									<tr>
+									<tr id="quizListTbl">
 										<td id="num"><br> <br> <br> Q. ${i}번<br>
 											<br> ${list.question}<br> <br></td>
 									</tr>

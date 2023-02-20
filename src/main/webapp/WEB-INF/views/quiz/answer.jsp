@@ -60,7 +60,7 @@
 										<c:forEach items="${learnList}" var="learn">
 <%-- 											<c:set var="loop_flag" value="false" /> --%>
 											<div class="hideDiv">
-												<br><b>내가 입력한 답: </b><br>
+												<br><b>내가 입력한 답: ${learn.userChoice }</b><br>
 <%-- 												<c:if test="${not loop_flag}"> --%>
 												<c:choose>
 													<c:when test="${learn.userChoice eq 1}">

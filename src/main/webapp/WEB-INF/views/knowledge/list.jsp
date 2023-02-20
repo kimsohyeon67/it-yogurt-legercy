@@ -22,7 +22,7 @@
 			
 			<h1 style="text-align: center;">매일지식 목록</h1>
 			
-			<table id="list_tbl">
+			<table id="listTbl">
 			
 				<tr>
 					<td>번호</td>
