@@ -10,7 +10,7 @@
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/container.css" rel="stylesheet">
     <link href="/css/admin.css" rel="stylesheet">
-<title>문제 관리</title>
+<title>관리자 | 문제 관리</title>
 </head>
 <body>
 

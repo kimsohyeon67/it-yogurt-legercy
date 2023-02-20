@@ -13,5 +13,6 @@
 		<typeAlias type="com.starters.ityogurt.dto.BlacklistDTO" alias="blacklistdto"/>
 		<typeAlias type="com.starters.ityogurt.dto.BoardDTO" alias="boarddto"/>
 		<typeAlias type="com.starters.ityogurt.dto.CategoryDTO" alias="categorydto"/>
+		<typeAlias type="com.starters.ityogurt.util.Criteria" alias="criteria"/>
 	</typeAliases>
 </configuration>

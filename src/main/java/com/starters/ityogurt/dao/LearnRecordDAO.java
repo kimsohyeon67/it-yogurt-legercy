@@ -16,6 +16,6 @@ public interface LearnRecordDAO {
 
 	List<LearnRecordDTO> getLearn(@Param("quizSeq1") int quizSeq1,@Param("quizSeq2") int quizSeq2,@Param("quizSeq3") int quizSeq3);
 
-
+	void deleteLearnData(int userSeq);
 	
 }

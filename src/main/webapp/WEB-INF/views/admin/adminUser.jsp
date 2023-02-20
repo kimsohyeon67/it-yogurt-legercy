@@ -12,7 +12,7 @@
     <link href="/css/container.css" rel="stylesheet">
      <link href="/css/admin.css" rel="stylesheet">
 
-<title>유저 관리</title>
+<title> 관리자 | 유저관리 </title>
 </head>
 <body>
 
@@ -39,8 +39,8 @@
 				<td>${list.nickname }</td>
 				<td>${list.declaration }</td>
 				<td>${list.lastloginDate }</td>
-				<td><button id= "delUserBtn" style="border-color: #C0D8C0" onclick="location.href='/admin/user/manage/${list.userSeq }'">탈퇴</button></td>
-				<td><button id= "black" onclick="location.href='/admin/user/manage/${list.userSeq }/${list.email }'">블랙</button></td>
+				<td><button class= "delUserBtn" style="border-color: #C0D8C0" onclick="clicked(${list.userSeq },'${list.nickname }')">탈퇴</button></td>
+				<td><button class= "black" onclick="black(${list.userSeq },'${list.email }','${list.nickname }')">블랙</button></td>
 			</tr>
 			</c:forEach>
 			<tr>
@@ -66,4 +66,26 @@
 <%@include file="../common/footer.jsp" %>
 </div>
 </body>
+<script>
+
+function clicked(clickedID,clickedName){
+	if (window.confirm(clickedName +"회원을 탈퇴시키겠습니까?"+ "\n\n"+"모든 회원 데이터가 삭제됩니다.\n")){
+		location.href="/admin/user/manage/"+clickedID;
+		alert("회원탈퇴 되었습니다.");		
+	}
+	else {
+		alert("회원 탈퇴가 취소되었습니다.");		
+	}
+}
+function black(clickedID,clickedEmail,clickedName){
+	if (window.confirm(clickedName +"회원을 블랙하시겠습니까?"+ "\n\n"+"모든 회원 데이터가 삭제됩니다.\n")){
+	location.href="/admin/user/manage/"+clickedID+"/"+clickedEmail;
+	alert("회원을 블랙했습니다.");
+	}
+	else {
+		alert("블랙이 취소되었습니다.");		
+	}
+	
+}
+</script>
 </html>

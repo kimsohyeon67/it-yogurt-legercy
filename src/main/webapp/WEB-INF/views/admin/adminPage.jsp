@@ -10,7 +10,7 @@
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/container.css" rel="stylesheet">
      <link href="/css/admin.css" rel="stylesheet">
-<title>관리자</title>
+<title> 마이페이지 | 관리자 </title>
 </head>
 <body>
 

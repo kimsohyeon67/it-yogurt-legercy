@@ -10,6 +10,6 @@ public interface LearnRecordService {
 
 	List<LearnRecordDTO> getLearn(int quizSeq1, int quizSeq2, int quizSeq3);
 
-	
+	void deleteLearnData(int userSeq);
 
 }
