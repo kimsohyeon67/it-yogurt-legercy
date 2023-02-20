@@ -37,61 +37,64 @@ public class EmailController {
     private String liveIp;
 
     // private final EmailService emailService;
-
-    //이메일 전송 API
-/*     @RequestMapping("/aws/email")
-    @Scheduled(cron = "0 30 7 * * ?", zone = "Asia/Seoul")
-    public String sendEmail() throws Exception {
-         List<Map<String, String>> subEmailMap = emailService.getEmailAndSub();
-         int categorySeq = emailService.getSendDetail().getCategorySeq();
-         int knowledgeSeq = emailService.getSendDetail().getKnowSeq();
-
-        // List<String> javaReceivers = emailService.getSendEmailsSubJava();       // 자바 카테고리를 구독한 사람
-        String subject = "오늘은 " + emailService.getSendDetail().getTitle() + "에 대해 알아보자!";     // 제목
-        String content = headerText() + emailService.getSendDetail().getContent() + buttonText(knowledgeSeq) + footerText();      // 본문
-
-         System.out.println(categorySeq);
-         System.out.println(knowledgeSeq);
-         System.out.println(subEmailMap);
-         System.out.println(subject);
-         System.out.println(content);
-
-        System.out.println("테스트!");
-        // emailService.updateSendDate(categorySeq);
-        // emailService.send(subject, content, javaReceivers);
-
-        return "true";
-    }*/
-
     @RequestMapping("/aws/email")
     @Scheduled(cron = "0 30 7 * * ?", zone = "Asia/Seoul")
     public String sendEmail() throws Exception {
         List<Map<String, Object>> subEmailMap = emailService.getEmailAndSub();          // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
         int count = categoryService.countAllSub();                                      // 총 소분류의 갯수이다.
         List<Map<String, Object>> sendDetailMap = emailService.getSendDetail(count);    // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
+        Map<String, Object> userMap = new HashMap<String, Object>();
+        Map<String, Object> categoryMap = new HashMap<String, Object>();
+        List<Object> updateCategorySeqList = new ArrayList<Object>();
+
+        Map<String, Object> map_01 = new HashMap<String, Object>();
+
+        // int categorySeq = (Integer) sendDetailMap.get(0).get("category_seq");
         System.out.println(subEmailMap);
-        System.out.println(count);
         System.out.println(sendDetailMap);
-        System.out.println(sendDetailMap.get(0).get("category_seq"));
-        System.out.println(sendDetailMap.get(0).get("category_seq").getClass().getName());
-        System.out.println(sendDetailMap.get(0).get("sub"));
-        System.out.println(sendDetailMap.get(0).get("sub").getClass().getName());
 
-        int categorySeq = (Integer) sendDetailMap.get(0).get("category_seq");
-
-        sendDetailMap.get(0).get("sub");
-        System.out.println(sendDetailMap.get(0).get("sub"));
-        if (sendDetailMap.get(0).get("sub").equals("java")) {
-            String content = knowledgeService.getKnowledgeByCategorySeq(categorySeq).getContent();
-            String title = knowledgeService.getKnowledgeByCategorySeq(categorySeq).getTitle();
-            System.out.println(content);
-            System.out.println(title);
+        // 1. {ityogurt213@gmail.com=mariadb, mjkim856@gmail.com=java, akdrh554@gmail.com=java}
+        for(Map<String, Object> data2 : sendDetailMap){
+            categoryMap.put((String) data2.get("sub"), data2.get("category_seq"));
         }
 
-        System.out.println("테스트!");
+        // 2. {mariadb=19, java=13}
+        for(Map<String, Object> map : subEmailMap){
+            userMap.put((String) map.get("email"), map.get("sub"));
+        }
 
-        // emailService.updateSendDate(categorySeq);
-        // emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
+        categoryMap.forEach((key, value) -> {
+            List emailCollectionList = new ArrayList<Object>();
+            // System.out.println(key + " : " + value);
+
+            userMap.forEach((userKey, userValue) -> {
+                // System.out.println(userKey + " : " + userValue);
+                if(key.equals(userValue)) {
+                    emailCollectionList.add(userKey);
+                }
+            });
+            map_01.put(key, emailCollectionList);
+        });
+
+        System.out.println(map_01);
+        System.out.println("userMap : " + userMap);
+        System.out.println("categoryMap : " + categoryMap);
+
+        //map에 키값과 같은 제네릭을 선언한 iterator에 map 키값들을 넣는다.
+        Iterator<String> it = categoryMap.keySet().iterator();
+
+        //키값이 존재할동안 반복
+        while(it.hasNext()) {
+            String key = it.next();
+            System.out.println(" =================== key -> " + key);
+            System.out.println(" =================== value ->" + categoryMap.get(key));
+            updateCategorySeqList.add(categoryMap.get(key));
+        }
+
+        System.out.println(updateCategorySeqList);
+
+        emailService.updateSendDate(updateCategorySeqList);
+//        emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
         return "true";
     }
 

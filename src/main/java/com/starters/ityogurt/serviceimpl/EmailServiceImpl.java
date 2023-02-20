@@ -6,6 +6,7 @@ import java.util.Map;
 import com.starters.ityogurt.dao.EmailDAO;
 import com.starters.ityogurt.dto.EmailDTO;
 import com.starters.ityogurt.dto.KnowledgeDTO;
+import com.starters.ityogurt.service.CategoryService;
 import com.starters.ityogurt.service.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Autowired
     EmailDAO dao;
+
+    @Autowired
+    CategoryService categoryService;
 
     @Autowired
     private final AmazonSimpleEmailService amazonSimpleEmailService;
@@ -50,14 +54,9 @@ public class EmailServiceImpl implements EmailService {
         return dao.getSendEmailsSubJava();
     }
 
-/*    @Override
-    public KnowledgeDTO getSendDetail() {
-        return dao.getSendDetail();
-    }*/
-
     @Override
-    public void updateSendDate(int categorySeq) {
-        dao.updateSendDate(categorySeq);
+    public void updateSendDate(List<Object> updateCategorySeqList) {
+        dao.updateSendDate(updateCategorySeqList);
     }
 
     private void sendingResultMustSuccess(SendEmailResult sendEmailResult) {
@@ -67,7 +66,6 @@ public class EmailServiceImpl implements EmailService {
     }
 
     // 추가
-
     // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
     @Override
     public List<Map<String, Object>> getEmailAndSub() {
@@ -81,9 +79,17 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq) {
-        KnowledgeDTO knowledgeDTO = new KnowledgeDTO();
-
+    public KnowledgeDTO getKnowledgeByCategorySeq() {
+        KnowledgeDTO knowledgeDTO = new KnowledgeDTO();                     // 컨트롤러에 유저가 선택한 소분류에 해당하는 정보글 knowledgeDTO를 보낼 것이다.
+        List<Map<String, Object>> subEmailMap = getEmailAndSub();           // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
+                                                                            // {sub=java, email=akdrh554@gmail.com}
+        int count = categoryService.countAllSub();                          // 총 소분류의 갯수이다.
+                                                                            // 2
+        List<Map<String, Object>> sendDetailMap = getSendDetail(count);     // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
+                                                                            // {sub=java, category_seq=13}
+/*        for(Map<String, Object> map : subEmailMap){
+            map.
+        }*/
         return knowledgeDTO;
     }
 

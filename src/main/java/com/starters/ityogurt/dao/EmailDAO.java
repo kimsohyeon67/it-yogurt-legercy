@@ -1,7 +1,5 @@
 package com.starters.ityogurt.dao;
 
-import com.starters.ityogurt.dto.KnowledgeDTO;
-import com.starters.ityogurt.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +13,7 @@ public interface EmailDAO {
     List<String> getSendEmailsSubJava();
     // KnowledgeDTO getSendDetail();
 
-    void updateSendDate(int categorySeq);
+    void updateSendDate(List<Object> updateCategorySeqList);
 
 
     void getDetailBySub(String sub);
