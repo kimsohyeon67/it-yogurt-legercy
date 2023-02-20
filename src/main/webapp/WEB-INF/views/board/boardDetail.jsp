@@ -10,62 +10,138 @@
     <link href="/css/header.css" rel="stylesheet">
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/container.css" rel="stylesheet">
+     <link href="/css/styles.css" rel="stylesheet">
      <link href="/css/admin.css" rel="stylesheet">
 <title> 커뮤니티 | 게시판 </title>
 <style>
-.tableList:hover {
-	background-color: #91ACCC;
-	color: white;
-	cursor: pointer;
-}
+
+
 </style>
 </head>
 <body>
 
+
 <div class="container">
 <%@include file="../common/header.jsp" %>
-     <div class="form">
+        <!-- Page content-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-auto">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <c:set value="${oneBoard }" var="oneboard"/>
+                            <h1 class="fw-bolder mb-1">${oneboard.title }</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2"> <table> <tr><td>작성시간 </td><td> | ${oneboard.insertDate }</td></tr><tr><td> 작성자  </td><td> | ${oneboard.nickname }</td></tr></table> </div>
+                            <!-- Post categories-->
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">IT</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">JAVA</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">잡담</a>
+                        </header>
+   
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">${oneboard.content }</p>
+                        </section>
+                    </article>
+                    
+                    <section class="mb-2">
+                    <div class="d-md-flex justify-content-md-end" >
+  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/form/${oneboard.boardSeq}'">수정</button>
+  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/d'">삭제</button>
+  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/list'">목록</button>
+					</div>
+                    </section>
+                    
+                    <!-- Comments section-->
+                    <section class="mb-5">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <!-- Comment form-->
+                                <form class="mb-4"><textarea name="content" class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                                <!-- Comment with nested comments-->
+                                <div class="d-flex mb-4">
+                                    <!-- Parent comment-->
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">Commenter Name</div>
+                                        If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+                                        <!-- Child comment 1-->
+                                        <div class="d-flex mt-4">
+                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                            <div class="ms-3">
+                                                <div class="fw-bold">Commenter Name</div>
+                                                And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+                                            </div>
+                                        </div>
+                                        <!-- Child comment 2-->
+                                        <div class="d-flex mt-4">
+                                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                            <div class="ms-3">
+                                                <div class="fw-bold">Commenter Name</div>
+                                                When you put money directly to a problem, it makes a good headline.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single comment-->
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                    <div class="ms-3">
+                                        <div class="fw-bold">Commenter Name</div>
+                                        When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+               
+        </div> 
+      
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+
+
+
+
+
+     <%-- <div class="form">
 		<h3 id="main" > 게시판 </h3> <br>
 		<button id= "black" onclick="location.href='/board/list'">목록</button>
-		<table class="form" border=3>
+		<table class="form" border=3 style="padding: 0px;">
 		<c:set value="${oneBoard }" var="oneboard"/>
+			<tr>
+				<th> 작성자 </th>
+				<td> ${oneboard.nickname } </td>
+				<th> 작성 시간 </th>
+				<td> ${oneboard.insertDate }</td>
+				
+			</tr>
+			</table>
+			<table class="form" border=3>
 			<tr>
 				<th> 제목 </th>
 				<td> ${oneboard.title } </td>
-				<th> 작성자 </th>
-				<td> ${oneboard.nickname } </td>
+				<th style="width:8%;"> 조회수 </th>
+				<td style="width:5%;"> ${oneboard.viewcount }</td>
 			</tr>
 			<tr >
-				<td colspan=4>${oneboard.content }<td>
+				<td colspan=6 style="text-align : left; padding: 15px;">${oneboard.content }<td>
 			</tr>
-			<%-- <tr class="tableList" onClick="location.href=''">
-				<td id ="boardSeq">${list.boardSeq }</td>
-				<td>${list.category }</td>
-				<td style="display : flex;">${list.title }</td>
-				<td>${list.nickname }</td>
-				<td>${list.viewcount }</td>
-			</tr>
-			</c:forEach>
-			<tr>
-			<td colspan="5">
-				<%
-				int totalBoardCnt = (int) request.getAttribute("totalBoardCnt");
-				int totalPage = 0;
-				if (totalBoardCnt % 10 == 0) {
-					totalPage = totalBoardCnt / 10;
-				} else {
-					totalPage = totalBoardCnt / 10 + 1;
-				}
-				for (int i = 1; i <= totalPage; i++) {
-				%>
-				<a href="<%=i%>"><%=i%>페이지</a>
-				<%
-				}
-				%>
-			</td>
-			</tr> --%>
+			
 		</table>
+		
+		
+		
 	</div>
+		<div class="">
+			<button id= "black" onclick="location.href=''">수정</button>
+		</div> --%>
 <%@include file="../common/footer.jsp" %>
 </div>
 </body>

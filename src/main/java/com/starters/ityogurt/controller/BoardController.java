@@ -76,13 +76,32 @@ public class BoardController {
 	 
 	 //게시글 업로드
 	 @PostMapping("/form")
-	 public ModelAndView boardInsert(BoardDTO boardDto) {
+	 public ModelAndView insertBoard(BoardDTO boardDto) {
 		 ModelAndView mv = new ModelAndView();
 		 boardService.insertBoard(boardDto);
 		 mv.setViewName("redirect:list");
 		 return mv;
 	 }
+	 
+	 //게시글 수정
+	 @GetMapping("/form/{boardseq}")
+	 public ModelAndView uploadBaordForm(BoardDTO boardDto, @PathVariable("boardseq") int boardSeq) {
+		 ModelAndView mv = new ModelAndView();
+		 
+		 Map<String,String> oneBoard = boardService.getOneBoardJoinUser(boardSeq);
+		 mv.addObject("oneBoard", oneBoard);
+		 mv.setViewName("board/boardUpdateForm");
+		 return mv;
+	 }
 	
+	 @PostMapping("/form/{boardseq}")
+	 public ModelAndView uploadBoard(BoardDTO boardDto,  @PathVariable("boardseq") int boardSeq) {
+		 ModelAndView mv = new ModelAndView();
+		 boardDto.setBoardSeq(boardSeq);
+		 boardService.updateBoard(boardDto);
+		 mv.setViewName("redirect:/board/list");
+		 return mv;
+	 }
 	
 	 
 }

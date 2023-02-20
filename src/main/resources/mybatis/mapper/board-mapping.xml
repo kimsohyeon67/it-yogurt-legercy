@@ -61,4 +61,20 @@
 	values(#{title}, #{content}, now(), #{img}, #{userSeq}, #{categorySeq})
 </insert>
 
+<delete id="deleteBoardByBoardSeq" parameterType="int">
+	delete
+	from board
+	where board_seq = #{boardSeq}
+</delete>
+
+<update id="updateBoard" parameterType="boarddto">
+	update board 
+	set title=#{title},
+		content=#{content},
+		insert_date= now(),
+		img=#{img},
+		category_seq=#{categorySeq}
+	where board_seq=#{boardSeq}
+</update>
+
 </mapper>

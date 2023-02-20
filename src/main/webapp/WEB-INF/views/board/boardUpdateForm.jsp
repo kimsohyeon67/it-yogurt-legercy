@@ -29,13 +29,13 @@
             <div class="row">
                 <div class="col-lg-auto">
                     <!-- Post content-->
-                            <form action="form" method="post">
+                  <form action="/board/form/${oneBoard.boardSeq }" method="post">
                     <article>
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post title-->
                             <p>제목</p>
-                            <h1 class="fw-bolder mb-1"><input type="text" class="fw-bolder mb-1" name="title"></h1>
+                            <h1 class="fw-bolder mb-1"><input type="text" class="fw-bolder mb-1" name="title" value="${oneBoard.title }"></h1>
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2"> <table> <tr><td> 작성자  </td><td> | 세션 유저</td></tr></table> </div>
                             <!-- Post categories-->
@@ -47,19 +47,17 @@
                         <section class="mb-5">
                             <p class="fs-5 mb-4"> 내용</p>
                             
-                           <textarea  class="form-control" name="content" rows=10></textarea>
+                           <textarea  class="form-control" name="content" rows=10 >${oneBoard.content }</textarea>
                       			
                       			<input type="hidden" name="userSeq" value="2">
 								<input type="hidden" name="categorySeq" value="3">
                         
                         </section>
                     </article>
-                    	<button type="submit" class="btn me-md-2" style="background-color: #91ACCC;">등록</button>
-                        </form>
+                    	<button type="submit" class="btn me-md-2" style="background-color: #91ACCC;">수정</button>
+                   </form>
                     <section class="mb-2">
                     <div class="d-md-flex justify-content-md-end" >
-  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/e'">수정</button>
-  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/d'">삭제</button>
   						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/list'">목록</button>
 					</div>
                     </section>

@@ -10,12 +10,12 @@
 	where admin is null
  </select>
 
- <select id="getAllUserlistLimit" resultType="userdto" parameterType="int">
+ <select id="getAllUserlistLimit" resultType="userdto" parameterType="criteria">
 	select *
 	from user
 	where admin is null
 	order by user_seq
-	limit #{limit}, 10
+	limit #{pageStart}, #{perPageNum} 
  </select>
 
  <select id="getUserByUserSeq" resultType="userdto" parameterType="int">

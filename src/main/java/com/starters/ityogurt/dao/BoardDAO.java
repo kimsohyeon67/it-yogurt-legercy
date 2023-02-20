@@ -25,4 +25,5 @@ public interface BoardDAO {
 	
 	int insertBoard(BoardDTO dto);
 	
+	void updateBoard(BoardDTO dto);
 }

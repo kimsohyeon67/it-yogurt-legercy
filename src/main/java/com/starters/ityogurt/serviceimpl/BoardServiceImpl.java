@@ -48,6 +48,11 @@ public class BoardServiceImpl implements BoardService {
 		return dao.insertBoard(dto);
 	}
 
+	@Override
+	public void updateBoard(BoardDTO dto) {
+		dao.updateBoard(dto);
+	}
+
 	
 	
 }
