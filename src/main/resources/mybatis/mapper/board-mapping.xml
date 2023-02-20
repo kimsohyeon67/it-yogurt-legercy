@@ -18,15 +18,15 @@
 </resultMap>
 
 
- <select id="getBoardJoinUser" resultMap="getBoardlist" parameterType="int">
+ <select id="getBoardJoinUser" resultMap="getBoardlist" parameterType="criteria">
 	select board_seq, title, content, viewcount,
 		b.category_seq category ,b.img img, b.insert_date insert_date,
 		u.user_seq user_seq, u.nickname nickname
 	from board b
 	JOIN user u 
 	ON b.user_seq = u.user_seq	
-	order BY board_seq
-	LIMIT #{limit}, 10		
+	order BY board_seq desc
+	LIMIT #{pageStart}, #{perPageNum}		
  </select>
  
   <select id="countAllBoard" resultType="int">

@@ -11,7 +11,7 @@
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/container.css" rel="stylesheet">
      <link href="/css/admin.css" rel="stylesheet">
-<title>관리자</title>
+<title> 커뮤니티 | 게시판 </title>
 <style>
 .tableList:hover {
 	background-color: #91ACCC;
@@ -26,7 +26,7 @@
 <%@include file="../common/header.jsp" %>
      <div class="form">
 		<h3 id="main" > 게시판 </h3> <br>
-		<button id= "black" onclick="location.href='/board/list/1'">목록</button>
+		<button id= "black" onclick="location.href='/board/list'">목록</button>
 		<table class="form" border=3>
 		<c:set value="${oneBoard }" var="oneboard"/>
 			<tr>

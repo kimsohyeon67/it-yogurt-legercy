@@ -12,7 +12,7 @@
     <link href="/css/container.css" rel="stylesheet">
      <link href="/css/admin.css" rel="stylesheet">
 
-<title>유저 관리</title>
+<title> 관리자 | 유저관리 </title>
 </head>
 <body>
 

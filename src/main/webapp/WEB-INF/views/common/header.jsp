@@ -13,7 +13,7 @@
                 퀴즈
             </li>
             <li id="nav-menu-quiz">
-                <a href="<%=request.getContextPath()%>/board/list/1" style="text-decoration-line: none; color:white;">게시판</a>
+                <a href="<%=request.getContextPath()%>/board/list" style="text-decoration-line: none; color:white;">게시판</a>
             </li>
             <li id="nav-menu-mypage" hidden="hidden">
                 마이 페이지

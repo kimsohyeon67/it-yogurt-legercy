@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.starters.ityogurt.dao.BoardDAO;
 import com.starters.ityogurt.dto.BoardDTO;
 import com.starters.ityogurt.service.BoardService;
+import com.starters.ityogurt.util.Criteria;
 
 @Service("boardservice")
 public class BoardServiceImpl implements BoardService {
@@ -18,8 +19,8 @@ public class BoardServiceImpl implements BoardService {
 	BoardDAO dao;
 
 	@Override
-	public List<Map<String,String>> getBoardJoinUser(int limit) {
-		return dao.getBoardJoinUser(limit);
+	public List<Map<String,String>> getBoardJoinUser(Criteria cri) {
+		return dao.getBoardJoinUser(cri);
 	}
 
 	@Override

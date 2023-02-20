@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.starters.ityogurt.dto.BoardDTO;
+import com.starters.ityogurt.util.Criteria;
 
 public interface BoardService {
 	
-	List<Map<String,String>> getBoardJoinUser(int limit);
+	List<Map<String,String>> getBoardJoinUser(Criteria cri);
 	
 	Map<String,String> getOneBoardJoinUser(int boardSeq);
 	
