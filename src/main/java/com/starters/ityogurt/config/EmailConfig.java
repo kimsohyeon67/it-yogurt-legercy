@@ -1,3 +1,4 @@
+/*
 package com.starters.ityogurt.config;
 
 import java.util.*;
@@ -82,3 +83,4 @@ public class EmailConfig {
     }
 
 }
+*/

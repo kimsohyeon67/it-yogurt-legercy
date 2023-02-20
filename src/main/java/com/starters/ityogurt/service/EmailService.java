@@ -13,10 +13,15 @@ public interface EmailService {
 
     List<String> getAllEmails();
 
-    KnowledgeDTO getSendDetail();
+/*    KnowledgeDTO getSendDetail();*/
 
     List<String> getSendEmailsSubJava();
 
     void updateSendDate(int categorySeq);
+
+    // 추가
+    List<Map<String, Object>> getEmailAndSub();
+    List<Map<String, Object>> getSendDetail(int count);
+    KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq);
 
 }

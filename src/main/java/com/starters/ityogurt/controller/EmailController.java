@@ -39,20 +39,59 @@ public class EmailController {
     // private final EmailService emailService;
 
     //이메일 전송 API
-    // @RequestMapping("/aws/email")
+/*     @RequestMapping("/aws/email")
     @Scheduled(cron = "0 30 7 * * ?", zone = "Asia/Seoul")
     public String sendEmail() throws Exception {
-        int categorySeq = emailService.getSendDetail().getCategorySeq();
-        int knowledgeSeq = emailService.getSendDetail().getKnowSeq();
+         List<Map<String, String>> subEmailMap = emailService.getEmailAndSub();
+         int categorySeq = emailService.getSendDetail().getCategorySeq();
+         int knowledgeSeq = emailService.getSendDetail().getKnowSeq();
 
-        List<String> javaReceivers = emailService.getSendEmailsSubJava();       // 자바 카테고리를 구독한 사람
+        // List<String> javaReceivers = emailService.getSendEmailsSubJava();       // 자바 카테고리를 구독한 사람
         String subject = "오늘은 " + emailService.getSendDetail().getTitle() + "에 대해 알아보자!";     // 제목
         String content = headerText() + emailService.getSendDetail().getContent() + buttonText(knowledgeSeq) + footerText();      // 본문
 
-        System.out.println("테스트!");
-        emailService.updateSendDate(categorySeq);
-        emailService.send(subject, content, javaReceivers);
+         System.out.println(categorySeq);
+         System.out.println(knowledgeSeq);
+         System.out.println(subEmailMap);
+         System.out.println(subject);
+         System.out.println(content);
 
+        System.out.println("테스트!");
+        // emailService.updateSendDate(categorySeq);
+        // emailService.send(subject, content, javaReceivers);
+
+        return "true";
+    }*/
+
+    @RequestMapping("/aws/email")
+    @Scheduled(cron = "0 30 7 * * ?", zone = "Asia/Seoul")
+    public String sendEmail() throws Exception {
+        List<Map<String, Object>> subEmailMap = emailService.getEmailAndSub();          // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
+        int count = categoryService.countAllSub();                                      // 총 소분류의 갯수이다.
+        List<Map<String, Object>> sendDetailMap = emailService.getSendDetail(count);    // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
+        System.out.println(subEmailMap);
+        System.out.println(count);
+        System.out.println(sendDetailMap);
+        System.out.println(sendDetailMap.get(0).get("category_seq"));
+        System.out.println(sendDetailMap.get(0).get("category_seq").getClass().getName());
+        System.out.println(sendDetailMap.get(0).get("sub"));
+        System.out.println(sendDetailMap.get(0).get("sub").getClass().getName());
+
+        int categorySeq = (Integer) sendDetailMap.get(0).get("category_seq");
+
+        sendDetailMap.get(0).get("sub");
+        System.out.println(sendDetailMap.get(0).get("sub"));
+        if (sendDetailMap.get(0).get("sub").equals("java")) {
+            String content = knowledgeService.getKnowledgeByCategorySeq(categorySeq).getContent();
+            String title = knowledgeService.getKnowledgeByCategorySeq(categorySeq).getTitle();
+            System.out.println(content);
+            System.out.println(title);
+        }
+
+        System.out.println("테스트!");
+
+        // emailService.updateSendDate(categorySeq);
+        // emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
         return "true";
     }
 

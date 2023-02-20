@@ -7,7 +7,7 @@
     <select id="getAllEmails" resultType="String">
         select email
         from user
-    where is_pass = 1;
+        where is_pass = 1;
     </select>
 
     <select id="getSendEmailsSubJava" resultType="String">
@@ -20,7 +20,7 @@
         AND is_pass = true
     </select>
 
-    <select id="getSendDetail" resultType="knowledgedto">
+<!--    <select id="getSendDetail" resultType="knowledgedto">
         SELECT *
         FROM knowledge
         WHERE category_seq = (select category_seq
@@ -29,10 +29,30 @@
                               AND detail IS NOT null
                               order by send_date , category_seq
                               limit 0, 1)
-    </select>
+    </select>-->
 
     <update id="updateSendDate" parameterType="int">
         UPDATE category set send_date = NOW() WHERE category_seq =  #{categorySeq}
     </update>
+
+    <!-- 전체 회원 + 카테고리 조회 코드 -->
+    <select id="getEmailAndSub" resultType="Map">
+        SELECT u.email, c.sub
+        FROM user u INNER JOIN (SELECT category_seq, sub
+                                FROM category
+                                WHERE detail IS NULL) as c ON u.category_seq = c.category_seq
+                                AND is_pass = TRUE
+        ORDER BY SUB
+    </select>
+
+    <select id="getSendDetail" parameterType="int" resultType="Map">
+        SELECT sub, category_seq
+        FROM category
+        WHERE detail IS NOT null
+        order BY send_date, category_seq
+        LIMIT 0,#{count}
+    </select>
+
+
 
 </mapper>

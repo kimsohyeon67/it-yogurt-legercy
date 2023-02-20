@@ -1,6 +1,7 @@
 package com.starters.ityogurt.serviceimpl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.starters.ityogurt.dao.EmailDAO;
 import com.starters.ityogurt.dto.EmailDTO;
@@ -49,10 +50,10 @@ public class EmailServiceImpl implements EmailService {
         return dao.getSendEmailsSubJava();
     }
 
-    @Override
+/*    @Override
     public KnowledgeDTO getSendDetail() {
         return dao.getSendDetail();
-    }
+    }*/
 
     @Override
     public void updateSendDate(int categorySeq) {
@@ -63,6 +64,27 @@ public class EmailServiceImpl implements EmailService {
         if (sendEmailResult.getSdkHttpMetadata().getHttpStatusCode() != 200) {
             log.error("{}", sendEmailResult.getSdkResponseMetadata().toString());
         }
+    }
+
+    // 추가
+
+    // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
+    @Override
+    public List<Map<String, Object>> getEmailAndSub() {
+        return dao.getEmailAndSub();
+    }
+
+    // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
+    @Override
+    public List<Map<String, Object>> getSendDetail(int count) {
+        return dao.getSendDetail(count);
+    }
+
+    @Override
+    public KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq) {
+        KnowledgeDTO knowledgeDTO = new KnowledgeDTO();
+
+        return knowledgeDTO;
     }
 
 }
