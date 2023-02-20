@@ -54,7 +54,8 @@
 									</div>
 								</table>
 							</c:forEach>
-						<br> <input type="submit" id="checkAnswer" value="정답 확인" >
+						<br> <input type="submit" value="정답 확인" class="a" >
+							 <input type="button" value="초기화" class="a" onclick="removeAll()"> 
 				</form>
 					</div><!-- 전체 div -->
 		</div><!-- content -->
@@ -90,8 +91,14 @@
 				 $("form").attr("action","/answer");
 			}
 		});
-		
-	});
+});	
+	
+function removeAll() {
+	var obj = document.getElementsByClassName('radio');
+	for (var i = 0; i < obj.length; i++) {
+	     obj[i].checked = false;
+	}
+}
 </script>
 </body>
 </html>

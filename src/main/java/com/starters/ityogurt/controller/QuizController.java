@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,8 +31,8 @@ public class QuizController {
 	@Qualifier("learnrecordservice")
 	LearnRecordService learnRecordService;
 	
-	@GetMapping("/quiz") //매일지식 폼 확인
-	public ModelAndView quiz(int knowSeq) {
+	@GetMapping("/quiz/{knowSeq}") //매일지식 폼 확인
+	public ModelAndView quiz(@PathVariable("knowSeq") int knowSeq) {
 		ModelAndView mv = new ModelAndView();
 		List<QuizDTO> quizList = service.getQuiz(knowSeq);
 		mv.addObject("quizList", quizList);
@@ -86,17 +87,21 @@ public class QuizController {
 				learnRecordService.updateLearnData(userChoice[i], isRight[i], userSeq, quizSeq[i]);
 			}
 		}
+		int quizSeq1=quizSeq[0];
+		int quizSeq2=quizSeq[1];
+		int quizSeq3=quizSeq[2];
 		
 		// 새로운 페이지로 redirect, 대신 필요한 값들 모두 url에 전달해주기
-		return "redirect:/answerResult?quizSeq="+quizSeq[0]+"&quizSeq="+quizSeq[1]+"&quizSeq="+quizSeq[2]+"&knowSeq="+knowSeq;
+//		return "redirect:/answerResult?quizSeq="+quizSeq[0]+"&quizSeq="+quizSeq[1]+"&quizSeq="+quizSeq[2]+"&knowSeq="+knowSeq;
+		return "redirect:/answerResult/"+quizSeq1+"/"+quizSeq2+"/"+quizSeq3+"/"+knowSeq;
 	}
 
 	//정답 보여주기(가져와서 보여주기)
-	@GetMapping("/answerResult")
-	public ModelAndView answerResult(int[] quizSeq, int knowSeq) {
+	@GetMapping("/answerResult/{quizSeq1}/{quizSeq2}/{quizSeq3}/{knowSeq}")
+	public ModelAndView answerResult(@PathVariable("quizSeq1") int quizSeq1, @PathVariable("quizSeq2") int quizSeq2, @PathVariable("quizSeq3") int quizSeq3, @PathVariable("knowSeq") int knowSeq) {
 		ModelAndView mv = new ModelAndView();
 		//답 보여줘야 하니 learn_record 불러오기
-		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq[0],quizSeq[1],quizSeq[2]);
+		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
 		for(LearnRecordDTO d:learnList) {
 			System.out.println("퀴즈번호"+d.getQuizSeq());
 			System.out.println("유저 선택"+d.getUserChoice());
@@ -106,12 +111,6 @@ public class QuizController {
 		List<QuizDTO> quizList = service.getQuiz(knowSeq);
 		mv.addObject("quizList", quizList);
 		mv.addObject("learnList", learnList);
-//		mv.addObject("isRight1",learnList.get(0).getIsRight());
-//		mv.addObject("isRight2",learnList.get(1).getIsRight());
-//		mv.addObject("isRight3",learnList.get(2).getIsRight());
-//		mv.addObject("userChoice1",learnList.get(0).getUserChoice());
-//		mv.addObject("userChoice2",learnList.get(1).getUserChoice());
-//		mv.addObject("userChoice3",learnList.get(2).getUserChoice());
 		mv.setViewName("quiz/answer");
 		return mv;
 	}

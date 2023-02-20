@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dao.KnowledgeDAO;
@@ -22,15 +23,10 @@ public class KnowledgeController {
 	@Qualifier("knowledgeservice")
 	KnowledgeService service;
 
-//	@GetMapping("/list") //매일지식 폼 확인
-//	public String list1() {
-//		return "knowledge/list";
-//	}
 
-	@GetMapping("/list") //매일지식 list 불러오기
-	public ModelAndView list2(int page) {
+	@GetMapping("/list/{page}") //매일지식 list 불러오기
+	public ModelAndView list(@PathVariable("page") int page) {
 		ModelAndView mv = new ModelAndView();
-//      KnowledgeDTO dto = service.getOneNovel(id);
 		int userSeq = 2;
 		int limit = (page - 1) * 9; // page처리 위해서
 		int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
@@ -42,8 +38,8 @@ public class KnowledgeController {
 		return mv;
 	}
 	
-	@GetMapping("/detail") //매일지식 폼 확인
-	public ModelAndView detail(int knowSeq) {
+	@GetMapping("/detail/{knowSeq}") //매일지식 폼 확인
+	public ModelAndView detail(@PathVariable("knowSeq") int knowSeq) {
 		ModelAndView mv = new ModelAndView();
 		String title = service.getTitle(knowSeq);
 		String contents = service.getContents(knowSeq);

@@ -36,11 +36,11 @@
 				<c:forEach items="${knowledgeList }" var="list">
 					<tr>
 						<td>${list.knowSeq}</td>
-						<td><a href="<%=request.getContextPath()%>/detail?knowSeq=${list.knowSeq}">${list.title}</a></td>
+						<td><a href="<%=request.getContextPath()%>/detail/${list.knowSeq}">${list.title}</a></td>
 						<td>${list.insertDate }</td>
 						<td>${list.viewcount }</td>
 						<td>관리자</td>	
-						<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href='<%=request.getContextPath()%>/quiz?knowSeq=${list.knowSeq}'"></td>
+						<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href='<%=request.getContextPath()%>/quiz/${list.knowSeq}'"></td>
 					</tr>
 				</c:forEach>
 				
@@ -57,7 +57,7 @@
 				}
 				for (int i = 1; i <= totalPage; i++) {
 				%>
-				<a href="list?page=<%=i%>" class="page-link"><%=i%></a>
+				<a href="<%=request.getContextPath()%>/list/<%=i%>" class="page-link"><%=i%></a>
 				<%
 				}
 				%>
@@ -67,14 +67,5 @@
 		<%@include file="../common/footer.jsp"%>
 		</div>
 	</div>
-<script type="text/javascript">
-$(document).ready(function() {
-	//해설  n
-	$("input:button").click(function(e) {
-	
-		
-	});
-});
-</script>
 </body>
 </html>
