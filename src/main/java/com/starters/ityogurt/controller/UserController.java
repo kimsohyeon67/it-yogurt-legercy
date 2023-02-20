@@ -42,21 +42,6 @@ public class UserController {
 
     //region === 기능 ===
 
-
-    // 회원가입
-    @PostMapping("/user/1")
-    public ModelAndView SignUp(UserDTO userDTO) {
-        ModelAndView mv = new ModelAndView();
-        try {
-            userDTO.setPassword(ConvertPassword(userDTO.getPassword()));
-            int result = userService.insertUser(userDTO);
-            mv.setViewName("/user/login");
-        } catch (Exception e) {
-            mv.setViewName("error");
-        }
-        return mv;
-    }
-
     // 비밀번호 암호화
     String ConvertPassword(String pw) throws Exception {
         Encrypt crypto = new Encrypt();

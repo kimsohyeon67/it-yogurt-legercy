@@ -13,45 +13,32 @@ $(document).ready(function () {
     event.preventDefault();
 
     let result;
-    let isNotEmpty = false;
 
     $('#login_form input:not([type=image],[type=button],[type=submit], [type=checkbox])')
     .each(
         function (index) {
-          result = window.util.emptyAlert($(this))
+          let target = $(this);
+          result = window.util.emptyAlert(target);
           if (result != "") {
-            alert(result)
             return false;
-          } else {
-            isNotEmpty = true;
           }
         });
 
+    if (result != "") {
+      alert(result);
+      return;
+    }
+
     // 로그인 요청
-    $.ajax({
-      url: "/user",
-      enctype: 'multipart/form-data',
-      type: 'POST',
-      cache: false,
-      processData: false,
-      contentType: false,
-      data: new FormData($('#login_form')[0]),
-      success: result => {
-        if (result == "") {
-          window.location.href = "/";
-        }
-        else
-        {
-          alert(result)
-        }
-
-      },
-      error: (request, status, error) => {
-        alert(error);
-      }
-    });
-    //window.ajax.sendForm("/user", new FormData($('#login_form')[0]))
-
+    window.ajax.sendForm("/user", new FormData($('#login_form')[0]),
+        loginSuceess, loginError)
   })
-
 });
+
+loginSuceess = (result) => {
+  alert(result);
+  window.location.href="/";
+}
+loginError = (request) => {
+  alert(request.responseJSON.errorMessage);
+}
