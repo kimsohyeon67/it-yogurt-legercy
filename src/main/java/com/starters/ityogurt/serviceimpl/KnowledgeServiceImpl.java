@@ -48,6 +48,11 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 		dao.viewCnt(knowSeq);
 	}
 
+	@Override
+	public List<KnowledgeDTO> getSearchList(String keyword) {
+		return dao.getSearchList(keyword);
+	}
+
 
 
 }

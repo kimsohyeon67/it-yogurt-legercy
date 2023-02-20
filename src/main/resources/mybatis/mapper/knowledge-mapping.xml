@@ -32,4 +32,8 @@
 	update knowledge set viewcount=viewcount+1 where know_seq=#{knowSeq}
 </update>
 
+<select id="getSearchList" parameterType="String" resultType="knowledgedto">
+	select * from knowledge where title like concat('%',#{keyword},'%')
+</select>
+
 </mapper>
