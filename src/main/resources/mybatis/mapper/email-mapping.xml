@@ -9,10 +9,6 @@
         from user
         where is_pass = 1;
     </select>
-<!--
-    <update id="updateSendDate" parameterType="int">
-        UPDATE category set send_date = NOW() WHERE category_seq =  #{categorySeq}
-    </update>-->
 
     <update id="updateSendDate" parameterType="java.util.List">
         UPDATE category
@@ -32,12 +28,19 @@
         ORDER BY SUB
     </select>
 
-    <select id="getSendDetail" parameterType="int" resultType="Map">
+<!--    <select id="getSendDetail" parameterType="int" resultType="Map">
         SELECT sub, category_seq
         FROM category
         WHERE detail IS NOT null
         order BY send_date, category_seq
         LIMIT 0,#{count}
+    </select>-->
+
+    <select id="getSendDetail" parameterType="int" resultType="Map">
+        SELECT sub, category_seq
+        FROM category
+        WHERE (sub, send_date) IN (SELECT sub, MIN(send_date) FROM category where detail IS NOT NULL GROUP BY sub ORDER BY category_seq)
+        order BY send_date, category_seq
     </select>
 
 

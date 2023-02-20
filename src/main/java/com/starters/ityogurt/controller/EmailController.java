@@ -35,6 +35,7 @@ public class EmailController {
 
     @Value("${live.ip}")
     private String liveIp;
+    private KnowledgeDTO knowledgeByCategorySeq;
 
     // private final EmailService emailService;
     @RequestMapping("/aws/email")
@@ -49,9 +50,10 @@ public class EmailController {
 
         Map<String, Object> map_01 = new HashMap<String, Object>();
 
+
         // int categorySeq = (Integer) sendDetailMap.get(0).get("category_seq");
-        System.out.println(subEmailMap);
-        System.out.println(sendDetailMap);
+        System.out.println("subEmailMap: " + subEmailMap);
+        System.out.println("sendDetailMap: " + sendDetailMap);
 
         // 1. {ityogurt213@gmail.com=mariadb, mjkim856@gmail.com=java, akdrh554@gmail.com=java}
         for(Map<String, Object> data2 : sendDetailMap){
@@ -76,7 +78,7 @@ public class EmailController {
             map_01.put(key, emailCollectionList);
         });
 
-        System.out.println(map_01);
+        System.out.println(map_01);         // {mariadb=[ityogurt213@gmail.com], java=[mjkim856@gmail.com, akdrh554@gmail.com]}
         System.out.println("userMap : " + userMap);
         System.out.println("categoryMap : " + categoryMap);
 
@@ -91,10 +93,17 @@ public class EmailController {
             updateCategorySeqList.add(categoryMap.get(key));
         }
 
-        System.out.println(updateCategorySeqList);
+        System.out.println("map_01.get: " + map_01.get("java"));
+/*
+        for(int i = 1 ; i < count ; i++) {
+            KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq(i);
+            emailService.send(knowledgeDTO.getTitle(), knowledgeDTO.getContent(), map_01.get("mariadb"));
+        }
+*/
+        System.out.println("updateCategorySeqList: " + updateCategorySeqList.toString());
 
-        emailService.updateSendDate(updateCategorySeqList);
-//        emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
+        //emailService.updateSendDate(updateCategorySeqList);
+        //emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
         return "true";
     }
 
