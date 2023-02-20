@@ -24,7 +24,7 @@ h1{
 	margin: auto;
 }
 
-#listTbl td{
+#listTbl th, td{
 	height: 40px;
 	border: 1px solid gray;
 }

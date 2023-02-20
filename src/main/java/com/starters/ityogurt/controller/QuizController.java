@@ -31,11 +31,10 @@ public class QuizController {
 	LearnRecordService learnRecordService;
 	
 	@GetMapping("/quiz") //매일지식 폼 확인
-	public ModelAndView quiz(int knowSeq, HttpServletRequest request) {
+	public ModelAndView quiz(int knowSeq) {
 		ModelAndView mv = new ModelAndView();
 		List<QuizDTO> quizList = service.getQuiz(knowSeq);
 		mv.addObject("quizList", quizList);
-		request.setAttribute("quizList", quizList);
 		mv.setViewName("quiz/list");		
 		return mv;
 	}

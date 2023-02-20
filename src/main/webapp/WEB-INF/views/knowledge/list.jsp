@@ -40,6 +40,7 @@
 						<td>${list.insertDate }</td>
 						<td>${list.viewcount }</td>
 						<td>관리자</td>	
+						<td><input type="button" value="퀴즈 풀러가기" onClick="location.href='<%=request.getContextPath()%>/quiz?knowSeq=${list.knowSeq}'"></td>
 					</tr>
 				</c:forEach>
 				
@@ -66,5 +67,14 @@
 		<%@include file="../common/footer.jsp"%>
 		</div>
 	</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	//해설  n
+	$("input:button").click(function(e) {
+	
+		
+	});
+});
+</script>
 </body>
 </html>
