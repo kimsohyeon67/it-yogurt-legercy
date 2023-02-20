@@ -1,9 +1,7 @@
 package com.starters.ityogurt.util;
 
 
-import lombok.Getter;
 
-@Getter
 public class Criteria {
     
     // 특정 페이지 조회를 위한 클래스
