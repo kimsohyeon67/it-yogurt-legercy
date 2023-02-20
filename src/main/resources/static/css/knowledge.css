@@ -1,0 +1,54 @@
+@media screen {
+
+}
+
+/* list.jsp */
+h1{
+	margin: 30px;
+}
+
+#listTbl {
+	border: 3px solid black;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+}
+
+#page {
+	margin: 40px;
+	text-align: center;
+}
+
+#tblDiv{
+	width: 100%;
+	margin: auto;
+}
+
+#list_tbl td{
+	height: 40px;
+	border: 1px solid gray;
+}
+
+/* detail */
+
+#contents{
+	margin: 400px;
+}
+
+#subBtn{
+  width: 250px;
+  height: 40px;
+  border-style: solid;
+  border-width: medium;
+  margin-top: 40px;
+  margin-left: 32%;
+  margin-bottom: 35px;
+  border-color: #91ACCC;
+  font-size: 20px;
+}
+
+#category{
+	height:50px;
+}
+
+

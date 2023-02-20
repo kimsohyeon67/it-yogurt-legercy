@@ -21,8 +21,8 @@ public class QuizServiceImpl implements QuizService {
 		
 	}
 	@Override
-	public List<QuizDTO> quiz(int knowSeq) {
-		return dao.quiz(knowSeq);
+	public List<QuizDTO> getQuiz(int knowSeq) {
+		return dao.getQuiz(knowSeq);
 	}
 	
 	@Override

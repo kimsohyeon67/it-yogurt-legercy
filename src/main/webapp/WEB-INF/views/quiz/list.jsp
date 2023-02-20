@@ -11,48 +11,10 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
+<link href="/css/quiz.css" rel="stylesheet">
 <title>퀴즈 풀기</title>
-<style type="text/css">
-#hideDiv {
-	display: none;
-}
 
-#num {
-	height: 90px;
-}
-</style>
 <script>
-
-// checkAnswer
-// $('#checkAnswer').on("click", function(e){
-// 	var length = $('input[name=length]').val(); //문제 길이
-// 	var chk1 = $('input[name=radio1]:checked').val(); //체크된 보기 번호
-// 	var chk2 = $('input[name=radio2]:checked').val(); //체크된 보기 번호
-// 	var chk3 = $('input[name=radio3]:checked').val(); //체크된 보기 번호
-// 	var chk4 = $('input[name=radio4]:checked').val(); //체크된 보기 번호
-// 	var answer = 0;
-	
-// 	if(chk1 != undefined){
-// 		answer+=1;
-// 	}
-// 	if(chk2 != undefined){
-// 		answer+=1;
-// 	}
-// 	if(chk3 != undefined){
-// 		answer+=1;
-// 	}
-// 	if(chk4 != undefined){
-// 		answer+=1;
-// 	}
-	
-// 	if(length != answer){
-// 		alert('답을 체크하세요.');
-// 		e.preventDefault();
-// 	}else{
-// 		 $("form").attr("action","/answer");
-// 	}
-// });
-
 	$(document).ready(function() {
 		//해설  n
 		$("input:submit").click(function(e) {
@@ -82,16 +44,6 @@
 			}else{
 				 $("form").attr("action","/answer");
 			}
-// 			alert('답 길이'+answer);
-			
-// 			console.log('문제 길이'+length);
-// 			alert(chk1);
-// 			alert(chk2);
-// 			alert(chk3);
-// 			alert(chk4);
-			
-// 			/answer?knowSeq=${list.knowSeq}
-
 		});
 		
 	});
@@ -101,9 +53,6 @@
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
-<!-- 			<div> -->
-<!-- 				<h2>퀴즈풀기</h2> -->
-<!-- 			</div> -->
 				<div>
 				<form action="<%=request.getContextPath()%>" id="quizForm" method=post>
 					<c:forEach items="${quizList }" var="list">
@@ -114,7 +63,7 @@
 							<input type="hidden" value="${length}" name="length"><!-- 퀴즈 몇 개인지 -->
 							<c:set var="i" value="${i+1}" />
 						<table>
-									<tr>
+									<tr id="quizListTbl">
 										<td id="num"><br> <br> <br> Q. ${i}번<br>
 											<br> ${list.question}<br> <br></td>
 									</tr>

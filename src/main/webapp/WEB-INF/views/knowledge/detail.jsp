@@ -8,22 +8,7 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/login.css" rel="stylesheet">
-<style type="text/css">
-#contents{
-	margin: 400px;
-}
-
-#subBtn{
-    margin-left: 38%;
-	width:150px;
- 	margin-top: 50px;
- 	margin-bottom: 50px;
-}
-
-#category{
-	height:50px;
-}
-</style>
+<link href="/css/knowledge.css" rel="stylesheet">
 <title>매일지식</title>
 </head>
 <body>

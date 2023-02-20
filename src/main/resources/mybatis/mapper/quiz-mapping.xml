@@ -12,7 +12,7 @@
 			#{choice1},#{choice2},#{choice3},#{choice4},#{knowSeq})
 </insert>
 
-<select id="quiz" resultType="quizdto" parameterType="int">
+<select id="getQuiz" resultType="quizdto" parameterType="int">
 	select * from quiz where know_seq=#{knowSeq}
 </select>
 
