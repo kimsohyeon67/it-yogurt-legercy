@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface CategoryDAO {
 	List<CategoryDTO> getAllCategoryList();
 	CategoryDTO getCategoryByCategorySeq(String categorySeq);
+	List<CategoryDTO> getCategoryByType(String type, String typeValue);
+	CategoryDTO getCategoryByAllType(String main, String middle, String sub);
 }

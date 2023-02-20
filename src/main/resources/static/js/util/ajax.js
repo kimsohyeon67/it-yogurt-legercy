@@ -6,7 +6,7 @@ const DEFAULT = {
 }
 
 window.ajax = {
-  sendForm: (path, data) => {
+  sendForm: (path, data, success, error) => {
     let sendFromResult;
     let url = window.location.origin;
     if (path.startsWith('http')) {
@@ -26,16 +26,16 @@ window.ajax = {
       contentType: false,
       data: data,
       success: result => {
-       sendFromResult = result;
+        success(result);
+
       },
-      error: (request, status, error) => {
-        return error;
-      }
+      error: (request) => {
+        error(request);
+      },
     });
-    return sendFromResult;
   },
 
-  request: async (path, options) => {
+  request: (path, options, success, error) => {
     var url = window.location.origin;
     if (path.startsWith('http')) {
       url = path;
@@ -45,26 +45,24 @@ window.ajax = {
       url += '/' + path;
     }
 
-    return new Promise((resolve, reject) => {
-      if (options.data && (options.type === 'POST' || options.type
-          === 'DELETE')) {
-        options.data = JSON.stringify(options.data);
-      }
-      $.ajax({
-        ...DEFAULT,
-        ...options,
-        url,
-        beforeSend: xhr => {
-          xhr.setRequestHeader("Content-Type",
-              "application/json;charset=UTF-8");
-        },
-        success: result => {
-          resolve(result);
-        },
-        error: async (request, status, error) => {
-
-        }
-      })
-    });
+    if (options.data && (options.type === 'POST' || options.type
+        === 'DELETE')) {
+      options.data = JSON.stringify(options.data);
+    }
+    $.ajax({
+      ...DEFAULT,
+      ...options,
+      url,
+      beforeSend: xhr => {
+        xhr.setRequestHeader("Content-Type",
+            "application/json;charset=UTF-8");
+      },
+      success: result => {
+        success(result);
+      },
+      error: (request) => {
+        error(request);
+      },
+    })
   }
 }

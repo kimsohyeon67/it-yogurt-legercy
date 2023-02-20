@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @Component
 public class CategoryDTO {
-   String categorySeq;
+   int categorySeq;
    String main;
    String middle;
    String sub;
