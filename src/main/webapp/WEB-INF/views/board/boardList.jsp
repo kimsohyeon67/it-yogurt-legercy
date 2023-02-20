@@ -65,9 +65,10 @@
 			</tr>
 			</c:forEach>
 			</table>
-			
-<nav aria-label="Page navigation example">
+	
+<nav aria-label="Page navigation example" style="margin: 10px;">
 		<ul class="pagination justify-content-center">
+        <li class="page-item"><a href='<c:url value="/board/list?page=1"/>' class="page-link">처음</a></li>
     <%-- <c:if test="${paging.prev}"> --%>
         <li class="page-item"><a href='<c:url value="/board/list?page=${paging.startPage-1}"/>' class="page-link">이전</a></li>
    <%--  </c:if> --%>
@@ -77,9 +78,13 @@
     <%-- <c:if test="${paging.next && paging.endPage>0}"> --%>
         <li class="page-item"><a href='<c:url value="/board/list?page=${paging.endPage+1}" />'class="page-link">다음</a></li>
   <%--   </c:if> --%>
+        <li class="page-item"><a href='<c:url value="/board/list?page=${maxpage}" />'class="page-link">끝</a></li>
 </ul>
-</nav>
 		
+</nav>
+<div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
+  <button class="btn btn-primary" style="background-color: #91ACCC; font-size: 15px; width: 80px;" type="button" onClick="location.href='/board/form'">글쓰기</button>
+</div>
 	</div>
 <%@include file="../common/footer.jsp" %>
 </div>
