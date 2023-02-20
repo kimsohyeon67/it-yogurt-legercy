@@ -4,19 +4,19 @@
 
 <mapper namespace="com.starters.ityogurt.dao.KnowledgeDAO">
 
-<select id="list" resultType="knowledgedto" parameterType="int">
+<select id="getList" resultType="knowledgedto" parameterType="int">
 	select * from knowledge where user_seq=#{userSeq} order by know_seq limit #{limit},9
 </select>
 
-<select id="totalCnt" resultType="int">
+<select id="getTotalCnt" resultType="int">
 	select count(*) from knowledge
 </select>
 
-<select id="title" resultType="String" parameterType="int">
+<select id="getTitle" resultType="String" parameterType="int">
 	select title from knowledge where know_seq=#{knowSeq}
 </select>
 
-<select id="contents" resultType="String" parameterType="int">
+<select id="getContents" resultType="String" parameterType="int">
 	select content from knowledge where know_seq=#{knowSeq}
 </select>
 

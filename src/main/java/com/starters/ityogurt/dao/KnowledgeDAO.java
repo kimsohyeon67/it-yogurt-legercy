@@ -12,13 +12,13 @@ import com.starters.ityogurt.dto.KnowledgeDTO;
 @Repository
 public interface KnowledgeDAO {
 
-	List<KnowledgeDTO> list(@Param("userSeq")int userSeq, @Param("limit")int limit);
+	List<KnowledgeDTO> getList(@Param("userSeq")int userSeq, @Param("limit")int limit);
 
-	int totalCnt();
+	int getTotalCnt();
 
-	String contents(int knowSeq);
+	String getContents(int knowSeq);
 
-	String title(int knowSeq);
+	String getTitle(int knowSeq);
 
 	void uploadKnowledge(KnowledgeDTO dto);
 

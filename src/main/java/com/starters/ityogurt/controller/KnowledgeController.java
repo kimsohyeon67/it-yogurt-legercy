@@ -33,8 +33,8 @@ public class KnowledgeController {
 //      KnowledgeDTO dto = service.getOneNovel(id);
 		int userSeq = 2;
 		int limit = (page - 1) * 9; // page처리 위해서
-		int totalCnt = service.totalCnt(); // 매일지식 몇 개인지 불러오기
-        List<KnowledgeDTO> knowledgeList = service.list(userSeq,limit);
+		int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
+        List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
         mv.addObject("knowledgeList", knowledgeList);
         mv.addObject("totalCnt",totalCnt);
         mv.setViewName("knowledge/list");
@@ -45,8 +45,8 @@ public class KnowledgeController {
 	@GetMapping("/detail") //매일지식 폼 확인
 	public ModelAndView detail(int knowSeq) {
 		ModelAndView mv = new ModelAndView();
-		String title = service.title(knowSeq);
-		String contents = service.contents(knowSeq);
+		String title = service.getTitle(knowSeq);
+		String contents = service.getContents(knowSeq);
         service.viewCnt(knowSeq);
 		mv.addObject("knowSeq",knowSeq);
 		mv.addObject("title",title);

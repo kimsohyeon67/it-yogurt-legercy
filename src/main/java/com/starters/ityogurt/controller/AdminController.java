@@ -114,7 +114,7 @@ public class AdminController {
 	 @GetMapping("/contents")
 	    public ModelAndView adminContents() {
 		 	ModelAndView mv = new ModelAndView();
-		 	int knowSeq = knowledgeService.totalCnt() + 1;
+		 	int knowSeq = knowledgeService.getTotalCnt() + 1;
 		 	mv.addObject("knowSeq", knowSeq);
 		 	mv.setViewName("admin/adminContents");
 	        return mv; 
