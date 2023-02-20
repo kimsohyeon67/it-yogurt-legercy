@@ -43,41 +43,28 @@
 								<div id="${i}">
 									<tr><td> 1. ${list.choice1}</td></tr>
 									<tr><td> 2. ${list.choice2}</td></tr>
-										
-									<c:if test="${list.choice3 ne '' }">
-										<tr><td> 3. ${list.choice3}</td></tr>
-									</c:if>
-									
-									<c:if test="${list.choice4 ne '' }">
-										<tr><td> 4. ${list.choice4}</td></tr>
-									</c:if>
-									
+									<tr><td> 3. ${list.choice3}</td></tr>
+									<tr><td> 4. ${list.choice4}</td></tr>
 								</div>
-								
 									<!-- 정답 및 해설 -->
 								<tr>
 									<td>
+										<div class="hideDiv">
 										<c:forEach items="${learnList}" var="learn">
-<%-- 											<c:set var="loop_flag" value="false" /> --%>
-											<div class="hideDiv">
 												<br><b>내가 입력한 답: ${learn.userChoice }</b><br>
-<%-- 												<c:if test="${not loop_flag}"> --%>
 												<c:choose>
 													<c:when test="${learn.userChoice eq 1}">
 														<br>정답입니다.<br>
 														${list.commentary }<br>
-<%-- 											   			<c:set var="loop_flag" value="true"/> --%>
 													</c:when>
 													<c:otherwise>
 														틀렸습니다.<br>
 														${list.commentary }
 													</c:otherwise>
 												</c:choose>
-											
-<%-- 											</c:if>									 --%>
 													
-											</div>
 											</c:forEach>
+											</div>
 										</td>
 									</tr>
 								</c:forEach>
