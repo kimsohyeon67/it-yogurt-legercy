@@ -7,13 +7,13 @@ import com.starters.ityogurt.dto.QuizDTO;
 
 public interface KnowledgeService {
 
-	List<KnowledgeDTO> list(int userSeq, int limit);
+	List<KnowledgeDTO> getList(int userSeq, int limit);
 
-	int totalCnt();
+	int getTotalCnt();
 
-	String contents(int knowSeq);
+	String getContents(int knowSeq);
 
-	String title(int knowSeq);
+	String getTitle(int knowSeq);
 
 	void uploadKnowledge(KnowledgeDTO dto);
 
