@@ -47,10 +47,10 @@
 				<%-- <c:forEach items="${knowledgeList }" var="list">
 					<tr id="id"> --%>
 
-				<tbody>
+				<tbody class="listData">
 					
 					<c:forEach items="${knowledgeList }" var="list">
-					<tr id="ajaxTr">
+					<tr class="tableList">
 						<td>${list.knowSeq}</td>
 						<td><a href="<%=request.getContextPath()%>/knowledge/detail/${list.knowSeq}">${list.title}</a></td>
 						<td>${list.insertDate }</td>
@@ -64,29 +64,29 @@
 			</table>
 			
 			<div class="paging">
-				<nav aria-label="Page navigation example" style="margin: 10px;">
-						<ul class="pagination justify-content-center">
-				        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(1); return false;" class="page-link">처음</a></li>
-				    <%-- <c:if test="${paging.prev}"> --%>
-				        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.startPage-1});" class="page-link">이전</a></li>
-				   <%--  </c:if> --%>
-				    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-				    	<c:choose>
-				    		<c:when test= "${num==1 }">
-				        		<li class="page-item active" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
-							</c:when>
-							<c:otherwise>
-				        		<li class="page-item" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
-							</c:otherwise>
-						</c:choose>	        
-				    </c:forEach>
-				    <%-- <c:if test="${paging.next && paging.endPage>0}"> --%>
-				        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.endPage+1});return false;" class="page-link">다음</a></li>
-					 <%--</c:if> --%>
-				        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${maxpage});return false;" class="page-link">끝</a></li>
-						</ul>
-				</nav>
-			</div>
+	<nav aria-label="Page navigation example" style="margin: 10px;">
+			<ul class="pagination justify-content-center">
+	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(1); return false;" class="page-link">처음</a></li>
+	    <%-- <c:if test="${paging.prev}"> --%>
+	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.startPage-1});" class="page-link">이전</a></li>
+	   <%--  </c:if> --%>
+	    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+	    	<c:choose>
+	    		<c:when test= "${num==1 }">
+	        		<li class="page-item active" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
+				</c:when>
+				<c:otherwise>
+	        		<li class="page-item" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
+				</c:otherwise>
+			</c:choose>	        
+	    </c:forEach>
+	    <%-- <c:if test="${paging.next && paging.endPage>0}"> --%>
+	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.endPage+1});return false;" class="page-link">다음</a></li>
+		 <%--</c:if> --%>
+	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${maxpage});return false;" class="page-link">끝</a></li>
+			</ul>
+	</nav>
+	</div>
 			
 <!-- 			<div id="page"> -->
 <!-- 	<script> -->
@@ -123,8 +123,9 @@
 		</div>
 	</div>
 <script>
+
 function go_page(pageNum){
-	
+	console.log("click");
 	
 	$.ajax({
 		url: "${pageContext.request.contextPath}/knowledge/list/a?page="+pageNum,
@@ -134,13 +135,16 @@ function go_page(pageNum){
 			let list = result.knowledgeList;
 			let content = '';
 			for(let i=0;i<list.length;i++){
-				content += '<tr class="tableList" onClick="window.location=\'/knowledge/'+list[i].knowSeq+'\'">';
-				content += '<td id ="knowSeq">' + list[i].knowSeq +'</td>';
+				content += '<tr>';
+				content +=	'<td>'+ list[i].knowSeq +'</td>';
+				content += '<td><a href="${pageContext.request.contextPath}/knowledge/detail/'+list[i].knowSeq+'\">' + list[i].title +'</a></td>';
 				content +=	'<td>'+ list[i].insertDate +'</td>';
-				content +=	'<td style="display : flex;"> 관리자 </td>';
-				'<td><input type="button" value="퀴즈 풀러가기" onClick="location.href=+${pageContext.request.contextPath}/quiz/'+${list[i].knowSeq}+'\'"></td>';
+				content +=	'<td>'+ list[i].viewcount +'</td>';
+				content +=	'<td> 관리자 </td>';
+				content +=	'<td><input type="button" value="퀴즈 풀러가기" onClick="location.href=\'/quiz/'+list[i].knowSeq+'"></td>';
 				content += '</tr>';
 			}
+			console.log(content);
 			$('.listData').html(content);	
 			
 			let paging = result.paging;
@@ -177,9 +181,8 @@ function go_page(pageNum){
 		error: function(){
 			console.log('error');
 		}
-	})
+	});
 }
-
 
 // function pageClick(){
 // 	let page = i;

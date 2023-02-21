@@ -84,8 +84,10 @@ public class KnowledgeController {
 			ModelAndView mv = new ModelAndView();
 			Paging paging = new Paging();
 			int userSeq = 2;
-			int limit = 10;
+			int limit = (cri.getPage() - 1) * 9;
+			System.out.println("limit"+limit);
 			paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
+//			System.out.print(paging.setCri(cri));
 			int totalCnt = service.getTotalCnt(); // 전체 게시글 수
 			int maxPage = (int)((double)totalCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
 			paging.setTotalCount(totalCnt);
@@ -104,13 +106,16 @@ public class KnowledgeController {
 	 public JSONObject boardListAjax(Criteria cri) throws Exception {
 		 Paging paging = new Paging();
 		 int userSeq = 2;
-		 int limit = 10;
+		 int limit = (cri.getPage() - 1) * 9;
 		 JSONObject jsonObjBoard = new JSONObject();
 		 paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
 		 int totalCnt = service.getTotalCnt(); // 전체 게시글 수
+		 System.out.println("토탈"+totalCnt);
 		 int maxPage = (int)((double)totalCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+		 System.out.println("맥스"+maxPage);
 		 paging.setTotalCount(totalCnt);
 		 List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+		 System.out.println(knowledgeList.size());
 		 jsonObjBoard.put("maxPage", maxPage);
 		 jsonObjBoard.put("paging", paging);
 		 jsonObjBoard.put("knowledgeList", knowledgeList);
