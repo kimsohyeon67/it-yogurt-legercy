@@ -1,10 +1,12 @@
 package com.starters.ityogurt.serviceimpl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.starters.ityogurt.dao.EmailDAO;
 import com.starters.ityogurt.dto.EmailDTO;
 import com.starters.ityogurt.dto.KnowledgeDTO;
+import com.starters.ityogurt.service.CategoryService;
 import com.starters.ityogurt.service.EmailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Autowired
     EmailDAO dao;
+
+    @Autowired
+    CategoryService categoryService;
 
     @Autowired
     private final AmazonSimpleEmailService amazonSimpleEmailService;
@@ -50,11 +55,6 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public KnowledgeDTO getSendDetail() {
-        return dao.getSendDetail();
-    }
-
-    @Override
     public void updateSendDate(int categorySeq) {
         dao.updateSendDate(categorySeq);
     }
@@ -64,5 +64,19 @@ public class EmailServiceImpl implements EmailService {
             log.error("{}", sendEmailResult.getSdkResponseMetadata().toString());
         }
     }
+
+    // 추가
+    // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
+    @Override
+    public List<Map<String, Object>> getEmailAndSub() {
+        return dao.getEmailAndSub();
+    }
+
+    // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
+    @Override
+    public List<Map<String, Object>> getSendDetail(int count) {
+        return dao.getSendDetail(count);
+    }
+
 
 }

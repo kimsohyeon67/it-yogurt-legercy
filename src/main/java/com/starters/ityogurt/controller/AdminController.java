@@ -1,6 +1,7 @@
 package com.starters.ityogurt.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dto.KnowledgeDTO;
@@ -23,8 +23,9 @@ import com.starters.ityogurt.service.KnowledgeService;
 import com.starters.ityogurt.service.LearnRecordService;
 import com.starters.ityogurt.service.QuizService;
 import com.starters.ityogurt.service.UserService;
+import com.starters.ityogurt.util.Criteria;
+import com.starters.ityogurt.util.Paging;
 
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/admin")
@@ -67,20 +68,19 @@ public class AdminController {
 	    }
 
 	// 관리자 회원 조회
-	 @GetMapping(value ={"/user","/user/" ,"/user/{userpage}"})
-	    public ModelAndView adminUser(@PathVariable(value = "userpage", required=false) Optional<String> userPage) {
+	 @GetMapping(value ={"/user"})
+	    public ModelAndView adminUser(Criteria cri) {
 		 	ModelAndView mv = new ModelAndView();
-		 	int pageInt=0;
-		 	if (userPage!=null) {
-		 		pageInt =Integer.parseInt(userPage.get()) ;
-		 	}
-		 	else {
-		 		pageInt= 1;
-		 	}
-		 	
-		 	int limit = (pageInt- 1) * 10;
-		 	int totalUserCnt = userService.countAllUser();
-		 	List<UserDTO> userList = userService.getAllUserlistLimit(limit);
+			Paging paging = new Paging();
+			paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
+			int totalUserCnt = userService.countAllUser();
+			int maxPage = (int)((double)totalUserCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+			paging.setTotalCount(totalUserCnt);
+			List<UserDTO> userList = userService.getAllUserlistLimit(cri);
+			
+			mv.addObject("maxpage", maxPage);
+		 	mv.addObject("paging", paging);
+ 	
 		 	mv.addObject("totalUserCnt", totalUserCnt);
 		 	mv.addObject("userList", userList);
 		 	mv.setViewName("admin/adminUser");

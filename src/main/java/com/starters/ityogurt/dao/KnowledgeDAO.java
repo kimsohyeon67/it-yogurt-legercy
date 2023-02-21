@@ -25,5 +25,7 @@ public interface KnowledgeDAO {
 	void viewCnt(int knowSeq);
 
 	List<KnowledgeDTO> getSearchList(String keyword);
+  
+	KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq);
 	
 }

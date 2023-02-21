@@ -20,6 +20,8 @@ public interface KnowledgeService {
 	void viewCnt(int knowSeq);
 
 	List<KnowledgeDTO> getSearchList(String keyword);
+  
+	KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq);
 
 
 }

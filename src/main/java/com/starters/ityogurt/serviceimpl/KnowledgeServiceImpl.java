@@ -29,9 +29,7 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 	}
 
 	@Override
-	public String getContents(int knowSeq) {
-		return dao.getContents(knowSeq);
-	}
+	public String getContents(int knowSeq) { return dao.getContents(knowSeq); }
 
 	@Override
 	public String getTitle(int knowSeq) {
@@ -53,6 +51,10 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 		return dao.getSearchList(keyword);
 	}
 
+  @Override
+	public KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq) {
+		return dao.getKnowledgeByCategorySeq(categorySeq);
+	}
 
 
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,4 +50,9 @@ public class UserController {
         return pw;
     }
     //endregion
+
+    @GetMapping("/user/check/{quizSeq}")
+    public String QuizLoginCheck(@PathVariable(value = "quizSeq") int quizSeq) {
+        return "user/check";
+    }
 }

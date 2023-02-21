@@ -36,4 +36,8 @@
 	select * from knowledge where title like concat('%',#{keyword},'%')
 </select>
 
+<select id="getKnowledgeByCategorySeq" parameterType="int" resultType="knowledgedto">
+	SELECT * FROM knowledge WHERE category_seq = #{categorySeq}
+</select>
+
 </mapper>
