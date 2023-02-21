@@ -17,22 +17,22 @@
 		<div class="content">
 				<form action=" <%=request.getContextPath()%>/quiz/${knowSeq}">
 					<div>
-						<table>
+						<table id="detailTbl">
 						<div>
 							<tr>
-								<td id="category">IT > 프로그래밍언어 > JAVA</td>
+								<td class="detailTd">IT > 프로그래밍언어 > JAVA</td>
 							</tr>
 							</div>
 							<div>
 							<tr style="height: 100px;">
-								<td><b>${title}</b></td>
+								<td class="detailTd"><b>${title}</b></td>
 							</tr>
 							</div>
 							<tr>
-								<td id="contents">${contents }</td>
+								<td class="detailTd">${contents }</td>
 							</tr>
 							<tr>
-								<td><input type="submit" value="퀴즈 풀러가기" id="subBtn">
+								<td class="detailTd"><input type="submit" value="퀴즈 풀러가기" id="subBtn">
 								<input type="hidden" value="${knowSeq}" name="knowSeq"></td>
 							</tr>
 						</table>

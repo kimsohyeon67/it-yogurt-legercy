@@ -29,12 +29,14 @@
 		<div class="content">
 			<div id="tblDiv">
 			
-			<h1 style="text-align: center;">매일지식 목록</h1>
+			<h3 style="text-align: center;">매일지식 목록</h3>
+			
 			<form action="<%=request.getContextPath()%>/knowledge/searchResult">
+			<div id="searchDiv">
 			<input type="text" placeholder="검색어 입력" name="keyword" id="keyword">
                 <button type="submit" id="search">검색</button>
+			</div>	
 			<table id="listTbl">
-				
 				<tr>
 					<th>번호</th>
 					<th>제목</th>
@@ -68,7 +70,7 @@
 			<ul class="pagination justify-content-center">
 	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(1); return false;" class="page-link">처음</a></li>
 	    <%-- <c:if test="${paging.prev}"> --%>
-	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.startPage-1});" class="page-link">이전</a></li>
+<%-- 	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.startPage-1});" class="page-link">이전</a></li> --%>
 	   <%--  </c:if> --%>
 	    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
 	    	<c:choose>
@@ -81,7 +83,7 @@
 			</c:choose>	        
 	    </c:forEach>
 	    <%-- <c:if test="${paging.next && paging.endPage>0}"> --%>
-	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.endPage+1});return false;" class="page-link">다음</a></li>
+<%-- 	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.endPage+1});return false;" class="page-link">다음</a></li> --%>
 		 <%--</c:if> --%>
 	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${maxpage});return false;" class="page-link">끝</a></li>
 			</ul>
@@ -127,7 +129,7 @@ function go_page(pageNum){
 				
 				
 				/* if(paging.prev){ */
-					content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page('+(Number(paging.startPage)-1)+');return false;" class="page-link">이전</a></li>';
+// 					content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page('+(Number(paging.startPage)-1)+');return false;" class="page-link">이전</a></li>';
 				/* } */
 				for (let num = Number(paging.startPage) ; num <=Number(paging.endPage); num++){
 					if (num == Number(paging.cri.page)){

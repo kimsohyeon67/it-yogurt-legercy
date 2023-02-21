@@ -12,7 +12,7 @@
   font-size: 20px;
 }
 
-h1{
+h3{
 	margin: 30px;
 }
 
@@ -38,15 +38,37 @@ h1{
 	border: 1px solid gray;
 }
 
+
+#keyword{
+	border-radius: 15px;
+	width: 300px;
+}
+
+#searchDiv{
+	height: 80px;
+	width: 100%;
+    padding-left: 30%;
+}
+
+#search{
+  width: 100px;
+  height: 40px;
+  border-style: solid;
+  border-width: medium;
+  border-color: #91ACCC;
+  font-size: 20px;
+}
+
 .page-link {
   color: #fff; 
   background-color: #91ACCC;
   border: 1px solid #ccc; 
   display: inline-block;
-  width:35px;
+  width:78px;
+  margin:auto;
   z-index: 1;
   font-weight:bold;
- 
+  text-align: center;
 }
 
 .page-link:focus, .page-link:hover {
@@ -57,9 +79,7 @@ h1{
 
 /* detail */
 
-#contents{
-	margin: 400px;
-}
+
 
 #subBtn{
   width: 250px;
