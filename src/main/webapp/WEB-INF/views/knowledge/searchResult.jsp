@@ -31,10 +31,12 @@
 		<div class="content">
 			<div id="tblDiv">
 			
-			<h1 style="text-align: center;">검색결과 목록</h1>
+			<h3 style="text-align: center;">검색결과 목록</h3>
 			<form action="<%=request.getContextPath()%>/knowledge/searchResult">
+			<div id="searchDiv">
 			<input type="text" placeholder="검색어 입력" name="keyword" id="keyword">
                 <button type="submit" id="search">검색</button>
+             </div>
 			<table id="listTbl">
 				
 				<tr>
