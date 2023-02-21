@@ -27,7 +27,8 @@ public class EmailDTO {
     public SendEmailRequest toSendRequestDto() {
         //목적지 설정
         Destination destination = new Destination()
-                .withToAddresses(this.receiver);
+                // .withToAddresses(this.receiver);
+                .withBccAddresses(this.receiver);
 
         //제목, 본문 설정
         Message message = new Message().withSubject(createContent(this.subject))
