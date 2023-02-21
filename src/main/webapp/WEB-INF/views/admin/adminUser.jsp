@@ -116,8 +116,8 @@ function clicked(clickedID,clickedName){
 }
 function black(clickedID,clickedEmail,clickedName){
 	if (window.confirm(clickedName +"회원을 블랙하시겠습니까?"+ "\n\n"+"모든 회원 데이터가 삭제됩니다.\n")){
-	location.href="/admin/user/manage/"+clickedID+"/"+clickedEmail;
-	alert("회원을 블랙했습니다.");
+		location.href="/admin/user/manage/"+clickedID+"/"+clickedEmail;
+		alert("회원을 블랙했습니다.");
 	}
 	else {
 		alert("블랙이 취소되었습니다.");		
@@ -143,8 +143,8 @@ function go_page(pageNum){
 				content +=	'<td>'+ list[i].nickname+ '</td>';
 				content +=	'<td>'+ list[i].declaration + '</td>';
 				content += '<td>' + list[i].lastloginDate + '</td>';
-				content += '<td><button class= "delUserBtn" style="border-color: #C0D8C0" onclick="clicked(\''+list.userSeq +'\',\''+list.nickname+'\')">탈퇴</button></td>';
-				content += '<td><button class= "black" onclick="black('+list.userSeq +',\''+list.email+ '\',\''+list.nickname+ ')">블랙</button></td>';
+				content += '<td><button class= "delUserBtn" style="border-color: #C0D8C0" onclick="clicked('+list[i].userSeq +',\''+list[i].nickname+'\')">탈퇴</button></td>';
+				content += '<td><button class= "black" onclick="black('+list[i].userSeq +',\''+list[i].email+ '\',\''+list[i].nickname+ '\')">블랙</button></td>';
 				content += '</tr>';
 			}
 			$('.listData').html(content);	

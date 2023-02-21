@@ -115,7 +115,7 @@ public class AdminController {
 		 boardService.deleteBoard(userSeq);
 		 learnRecordService.deleteLearnData(userSeq);
 		 userService.deleteUser(userSeq);
-		 return "redirect:/admin/user/1";
+		 return "redirect:/admin/user";
 	 }
 
 	 //관리자가 유저 블랙
@@ -126,7 +126,7 @@ public class AdminController {
 		 boardService.deleteBoard(userSeq);
 		 learnRecordService.deleteLearnData(userSeq);
 		 userService.deleteUser(userSeq);
-		 return "redirect:/admin/user/1";
+		 return "redirect:/admin/user";
 	 }
 
 
