@@ -47,6 +47,11 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 	}
 
 	@Override
+	public List<KnowledgeDTO> getSearchList(String keyword) {
+		return dao.getSearchList(keyword);
+	}
+
+  @Override
 	public KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq) {
 		return dao.getKnowledgeByCategorySeq(categorySeq);
 	}

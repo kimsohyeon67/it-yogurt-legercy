@@ -15,7 +15,7 @@
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
-				<form action=" <%=request.getContextPath()%>/quiz?knowSeq=${knowSeq}">
+				<form action=" <%=request.getContextPath()%>/quiz/${knowSeq}">
 					<div>
 						<table>
 						<div>

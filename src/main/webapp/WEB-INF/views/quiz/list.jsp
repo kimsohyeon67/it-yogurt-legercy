@@ -14,38 +14,6 @@
 <link href="/css/quiz.css" rel="stylesheet">
 <title>퀴즈 풀기</title>
 
-<script>
-	$(document).ready(function() {
-		//해설  n
-		$("input:submit").click(function(e) {
-			var length = $('input[name=length]').val(); //문제 길이 3
-			var chk1 = $('input[name=radio1]:checked').val(); //1번 문제 체크된 값 가져오기
-			var chk2 = $('input[name=radio2]:checked').val(); //2번 문제 체크된 값 가져오기
-			var chk3 = $('input[name=radio3]:checked').val(); //3번 문제 체크된 값 가져오기
-
-			var answer = 0;
-			
-			if(chk1 != undefined){ //1번 문제 체크되어있으면
-				answer+=1; // +=1해주기
-			}
-			if(chk2 != undefined){
-				answer+=1;
-			}
-			if(chk3 != undefined){
-				answer+=1;
-			}
-			
-			//문제 길이(3)와 체크된 값(answer) 길이가 동일하지 않으면 체크되지 않은 값이 있다는 것 
-			if(length != answer){
-				alert('답을 체크하세요.');
-				e.preventDefault();
-			}else{
-				 $("form").attr("action","/answer");
-			}
-		});
-		
-	});
-</script>
 </head>
 <body>
 	<div class="container">
@@ -86,11 +54,51 @@
 									</div>
 								</table>
 							</c:forEach>
-						<br> <input type="submit" id="checkAnswer" value="정답 확인" >
+						<br> <input type="submit" value="정답 확인" class="a" >
+							 <input type="button" value="초기화" class="a" onclick="removeAll()"> 
 				</form>
 					</div><!-- 전체 div -->
 		</div><!-- content -->
 		<%@include file="../common/footer.jsp"%>
 	</div>
+	
+<script>
+	$(document).ready(function() {
+		//해설  n
+		$("input:submit").click(function(e) {
+			var length = $('input[name=length]').val(); //문제 길이 3
+			var chk1 = $('input[name=radio1]:checked').val(); //1번 문제 체크된 값 가져오기
+			var chk2 = $('input[name=radio2]:checked').val(); //2번 문제 체크된 값 가져오기
+			var chk3 = $('input[name=radio3]:checked').val(); //3번 문제 체크된 값 가져오기
+
+			var answer = 0;
+			
+			if(chk1 != undefined){ //1번 문제 체크되어있으면
+				answer+=1; // +=1해주기
+			}
+			if(chk2 != undefined){
+				answer+=1;
+			}
+			if(chk3 != undefined){
+				answer+=1;
+			}
+			
+			//문제 길이(3)와 체크된 값(answer) 길이가 동일하지 않으면 체크되지 않은 값이 있다는 것 
+			if(length != answer){
+				alert('답을 체크하세요.');
+				e.preventDefault();
+			}else{
+				 $("form").attr("action","/answer");
+			}
+		});
+});	
+	
+function removeAll() {
+	var obj = document.getElementsByClassName('radio');
+	for (var i = 0; i < obj.length; i++) {
+	     obj[i].checked = false;
+	}
+}
+</script>
 </body>
 </html>
