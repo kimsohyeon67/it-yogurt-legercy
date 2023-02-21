@@ -22,8 +22,6 @@ public class UserController {
     @Qualifier("userservice")
     UserService userService;
 
-    //region === 페이지 ===
-
     // 로그인 페이지
     @GetMapping("/user")
     public String getLoginPage() {
@@ -39,20 +37,9 @@ public class UserController {
         return "user/signUp";
     }
 
-    //endregion
-
-    //region === 기능 ===
-
-    // 비밀번호 암호화
-    String ConvertPassword(String pw) throws Exception {
-        Encrypt crypto = new Encrypt();
-        pw = crypto.encryptAES256(pw);
-        return pw;
-    }
-    //endregion
-
     @GetMapping("/user/check/{quizSeq}")
     public String QuizLoginCheck(@PathVariable(value = "quizSeq") int quizSeq) {
         return "user/check";
     }
+
 }
