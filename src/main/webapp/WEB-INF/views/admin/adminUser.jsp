@@ -144,7 +144,7 @@ function go_page(pageNum){
 				content +=	'<td>'+ list[i].declaration + '</td>';
 				content += '<td>' + list[i].lastloginDate + '</td>';
 				content += '<td><button class= "delUserBtn" style="border-color: #C0D8C0" onclick="clicked('+list[i].userSeq +',\''+list[i].nickname+'\')">탈퇴</button></td>';
-				content += '<td><button class= "black" onclick="black('+list[i].userSeq +',\''+list[i].email+ '\',\''+list[i].nickname+ '\')">블랙</button></td>';
+				content += '<td><button class= "black" onclick="black('+list[i].userSeq +',\''+list[i].email+ '\',\''+list[i].nickname+ '\'">블랙</button></td>';
 				content += '</tr>';
 			}
 			$('.listData').html(content);	
