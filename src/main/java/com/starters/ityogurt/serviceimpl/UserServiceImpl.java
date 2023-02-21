@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
 		return dao.getUserByUserEmail(email);
 	}
 
+	@Override
+	public int setIsPassByUserSeq(int userSeq) {
+		return dao.setIsPassByUserSeq(userSeq);
+	}
+
 }

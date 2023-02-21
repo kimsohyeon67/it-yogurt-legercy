@@ -23,10 +23,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-
     public int countAllSub() {
         return dao.countAllSub();
+    }
 
+    @Override
     public List<CategoryDTO> getCategoryByType(String type, String typeValue) {
         return dao.getCategoryByType(type, typeValue);
     }
