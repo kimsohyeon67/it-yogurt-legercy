@@ -35,6 +35,7 @@
             </div>
             <div class="form-input-password">
                 <label for="password">비밀번호</label>
+                <div class="input-info">숫자와 문자를 포함한 6~12자리</div>
                 <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
             </div>
             <div class="form-input-password-check">
@@ -48,17 +49,17 @@
             </div>
             <div class="form-input">
                 <label for="phone">전화번호</label>
-                <input type="tel" name="phone" id="phone"
+                <input type="text" name="phone" id="phone"
                        placeholder="번호를 입력해주세요."></div>
             <div class="form-input">
-                <label for="category_main">카테고리</label>
-                <select name="category_main" id="category_main">
+                <label for="main">카테고리</label>
+                <select name="main" id="main">
 
                 </select>
-                <select name="category_middle" id="category_middle">
+                <select name="middle" id="middle">
 
                 </select>
-                <select name="category_sub" id="category_sub">
+                <select name="sub" id="sub">
 
                 </select>
             </div>

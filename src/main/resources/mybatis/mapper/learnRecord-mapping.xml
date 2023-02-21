@@ -20,4 +20,12 @@
 	where user_seq = #{userSeq}
 </delete>
 
+<select id="getUserChoice" parameterType="int" resultType="int">
+	select count(user_choice) from learn_record where user_seq=#{userSeq} and quiz_seq in(#{quizSeq1},#{quizSeq2},#{quizSeq3})
+</select>
+
+<update id="updateLearnData" parameterType="int">
+	update learn_record set user_choice =#{userChoice}, is_right=#{isRight} where user_seq=#{userSeq} and quiz_seq=#{quizSeq}
+</update>
+
 </mapper>

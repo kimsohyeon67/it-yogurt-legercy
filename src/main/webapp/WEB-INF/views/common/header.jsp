@@ -10,9 +10,6 @@
                 <a href="<%=request.getContextPath()%>/list?page=1" style="text-decoration-line: none; color:white;                      ">매일지식</a>
             </li>
             <li id="nav-menu-quiz">
-                퀴즈
-            </li>
-            <li id="nav-menu-quiz">
                 <a href="<%=request.getContextPath()%>/board/list" style="text-decoration-line: none; color:white;">게시판</a>
             </li>
             <li id="nav-menu-mypage" hidden="hidden">

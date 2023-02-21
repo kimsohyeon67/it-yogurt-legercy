@@ -46,7 +46,7 @@
     insert into user(email, nickname, insert_date, phone, lastlogin_date,
                      category_seq, password, access_token, refresh_token)
     values (#{email}, #{nickname}, now(), #{phone}, now(),
-            1, #{password}, #{accessToken}, #{refreshToken})
+            #{categorySeq}, #{password}, #{accessToken}, #{refreshToken})
 </insert>
 
 	<select id="getUserByUserEmail" resultType="userdto" parameterType="String">

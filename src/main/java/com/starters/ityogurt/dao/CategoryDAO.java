@@ -12,4 +12,7 @@ public interface CategoryDAO {
 	CategoryDTO getCategoryByCategorySeq(String categorySeq);
 
 	int countAllSub();
+	List<CategoryDTO> getCategoryByType(String type, String typeValue);
+	CategoryDTO getCategoryByAllType(String main, String middle, String sub);
+
 }
