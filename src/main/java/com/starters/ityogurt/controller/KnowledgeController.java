@@ -1,6 +1,8 @@
 package com.starters.ityogurt.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,27 +42,56 @@ public class KnowledgeController {
 //		
 //		return mv;
 //	}
-	//ajax 테스트용
-	@GetMapping("/list/{page}") //매일지식 list 불러오기
-	@ResponseBody
-	public JSONObject list(@PathVariable("page") int page) {
-		JSONObject jsonObj = new JSONObject();
-		int userSeq = 2;
-		int limit = (page - 1) * 9; // page처리 위해서
-		int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
-        List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+//	ajax 테스트용
+//	@GetMapping("/list/{page}") //매일지식 list 불러오기
+//	@ResponseBody
+//	public List<KnowledgeDTO> list(@PathVariable("page") int page) {
+//		JSONObject jsonObj = new JSONObject();
+//		int userSeq = 2;
+//		int limit = (page - 1) * 9; // page처리 위해서
+//		int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
+//        List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
 //        jo.add("knowledgeList", (JsonElement) knowledgeList);
 //        jo.add("totalCnt",totalCnt);
 //        jo.setViewName("knowledge/list");
-        System.out.println(totalCnt);
-        jsonObj.put("knowledgeList", knowledgeList);
-        jsonObj.put("totalCnt", totalCnt);
-		return jsonObj;
+//        System.out.println(totalCnt);
+//        jsonObj.put("knowledgeList", knowledgeList);
+////        jsonObj.put("totalCnt", totalCnt);
+//        
+//		return knowledgeList;
+////        return jsonObj;
+//	}
+	
+	@GetMapping("/list/{page}") //매일지식 list 불러오기
+	@ResponseBody
+	public Map<String, Object> list2(@PathVariable("page") int page) {
+	    Map<String, Object> result = new HashMap<>();
+	    int userSeq = 2;
+	    int limit = (page - 1) * 9; // page처리 위해서
+	    int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
+	    List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+	    result.put("knowledgeList", knowledgeList);
+	    result.put("totalCnt", totalCnt);
+	    return result;
 	}
 	
 	
+//	@GetMapping("/list2/{page}") //매일지식 list 불러오기
+//	@ResponseBody
+//	public Map<String, Object> list(@PathVariable("page") int page) {
+//	    Map<String, Object> result = new HashMap<>();
+//	    JSONObject jsonObj = new JSONObject();
+//	    int userSeq = 2;
+//	    int limit = (page - 1) * 9; // page처리 위해서
+//	    int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
+//	    List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+//	    result.put("knowledgeList", knowledgeList);
+//	    result.put("totalCnt", totalCnt);
+//	    return result;
+//	}
+	
 	@GetMapping("/list2/{page}") //매일지식 list 불러오기
-	public ModelAndView list2(@PathVariable("page") int page) {
+	public ModelAndView list23(@PathVariable("page") int page) {
 		ModelAndView mv = new ModelAndView();
 		int userSeq = 2;
 		int limit = (page - 1) * 9; // page처리 위해서
