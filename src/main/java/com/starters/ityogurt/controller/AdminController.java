@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dto.KnowledgeDTO;
@@ -67,25 +69,44 @@ public class AdminController {
 	        return "admin/adminPage";
 	    }
 
-	// 관리자 회원 조회
-	 @GetMapping(value ={"/user"})
-	    public ModelAndView adminUser(Criteria cri) {
-		 	ModelAndView mv = new ModelAndView();
-			Paging paging = new Paging();
-			paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
-			int totalUserCnt = userService.countAllUser();
-			int maxPage = (int)((double)totalUserCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
-			paging.setTotalCount(totalUserCnt);
-			List<UserDTO> userList = userService.getAllUserlistLimit(cri);
-			
-			mv.addObject("maxpage", maxPage);
-		 	mv.addObject("paging", paging);
- 	
-		 	mv.addObject("totalUserCnt", totalUserCnt);
-		 	mv.addObject("userList", userList);
-		 	mv.setViewName("admin/adminUser");
-		 	return mv;
-	    }
+	 // 관리자 회원 조회
+	 @GetMapping("/user")
+	 public ModelAndView adminUser(Criteria cri) {
+		 ModelAndView mv = new ModelAndView();
+		 Paging paging = new Paging();
+		 paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
+		 int totalUserCnt = userService.countAllUser();
+		 int maxPage = (int)((double)totalUserCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+		 paging.setTotalCount(totalUserCnt);
+		 List<UserDTO> userList = userService.getAllUserlistLimit(cri);
+		 
+		 mv.addObject("maxPage", maxPage);
+		 mv.addObject("paging", paging);
+		 
+		 mv.addObject("totalUserCnt", totalUserCnt);
+		 mv.addObject("userList", userList);
+		 mv.setViewName("admin/adminUser");
+		 return mv;
+	 }
+	 // 관리자 회원 조회 ajax
+	 @GetMapping(value ={"/user/a"})
+	 @ResponseBody
+	 public JSONObject adminUserAjax(Criteria cri) {
+		 Paging paging = new Paging();
+		 JSONObject jsonObjUser = new JSONObject();
+		 paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
+		 int totalUserCnt = userService.countAllUser();
+		 int maxPage = (int)((double)totalUserCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+		 paging.setTotalCount(totalUserCnt);
+		 List<UserDTO> userList = userService.getAllUserlistLimit(cri);
+		 
+		 jsonObjUser.put("maxPage", maxPage);
+		 jsonObjUser.put("paging", paging);
+		 
+		 jsonObjUser.put("totalUserCnt", totalUserCnt);
+		 jsonObjUser.put("userList", userList);
+		 return jsonObjUser;
+	 }
 
 	 //관리자가 유저 탈퇴 시키기
 	 @GetMapping("/user/manage/{userseq}")
