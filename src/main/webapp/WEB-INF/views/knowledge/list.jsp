@@ -87,36 +87,6 @@
 			</ul>
 	</nav>
 	</div>
-			
-<!-- 			<div id="page"> -->
-<!-- 	<script> -->
-<%--   var totalCnt = <%=request.getAttribute("totalCnt")%>; --%>
-<!-- //   var totalPage = Math.ceil(totalCnt / 9); -->
-
-<!-- //   for (var i = 1; i <= totalPage; i++) { -->
-<!-- //     document.write('<input type="hidden" id="hide' + i + '" value="' + i + '">'); -->
-<!-- //     document.write(i); -->
-<!-- //     document.write('<a href="javascript:void(0);" onclick="pageClick(' + i + ');" class="page-link" id="pagenum">' + i + '페이지</a>'); -->
-<!-- //   } -->
-<!-- </script> -->
-	
-<%-- 				<% --%>
-<!-- //  				int totalCnt = (int) request.getAttribute("totalCnt"); -->
-<!-- //  				int totalPage = 0; -->
-<!-- //  				if (totalCnt % 9 == 0) { -->
-<!-- //  					totalPage = totalCnt / 9; -->
-<!-- //  				} else { -->
-<!-- //  					totalPage = totalCnt / 9 + 1; -->
-<!-- //  				} -->
-<!-- //  				for (int i = 1; i <= totalPage; i++) { -->
-<!-- //  					System.out.println(i); -->
-<%-- 				%> --%>
-<%-- 				<input type="hidden" id="hide" value="<%=i%>"> --%>
-<%-- 				<a href="javascript:void(0);" onclick="pageClick();" class="page-link" id="pagenum" ><%=i%></a> --%>
-<%-- 				<% --%>
-<!-- // 				} -->
-<%-- 				%>  --%>
-<!-- 			</div> -->
 			</form>
 		</div>
 		<%@include file="../common/footer.jsp"%>
@@ -141,7 +111,7 @@ function go_page(pageNum){
 				content +=	'<td>'+ list[i].insertDate +'</td>';
 				content +=	'<td>'+ list[i].viewcount +'</td>';
 				content +=	'<td> 관리자 </td>';
-				content +=	'<td><input type="button" value="퀴즈 풀러가기" onClick="location.href=\'/quiz/'+list[i].knowSeq+'"></td>';
+				content +=	'<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href=\'/quiz/'+list[i].knowSeq+'\'"></td>';														
 				content += '</tr>';
 			}
 			console.log(content);
