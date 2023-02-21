@@ -81,7 +81,7 @@
 // var pageIndex=0;
 // var cntPerPage=0;
 
-//html
+//html /값이 1만 넘어옴
 $("#page").on("click",function(){
 // 	$("#page").attr("id")
 	let a = $("#hide").val();
