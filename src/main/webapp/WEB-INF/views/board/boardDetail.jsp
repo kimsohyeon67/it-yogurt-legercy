@@ -33,13 +33,14 @@
                         <header class="mb-4">
                             <!-- Post title-->
                             <c:set value="${oneBoard }" var="oneboard"/>
+                            <c:set value="${categoryInfo }" var="categoryInfo"/>
                             <h1 class="fw-bolder mb-1">${oneboard.title }</h1>
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2"> <table> <tr><td>작성시간 </td><td> | ${oneboard.insertDate }</td></tr><tr><td> 작성자  </td><td> | ${oneboard.nickname }</td></tr></table> </div>
                             <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">IT</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">JAVA</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">잡담</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">${categoryInfo.main }</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">${categoryInfo.middle }</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">${categoryInfo.sub }</a>
                         </header>
    
                         <section class="mb-5">
