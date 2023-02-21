@@ -110,7 +110,7 @@ public class BoardController {
 		 return mv;
 	 }
 	 
-	 //게시글 수정
+	 //게시글 수정 폼
 	 @GetMapping("/form/{boardseq}")
 	 public ModelAndView uploadBaordForm(BoardDTO boardDto, @PathVariable("boardseq") int boardSeq) {
 		 ModelAndView mv = new ModelAndView();
@@ -120,7 +120,7 @@ public class BoardController {
 		 mv.setViewName("board/boardUpdateForm");
 		 return mv;
 	 }
-	
+	//게시글 수정 등록
 	 @PostMapping("/form/{boardseq}")
 	 public ModelAndView uploadBoard(BoardDTO boardDto,  @PathVariable("boardseq") int boardSeq) {
 		 ModelAndView mv = new ModelAndView();
@@ -129,6 +129,11 @@ public class BoardController {
 		 mv.setViewName("redirect:/board/list");
 		 return mv;
 	 }
-	
+	//게시글 삭제
+	 @GetMapping("/d/{boardseq}")
+	 public String deleteBoardByBoardSeq(@PathVariable("boardseq") int boardSeq) {
+		 boardService.deleteBoardByBoardSeq(boardSeq);
+		 return "redirect:/board/list";
+	 }
 	 
 }

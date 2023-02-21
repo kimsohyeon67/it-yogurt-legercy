@@ -51,7 +51,7 @@
                     <section class="mb-2">
                     <div class="d-md-flex justify-content-md-end" >
   						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/form/${oneboard.boardSeq}'">수정</button>
-  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/d'">삭제</button>
+  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="delboard(${oneboard.boardSeq})">삭제</button>
   						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/list'">목록</button>
 					</div>
                     </section>
@@ -146,4 +146,16 @@
 <%@include file="../common/footer.jsp" %>
 </div>
 </body>
+
+<script>
+function delboard(boardSeq){
+	if (window.confirm("게시물을 삭제하시겠습니까? \n")){
+		location.href="/board/d/"+boardSeq;
+		alert("게시물 삭제 되었습니다.");		
+	}
+	else {
+		alert("삭제가 취소되었습니다.");		
+	}
+}
+</script>
 </html>
