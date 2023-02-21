@@ -2,6 +2,7 @@ package com.starters.ityogurt.controller;
 
 import com.starters.ityogurt.dto.CategoryDTO;
 import com.starters.ityogurt.dto.UserDTO;
+import com.starters.ityogurt.error.ApiException;
 import com.starters.ityogurt.service.UserService;
 import com.starters.ityogurt.util.Encrypt;
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,4 +43,15 @@ public class UserController {
         return "user/check";
     }
 
+    // 이메일 인증 페이지
+    @GetMapping("/user/verify/{user_seq}")
+    public ModelAndView Verify(@PathVariable("user_seq") int userSeq) throws ApiException {
+        ModelAndView mv = new ModelAndView();
+        int result = userService.setIsPassByUserSeq(userSeq);
+        String str = result == 1 ? "이메일 인증이 완료되었습니다." : "이메일 인증에 실패했습니다. 정보를 다시 확인해주세요";
+
+        mv.addObject("result", str);
+        mv.setViewName("user/verify");
+        return mv;
+    }
 }

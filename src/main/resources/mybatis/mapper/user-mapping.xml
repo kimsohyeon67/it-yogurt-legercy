@@ -55,4 +55,7 @@
 		where email = #{email}
 	</select>
 
+	<update id="setIsPassByUserSeq" parameterType="int">
+		UPDATE user SET is_pass=TRUE WHERE user_seq=#{userSeq};
+	</update>
 </mapper>

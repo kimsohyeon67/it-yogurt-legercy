@@ -22,4 +22,6 @@ public interface UserDAO {
 	int insertUser(UserDTO dto);
 
 	UserDTO getUserByUserEmail(String email);
+
+	Integer setIsPassByUserSeq(int userSeq);
 }
