@@ -12,13 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class EmailController {
 
@@ -93,7 +95,7 @@ public class EmailController {
 
         System.out.println("userMap : " + userMap);
         System.out.println("categoryMap : " + categoryMap);
-
+/*
         categoryMap.forEach((key, value) -> {
             emailService.updateSendDate(value);
             KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq((Integer) value);
@@ -101,10 +103,15 @@ public class EmailController {
                     headerText() + knowledgeDTO.getContent() + buttonText(knowledgeDTO.getKnowSeq()) + footerText(),
                     (List<String>) subEmailList.get(key));
         });
+        */
 
-        KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq(19);
-        System.out.println(knowledgeDTO.getKnowSeq());
-        // emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
+        categoryMap.forEach((key, value) -> {
+            emailService.updateSendDate(value);
+            KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq((Integer) value);
+            emailService.send("오늘 배울 내용은 " + knowledgeDTO.getTitle() + "이야!",
+                    headerText() + knowledgeDTO.getContent() + buttonText(knowledgeDTO.getKnowSeq()) + footerText(),
+                    (List<String>) subEmailList.get(key));
+        });
 
         return "true";
     }
@@ -137,6 +144,12 @@ public class EmailController {
                 "  </div>\n" +
                 "</div>";
         return footerText;
+    }
+
+    @GetMapping("user/email")
+    public String checkEmail(String email) {
+
+        return "user/email";
     }
 
 }

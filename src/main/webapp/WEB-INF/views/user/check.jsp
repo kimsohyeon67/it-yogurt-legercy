@@ -25,10 +25,10 @@
     <div class="col" id="box-check">
         <div class="row pt-5 pd-5">
             <h4>로그인 하셔야 문제 풀이 기록이 저장됩니다. 로그인 하시겠습니끼?</h4>
-            <button id="btn-login" type="button" onclick="location.href='/host/completeRegister'" class="float-start btn btn-dark float-end me-5" style="width: 180px; height: 48px;">
+            <button id="btn-login" type="button" onclick="location.href='/user?access=mail&knowSeq=${knowSeq}'" class="float-start btn btn-dark float-end me-5" style="width: 180px; height: 48px;">
                 LOGIN
             </button>
-            <button id="btn-quiz" type="button" onclick="location.href='/host/completeRegister'" class="float-start btn btn-dark float-end me-5" style="width: 180px; height: 48px;">
+            <button id="btn-quiz" type="button" onclick="location.href='/quiz/${knowSeq}'" class="float-start btn btn-dark float-end me-5" style="width: 180px; height: 48px;">
                 문제만 풀래요!
             </button>
         </div>
