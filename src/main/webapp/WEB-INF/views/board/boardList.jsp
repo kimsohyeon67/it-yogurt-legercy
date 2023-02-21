@@ -76,7 +76,14 @@
 	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.startPage-1});" class="page-link">이전</a></li>
 	   <%--  </c:if> --%>
 	    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-	        <li class="page-item" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
+	    	<c:choose>
+	    		<c:when test= "${num==1 }">
+	        		<li class="page-item active" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
+				</c:when>
+				<c:otherwise>
+	        		<li class="page-item" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
+				</c:otherwise>
+			</c:choose>	        
 	    </c:forEach>
 	    <%-- <c:if test="${paging.next && paging.endPage>0}"> --%>
 	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.endPage+1});return false;" class="page-link">다음</a></li>
