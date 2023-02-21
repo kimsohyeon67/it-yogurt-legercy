@@ -32,7 +32,7 @@
 			<div id="tblDiv">
 			
 			<h1 style="text-align: center;">검색결과 목록</h1>
-			<form action="<%=request.getContextPath()%>/searchResult">
+			<form action="<%=request.getContextPath()%>/knowledge/searchResult">
 			<input type="text" placeholder="검색어 입력" name="keyword" id="keyword">
                 <button type="submit" id="search">검색</button>
 			<table id="listTbl">
@@ -55,7 +55,7 @@
 								<c:forEach items="${list }" var="list">
 									<tr id="ajaxTr">
 										<td>${list.knowSeq}</td>
-										<td><a href="<%=request.getContextPath()%>/detail/${list.knowSeq}">${list.title}</a></td>
+										<td><a href="<%=request.getContextPath()%>/knowledge/detail/${list.knowSeq}">${list.title}</a></td>
 										<td>${list.insertDate }</td>
 										<td>${list.viewcount }</td>
 										<td>관리자</td>	
