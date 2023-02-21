@@ -37,22 +37,22 @@ public class BoardController {
 	
 
 	//게시판 리스트 화면
-	 @GetMapping(value = { "/list"})  
-	    public ModelAndView boardList(Criteria cri) throws Exception {
-			ModelAndView mv = new ModelAndView();
-			int totalBoardCnt = boardService.countAllBoard();
-			
-			Paging paging = new Paging();
-			paging.setCri(cri);
-			paging.setTotalCount(totalBoardCnt);
-			List<Map<String,String>> boardlist = boardService.getBoardJoinUser(cri);
-		 	
-		 	mv.addObject("paging", paging);
-		 	mv.addObject("boardList", boardlist);
-		 	mv.setViewName("board/boardList");
-		 	return mv;
-	 
-	    }
+		 @GetMapping(value = { "/list"})  
+		    public ModelAndView boardList(Criteria cri) throws Exception {
+				ModelAndView mv = new ModelAndView();
+				Paging paging = new Paging();
+				paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
+				int totalBoardCnt = boardService.countAllBoard(); // 전체 게시글 수
+				int maxPage = (int)((double)totalBoardCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+				paging.setTotalCount(totalBoardCnt);
+				List<Map<String,String>> boardlist = boardService.getBoardJoinUser(cri); // 게시글 데이터 가져오기
+				mv.addObject("maxpage", maxPage);
+			 	mv.addObject("paging", paging);
+			 	mv.addObject("boardList", boardlist);
+			 	mv.setViewName("board/boardList");
+			 	return mv;
+		 
+		    }	
 	 
 	 //게시판 글 화면
 	 @GetMapping("/{boardSeq}")
@@ -64,6 +64,42 @@ public class BoardController {
 		 
 		 mv.addObject("oneBoard", oneBoard);
 		 mv.setViewName("board/boardDetail");
+		 return mv;
+	 }
+	 
+	 
+	 //게시글 업로드 폼
+	 @GetMapping("/form")
+	 public String boardInsertForm() {
+		return "board/boardForm";
+	 }
+	 
+	 //게시글 업로드
+	 @PostMapping("/form")
+	 public ModelAndView insertBoard(BoardDTO boardDto) {
+		 ModelAndView mv = new ModelAndView();
+		 boardService.insertBoard(boardDto);
+		 mv.setViewName("redirect:list");
+		 return mv;
+	 }
+	 
+	 //게시글 수정
+	 @GetMapping("/form/{boardseq}")
+	 public ModelAndView uploadBaordForm(BoardDTO boardDto, @PathVariable("boardseq") int boardSeq) {
+		 ModelAndView mv = new ModelAndView();
+		 
+		 Map<String,String> oneBoard = boardService.getOneBoardJoinUser(boardSeq);
+		 mv.addObject("oneBoard", oneBoard);
+		 mv.setViewName("board/boardUpdateForm");
+		 return mv;
+	 }
+	
+	 @PostMapping("/form/{boardseq}")
+	 public ModelAndView uploadBoard(BoardDTO boardDto,  @PathVariable("boardseq") int boardSeq) {
+		 ModelAndView mv = new ModelAndView();
+		 boardDto.setBoardSeq(boardSeq);
+		 boardService.updateBoard(boardDto);
+		 mv.setViewName("redirect:/board/list");
 		 return mv;
 	 }
 	

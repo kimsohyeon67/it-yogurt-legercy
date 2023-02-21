@@ -1,5 +1,8 @@
 package com.starters.ityogurt.dto;
 
+import lombok.ToString;
+
+@ToString
 public class KnowledgeDTO { //
 	int knowSeq, deleted, liked, viewcount, categorySeq, userSeq;
 	String title, content, img, insertDate, updateDate;
