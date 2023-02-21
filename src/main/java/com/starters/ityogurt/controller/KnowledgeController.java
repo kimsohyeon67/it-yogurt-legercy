@@ -52,6 +52,7 @@ public class KnowledgeController {
 //        jo.add("knowledgeList", (JsonElement) knowledgeList);
 //        jo.add("totalCnt",totalCnt);
 //        jo.setViewName("knowledge/list");
+        System.out.println(totalCnt);
         jsonObj.put("knowledgeList", knowledgeList);
         jsonObj.put("totalCnt", totalCnt);
 		return jsonObj;

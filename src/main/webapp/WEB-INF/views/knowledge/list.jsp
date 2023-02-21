@@ -59,11 +59,14 @@
 					totalPage = totalCnt / 9 + 1;
 				}
 				for (int i = 1; i <= totalPage; i++) {
+					System.out.println(i);
 				%>
-				<a href="<%-- <%=request.getContextPath()%>/list/<%=i%> --%>" class="page-link" id="page" value=<%=i %>><%=i%></a>
+				<input type="hidden" id="hide" value="<%=i%>"><%=i %>
+				<a href=" <%=request.getContextPath()%>/list/<%=i%>" class="page-link" id="page" <%-- value=<%=i %> --%>><%=i%>페</a>
 				<%
 				}
 				%>
+				<c:set var="i" value="$('#a').val()" />
 			</div>
 			</form>
 		</div>
@@ -81,7 +84,10 @@
 //html
 $("#page").on("click",function(){
 // 	$("#page").attr("id")
+	let a = $("#hide").val();
+	let i = '<c:out value="${i}"/>';
 	let page = $("#page").html();
+	alert(i);
 	$.ajax({
 		url: "${pageContext.request.contextPath}/list/"+page,
 		type: "get",
@@ -89,16 +95,16 @@ $("#page").on("click",function(){
 		success: function(result){
 			let list = result.knowledgeList;
 			for(let i=0;i<list.length;i++){
-				$('#ajaxTr').html(`
-						<tr id="ajaxTr">
-						<td>\${list[i].knowSeq}</td>
+				$('#ajaxTr').html(
+						"<tr id="+ajaxTr+">"+
+						"<td>"+\${list[i].knowSeq}+"</td>"+
 						<td><a href="<%=request.getContextPath()%>/detail/\${list[i].knowSeq}">${list.title}</a></td>
 						<td>\${list[i].insertDate }</td>
 						<td>\${list[i].viewcount }</td>
 						<td>관리자</td>	
 						<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href='${pageContext.request.contextPath}/quiz/\${list.knowSeq}'"></td>
 					</tr>
-						`);				
+						);				
 			}
 		},
 		error: function(){
