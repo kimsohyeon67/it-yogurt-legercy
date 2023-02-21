@@ -34,8 +34,8 @@
 					<th>퀴즈풀러가기</th>
 				</tr>
 
-				<c:forEach items="${knowledgeList }" var="list">
-					<tr id="id">
+<%-- 				<c:forEach items="${knowledgeList }" var="list"> --%>
+<!-- 					<tr id="id"> -->
 
 				<tbody>
 					

@@ -20,6 +20,7 @@
 			<div id="tblDiv">
 			
 			<h1 style="text-align: center;">검색결과 목록</h1>
+			<form action="<%=request.getContextPath()%>/searchResult">
 			<input type="text" placeholder="검색어 입력" name="keyword" id="keyword">
                 <button type="submit" id="search">검색</button>
 			<table id="listTbl">
@@ -64,7 +65,7 @@
 <!-- // 				} -->
 <%-- 				%> --%>
 <!-- 			</div> -->
-			
+			</form>
 		</div>
 		<%@include file="../common/footer.jsp"%>
 		</div>
