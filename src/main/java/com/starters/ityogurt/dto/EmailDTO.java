@@ -1,5 +1,6 @@
 package com.starters.ityogurt.dto;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.amazonaws.services.simpleemail.model.Body;
@@ -18,7 +19,6 @@ import lombok.NoArgsConstructor;
 public class EmailDTO {
     //AWS SES에 등록된 도메인명과 일치해야함
     static final String FROM_EMAIL = "ityogurt213@gmail.com";//"SES에 등록된 이메일"; // 보내는 사람
-
     private List<String> receiver; // 받는 사람
     private String subject; // 제목
     private String content; // 본문
@@ -27,7 +27,7 @@ public class EmailDTO {
     public SendEmailRequest toSendRequestDto() {
         //목적지 설정
         Destination destination = new Destination()
-                // .withToAddresses(this.receiver);
+                // .withToAddresses(this.receiver)
                 .withBccAddresses(this.receiver);
 
         //제목, 본문 설정

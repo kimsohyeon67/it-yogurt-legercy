@@ -93,7 +93,7 @@ public class EmailController {
 
         System.out.println("userMap : " + userMap);
         System.out.println("categoryMap : " + categoryMap);
-
+/*
         categoryMap.forEach((key, value) -> {
             emailService.updateSendDate(value);
             KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq((Integer) value);
@@ -101,10 +101,13 @@ public class EmailController {
                     headerText() + knowledgeDTO.getContent() + buttonText(knowledgeDTO.getKnowSeq()) + footerText(),
                     (List<String>) subEmailList.get(key));
         });
+        */
 
-        KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq(19);
-        System.out.println(knowledgeDTO.getKnowSeq());
-        // emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
+        categoryMap.forEach((key, value) -> {
+            emailService.updateSendDate(value);
+            KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq((Integer) value);
+            emailService.send(knowledgeDTO.getTitle(),  headerText() + knowledgeDTO.getContent() + buttonText(knowledgeDTO.getKnowSeq()) + footerText(),  (List<String>) subEmailList.get(key));
+        });
 
         return "true";
     }
