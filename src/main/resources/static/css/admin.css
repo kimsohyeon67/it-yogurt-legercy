@@ -41,7 +41,7 @@
 	text-align: center;
 }
 .form th {
-	border: 1px solid grey;
+	border-bottom: 2px solid grey;
 	text-align: center;
 }
 .form td button {
