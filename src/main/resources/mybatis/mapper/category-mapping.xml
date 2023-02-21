@@ -13,6 +13,14 @@
 		SELECT *	FROM category WHERE category_seq = #{categorySeq}  ORDER BY category_seq
 	</select>
 
+
+	<select id="countAllSub" resultType="int">
+		SELECT count(sub)
+		FROM category
+		WHERE detail IS NULL
+	</select>
+
+
 <!-- 카테고리 각 type으로 카테고리 목록 찾기,	type = main, middle, sub, detail -->
 	<select id="getCategoryByType" resultType="categorydto">
 		SELECT * FROM category WHERE ${type} = #{typeValue};
@@ -22,4 +30,5 @@
 	<select id="getCategoryByAllType" resultType="categorydto">
 		SELECT * FROM category WHERE main = #{main} AND middle = #{middle} AND sub = #{sub} AND detail IS NULL;
 	</select>
+
 </mapper>
