@@ -32,9 +32,9 @@
 					<th>작성자</th>
 					<th>퀴즈풀러가기</th>
 				</tr>
-				
+
 				<c:forEach items="${knowledgeList }" var="list">
-					<tr>
+					<tr id="id">
 						<td>${list.knowSeq}</td>
 						<td><a href="<%=request.getContextPath()%>/detail?knowSeq=${list.knowSeq}">${list.title}</a></td>
 						<td>${list.insertDate }</td>

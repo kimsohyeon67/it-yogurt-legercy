@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface LearnRecordQuizDAO {
-    public List<LearnRecordQuizDTO> getWrongAnswerByUser(String userSeq);
+    public List<LearnRecordQuizDTO> getWrongAnswerByUser(String userSeq, String start, String end);
 	
 }

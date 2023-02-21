@@ -21,8 +21,6 @@ public class UserController {
     @Qualifier("userservice")
     UserService userService;
 
-    //region === 페이지 ===
-
     // 로그인 페이지
     @GetMapping("/user")
     public String getLoginPage() {
@@ -37,16 +35,4 @@ public class UserController {
         System.out.println(session.getAttribute("isSNS"));
         return "user/signUp";
     }
-
-    //endregion
-
-    //region === 기능 ===
-
-    // 비밀번호 암호화
-    String ConvertPassword(String pw) throws Exception {
-        Encrypt crypto = new Encrypt();
-        pw = crypto.encryptAES256(pw);
-        return pw;
-    }
-    //endregion
 }
