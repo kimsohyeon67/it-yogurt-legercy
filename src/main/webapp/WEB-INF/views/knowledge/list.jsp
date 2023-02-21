@@ -10,7 +10,17 @@
 <link href="/css/footer.css" rel="stylesheet">
 <link href="/css/container.css" rel="stylesheet">
 <link href="/css/knowledge.css" rel="stylesheet">
-
+<script>
+      $(document).ready(function () {
+        $('#search').click(function (e) {
+          if ($('#keyword').val() == "") {
+            e.preventDefault()
+            alert("검색어를 입력해주세요!")
+            return false;
+          }
+        })
+      });
+    </script>
 <title>매일지식 컨텐츠</title>
 </head>
 <body>
