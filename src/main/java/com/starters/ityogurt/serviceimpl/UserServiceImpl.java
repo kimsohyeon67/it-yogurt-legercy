@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.starters.ityogurt.dao.UserDAO;
 import com.starters.ityogurt.dto.UserDTO;
 import com.starters.ityogurt.service.UserService;
+import com.starters.ityogurt.util.Criteria;
 
 @Service("userservice")
 public class UserServiceImpl implements UserService {
@@ -20,8 +21,8 @@ public class UserServiceImpl implements UserService {
 		return dao.getAllUserlist();
 	}
 	@Override
-	public List<UserDTO> getAllUserlistLimit(int limit){
-		return dao.getAllUserlistLimit(limit);
+	public List<UserDTO> getAllUserlistLimit(Criteria cri){
+		return dao.getAllUserlistLimit(cri);
 	}
 	@Override
 	public int countAllUser(){

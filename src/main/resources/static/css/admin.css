@@ -12,7 +12,7 @@
   height: 40px;
   border-style: solid;
   border-width: medium;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
   border-color: #C0D8C0;
   font-size: 20px;
 }
@@ -37,7 +37,7 @@
 }
 
 .form td {
-	border: 1px solid grey;
+	/* border: 1px solid grey; */
 	text-align: center;
 }
 .form th {
