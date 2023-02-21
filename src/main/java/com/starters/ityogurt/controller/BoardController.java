@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dto.BoardDTO;
@@ -53,6 +55,23 @@ public class BoardController {
 			 	return mv;
 		 
 		    }	
+		 //게시판 리스트 화면 ajax
+		 @GetMapping(value = { "/list/a"}) 
+		 @ResponseBody
+		 public JSONObject boardListAjax(Criteria cri) throws Exception {
+			 Paging paging = new Paging();
+			 JSONObject jsonObjBoard = new JSONObject();
+			 paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
+			 int totalBoardCnt = boardService.countAllBoard(); // 전체 게시글 수
+			 int maxPage = (int)((double)totalBoardCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+			 paging.setTotalCount(totalBoardCnt);
+			 List<Map<String,String>> boardlist = boardService.getBoardJoinUser(cri); // 게시글 데이터 가져오기
+			 jsonObjBoard.put("maxPage", maxPage);
+			 jsonObjBoard.put("paging", paging);
+			 jsonObjBoard.put("boardList", boardlist);
+			 return jsonObjBoard;
+			 
+		 }	
 	 
 	 //게시판 글 화면
 	 @GetMapping("/{boardSeq}")
