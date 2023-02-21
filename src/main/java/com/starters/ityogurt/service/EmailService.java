@@ -8,18 +8,13 @@ import java.util.Map;
 public interface EmailService {
 
     void send(String subject, String content, List<String> receivers);
-
     List<String> getAllEmails();
-
 /*    KnowledgeDTO getSendDetail();*/
-
     List<String> getSendEmailsSubJava();
-
-    void updateSendDate(List<Object> updateCategorySeqList);
+    void updateSendDate(int categorySeq);
 
     // 추가
     List<Map<String, Object>> getEmailAndSub();
     List<Map<String, Object>> getSendDetail(int count);
-    KnowledgeDTO getKnowledgeByCategorySeq();
 
 }

@@ -10,12 +10,10 @@
         where is_pass = 1;
     </select>
 
-    <update id="updateSendDate" parameterType="java.util.List">
+    <update id="updateSendDate" parameterType="int">
         UPDATE category
         set send_date = NOW()
-        WHERE category_seq in <foreach collection="list" item="item" open="(" close=")" separator=",">
-                                #{item}
-                              </foreach>
+        WHERE category_seq = #{categorySeq}
     </update>
 
     <!-- 전체 회원 + 카테고리 조회 코드 -->

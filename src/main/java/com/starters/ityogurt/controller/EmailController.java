@@ -1,3 +1,4 @@
+
 package com.starters.ityogurt.controller;
 
 import java.util.*;
@@ -39,71 +40,72 @@ public class EmailController {
 
     // private final EmailService emailService;
     @RequestMapping("/aws/email")
-    @Scheduled(cron = "0 30 7 * * ?", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 46 1 * * ?", zone = "Asia/Seoul")
     public String sendEmail() throws Exception {
-        List<Map<String, Object>> subEmailMap = emailService.getEmailAndSub();          // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
-        int count = categoryService.countAllSub();                                      // 총 소분류의 갯수이다.
-        List<Map<String, Object>> sendDetailMap = emailService.getSendDetail(count);    // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
-        Map<String, Object> userMap = new HashMap<String, Object>();
-        Map<String, Object> categoryMap = new HashMap<String, Object>();
+        // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
+        List<Map<String, Object>> subEmailMap = emailService.getEmailAndSub();
+
+        // 총 소분류의 갯수이다.
+        int count = categoryService.countAllSub();
+
+        // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
+        // 가장 오래 전에 보냈으면서 가장 작은 번호 순이다.
+        List<Map<String, Object>> sendDetailMap = emailService.getSendDetail(count);
+
+        // User의 이메일과 User가 선택한 소분류가 들어갈 map이다.
+        Map<String, String> userMap = new HashMap<String, String>();
+
+        // category의 소분류와 상세번호가 들어갈 map이다.
+        Map<String, Integer> categoryMap = new HashMap<String, Integer>();
+
+        // 보내질 카테고리 번호 List이다.
         List<Object> updateCategorySeqList = new ArrayList<Object>();
 
-        Map<String, Object> map_01 = new HashMap<String, Object>();
+        // String에는 소분류가, Object에는 해당 소분류를 선택한 사람의 List가 들어가게 될 Map이다.
+        Map<String, Object> subEmailList = new HashMap<String, Object>();
 
-
-        // int categorySeq = (Integer) sendDetailMap.get(0).get("category_seq");
-        System.out.println("subEmailMap: " + subEmailMap);
-        System.out.println("sendDetailMap: " + sendDetailMap);
-
-        // 1. {ityogurt213@gmail.com=mariadb, mjkim856@gmail.com=java, akdrh554@gmail.com=java}
-        for(Map<String, Object> data2 : sendDetailMap){
-            categoryMap.put((String) data2.get("sub"), data2.get("category_seq"));
+        // 1. categoryMap {mariadb=19, java=13}
+        for(Map<String, Object> data : sendDetailMap){
+            categoryMap.put((String) data.get("sub"), (Integer) data.get("category_seq"));
         }
 
-        // 2. {mariadb=19, java=13}
-        for(Map<String, Object> map : subEmailMap){
-            userMap.put((String) map.get("email"), map.get("sub"));
+        // 2. userMap {ityogurt213@gmail.com=mariadb, mjkim856@gmail.com=java, akdrh554@gmail.com=java}
+        for(Map<String, Object> data : subEmailMap){
+            userMap.put((String) data.get("email"), (String) data.get("sub"));
         }
 
+        // categoryMap의 key(소분류)와 value(발송할 카테고리 번호)를 foreach문을 사용해 값을 꺼낸다.
+        // userMap의 userKey(이메일)과 userValue(소분류)를 내부에서 foreach문을 사용해서 값을 꺼낸다.
+        // 만약 userMap의 value와 categoryMap의 key가 같다면, emailCollectionList에 userKey를 add한다.
         categoryMap.forEach((key, value) -> {
+            // 소분류를 선택한 User들의 email을 담을 List이다.
+            // subEmailList의 value값이 된다.
             List emailCollectionList = new ArrayList<Object>();
-            // System.out.println(key + " : " + value);
 
             userMap.forEach((userKey, userValue) -> {
-                // System.out.println(userKey + " : " + userValue);
                 if(key.equals(userValue)) {
                     emailCollectionList.add(userKey);
                 }
             });
-            map_01.put(key, emailCollectionList);
+            // {mariadb=[ityogurt213@gmail.com], java=[mjkim856@gmail.com, akdrh554@gmail.com]}
+            subEmailList.put(key, emailCollectionList);
         });
 
-        System.out.println(map_01);         // {mariadb=[ityogurt213@gmail.com], java=[mjkim856@gmail.com, akdrh554@gmail.com]}
         System.out.println("userMap : " + userMap);
         System.out.println("categoryMap : " + categoryMap);
 
-        //map에 키값과 같은 제네릭을 선언한 iterator에 map 키값들을 넣는다.
-        Iterator<String> it = categoryMap.keySet().iterator();
+        categoryMap.forEach((key, value) -> {
+            emailService.updateSendDate(value);
+            KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq((Integer) value);
+            emailService.send(knowledgeDTO.getTitle(),
+                    headerText() + knowledgeDTO.getContent() + buttonText(knowledgeDTO.getKnowSeq()) + footerText(),
+                    (List<String>) subEmailList.get(key));
+        });
 
-        //키값이 존재할동안 반복
-        while(it.hasNext()) {
-            String key = it.next();
-            System.out.println(" =================== key -> " + key);
-            System.out.println(" =================== value ->" + categoryMap.get(key));
-            updateCategorySeqList.add(categoryMap.get(key));
-        }
+        KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq(19);
+        System.out.println(knowledgeDTO.getKnowSeq());
+        // emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
 
-        System.out.println("map_01.get: " + map_01.get("java"));
-/*
-        for(int i = 1 ; i < count ; i++) {
-            KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq(i);
-            emailService.send(knowledgeDTO.getTitle(), knowledgeDTO.getContent(), map_01.get("mariadb"));
-        }
-*/
-        System.out.println("updateCategorySeqList: " + updateCategorySeqList.toString());
-
-        //emailService.updateSendDate(updateCategorySeqList);
-        //emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
         return "true";
     }
 
@@ -117,10 +119,16 @@ public class EmailController {
         return headerText;
     }
 
-    public String buttonText(@RequestParam(value = "knowseq")int knowseq) {
-        String buttonText = "<br><a href='http://"+ liveIp + ":8818/quiz?knowSeq="+knowseq +"'><button class=\"btn btn-primary\">문제 풀기!</button></a>";
+    public String buttonText(@RequestParam(value = "knowSeq")int knowSeq) {
+        String buttonText = "<div style=\"text-align: center;\"><br>\n" +
+                "       <a href='http://localhost:8818/user/check/"+knowSeq+"'>\n" +
+                "               <button class=\"btn\" style=\"width: 200px; background-color: #86b7fe; padding: 15px 30px;\n" +
+                "                border-radius: 5px; color:white; font-size: 18px; font-weight: bold; cursor: pointer;\" >문제 풀기!</button>\n" +
+                "       </a><br>\n" +
+                "</div>";
         return buttonText;
     }
+
     public String footerText() {
         String footerText = "<div class=\"footer\" style=\"text-align : center; background-color: #F9F2ED\">\n" +
                 "  <div class=\"info\" ><br>\n" +
@@ -132,3 +140,5 @@ public class EmailController {
     }
 
 }
+
+

@@ -55,8 +55,8 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void updateSendDate(List<Object> updateCategorySeqList) {
-        dao.updateSendDate(updateCategorySeqList);
+    public void updateSendDate(int categorySeq) {
+        dao.updateSendDate(categorySeq);
     }
 
     private void sendingResultMustSuccess(SendEmailResult sendEmailResult) {
@@ -78,19 +78,5 @@ public class EmailServiceImpl implements EmailService {
         return dao.getSendDetail(count);
     }
 
-    @Override
-    public KnowledgeDTO getKnowledgeByCategorySeq() {
-        KnowledgeDTO knowledgeDTO = new KnowledgeDTO();                     // 컨트롤러에 유저가 선택한 소분류에 해당하는 정보글 knowledgeDTO를 보낼 것이다.
-        List<Map<String, Object>> subEmailMap = getEmailAndSub();           // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
-                                                                            // {sub=java, email=akdrh554@gmail.com}
-        int count = categoryService.countAllSub();                          // 총 소분류의 갯수이다.
-                                                                            // 2
-        List<Map<String, Object>> sendDetailMap = getSendDetail(count);     // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
-                                                                            // {sub=java, category_seq=13}
-/*        for(Map<String, Object> map : subEmailMap){
-            map.
-        }*/
-        return knowledgeDTO;
-    }
 
 }

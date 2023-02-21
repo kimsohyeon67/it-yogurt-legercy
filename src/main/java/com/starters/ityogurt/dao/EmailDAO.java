@@ -13,7 +13,7 @@ public interface EmailDAO {
     List<String> getSendEmailsSubJava();
     // KnowledgeDTO getSendDetail();
 
-    void updateSendDate(List<Object> updateCategorySeqList);
+    void updateSendDate(int categorySeq);
 
 
     void getDetailBySub(String sub);
