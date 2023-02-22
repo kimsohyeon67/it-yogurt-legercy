@@ -17,11 +17,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dto.BoardDTO;
 import com.starters.ityogurt.dto.CategoryDTO;
+import com.starters.ityogurt.dto.CommentDTO;
+import com.starters.ityogurt.dto.UserDTO;
 import com.starters.ityogurt.service.BoardService;
 import com.starters.ityogurt.service.CategoryService;
+import com.starters.ityogurt.service.CommentService;
 import com.starters.ityogurt.service.UserService;
 import com.starters.ityogurt.util.Criteria;
 import com.starters.ityogurt.util.Paging;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -40,6 +46,10 @@ public class BoardController {
 	@Qualifier("categoryservice")
 	CategoryService categoryService;
 	
+	@Autowired
+	@Qualifier("commentservice")
+	CommentService commentService;
+	
 	
 
 	//게시판 리스트 화면
@@ -53,6 +63,10 @@ public class BoardController {
 				int maxPage = (int)((double)totalBoardCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
 				paging.setTotalCount(totalBoardCnt); //전체 게시글 수 설정
 				List<Map<String,String>> boardlist = boardService.getBoardJoinUser(cri); // 게시글 데이터 가져오기
+				
+				//댓글 개수
+				
+				
 				mv.addObject("maxpage", maxPage);
 			 	mv.addObject("paging", paging);
 			 	mv.addObject("boardList", boardlist);
@@ -82,13 +96,18 @@ public class BoardController {
 	 @GetMapping("/{boardSeq}")
 	 public ModelAndView boardlisttest(@PathVariable("boardSeq") int boardSeq) {
 		 ModelAndView mv = new ModelAndView();
-		 int limit =0;
+		 // 글 내용 출력
 		 boardService.viewCntBoard(boardSeq);
 		 Map<String,String> oneBoard = boardService.getOneBoardJoinUser(boardSeq);
 		 // 해당 글의 카테고리 번호
 		 String categorySeq = String.valueOf(oneBoard.get("category"));
 		 CategoryDTO categoryInfo = categoryService.getCategoryByCategorySeq(categorySeq);
 		 
+		 //댓글 출력
+		 List<Map<String,String>> commentList = commentService.getCommentList(boardSeq);
+		
+		 
+		 mv.addObject("commentList", commentList);
 		 mv.addObject("categoryInfo", categoryInfo);
 		 mv.addObject("oneBoard", oneBoard);
 		 mv.setViewName("board/boardDetail");
@@ -98,8 +117,12 @@ public class BoardController {
 	 
 	 //게시글 업로드 폼
 	 @GetMapping("/form")
-	 public String boardInsertForm() {
-		return "board/boardForm";
+	 public String boardInsertForm(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+	    int userSeq = (int) session.getAttribute("user_seq");
+	    UserDTO userDto = userService.getUserByUserSeq(userSeq);
+	    session.setAttribute("sessionUserInfo", userDto);
+	    return "board/boardForm";
 	 }
 	 
 	 //게시글 업로드
@@ -136,5 +159,21 @@ public class BoardController {
 		 boardService.deleteBoardByBoardSeq(boardSeq);
 		 return "redirect:/board/list";
 	 }
+	 
+	 //댓글 입력
+	 @PostMapping("/comment")
+	 public String insertComment(CommentDTO commentDto, HttpServletRequest request) {
+		 int userSeq = Integer.parseInt(request.getParameter("userSeq"));
+		 System.out.println(userSeq);
+			/* commentDto.setUserSeq(0) commentDto.getUserSeq(); */
+		 commentService.insertComment(commentDto);
+		 int boardSeq = commentDto.getBoardSeq();
+		 return "redirect:/board/"+boardSeq+"#comment";
+	 }
+	 
+	 //댓글 수정
+	 
+	 //댓글 삭제
+	 
 	 
 }

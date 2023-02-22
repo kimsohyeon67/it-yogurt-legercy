@@ -1,5 +1,6 @@
 <%--<%@ include file="common/tag.jsp" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -17,21 +18,27 @@
     <%@include file="common/header.jsp" %>
     <div class="content">
         <img id="logo" src="/image/logo.png">
-
+        <div class="button">
         <c:choose>
-            <c:when test="${not empty sessionScope.user_seq}">
-
-            </c:when>
-            <c:otherwise>
-                <div class="button">
-                    <div id="login" onclick="window.location.href='/user'">로그인</div>
-                </div>
-            </c:otherwise>
-        </c:choose>
+			<c:when test="${ not empty sessionScope.user_seq}">
+	            <div id="logout" onclick="window.location.href='/user/o'">로그아웃</div>
+			</c:when>
+			<c:otherwise>
+	            <div id="login" onclick="window.location.href='/user'">로그인</div>
+			</c:otherwise>
+		</c:choose>
+        </div>
     </div>
     <%@include file="common/footer.jsp" %>
 </div>
 </body>
+<script>
+$("#logout").on("click", function (event) {
+    event.preventDefault();
+	alert("로그아웃되었습니다.");
+    location.replace('redirect:/');
+})
+</script>
 </html>
 <style>
   .content {
@@ -43,6 +50,20 @@
   }
 
   #login {
+    width: 250px;
+    height: 40px;
+    border-style: solid;
+    border-width: medium;
+    /*margin-bottom: 35px;*/
+    margin-bottom: 0px;
+    border-color: #fab46e;
+    background-color: #fab46e;
+    font-size: 15px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 40px;
+  }
+  #logout {
     width: 250px;
     height: 40px;
     border-style: solid;

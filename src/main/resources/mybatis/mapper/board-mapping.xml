@@ -84,4 +84,14 @@
 	where board_seq=#{boardSeq}
 </update>
 
+<!-- 수정중 -->
+<!-- <select id="getBoardCommentNum" parameterType="">
+	select board_seq, (select count(*) 
+	from comment
+	where board_seq = #{boardSeq})
+	from board
+	
+
+</select> -->
+
 </mapper>

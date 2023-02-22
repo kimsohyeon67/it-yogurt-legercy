@@ -13,6 +13,8 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,6 +73,14 @@ public class UserRestController {
 
         return "로그인 성공";
     }
+    
+    // 로그아웃 임시(작동은 하나 오류남)
+    @GetMapping("/user/o")
+    public void logout(HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+    	session.invalidate();
+    }
+    
 
     // 비밀번호 암호화
     String ConvertPassword(String pw) throws Exception {
