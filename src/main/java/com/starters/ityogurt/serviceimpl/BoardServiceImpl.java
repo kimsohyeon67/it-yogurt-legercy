@@ -53,6 +53,11 @@ public class BoardServiceImpl implements BoardService {
 		dao.updateBoard(dto);
 	}
 
+	@Override
+	public void deleteBoardByBoardSeq(int boardSeq) {
+		dao.deleteBoardByBoardSeq(boardSeq);
+	}
+
 	
 	
 }

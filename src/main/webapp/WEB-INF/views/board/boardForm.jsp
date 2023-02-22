@@ -39,9 +39,6 @@
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2"> <table> <tr><td> 작성자  </td><td> | 세션 유저</td></tr></table> </div>
                             <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">IT</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">JAVA</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">잡담</a>
                         </header>
                        
                         <section class="mb-5">
@@ -49,8 +46,8 @@
                             
                            <textarea  class="form-control" name="content" rows=10></textarea>
                       			
-                      			<input type="hidden" name="userSeq" value="2">
-								<input type="hidden" name="categorySeq" value="3">
+                      			<input type="hidden" name="userSeq" value="31">
+								<input type="hidden" name="categorySeq" value="17">
                         
                         </section>
                     </article>
@@ -58,8 +55,6 @@
                         </form>
                     <section class="mb-2">
                     <div class="d-md-flex justify-content-md-end" >
-  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/e'">수정</button>
-  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/d'">삭제</button>
   						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/list'">목록</button>
 					</div>
                     </section>

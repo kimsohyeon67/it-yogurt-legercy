@@ -38,10 +38,6 @@
                             <h1 class="fw-bolder mb-1"><input type="text" class="fw-bolder mb-1" name="title" value="${oneBoard.title }"></h1>
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2"> <table> <tr><td> 작성자  </td><td> | 세션 유저</td></tr></table> </div>
-                            <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">IT</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">JAVA</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">잡담</a>
                         </header>
                        
                         <section class="mb-5">
