@@ -46,7 +46,7 @@ window.ajax = {
     }
 
     if (options.data && (options.type === 'POST' || options.type
-        === 'DELETE')) {
+        === 'DELETE' || options.type === 'PUT' )) {
       options.data = JSON.stringify(options.data);
     }
     $.ajax({

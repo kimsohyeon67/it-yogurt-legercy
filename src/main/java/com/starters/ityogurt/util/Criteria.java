@@ -41,13 +41,13 @@ public class Criteria {
     }
  
     public void setPerPageNum(int perPageNum) {
-        int cnt = this.perPageNum;
+//        int cnt = this.perPageNum;
         
-        if(perPageNum != cnt) {
-            this.perPageNum = cnt;    
-        } else {
+//        if(perPageNum != cnt) {
+//            this.perPageNum = cnt;
+//        } else {
             this.perPageNum = perPageNum;
-        }
+//        }
         
     }
     
