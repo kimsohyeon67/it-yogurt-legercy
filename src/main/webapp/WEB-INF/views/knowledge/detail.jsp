@@ -25,8 +25,9 @@
 							</div>
 							<div>
 							<tr style="height: 100px;">
-								<td class="detailTd"><b>${title}</b></td>
+								<td class="detailTd"><h1>${title}</h1></td>
 							</tr>
+							<tr><td>작성자 : 관리자</td></tr>
 							</div>
 							<tr>
 								<td class="detailTd">${contents }</td>
@@ -34,6 +35,13 @@
 							<tr>
 								<td class="detailTd"><input type="submit" value="퀴즈 풀러가기" id="subBtn">
 								<input type="hidden" value="${knowSeq}" name="knowSeq"></td>
+								<td><input type="button" value="좋아요"></td>
+							</tr>
+							<tr>
+							<td>
+								<input type="text" placeholder="댓글을 입력하세요.">
+								<input type="button" value="등록">
+							</td>
 							</tr>
 						</table>
 					</div>
