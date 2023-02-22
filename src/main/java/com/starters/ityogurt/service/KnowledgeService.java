@@ -9,7 +9,7 @@ import com.starters.ityogurt.util.Criteria;
 
 public interface KnowledgeService {
 
-	List<KnowledgeDTO> getList(int userSeq, int limit);
+	List<KnowledgeDTO> getList(Map<Object, Object> map);
 
 	int getTotalCnt();
 
@@ -24,6 +24,7 @@ public interface KnowledgeService {
 	List<KnowledgeDTO> getSearchList(String keyword);
   
 	KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq);
+
 
 
 

@@ -21,8 +21,8 @@ public class KnowledgeServiceImpl implements KnowledgeService{
     KnowledgeDAO dao;
 	
 	@Override
-	public List<KnowledgeDTO> getList(int userSeq, int limit) {
-		return dao.getList(userSeq, limit);
+	public List<KnowledgeDTO> getList(Map<Object, Object> map) {
+		return dao.getList(map);
 	}
 
 	@Override
