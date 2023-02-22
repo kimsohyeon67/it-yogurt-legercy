@@ -24,4 +24,6 @@ public interface UserDAO {
 	UserDTO getUserByUserEmail(String email);
 
 	Integer setIsPassByUserSeq(int userSeq);
+
+	UserDTO getUserByUserSeq(int userSeq);
 }

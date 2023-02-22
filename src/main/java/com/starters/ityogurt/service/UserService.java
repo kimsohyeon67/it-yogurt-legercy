@@ -19,5 +19,8 @@ public interface UserService {
 
 	UserDTO getUserByUserEmail(String email);
 
+	UserDTO getUserByUserSeq(int userSeq);
+
 	int setIsPassByUserSeq(int userSeq);
+
 }
