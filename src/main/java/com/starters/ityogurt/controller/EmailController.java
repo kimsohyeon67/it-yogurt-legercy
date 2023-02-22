@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +36,9 @@ public class EmailController {
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    UserService userService;
+
     @Value("${live.ip}")
     private String liveIp;
     private KnowledgeDTO knowledgeByCategorySeq;
@@ -44,6 +49,7 @@ public class EmailController {
     public String sendEmail() throws Exception {
         // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
         List<Map<String, Object>> subEmailMap = emailService.getEmailAndSub();
+        System.out.println("subEmailMap : " + subEmailMap);
 
         // 총 소분류의 갯수이다.
         int count = categoryService.countAllSub();
@@ -51,11 +57,12 @@ public class EmailController {
         // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
         // 가장 오래 전에 보냈으면서 가장 작은 번호 순이다.
         List<Map<String, Object>> sendDetailMap = emailService.getSendDetail(count);
+        System.out.println("sendDetailMap : " + sendDetailMap);
 
         // User의 이메일과 User가 선택한 소분류가 들어갈 map이다.
         Map<String, String> userMap = new HashMap<String, String>();
 
-        // category의 소분류와 상세번호가 들어갈 map이다.
+        // category의 소분류와 category_seq가 들어갈 map이다.
         Map<String, Integer> categoryMap = new HashMap<String, Integer>();
 
         // 보내질 카테고리 번호 List이다.
@@ -94,17 +101,16 @@ public class EmailController {
         System.out.println("userMap : " + userMap);
         System.out.println("categoryMap : " + categoryMap);
 
+        // 예외처리 해야 함 : 카테고리 18번에 퀴즈가 없다.
         categoryMap.forEach((key, value) -> {
+            System.out.println(value);
             emailService.updateSendDate(value);
-            KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq((Integer) value);
+            KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq(value);
+            System.out.println(knowledgeDTO);
             emailService.send(knowledgeDTO.getTitle(),
                     headerText() + knowledgeDTO.getContent() + buttonText(knowledgeDTO.getKnowSeq()) + footerText(),
                     (List<String>) subEmailList.get(key));
         });
-
-        KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq(19);
-        System.out.println(knowledgeDTO.getKnowSeq());
-        // emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
 
         return "true";
     }
@@ -138,6 +144,14 @@ public class EmailController {
                 "</div>";
         return footerText;
     }
+
+    @GetMapping("user/email")
+    public String checkEmail(String email) {
+        userService.setIsPassByUserSeq(31);
+        return "true";
+    }
+
+
 
 }
 

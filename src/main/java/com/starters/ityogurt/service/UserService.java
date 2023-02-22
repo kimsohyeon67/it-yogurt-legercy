@@ -19,7 +19,12 @@ public interface UserService {
 
 	UserDTO getUserByUserEmail(String email);
 
+	UserDTO getUserByUserSeq(int userSeq);
+
 	int setIsPassByUserSeq(int userSeq);
+
 	int setAttendanceByUserSeq(UserDTO user) throws Exception;
+  
 	int setLastLoginDateByUserSeq(int userSeq);
+
 }

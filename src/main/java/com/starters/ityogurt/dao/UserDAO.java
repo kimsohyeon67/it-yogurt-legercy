@@ -28,5 +28,8 @@ public interface UserDAO {
 	int setAttendanceByUserSeq(int userSeq, int attendance);
 
 	int setLastLoginDateByUserSeq(int userSeq);
+
+	UserDTO getUserByUserSeq(int userSeq);
+
 }
 

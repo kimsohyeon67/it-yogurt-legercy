@@ -17,23 +17,31 @@
 		<div class="content">
 				<form action=" <%=request.getContextPath()%>/quiz/${knowSeq}">
 					<div>
-						<table>
+						<table id="detailTbl">
 						<div>
 							<tr>
-								<td id="category">IT > 프로그래밍언어 > JAVA</td>
+								<td class="detailTd">IT > 프로그래밍언어 > JAVA</td>
 							</tr>
 							</div>
 							<div>
 							<tr style="height: 100px;">
-								<td><b>${title}</b></td>
+								<td class="detailTd"><h1>${title}</h1></td>
 							</tr>
+							<tr><td>작성자 : 관리자</td></tr>
 							</div>
 							<tr>
-								<td id="contents">${contents }</td>
+								<td class="detailTd">${contents }</td>
 							</tr>
 							<tr>
-								<td><input type="submit" value="퀴즈 풀러가기" id="subBtn">
+								<td class="detailTd"><input type="submit" value="퀴즈 풀러가기" id="subBtn">
 								<input type="hidden" value="${knowSeq}" name="knowSeq"></td>
+								<td><input type="button" value="좋아요"></td>
+							</tr>
+							<tr>
+							<td>
+								<input type="text" placeholder="댓글을 입력하세요.">
+								<input type="button" value="등록">
+							</td>
 							</tr>
 						</table>
 					</div>

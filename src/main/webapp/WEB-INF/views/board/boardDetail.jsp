@@ -33,13 +33,14 @@
                         <header class="mb-4">
                             <!-- Post title-->
                             <c:set value="${oneBoard }" var="oneboard"/>
+                            <c:set value="${categoryInfo }" var="categoryInfo"/>
                             <h1 class="fw-bolder mb-1">${oneboard.title }</h1>
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2"> <table> <tr><td>작성시간 </td><td> | ${oneboard.insertDate }</td></tr><tr><td> 작성자  </td><td> | ${oneboard.nickname }</td></tr></table> </div>
                             <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">IT</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">JAVA</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">잡담</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">${categoryInfo.main }</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">${categoryInfo.middle }</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">${categoryInfo.sub }</a>
                         </header>
    
                         <section class="mb-5">
@@ -50,7 +51,7 @@
                     <section class="mb-2">
                     <div class="d-md-flex justify-content-md-end" >
   						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/form/${oneboard.boardSeq}'">수정</button>
-  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/d'">삭제</button>
+  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="delboard(${oneboard.boardSeq})">삭제</button>
   						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/list'">목록</button>
 					</div>
                     </section>
@@ -145,4 +146,16 @@
 <%@include file="../common/footer.jsp" %>
 </div>
 </body>
+
+<script>
+function delboard(boardSeq){
+	if (window.confirm("게시물을 삭제하시겠습니까? \n")){
+		location.href="/board/d/"+boardSeq;
+		alert("게시물 삭제 되었습니다.");		
+	}
+	else {
+		alert("삭제가 취소되었습니다.");		
+	}
+}
+</script>
 </html>

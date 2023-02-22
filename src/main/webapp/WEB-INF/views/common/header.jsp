@@ -9,7 +9,7 @@
     <div class="nav">
         <ul class="nav-menu">
             <li id="nav-menu-knowledge">
-                <a href="<%=request.getContextPath()%>/list2/1" style="text-decoration-line: none; color:white;">매일지식</a>
+                <a href="<%=request.getContextPath()%>/knowledge/list" style="text-decoration-line: none; color:white;">매일지식</a>
             </li>
             <li id="nav-menu-quiz">
                 <a href="<%=request.getContextPath()%>/board/list" style="text-decoration-line: none; color:white;">게시판</a>

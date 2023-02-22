@@ -70,4 +70,5 @@
 		SET lastlogin_date = NOW()
 		WHERE user_seq = #{userSeq};
 	</update>
+
 </mapper>

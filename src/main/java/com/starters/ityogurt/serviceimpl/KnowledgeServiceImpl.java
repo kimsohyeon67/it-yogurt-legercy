@@ -1,6 +1,7 @@
 package com.starters.ityogurt.serviceimpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.starters.ityogurt.dao.QuizDAO;
 import com.starters.ityogurt.dto.KnowledgeDTO;
 import com.starters.ityogurt.dto.QuizDTO;
 import com.starters.ityogurt.service.KnowledgeService;
+import com.starters.ityogurt.util.Criteria;
 
 
 @Service("knowledgeservice")
@@ -55,6 +57,7 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 	public KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq) {
 		return dao.getKnowledgeByCategorySeq(categorySeq);
 	}
+
 
 
 }

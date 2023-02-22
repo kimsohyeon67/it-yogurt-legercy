@@ -2,12 +2,15 @@ package com.starters.ityogurt.serviceimpl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceAsync;
 import com.starters.ityogurt.dao.EmailDAO;
 import com.starters.ityogurt.dto.EmailDTO;
 import com.starters.ityogurt.dto.KnowledgeDTO;
 import com.starters.ityogurt.service.CategoryService;
 import com.starters.ityogurt.service.EmailService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,17 +22,14 @@ import lombok.RequiredArgsConstructor;
 
 @Slf4j
 @Service("emailservice")
-@RequiredArgsConstructor
+// @AllArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
     @Autowired
     EmailDAO dao;
 
     @Autowired
-    CategoryService categoryService;
-
-    @Autowired
-    private final AmazonSimpleEmailService amazonSimpleEmailService;
+    private AmazonSimpleEmailServiceAsync amazonSimpleEmailServiceAsync;
 
     //이메일 전송하기
     public void send(String subject, String content, List<String> receivers) {
@@ -37,11 +37,9 @@ public class EmailServiceImpl implements EmailService {
         //이메일 정보를 담은 객체 생성
         EmailDTO emailSenderDto = new EmailDTO(receivers, subject, content);
 
-        //EmailSenderDto를 SendEmailRequest형태로 바꿔준후 이메일 전송.
-        SendEmailResult sendEmailResult = amazonSimpleEmailService.sendEmail(emailSenderDto.toSendRequestDto());
+        Future<SendEmailResult> sendEmailResultFuture = amazonSimpleEmailServiceAsync.sendEmailAsync(emailSenderDto.toSendRequestDto());
 
-        System.out.println(sendEmailResult.getSdkResponseMetadata().toString());
-
+        System.out.println(sendEmailResultFuture);
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,9 +39,12 @@ public class UserController {
         return "user/signUp";
     }
 
-    @GetMapping("/user/check/{quizSeq}")
-    public String QuizLoginCheck(@PathVariable(value = "quizSeq") int quizSeq) {
-        return "user/check";
+    @GetMapping("/user/check/{knowSeq}")
+    public ModelAndView QuizLoginCheck(@PathVariable(value = "knowSeq") int knowSeq) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("knowSeq", knowSeq);
+        mv.setViewName("user/check");
+        return mv;
     }
 
     // 이메일 인증 페이지

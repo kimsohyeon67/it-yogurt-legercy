@@ -1,6 +1,8 @@
 package com.starters.ityogurt.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.starters.ityogurt.dao.KnowledgeDAO;
 import com.starters.ityogurt.dto.KnowledgeDTO;
 import com.starters.ityogurt.service.KnowledgeService;
+import com.starters.ityogurt.util.Criteria;
+import com.starters.ityogurt.util.Paging;
 
 @Controller
+@RequestMapping("/knowledge")
 public class KnowledgeController {
 
 	@Autowired
@@ -25,7 +30,7 @@ public class KnowledgeController {
 	@Qualifier("knowledgeservice")
 	KnowledgeService service;
 
-
+//원래 코드
 //	@RequestMapping(value = "/list/{page}", method = { RequestMethod.GET })	
 //	@GetMapping("/list/{page}") //매일지식 list 불러오기
 //	public ModelAndView list(@PathVariable("page") int page) {
@@ -40,27 +45,101 @@ public class KnowledgeController {
 //		
 //		return mv;
 //	}
-	//ajax 테스트용
-	@GetMapping("/list/{page}") //매일지식 list 불러오기
-	@ResponseBody
-	public JSONObject list(@PathVariable("page") int page) {
-		JSONObject jsonObj = new JSONObject();
-		int userSeq = 2;
-		int limit = (page - 1) * 9; // page처리 위해서
-		int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
-        List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+//	ajax 테스트용
+//	@GetMapping("/list/{page}") //매일지식 list 불러오기
+//	@ResponseBody
+//	public List<KnowledgeDTO> list(@PathVariable("page") int page) {
+//		JSONObject jsonObj = new JSONObject();
+//		int userSeq = 2;
+//		int limit = (page - 1) * 9; // page처리 위해서
+//		int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
+//        List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
 //        jo.add("knowledgeList", (JsonElement) knowledgeList);
 //        jo.add("totalCnt",totalCnt);
 //        jo.setViewName("knowledge/list");
-        System.out.println(totalCnt);
-        jsonObj.put("knowledgeList", knowledgeList);
-        jsonObj.put("totalCnt", totalCnt);
-		return jsonObj;
-	}
+//        System.out.println(totalCnt);
+//        jsonObj.put("knowledgeList", knowledgeList);
+////        jsonObj.put("totalCnt", totalCnt);
+//        
+//		return knowledgeList;
+////        return jsonObj;
+//	}
 	
+//	@GetMapping("/list/{page}") //매일지식 list 불러오기
+//	@ResponseBody
+//	public Map<String, Object> list2(@PathVariable("page") int page) {
+//	    Map<String, Object> result = new HashMap<>();
+//	    int userSeq = 2;
+//	    int limit = (page - 1) * 9; // page처리 위해서
+//	    int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
+//	    List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+//	    result.put("knowledgeList", knowledgeList);
+//	    result.put("totalCnt", totalCnt);
+//	    return result;
+//	}
+	
+	//게시판 리스트 화면
+	 @GetMapping(value = { "/list"})  
+	    public ModelAndView boardList(Criteria cri) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			Paging paging = new Paging();
+			int userSeq = 2;
+			int limit = (cri.getPage() - 1) * 9;
+			System.out.println("limit"+limit);
+			paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
+//			System.out.print(paging.setCri(cri));
+			int totalCnt = service.getTotalCnt(); // 전체 게시글 수
+			int maxPage = (int)((double)totalCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+			paging.setTotalCount(totalCnt);
+			List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+			mv.addObject("maxpage", maxPage);
+		 	mv.addObject("paging", paging);
+		 	mv.addObject("knowledgeList", knowledgeList);
+		 	mv.setViewName("knowledge/list");
+		 	return mv;
+	 
+	    }	
+	
+	 //게시판 리스트 화면 ajax
+	 @GetMapping(value = { "/list/a"}) 
+	 @ResponseBody
+	 public JSONObject boardListAjax(Criteria cri) throws Exception {
+		 Paging paging = new Paging();
+		 int userSeq = 2;
+		 int limit = (cri.getPage() - 1) * 9;
+		 JSONObject jsonObjBoard = new JSONObject();
+		 paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
+		 int totalCnt = service.getTotalCnt(); // 전체 게시글 수
+		 System.out.println("토탈"+totalCnt);
+		 int maxPage = (int)((double)totalCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+		 System.out.println("맥스"+maxPage);
+		 paging.setTotalCount(totalCnt);
+		 List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+		 System.out.println(knowledgeList.size());
+		 jsonObjBoard.put("maxPage", maxPage);
+		 jsonObjBoard.put("paging", paging);
+		 jsonObjBoard.put("knowledgeList", knowledgeList);
+		 return jsonObjBoard;
+		 
+	 }	
+	
+	
+//	@GetMapping("/list2/{page}") //매일지식 list 불러오기
+//	@ResponseBody
+//	public Map<String, Object> list(@PathVariable("page") int page) {
+//	    Map<String, Object> result = new HashMap<>();
+//	    JSONObject jsonObj = new JSONObject();
+//	    int userSeq = 2;
+//	    int limit = (page - 1) * 9; // page처리 위해서
+//	    int totalCnt = service.getTotalCnt(); // 매일지식 몇 개인지 불러오기
+//	    List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+//	    result.put("knowledgeList", knowledgeList);
+//	    result.put("totalCnt", totalCnt);
+//	    return result;
+//	}
 	
 	@GetMapping("/list2/{page}") //매일지식 list 불러오기
-	public ModelAndView list2(@PathVariable("page") int page) {
+	public ModelAndView list23(@PathVariable("page") int page) {
 		ModelAndView mv = new ModelAndView();
 		int userSeq = 2;
 		int limit = (page - 1) * 9; // page처리 위해서
@@ -94,7 +173,7 @@ public class KnowledgeController {
 	public ModelAndView searchResult(String keyword) {
 		ModelAndView mv = new ModelAndView();
 		List<KnowledgeDTO> list = service.getSearchList(keyword);
-		System.out.println(list);
+//		System.out.println(list);
 		
 		mv.addObject("list", list);
 		mv.setViewName("knowledge/searchResult");

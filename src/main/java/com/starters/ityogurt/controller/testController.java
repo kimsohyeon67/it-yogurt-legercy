@@ -11,4 +11,9 @@ public class testController {
         return "index";
     }
 
+    @GetMapping("/index1")
+    public String main1() {
+        return "index1";
+    }
+
 }

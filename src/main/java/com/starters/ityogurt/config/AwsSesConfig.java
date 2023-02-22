@@ -1,5 +1,7 @@
 package com.starters.ityogurt.config;
 
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceAsync;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceAsyncClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,11 +22,9 @@ public class AwsSesConfig {
     private String secretKey;
 
     @Bean
-    public AmazonSimpleEmailService amazonSimpleEmailService() {
+    public AmazonSimpleEmailServiceAsync amazonSimpleEmailServiceAsync() {
         final BasicAWSCredentials basicAWSCredentials = new BasicAWSCredentials(accessKey, secretKey);
-
         final AWSStaticCredentialsProvider awsStaticCredentialsProvider = new AWSStaticCredentialsProvider(basicAWSCredentials);
-
-        return AmazonSimpleEmailServiceClientBuilder.standard().withCredentials(awsStaticCredentialsProvider).withRegion("ap-south-1").build();
+        return AmazonSimpleEmailServiceAsyncClientBuilder.standard().withCredentials(awsStaticCredentialsProvider).withRegion("ap-south-1").build();
     }
 }
