@@ -26,14 +26,6 @@
         ORDER BY SUB
     </select>
 
-<!--    <select id="getSendDetail" parameterType="int" resultType="Map">
-        SELECT sub, category_seq
-        FROM category
-        WHERE detail IS NOT null
-        order BY send_date, category_seq
-        LIMIT 0,#{count}
-    </select>-->
-
     <select id="getSendDetail" parameterType="int" resultType="Map">
         SELECT sub, category_seq
         FROM category
