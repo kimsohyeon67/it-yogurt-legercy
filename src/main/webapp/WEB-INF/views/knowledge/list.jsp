@@ -38,7 +38,6 @@
 			</div>	
 			
 			<select id="categoryChoice" onchange="changeFn()">
-				<option value="-" >선택하세요.</option>
 				<option value="all" >전체</option>
 				<option value="프로그래밍언어" >프로그래밍언어</option>
 				<option value="데이터베이스" >데이터베이스</option>
@@ -57,8 +56,9 @@
 				<tbody class="listData">
 					
 					<c:forEach items="${knowledgeList }" var="list">
+					<c:set var="i" value="${i+1}"></c:set>
 					<tr class="tableList">
-						<td>${list.knowSeq}</td>
+						<td>${i}</td>
 						<td><a href="<%=request.getContextPath()%>/knowledge/detail/${list.knowSeq}">${list.title}</a></td>
 						<td>${list.insertDate }</td>
 						<td>${list.viewcount }</td>
@@ -94,25 +94,36 @@
 		</div>
 	</div>
 <script>
+let params = (new URL(document.location)).searchParams;
+let currentCategory = params.get('category') || "";
+let category_list = {"all" : "전체","프로그래밍언어":"프로그래밍언어","데이터베이스":"데이터베이스"}
+
+$("#categoryChoice").val(currentCategory).prop("selected", true);
+
+
 //검색
 $("#search").click(function(e){
         $("form").attr("action","/knowledge/searchResult");	
 });
 
-function changeFn(){
+function changeFn(){	
 	var choice  = document.getElementById("categoryChoice");
-	var category = (choice.options[choice.selectedIndex].value);
-	alert("value = "+category);
-	location.href="${pageContext.request.contextPath}/knowledge/list/"+category;
+	var category = (choice.value);
+	location.href="${pageContext.request.contextPath}/knowledge/list?category="+category;
+	
 }
-
-
 
 function go_page(pageNum){
 	console.log("click");
+	var choice  = document.getElementById("categoryChoice");
+	var category = (choice.value);
+	
+// 	alert(window.location.pathname.split("/"));
+	
+// 	alert(choice.value);
 	
 	$.ajax({
-		url: "${pageContext.request.contextPath}/knowledge/list/category?page="+pageNum,
+		url: "${pageContext.request.contextPath}/knowledge/list/a?category="+category+"&page="+pageNum,
 		type: "GET",
 		dataType: "json",
 		success: function(result){
@@ -120,7 +131,7 @@ function go_page(pageNum){
 			let content = '';
 			for(let i=0;i<list.length;i++){
 				content += '<tr>';
-				content +=	'<td>'+ list[i].knowSeq +'</td>';
+				content +=	'<td>'+ (i+1) +'</td>';
 				content += '<td><a href="${pageContext.request.contextPath}/knowledge/detail/'+list[i].knowSeq+'\">' + list[i].title +'</a></td>';
 				content +=	'<td>'+ list[i].insertDate +'</td>';
 				content +=	'<td>'+ list[i].viewcount +'</td>';

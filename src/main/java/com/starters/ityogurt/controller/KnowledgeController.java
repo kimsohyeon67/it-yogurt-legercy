@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -81,33 +82,23 @@ public class KnowledgeController {
 //	}
 	
 	//게시판 리스트 화면
-	 @GetMapping("/list/{category}")  
-	    public ModelAndView boardList(@PathVariable("category") String category, Criteria cri, HttpServletRequest request) throws Exception {
+	 @GetMapping("/list")  
+	    public ModelAndView boardList(@RequestParam("category") String category, Criteria cri) throws Exception {
 			ModelAndView mv = new ModelAndView();
-//			System.out.println("value"+category);
 			Paging paging = new Paging();
 			int userSeq = 2;
 			int limit = (cri.getPage() - 1) * 9;
 			System.out.println("limit"+limit);
 			paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
-//			System.out.print(paging.setCri(cri));
 			int totalCnt = service.getTotalCnt(); // 전체 게시글 수
 			int maxPage = (int)((double)totalCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
 			paging.setTotalCount(totalCnt);
 			
-//			if(category.equals("category")||category.equals("all")) {
 			Map<Object,Object> map = new HashMap<>();
 			map.put("userSeq", userSeq);
 			map.put("category", category);
 			map.put("limit", limit);
-			
-				List<KnowledgeDTO> knowledgeList = service.getList(map);				
-//			}else {
-//				List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit,);			
-//			}
-				for(KnowledgeDTO a : knowledgeList) {
-					System.out.println("카테고리"+a.getCategorySeq());
-				}
+			List<KnowledgeDTO> knowledgeList = service.getList(map);		
 			
 			mv.addObject("maxpage", maxPage);
 		 	mv.addObject("paging", paging);
@@ -118,34 +109,64 @@ public class KnowledgeController {
 	    }	
 	
 	 //게시판 리스트 화면 ajax
-//	 @GetMapping(value = { "/list/a"}) 
+//	 @GetMapping(value = { "/list/category"}) 
 //	 @ResponseBody
-//	 public JSONObject boardListAjax(Criteria cri) throws Exception {
+//		public JSONObject boardListAjax(Criteria cri , @PathVariable String category ) throws Exception {
 //		 Paging paging = new Paging();
 //		 int userSeq = 2;
 //		 int limit = (cri.getPage() - 1) * 9;
 //		 JSONObject jsonObjBoard = new JSONObject();
 //		 paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
 //		 int totalCnt = service.getTotalCnt(); // 전체 게시글 수
-//		 System.out.println("토탈"+totalCnt);
 //		 int maxPage = (int)((double)totalCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
-//		 System.out.println("맥스"+maxPage);
 //		 paging.setTotalCount(totalCnt);
-//		 
-//		 String category = "데이터베이스";
+////		 String category = "all";
+//		 System.out.println("ajaxCate"+category);
 //		 Map<Object,Object> map = new HashMap<>();
 //			map.put("userSeq", userSeq);
 //			map.put("limit", limit);
 //			map.put("category", category);
 //			List<KnowledgeDTO> knowledgeList = service.getList(map);		
 ////		 List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
-//		 System.out.println(knowledgeList.size());
+//			
 //		 jsonObjBoard.put("maxPage", maxPage);
 //		 jsonObjBoard.put("paging", paging);
 //		 jsonObjBoard.put("knowledgeList", knowledgeList);
 //		 return jsonObjBoard;
 //		 
 //	 }	
+//	 
+	//게시판 리스트 화면 ajax
+		 @GetMapping(value = { "/list/a"}) 
+		 @ResponseBody
+		 public JSONObject boardListAjax(Criteria cri, @RequestParam String category) throws Exception {
+			 Paging paging = new Paging();
+			 int userSeq = 2;
+			 int limit = (cri.getPage() - 1) * 9;
+			 JSONObject jsonObjBoard = new JSONObject();
+			 paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
+			 int totalCnt = service.getTotalCnt(); // 전체 게시글 수
+			 int maxPage = (int)((double)totalCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+			 paging.setTotalCount(totalCnt);
+			 
+			 System.out.println("카테고리"+category);
+			 
+			 Map<Object,Object> map = new HashMap<>();
+				map.put("userSeq", userSeq);
+				map.put("limit", limit);
+				map.put("category", category);
+			List<KnowledgeDTO> knowledgeList = service.getList(map);		
+				
+			 
+//			 List<KnowledgeDTO> knowledgeList = service.getList(userSeq,limit);
+			 System.out.println(knowledgeList.size());
+			 jsonObjBoard.put("maxPage", maxPage);
+			 jsonObjBoard.put("paging", paging);
+			 jsonObjBoard.put("knowledgeList", knowledgeList);
+			 return jsonObjBoard;
+			 
+		 }	
+	 
 	
 //	@GetMapping("/list2/{page}") //매일지식 list 불러오기
 //	public ModelAndView list23(@PathVariable("page") int page) {
