@@ -50,8 +50,10 @@
                     
                     <section class="mb-2">
                     <div class="d-md-flex justify-content-md-end" >
-  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/form/${oneboard.boardSeq}'">수정</button>
-  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="delboard(${oneboard.boardSeq})">삭제</button>
+                    	<c:if test="${sessionScope.user_seq eq oneboard.userSeq || sessionScope.user_seq eq 16 }">
+	  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/form/${oneboard.boardSeq}'">수정</button>
+	  						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="delboard(${oneboard.boardSeq})">삭제</button>
+  						</c:if>
   						<button class="btn me-md-2" style="background-color: #91ACCC;" type="button" onclick="location.href='/board/list'">목록</button>
 					</div>
                     </section>
@@ -144,6 +146,7 @@
 			<button id= "black" onclick="location.href=''">수정</button>
 		</div> --%>
 <%@include file="../common/footer.jsp" %>
+</div>
 </div>
 </body>
 
