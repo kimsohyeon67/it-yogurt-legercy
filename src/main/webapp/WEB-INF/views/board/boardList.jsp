@@ -120,7 +120,15 @@ line-height: inherit;
 	</div>
 	
 <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
-  <button class="btn btn-primary" style="background-color: #91ACCC; font-size: 15px; width: 80px;" type="button" onClick="location.href='/board/form'">글쓰기</button>
+
+<c:choose>
+	<c:when test="${ not empty sessionScope.user_seq}">
+  		<button class="btn btn-primary" style="background-color: #91ACCC; font-size: 15px; width: 80px;" type="button" onClick="location.href='/board/form'">글쓰기</button>
+	</c:when>
+	<c:otherwise>
+  		<button class="btn btn-primary" disabled="disabled" style="background-color: #91ACCC; font-size: 15px; width: 80px;" type="button" onClick="location.href='/board/form'">글쓰기</button>
+	</c:otherwise>
+</c:choose>
 </div>
 	</div>
 <%@include file="../common/footer.jsp" %>
