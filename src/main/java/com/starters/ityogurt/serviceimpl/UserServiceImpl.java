@@ -21,11 +21,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDAO dao;
 
-    @Override
-    public List<UserDTO> getAllUserlist() {
-        return dao.getAllUserlist();
-    }
-
 	  @Autowired
 	  EmailServiceImpl emailService;
 
@@ -64,10 +59,10 @@ public class UserServiceImpl implements UserService {
 		  return dao.getUserByUserEmail(email);
 	  }
     
-    @Override
-    public int setIsPassByUserSeq(int userSeq) {
-        return dao.setIsPassByUserSeq(userSeq);
-    }
+//    @Override
+//    public int setIsPassByUserSeq(int userSeq) {
+//        return dao.setIsPassByUserSeq(userSeq);
+//    }
         
     @Override
     public int setLastLoginDateByUserSeq(int userSeq) {

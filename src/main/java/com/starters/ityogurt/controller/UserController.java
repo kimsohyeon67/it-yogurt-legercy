@@ -58,4 +58,12 @@ public class UserController {
         mv.setViewName("user/verify");
         return mv;
     }
+    
+    @GetMapping("/myPage/{user_seq}")
+    public String myPage(@PathVariable("user_seq") String user_seq) {
+//    	ModelAndView mv = new ModelAndView();
+//    	System.out.println(user_seq);
+//    	mv.setViewName("user/myPage");
+        return "user/myPage";
+    }
 }

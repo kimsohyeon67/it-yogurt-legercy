@@ -73,6 +73,7 @@ public class QuizController {
 		
 		//이미 insert된 내용이 있는지 확인하기
 		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
+		System.out.println("user"+userSeq);
 		int choiceRecord = learnRecordService.getUserChoice(userSeq, quizSeq[0], quizSeq[1], quizSeq[2]); //해당 유저 번호의 총 갯수 가져오기
 		System.out.println("유저 푼 문제 수"+choiceRecord);
 		

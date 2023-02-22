@@ -83,7 +83,7 @@ public class KnowledgeController {
 
 	// 게시판 리스트 화면
 	@GetMapping("/list")
-	public ModelAndView boardList(@RequestParam("category") String category, Criteria cri) throws Exception {
+	public ModelAndView boardList(@RequestParam("category") String category, Criteria cri, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		Paging paging = new Paging();
 		int userSeq = 2;
@@ -95,7 +95,7 @@ public class KnowledgeController {
 		paging.setTotalCount(totalCnt);
 
 		Map<Object, Object> map = new HashMap<>();
-		map.put("userSeq", userSeq);
+//		map.put("userSeq", userSeq);
 		map.put("category", category);
 		map.put("limit", limit);
 		List<KnowledgeDTO> knowledgeList = service.getList(map);

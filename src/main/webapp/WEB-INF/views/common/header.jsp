@@ -17,7 +17,7 @@
             </li>
             <c:if test="${not empty sessionScope.user_seq}">
                 <li id="nav-menu-mypage">
-                    마이 페이지
+                    <a href="<%=request.getContextPath()%>/myPage/${sessionScope.user_seq}" style="text-decoration-line: none; color:white;">마이 페이지</a>
                 </li>
             </c:if>
         </ul>
