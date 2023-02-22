@@ -15,9 +15,9 @@
 <title>정답 보기</title>
 
 </head>
+<%@include file="../common/nav.jsp"%>
 <body>
-	<div class="container">
-		<%@include file="../common/header.jsp"%>
+<div class="container">
 		<div class="content">
 			<div>
 				<table>
@@ -70,7 +70,7 @@
 							</table>
 					</div><!-- 전체 div -->
 		</div><!-- content -->
-		<%@include file="../common/footer.jsp"%>
 	</div>
 </body>
+<%@include file="../common/footer.jsp"%>
 </html>

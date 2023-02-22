@@ -15,7 +15,6 @@
     #detailTbl {
         margin-top: 20%;
     }
-
 </style>
 <%@include file="../common/nav.jsp"%>
 <body>
@@ -49,6 +48,6 @@
         </form>
     </div>
 </div>
-<%@include file="../common/footer1.jsp"%>
+<%@include file="../common/footer.jsp"%>
 </body>
 </html>
