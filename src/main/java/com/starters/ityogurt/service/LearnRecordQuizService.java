@@ -5,5 +5,6 @@ import java.util.List;
 
 public interface LearnRecordQuizService {
 
-	List<LearnRecordQuizDTO> getWrongAnswerByUser(String userSeq, String start, String end);
+	List<LearnRecordQuizDTO> getWrongAnswerByUser(int userSeq, int start, int limit);
+	int getWrongAnswerCountByUser(int userSeq);
 }

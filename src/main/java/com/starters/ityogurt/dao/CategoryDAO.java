@@ -13,6 +13,6 @@ public interface CategoryDAO {
 
 	int countAllSub();
 	List<CategoryDTO> getCategoryByType(String type, String typeValue);
-	CategoryDTO getCategoryByAllType(String main, String middle, String sub);
+	CategoryDTO getCategoryByAllType(CategoryDTO categoryDTO);
 
 }

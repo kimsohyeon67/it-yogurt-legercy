@@ -15,7 +15,12 @@ public class LearnRecordQuizServiceImpl implements LearnRecordQuizService {
 	LearnRecordQuizDAO dao;
 
 	@Override
-	public List<LearnRecordQuizDTO> getWrongAnswerByUser(String userSeq, String start, String end) {
-		return dao.getWrongAnswerByUser(userSeq, start, end);
+	public List<LearnRecordQuizDTO> getWrongAnswerByUser(int userSeq, int start, int limit) {
+		return dao.getWrongAnswerByUser(userSeq, start, limit);
+	}
+
+	@Override
+	public int getWrongAnswerCountByUser(int userSeq) {
+		return dao.getWrongAnswerCountByUser(userSeq);
 	}
 }

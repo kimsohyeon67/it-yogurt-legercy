@@ -1,5 +1,7 @@
 package com.starters.ityogurt.serviceimpl;
 
+import com.starters.ityogurt.util.DateUtil;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,41 +14,63 @@ import com.starters.ityogurt.util.Criteria;
 
 @Service("userservice")
 public class UserServiceImpl implements UserService {
-	
-	@Autowired
-	UserDAO dao;
-	
-	@Override
-	public List<UserDTO> getAllUserlist(){
-		return dao.getAllUserlist();
-	}
-	@Override
-	public List<UserDTO> getAllUserlistLimit(Criteria cri){
-		return dao.getAllUserlistLimit(cri);
-	}
-	@Override
-	public int countAllUser(){
-		return dao.countAllUser();
-	}
 
-	@Override
-	public void deleteUser(int userSeq) {
-		dao.deleteUser(userSeq);
-	}
+    @Autowired
+    UserDAO dao;
 
-	@Override
-	public int insertUser(UserDTO dto){
-		return dao.insertUser(dto);
-	}
+    @Override
+    public List<UserDTO> getAllUserlist() {
+        return dao.getAllUserlist();
+    }
 
-	@Override
-	public UserDTO getUserByUserEmail(String email) {
-		return dao.getUserByUserEmail(email);
-	}
+    @Override
+    public List<UserDTO> getAllUserlistLimit(Criteria cri) {
+        return dao.getAllUserlistLimit(cri);
+    }
 
-	@Override
-	public int setIsPassByUserSeq(int userSeq) {
-		return dao.setIsPassByUserSeq(userSeq);
-	}
+    @Override
+    public int countAllUser() {
+        return dao.countAllUser();
+    }
+
+    @Override
+    public void deleteUser(int userSeq) {
+        dao.deleteUser(userSeq);
+    }
+
+    @Override
+    public int insertUser(UserDTO dto) {
+        return dao.insertUser(dto);
+    }
+
+    @Override
+    public UserDTO getUserByUserEmail(String email) {
+        return dao.getUserByUserEmail(email);
+    }
+
+    @Override
+    public int setIsPassByUserSeq(int userSeq) {
+        return dao.setIsPassByUserSeq(userSeq);
+    }
+
+    @Override
+    public int setAttendanceByUserSeq(UserDTO user) {
+        DateUtil diff = new DateUtil();
+        try {
+            String afterDay = diff.afterOneDay(user.getLastloginDate(), 1);
+            Boolean current = afterDay.split(" ")[0].equals(user.getLastloginDate().split(" ")[0]);
+            int attendance = current ? user.getAttendance() + 1 : 0;
+
+            return dao.setAttendanceByUserSeq(user.getUserSeq(), attendance);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int setLastLoginDateByUserSeq(int userSeq) {
+        return dao.setLastLoginDateByUserSeq(userSeq);
+    }
 
 }

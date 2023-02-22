@@ -33,8 +33,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDTO getCategoryByAllType(String main, String middle, String sub) {
-        return dao.getCategoryByAllType(main, middle, sub);
+    public CategoryDTO getCategoryByAllType(CategoryDTO categoryDTO) {
+        return dao.getCategoryByAllType(categoryDTO);
 
     }
 
