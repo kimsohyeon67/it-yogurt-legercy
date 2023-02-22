@@ -34,6 +34,7 @@
                             <!-- Post title-->
                             <c:set value="${oneBoard }" var="oneboard"/>
                             <c:set value="${categoryInfo }" var="categoryInfo"/>
+			                
                             <h1 class="fw-bolder mb-1">${oneboard.title }</h1>
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2"> <table> <tr><td>작성시간 </td><td> | ${oneboard.insertDate }</td></tr><tr><td> 작성자  </td><td> | ${oneboard.nickname }</td></tr></table> </div>
@@ -59,50 +60,62 @@
                     </section>
                     
                     <!-- Comments section-->
-                    <section class="mb-5">
+                    <section class="mb-5" id="comment">
                         <div class="card bg-light">
                             <div class="card-body">
                                 <!-- Comment form-->
-                                <form class="mb-4"><textarea name="content" class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+                                <form class="mb-4" action="/board/comment" method="post">
+                                	<input type="hidden" name="boardSeq" value=${oneboard.boardSeq }>
+                                	<input type="hidden" name="userSeq" value="${sessionScope.user_seq }">
+                                	<textarea name="content" class="form-control" rows="3" placeholder="댓글을 쓰려면 로그인이 필요합니다!"></textarea>
+			  						<button type="submit" class="btn me-md-2" style="background-color: #91ACCC;" >등록</button>
+                                </form>
                                 <!-- Comment with nested comments-->
-                                <div class="d-flex mb-4">
                                     <!-- Parent comment-->
+			                           <%--  ${commentList.content } --%>
+			                            <c:forEach items="${commentList }" var="List">
+                                <div class="d-flex mb-4">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+                                    	<div class="ms-3">
+			                				<div class="fw-bold">${List.nickname }</div>
+			                				${List.content}
+			                			</div>	
+			                		</div>	
+		
+			               				</c:forEach>
+                            
                                         <!-- Child comment 1-->
-                                        <div class="d-flex mt-4">
+                                    <!--     <div class="d-flex mt-4">
                                             <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                             <div class="ms-3">
                                                 <div class="fw-bold">Commenter Name</div>
                                                 And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!-- Child comment 2-->
-                                        <div class="d-flex mt-4">
+                                      <!--   <div class="d-flex mt-4">
                                             <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                             <div class="ms-3">
                                                 <div class="fw-bold">Commenter Name</div>
                                                 When you put money directly to a problem, it makes a good headline.
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <!-- Single comment-->
-                                <div class="d-flex">
+                                <!-- <div class="d-flex">
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     <div class="ms-3">
                                         <div class="fw-bold">Commenter Name</div>
                                         When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
                                     </div>
-                                </div>
-                            </div>
+                                </div> -->
+                   </section>
+                      <!--       </div>
                         </div>
-                    </section>
                 </div>
                
-        </div> 
+        </div>  -->
       
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
