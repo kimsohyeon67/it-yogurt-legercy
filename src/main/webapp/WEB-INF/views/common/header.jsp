@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<<style>
+<style>
 .dropdown{
   position : relative;
   display : inline-block;
@@ -37,9 +37,7 @@
             		<span class="dropbtn">매일지식</span>
 <%--                 <a href="<%=request.getContextPath()%>/knowledge/list" style="text-decoration-line: none; color:white;">매일지식</a> --%>
                 	<div class="dropdown-content">
-				        <a href="<%=request.getContextPath()%>/knowledge/list">프로그래밍언어</a>
-				        <a href="#">데이터베이스</a>
-				        <a href="#">-점검중-</a>
+				        <a href="<%=request.getContextPath()%>/knowledge/list/category">프로그래밍언어</a>
 			        </div>
 			        </div>
             </li>

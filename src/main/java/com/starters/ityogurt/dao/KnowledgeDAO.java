@@ -14,7 +14,7 @@ import com.starters.ityogurt.util.Criteria;
 @Repository
 public interface KnowledgeDAO {
 
-	List<KnowledgeDTO> getList(@Param("userSeq")int userSeq, @Param("limit")int limit);
+	List<KnowledgeDTO> getList(Map<Object, Object> map);
 
 	int getTotalCnt();
 
