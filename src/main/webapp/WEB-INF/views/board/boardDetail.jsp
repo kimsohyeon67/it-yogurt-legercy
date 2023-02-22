@@ -18,7 +18,7 @@
 
 </style>
 </head>
-<body>
+<body style="background-color: #F9F2ED">
 
 
 <div class="container">
