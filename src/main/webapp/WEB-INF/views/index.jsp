@@ -17,9 +17,17 @@
     <%@include file="common/header.jsp" %>
     <div class="content">
         <img id="logo" src="/image/logo.png">
-        <div class="button">
-            <div id="login" onclick="window.location.href='/user'">로그인</div>
-        </div>
+
+        <c:choose>
+            <c:when test="${not empty sessionScope.user_seq}">
+
+            </c:when>
+            <c:otherwise>
+                <div class="button">
+                    <div id="login" onclick="window.location.href='/user'">로그인</div>
+                </div>
+            </c:otherwise>
+        </c:choose>
     </div>
     <%@include file="common/footer.jsp" %>
 </div>

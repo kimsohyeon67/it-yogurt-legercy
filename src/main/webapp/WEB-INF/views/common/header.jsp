@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="header">
     <div id="title">
+
+
         <a href="<%=request.getContextPath()%>/" style="text-decoration-line: none; color:black;">IT Yogurt</a>
     </div>
     <div class="nav">
@@ -12,9 +14,11 @@
             <li id="nav-menu-quiz">
                 <a href="<%=request.getContextPath()%>/board/list" style="text-decoration-line: none; color:white;">게시판</a>
             </li>
-            <li id="nav-menu-mypage" hidden="hidden">
-                마이 페이지
-            </li>
+            <c:if test="${not empty sessionScope.user_seq}">
+                <li id="nav-menu-mypage">
+                    마이 페이지
+                </li>
+            </c:if>
         </ul>
     </div>
 </div>

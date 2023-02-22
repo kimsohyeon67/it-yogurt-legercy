@@ -23,4 +23,8 @@ public interface UserService {
 
 	int setIsPassByUserSeq(int userSeq);
 
+	int setAttendanceByUserSeq(UserDTO user) throws Exception;
+  
+	int setLastLoginDateByUserSeq(int userSeq);
+
 }
