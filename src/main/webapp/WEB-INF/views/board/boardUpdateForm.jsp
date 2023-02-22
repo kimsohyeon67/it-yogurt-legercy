@@ -37,7 +37,7 @@
                             <p>제목</p>
                             <h1 class="fw-bolder mb-1"><input type="text" class="fw-bolder mb-1" name="title" value="${oneBoard.title }"></h1>
                             <!-- Post meta content-->
-                            <div class="text-muted fst-italic mb-2"> <table> <tr><td> 작성자  </td><td> | 세션 유저</td></tr></table> </div>
+                            <div class="text-muted fst-italic mb-2"> <table> <tr><td> 작성자  </td><td> | ${oneBoard.nickname }</td></tr></table> </div>
                         </header>
                        
                         <section class="mb-5">

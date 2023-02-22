@@ -17,11 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dto.BoardDTO;
 import com.starters.ityogurt.dto.CategoryDTO;
+import com.starters.ityogurt.dto.UserDTO;
 import com.starters.ityogurt.service.BoardService;
 import com.starters.ityogurt.service.CategoryService;
 import com.starters.ityogurt.service.UserService;
 import com.starters.ityogurt.util.Criteria;
 import com.starters.ityogurt.util.Paging;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -98,8 +102,12 @@ public class BoardController {
 	 
 	 //게시글 업로드 폼
 	 @GetMapping("/form")
-	 public String boardInsertForm() {
-		return "board/boardForm";
+	 public String boardInsertForm(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+	    int userSeq = (int) session.getAttribute("user_seq");
+	    UserDTO userDto = userService.getUserByUserSeq(userSeq);
+	    session.setAttribute("sessionUserInfo", userDto);
+	    return "board/boardForm";
 	 }
 	 
 	 //게시글 업로드
