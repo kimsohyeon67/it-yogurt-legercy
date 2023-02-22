@@ -28,21 +28,21 @@
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 			<div id="tblDiv">
-			
 			<h3 style="text-align: center;">매일지식 목록</h3>
-			
-			<form action="<%=request.getContextPath()%>">
+			<!-- 검색을 위한 form -->
+			<form action="<%=request.getContextPath()%>/knowledge/searchResult">
+			<!-- 검색창 -->
 			<div id="searchDiv">
 			<input type="text" placeholder="검색어 입력" name="keyword" id="keyword">
                 <button type="submit" id="search">검색</button>
 			</div>	
-			
-			<select id="categoryChoice" onchange="changeFn()">
+			<!-- 카테고리 선택 -->
+			<select id="categoryChoice" onchange="changeCategory()">
 				<option value="all" >전체</option>
 				<option value="프로그래밍언어" >프로그래밍언어</option>
 				<option value="데이터베이스" >데이터베이스</option>
 			</select>
-			
+			<!-- 지식 목록 제목-->
 			<table id="listTbl">
 				<tr>
 					<th>번호</th>
@@ -52,9 +52,8 @@
 					<th>작성자</th>
 					<th>퀴즈풀러가기</th>
 				</tr>
-				
+				<!-- 지식 목록 내용 -->
 				<tbody class="listData">
-					
 					<c:forEach items="${knowledgeList }" var="list">
 					<c:set var="i" value="${i+1}"></c:set>
 					<tr class="tableList">
@@ -66,28 +65,28 @@
 						<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href='<%=request.getContextPath()%>/quiz/${list.knowSeq}'"></td>
 					</tr>
 					</c:forEach>
-					
 				</tbody>
 			</table>
-			
+			<!-- 페이징 -->
 			<div class="paging">
-	<nav aria-label="Page navigation example" style="margin: 10px;">
-			<ul class="pagination justify-content-center">
-	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(1); return false;" class="page-link">처음</a></li>
-	    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-	    	<c:choose>
-	    		<c:when test= "${num==1 }">
-	        		<li class="page-item active" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
-				</c:when>
-				<c:otherwise>
-	        		<li class="page-item" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
-				</c:otherwise>
-			</c:choose>	        
-	    </c:forEach>
-	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${maxpage});return false;" class="page-link">끝</a></li>
-			</ul>
-	</nav>
-	</div>
+				<nav aria-label="Page navigation example" style="margin: 10px;">
+					<ul class="pagination justify-content-center">
+			        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(1); return false;" class="page-link">처음</a></li>
+	   				
+	   				 <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+				    	<c:choose>
+				    		<c:when test= "${num==1 }">
+				        		<li class="page-item active" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
+							</c:when>
+							<c:otherwise>
+				        		<li class="page-item" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
+							</c:otherwise>
+						</c:choose>	        
+	    			 </c:forEach>
+	       			 <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${maxpage});return false;" class="page-link">끝</a></li>
+					</ul>
+				</nav>
+			</div><!-- 페이징 div -->
 			</form>
 		</div>
 		<%@include file="../common/footer.jsp"%>
@@ -97,30 +96,26 @@
 let params = (new URL(document.location)).searchParams;
 let currentCategory = params.get('category') || "";
 let category_list = {"all" : "전체","프로그래밍언어":"프로그래밍언어","데이터베이스":"데이터베이스"}
-
 $("#categoryChoice").val(currentCategory).prop("selected", true);
 
-
 //검색
-$("#search").click(function(e){
-        $("form").attr("action","/knowledge/searchResult");	
-});
+// $("#search").click(function(e){
+//         $("form").attr("action","/knowledge/searchResult");	
+// });
 
-function changeFn(){	
+// select태그 카테고리 변경시 발생하는 이벤트
+function changeCategory(){	
 	var choice  = document.getElementById("categoryChoice");
 	var category = (choice.value);
 	location.href="${pageContext.request.contextPath}/knowledge/list?category="+category;
 	
 }
 
+//페이징
 function go_page(pageNum){
 	console.log("click");
 	var choice  = document.getElementById("categoryChoice");
 	var category = (choice.value);
-	
-// 	alert(window.location.pathname.split("/"));
-	
-// 	alert(choice.value);
 	
 	$.ajax({
 		url: "${pageContext.request.contextPath}/knowledge/list/a?category="+category+"&page="+pageNum,
@@ -136,7 +131,7 @@ function go_page(pageNum){
 				content +=	'<td>'+ list[i].insertDate +'</td>';
 				content +=	'<td>'+ list[i].viewcount +'</td>';
 				content +=	'<td> 관리자 </td>';
-				content +=	'<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href=\'/quiz/'+list[i].knowSeq+'\'"></td>';														
+				content +=	'<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href=\'/quiz/'+list[i].knowSeq+'\'"></td>';												
 				content += '</tr>';
 			}
 			console.log(content);
