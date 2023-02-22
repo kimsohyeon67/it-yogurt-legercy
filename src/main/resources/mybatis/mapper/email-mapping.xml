@@ -26,11 +26,16 @@
         ORDER BY SUB
     </select>
 
+<!--    <select id="getSendDetail" parameterType="int" resultType="Map">-->
+<!--        SELECT sub, category_seq-->
+<!--        FROM category-->
+<!--        WHERE (sub, send_date) IN (SELECT sub, MIN(send_date) FROM category where detail IS NOT NULL GROUP BY sub ORDER BY category_seq)-->
+<!--        order BY send_date, category_seq-->
+<!--    </select>-->
     <select id="getSendDetail" parameterType="int" resultType="Map">
         SELECT sub, category_seq
-        FROM category
-        WHERE (sub, send_date) IN (SELECT sub, MIN(send_date) FROM category where detail IS NOT NULL GROUP BY sub ORDER BY category_seq)
-        order BY send_date, category_seq
+        FROM (SELECT sub, category_seq, send_date, ROW_NUMBER() over(PARTITION BY sub ORDER BY send_date, category_seq) AS num FROM category WHERE detail IS NOT NULL) AS imsi
+        WHERE num=1;
     </select>
 
 

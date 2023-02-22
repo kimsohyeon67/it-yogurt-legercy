@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,17 +30,25 @@ public class EmailConfig {
     @Autowired
     CategoryService categoryService;
 
+    @Autowired
+    UserService userService;
+
+    @Value("${detail.path}")
+    private String detailPath;
+
+    @Value("${check.path}")
+    private String checkPath;
+
     @Value("${live.ip}")
     private String liveIp;
 
-    private KnowledgeDTO knowledgeByCategorySeq;
-
     //이메일 전송 API
     // @RequestMapping("/aws/email")
-    @Scheduled(cron = "0 3 10 * * ?", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 31 14 * * ?", zone = "Asia/Seoul")
     public String sendEmail() throws Exception {
         // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
         List<Map<String, Object>> subEmailMap = emailService.getEmailAndSub();
+        System.out.println("subEmailMap : " + subEmailMap);
 
         // 총 소분류의 갯수이다.
         int count = categoryService.countAllSub();
@@ -47,11 +56,12 @@ public class EmailConfig {
         // 소분류에서 어떤 상세분류를 보낼 것인지를 map에 담아 반환한다.
         // 가장 오래 전에 보냈으면서 가장 작은 번호 순이다.
         List<Map<String, Object>> sendDetailMap = emailService.getSendDetail(count);
+        System.out.println("sendDetailMap : " + sendDetailMap);
 
         // User의 이메일과 User가 선택한 소분류가 들어갈 map이다.
         Map<String, String> userMap = new HashMap<String, String>();
 
-        // category의 소분류와 상세번호가 들어갈 map이다.
+        // category의 소분류와 category_seq가 들어갈 map이다.
         Map<String, Integer> categoryMap = new HashMap<String, Integer>();
 
         // 보내질 카테고리 번호 List이다.
@@ -90,16 +100,18 @@ public class EmailConfig {
         System.out.println("userMap : " + userMap);
         System.out.println("categoryMap : " + categoryMap);
 
+        // 예외처리 해야 함 : 카테고리 18번에 퀴즈가 없다.
         categoryMap.forEach((key, value) -> {
+            System.out.println(value);
+            KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq(value);
+            System.out.println(knowledgeDTO);
+            System.out.println("getQuiz()" + quizService.getQuiz(17));
+            System.out.println("getQuiz()" + quizService.getQuiz(17).size());
+            emailService.send("오늘의 지식은 " + knowledgeDTO.getTitle() + "이야!",
+                    headerText() + knowledgeDTO.getContent() + buttonText(knowledgeDTO.getKnowSeq()) + footerText(),
+                    (List<String>) subEmailList.get(key));
             emailService.updateSendDate(value);
-            KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq((Integer) value);
-            emailService.send(knowledgeDTO.getTitle(),
-                       headerText() + knowledgeDTO.getContent() + buttonText(knowledgeDTO.getKnowSeq()) + footerText(),
-                              (List<String>) subEmailList.get(key));
         });
-
-        // emailService.send(subject, content, javaReceivers);      // 제목, 컨텐츠, 받는 사람이 들어간다.
-
         return "true";
     }
 
@@ -114,12 +126,22 @@ public class EmailConfig {
     }
 
     public String buttonText(@RequestParam(value = "knowSeq")int knowSeq) {
-        String buttonText = "<div style=\"text-align: center;\"><br>\n" +
-                "       <a href='http://localhost:8818/user/check/"+knowSeq+"'>\n" +
-                "               <button class=\"btn\" style=\"width: 200px; background-color: #86b7fe; padding: 15px 30px;\n" +
-                "                border-radius: 5px; color:white; font-size: 18px; font-weight: bold; cursor: pointer;\" >문제 풀기!</button>\n" +
-                "       </a><br>\n" +
-                "</div>";
+        String buttonText = null;
+        if (quizService.getQuiz(knowSeq).size() == 0) {
+            buttonText = "<div style=\"text-align: center;\"><br>\n" +
+                    "       <a href='http://localhost:8818"+detailPath+knowSeq+"'>\n" +
+                    "               <button class=\"btn\" style=\"width: 250px; background-color: #86b7fe; padding: 15px 30px;\n" +
+                    "                border-radius: 5px; color:white; font-size: 18px; font-weight: bold; cursor: pointer;\" >웹사이트에서 보기!</button>\n" +
+                    "       </a><br>\n" +
+                    "</div>";
+        } else {
+            buttonText = "<div style=\"text-align: center;\"><br>\n" +
+                    "       <a href='http://localhost:8818"+checkPath+knowSeq+"'>\n" +
+                    "               <button class=\"btn\" style=\"width: 250px; background-color: #86b7fe; padding: 15px 30px;\n" +
+                    "                border-radius: 5px; color:white; font-size: 18px; font-weight: bold; cursor: pointer;\" >문제 풀기!</button>\n" +
+                    "       </a><br>\n" +
+                    "</div>";
+        }
         return buttonText;
     }
 
@@ -132,6 +154,14 @@ public class EmailConfig {
                 "</div>";
         return footerText;
     }
+
+    @GetMapping("user/email")
+    public String checkEmail(String email) {
+        userService.setIsPassByUserSeq(31);
+        return "true";
+    }
+
+
 
 }
 
