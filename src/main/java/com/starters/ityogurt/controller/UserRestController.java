@@ -67,7 +67,7 @@ public class UserRestController {
         return "로그인 성공";
     }
     
-    // 로그아웃
+    // 로그아웃 임시(작동은 하나 오류남)
     @GetMapping("/user/o")
     public void logout(HttpServletRequest request) {
     	HttpSession session = request.getSession();
