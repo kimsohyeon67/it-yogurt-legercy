@@ -59,4 +59,16 @@
 		UPDATE user SET is_pass=TRUE WHERE user_seq=#{userSeq};
 	</update>
 
+	<update id="setAttendanceByUserSeq" parameterType="int">
+    UPDATE user
+    SET attendance=#{attendance}
+    WHERE user_seq = #{userSeq};
+  </update>
+
+	<update id="setLastLoginDateByUserSeq" parameterType="int">
+		UPDATE user
+		SET lastlogin_date = NOW()
+		WHERE user_seq = #{userSeq};
+	</update>
+
 </mapper>

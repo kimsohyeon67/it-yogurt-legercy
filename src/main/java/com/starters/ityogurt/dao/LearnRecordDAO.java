@@ -22,5 +22,6 @@ public interface LearnRecordDAO {
 
 	int getUserChoice(@Param("userSeq") int userSeq, @Param("quizSeq1") int quizSeq1, @Param("quizSeq2") int quizSeq2, @Param("quizSeq3") int quizSeq3);
 
+	int deleteLearnDataByLearnSeq(int learnSeq);
 	
 }

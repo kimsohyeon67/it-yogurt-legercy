@@ -5,10 +5,12 @@ import com.starters.ityogurt.dto.UserDTO;
 import com.starters.ityogurt.error.ApiException;
 import com.starters.ityogurt.service.CategoryService;
 import com.starters.ityogurt.service.UserService;
+import com.starters.ityogurt.util.DateUtil;
 import com.starters.ityogurt.util.Encrypt;
 import com.starters.ityogurt.error.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class UserRestController {
             throw new ApiException(ErrorCode.SIGNUP_INVALID_EMAIL);
         }
         CategoryDTO selectedCategory = categoryService.getCategoryByAllType(
-            categoryDTO.getMain(), categoryDTO.getMiddle(), categoryDTO.getSub());
+            categoryDTO);
 
         if (userDTO.getPassword() != null) {
             userDTO.setPassword(ConvertPassword(userDTO.getPassword()));
@@ -48,8 +50,6 @@ public class UserRestController {
     // 로그인
     @PostMapping("/user")
     public String Login(UserDTO dto, HttpServletRequest request) throws Exception {
-        String error = "";
-
         UserDTO result = userService.getUserByUserEmail(dto.getEmail());
         if (result == null) {
             throw new ApiException(ErrorCode.SIGNIN_INVALID_EMAIL);
@@ -64,6 +64,13 @@ public class UserRestController {
                 throw new ApiException(ErrorCode.SIGNIN_INVALID_PASSWORD);
             }
         }
+
+        userService.setAttendanceByUserSeq(result);
+        userService.setLastLoginDateByUserSeq(result.getUserSeq());
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user_seq", result.getUserSeq());
+
         return "로그인 성공";
     }
     

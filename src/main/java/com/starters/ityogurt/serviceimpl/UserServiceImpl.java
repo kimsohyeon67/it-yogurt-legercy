@@ -1,5 +1,7 @@
 package com.starters.ityogurt.serviceimpl;
 
+import com.starters.ityogurt.util.DateUtil;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,53 +17,85 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Service("userservice")
 public class UserServiceImpl implements UserService {
-	
-	@Autowired
-	UserDAO dao;
 
-	@Autowired
-	EmailServiceImpl emailService;
-	
-	@Override
-	public List<UserDTO> getAllUserlist(){
-		return dao.getAllUserlist();
-	}
-	@Override
-	public List<UserDTO> getAllUserlistLimit(Criteria cri){
-		return dao.getAllUserlistLimit(cri);
-	}
-	@Override
-	public int countAllUser(){
-		return dao.countAllUser();
-	}
+    @Autowired
+    UserDAO dao;
 
-	@Override
-	public void deleteUser(int userSeq) {
-		dao.deleteUser(userSeq);
-	}
+    @Override
+    public List<UserDTO> getAllUserlist() {
+        return dao.getAllUserlist();
+    }
 
-	@Override
-	public int insertUser(UserDTO dto){
-		return dao.insertUser(dto);
-	}
+	  @Autowired
+	  EmailServiceImpl emailService;
 
-	@Override
-	public UserDTO getUserByUserEmail(String email) {
-		return dao.getUserByUserEmail(email);
-	}
+ 	  @Override
+	  public List<UserDTO> getAllUserlist(){
+		  return dao.getAllUserlist();
+	  }
+    
+	  @Override
+	  public List<UserDTO> getAllUserlistLimit(Criteria cri){
+		  return dao.getAllUserlistLimit(cri);
+	  }
 
-	@Override
-	public UserDTO getUserByUserSeq(int userSeq) {
-		return dao.getUserByUserSeq(userSeq);
-	}
+	  @Override
+	  public int countAllUser(){
+		  return dao.countAllUser();
+	  }
 
-	@Override
-	public int setIsPassByUserSeq(int userSeq) {
-		List<String> userDto = new ArrayList<>();
-		userDto.add(getUserByUserSeq(userSeq).getEmail());
+	  @Override
+	  public void deleteUser(int userSeq) {
+		  dao.deleteUser(userSeq);
+	  }
 
-		String title = "It-Yogurt 인증 메일입니다.";
-		String content = "<div style=\"text-align : center;\">\n" +
+    @Override
+    public int insertUser(UserDTO dto) {
+        return dao.insertUser(dto);
+    }
+
+	  @Override
+	  public UserDTO getUserByUserSeq(int userSeq) {
+		  return dao.getUserByUserSeq(userSeq);
+	  }
+
+	  @Override
+	  public UserDTO getUserByUserEmail(String email) {
+		  return dao.getUserByUserEmail(email);
+	  }
+    
+    @Override
+    public int setIsPassByUserSeq(int userSeq) {
+        return dao.setIsPassByUserSeq(userSeq);
+    }
+        
+    @Override
+    public int setLastLoginDateByUserSeq(int userSeq) {
+        return dao.setLastLoginDateByUserSeq(userSeq);
+    }
+
+    @Override
+    public int setAttendanceByUserSeq(UserDTO user) {
+        DateUtil diff = new DateUtil();
+        try {
+            String afterDay = diff.afterOneDay(user.getLastloginDate(), 1);
+            Boolean current = afterDay.split(" ")[0].equals(user.getLastloginDate().split(" ")[0]);
+            int attendance = current ? user.getAttendance() + 1 : 0;
+
+            return dao.setAttendanceByUserSeq(user.getUserSeq(), attendance);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+	  public int setIsPassByUserSeq(int userSeq) {
+		  List<String> userDto = new ArrayList<>();
+		  userDto.add(getUserByUserSeq(userSeq).getEmail());
+
+		  String title = "It-Yogurt 인증 메일입니다.";
+		  String content = "<div style=\"text-align : center;\">\n" +
 				"  <h1>IT-Yogurt!</h1>\n" +
 				"  <br><br><hr><br><br>\n" +
 				"  <h2>It-Yogurt 인증 메일입니다.</h2>\n" +
@@ -80,9 +114,8 @@ public class UserServiceImpl implements UserService {
 				"  </div>\n" +
 				"</div>";
 
-		emailService.send(title, content, userDto);
+		  emailService.send(title, content, userDto);
 
-		return dao.setIsPassByUserSeq(userSeq);
-	}
-
+		  return dao.setIsPassByUserSeq(userSeq);
+	  }
 }

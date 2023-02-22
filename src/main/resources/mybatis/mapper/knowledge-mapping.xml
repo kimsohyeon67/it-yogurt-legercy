@@ -4,8 +4,19 @@
 
 <mapper namespace="com.starters.ityogurt.dao.KnowledgeDAO">
 
-<select id="getList" resultType="knowledgedto" parameterType="int">
-	select * from knowledge where user_seq=#{userSeq} order by know_seq limit #{limit},9
+<select id="getList" resultType="knowledgedto" parameterType="hashmap">
+	select * from knowledge 
+	where user_seq=#{userSeq} 
+	<choose>
+		<when test='category.equals("category") || category.equals("all")'>
+			and category_seq in (select category_seq from category where middle in(#{category},'데이터베이스','프로그래밍언어'))
+			order by know_seq limit #{limit},9
+		</when>
+		<otherwise>
+			and category_seq in (select category_seq from category where middle like #{category})
+			order by know_seq limit #{limit},9
+		</otherwise>
+	</choose>
 </select>
 
 <select id="getTotalCnt" resultType="int">

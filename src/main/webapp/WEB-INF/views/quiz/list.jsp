@@ -63,6 +63,7 @@
 	</div>
 	
 <script>
+//수정 필요
 	$(document).ready(function() {
 		//해설  n
 		$("input:submit").click(function(e) {
@@ -82,7 +83,7 @@
 			if(chk3 != undefined){
 				answer+=1;
 			}
-			
+			 
 			//문제 길이(3)와 체크된 값(answer) 길이가 동일하지 않으면 체크되지 않은 값이 있다는 것 
 			if(length != answer){
 				alert('답을 체크하세요.');

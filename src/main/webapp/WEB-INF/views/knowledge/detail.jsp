@@ -15,8 +15,10 @@
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
+				<!-- 퀴즈 푸는 화면 이동 form -->
 				<form action=" <%=request.getContextPath()%>/quiz/${knowSeq}">
 					<div>
+						<!-- 퀴즈 목록 테이블 -->
 						<table id="detailTbl">
 						<div>
 							<tr>
@@ -35,13 +37,6 @@
 							<tr>
 								<td class="detailTd"><input type="submit" value="퀴즈 풀러가기" id="subBtn">
 								<input type="hidden" value="${knowSeq}" name="knowSeq"></td>
-								<td><input type="button" value="좋아요"></td>
-							</tr>
-							<tr>
-							<td>
-								<input type="text" placeholder="댓글을 입력하세요.">
-								<input type="button" value="등록">
-							</td>
 							</tr>
 						</table>
 					</div>

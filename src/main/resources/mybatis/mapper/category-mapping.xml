@@ -27,7 +27,7 @@
 	</select>
 
 <!-- 사용자가 선택한 매일지식 카테고리 Seq 찾기	-->
-	<select id="getCategoryByAllType" resultType="categorydto">
+	<select id="getCategoryByAllType" resultType="categorydto" parameterType="categorydto">
 		SELECT * FROM category WHERE main = #{main} AND middle = #{middle} AND sub = #{sub} AND detail IS NULL;
 	</select>
 

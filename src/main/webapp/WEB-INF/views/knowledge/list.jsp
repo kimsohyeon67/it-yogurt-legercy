@@ -28,14 +28,21 @@
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 			<div id="tblDiv">
-			
 			<h3 style="text-align: center;">매일지식 목록</h3>
-			
+			<!-- 검색을 위한 form -->
 			<form action="<%=request.getContextPath()%>/knowledge/searchResult">
+			<!-- 검색창 -->
 			<div id="searchDiv">
 			<input type="text" placeholder="검색어 입력" name="keyword" id="keyword">
                 <button type="submit" id="search">검색</button>
 			</div>	
+			<!-- 카테고리 선택 -->
+			<select id="categoryChoice" onchange="changeCategory()">
+				<option value="all" >전체</option>
+				<option value="프로그래밍언어" >프로그래밍언어</option>
+				<option value="데이터베이스" >데이터베이스</option>
+			</select>
+			<!-- 지식 목록 제목-->
 			<table id="listTbl">
 				<tr>
 					<th>번호</th>
@@ -45,15 +52,12 @@
 					<th>작성자</th>
 					<th>퀴즈풀러가기</th>
 				</tr>
-				
-				<%-- <c:forEach items="${knowledgeList }" var="list">
-					<tr id="id"> --%>
-
+				<!-- 지식 목록 내용 -->
 				<tbody class="listData">
-					
 					<c:forEach items="${knowledgeList }" var="list">
+					<c:set var="i" value="${i+1}"></c:set>
 					<tr class="tableList">
-						<td>${list.knowSeq}</td>
+						<td>${i}</td>
 						<td><a href="<%=request.getContextPath()%>/knowledge/detail/${list.knowSeq}">${list.title}</a></td>
 						<td>${list.insertDate }</td>
 						<td>${list.viewcount }</td>
@@ -61,46 +65,60 @@
 						<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href='<%=request.getContextPath()%>/quiz/${list.knowSeq}'"></td>
 					</tr>
 					</c:forEach>
-					
 				</tbody>
 			</table>
-			
+			<!-- 페이징 -->
 			<div class="paging">
-	<nav aria-label="Page navigation example" style="margin: 10px;">
-			<ul class="pagination justify-content-center">
-	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(1); return false;" class="page-link">처음</a></li>
-	    <%-- <c:if test="${paging.prev}"> --%>
-<%-- 	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.startPage-1});" class="page-link">이전</a></li> --%>
-	   <%--  </c:if> --%>
-	    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-	    	<c:choose>
-	    		<c:when test= "${num==1 }">
-	        		<li class="page-item active" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
-				</c:when>
-				<c:otherwise>
-	        		<li class="page-item" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
-				</c:otherwise>
-			</c:choose>	        
-	    </c:forEach>
-	    <%-- <c:if test="${paging.next && paging.endPage>0}"> --%>
-<%-- 	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${paging.endPage+1});return false;" class="page-link">다음</a></li> --%>
-		 <%--</c:if> --%>
-	        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${maxpage});return false;" class="page-link">끝</a></li>
-			</ul>
-	</nav>
-	</div>
+				<nav aria-label="Page navigation example" style="margin: 10px;">
+					<ul class="pagination justify-content-center">
+			        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(1); return false;" class="page-link">처음</a></li>
+	   				
+	   				 <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+				    	<c:choose>
+				    		<c:when test= "${num==1 }">
+				        		<li class="page-item active" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
+							</c:when>
+							<c:otherwise>
+				        		<li class="page-item" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
+							</c:otherwise>
+						</c:choose>	        
+	    			 </c:forEach>
+	       			 <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${maxpage});return false;" class="page-link">끝</a></li>
+					</ul>
+				</nav>
+			</div><!-- 페이징 div -->
 			</form>
 		</div>
 		<%@include file="../common/footer.jsp"%>
 		</div>
 	</div>
 <script>
+let params = (new URL(document.location)).searchParams;
+let currentCategory = params.get('category') || "";
+let category_list = {"all" : "전체","프로그래밍언어":"프로그래밍언어","데이터베이스":"데이터베이스"}
+$("#categoryChoice").val(currentCategory).prop("selected", true);
 
+//검색
+// $("#search").click(function(e){
+//         $("form").attr("action","/knowledge/searchResult");	
+// });
+
+// select태그 카테고리 변경시 발생하는 이벤트
+function changeCategory(){	
+	var choice  = document.getElementById("categoryChoice");
+	var category = (choice.value);
+	location.href="${pageContext.request.contextPath}/knowledge/list?category="+category;
+	
+}
+
+//페이징
 function go_page(pageNum){
 	console.log("click");
+	var choice  = document.getElementById("categoryChoice");
+	var category = (choice.value);
 	
 	$.ajax({
-		url: "${pageContext.request.contextPath}/knowledge/list/a?page="+pageNum,
+		url: "${pageContext.request.contextPath}/knowledge/list/a?category="+category+"&page="+pageNum,
 		type: "GET",
 		dataType: "json",
 		success: function(result){
@@ -108,12 +126,12 @@ function go_page(pageNum){
 			let content = '';
 			for(let i=0;i<list.length;i++){
 				content += '<tr>';
-				content +=	'<td>'+ list[i].knowSeq +'</td>';
+				content +=	'<td>'+ (i+1) +'</td>';
 				content += '<td><a href="${pageContext.request.contextPath}/knowledge/detail/'+list[i].knowSeq+'\">' + list[i].title +'</a></td>';
 				content +=	'<td>'+ list[i].insertDate +'</td>';
 				content +=	'<td>'+ list[i].viewcount +'</td>';
 				content +=	'<td> 관리자 </td>';
-				content +=	'<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href=\'/quiz/'+list[i].knowSeq+'\'"></td>';														
+				content +=	'<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href=\'/quiz/'+list[i].knowSeq+'\'"></td>';												
 				content += '</tr>';
 			}
 			console.log(content);
@@ -128,9 +146,6 @@ function go_page(pageNum){
 				content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page(1); return false;" class="page-link">처음</a></li>';
 				
 				
-				/* if(paging.prev){ */
-// 					content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page('+(Number(paging.startPage)-1)+');return false;" class="page-link">이전</a></li>';
-				/* } */
 				for (let num = Number(paging.startPage) ; num <=Number(paging.endPage); num++){
 					if (num == Number(paging.cri.page)){
 						content2 += '<li class="page-item active" style="pagination-bg: #91ACCC"><span><a href=\'javascript:void(0);\' onclick="go_page('+num+'); return false;" class="page-link">'+ num +'</a></span></li>';
@@ -156,104 +171,6 @@ function go_page(pageNum){
 	});
 }
 
-// function pageClick(){
-// 	let page = i;
-// 	alert(page);
-	
-// 	  $.ajax({
-// 	    url: "${pageContext.request.contextPath}/list/" + page,
-// 	    type: "get",
-// 	    dataType: "json",
-// 	    success: function(result) {
-// 	    	  let list = result.knowledgeList;
-// 	    	  let $tbody = $('#listTbl > tbody');
-// 	    	  $tbody.empty(); // 기존 데이터를 모두 삭제
-
-// 	    	  for (let i = 0; i < list.length; i++) {
-// 	    	    $tbody.append(
-// 	    	      `<tr>
-// 	    	        <td>${list[i].knowSeq}</td>
-// 	    	        <td><a href="${pageContext.request.contextPath}/detail/${list[i].knowSeq}">${list[i].title}</a></td>
-// 	    	        <td>${list[i].insertDate}</td>
-// 	    	        <td>${list[i].viewcount}</td>
-// 	    	        <td>관리자</td>
-// 	    	        <td><input type="button" value="퀴즈 풀러가기" onClick="location.href='${pageContext.request.contextPath}/quiz/${list[i].knowSeq}'"></td>
-// 	    	      </tr>`
-// 	    	    );
-// 	    	  }
-
-// // 	    	  // 페이지 버튼 클릭 시 해당 버튼에 'active' 클래스 추가
-// // 	    	  $('.pagination').find('li').removeClass('active');
-// // 	    	  $(this).parent().addClass('active');
-// 	    	},
-// 	    error: function(){
-// 	      console.log('error');
-// 	    }
-// 	  });
-// 	}
-// })
-	
-
-
-
-
-// var pageNum = 1;
-// console.log('전역변수 페이지 넘버:'+pageNum);
-
-// function getReply(){
-// 	console.log("getReply들어옴:${dto.placeName}")
-// 	$.ajax({
-// 		url:"${pageContext.request.contextPath}/list?pageNum="+pageNum,
-// 		type : "get",		
-// 		dataType: "json",
-// 		success:function(list){
-// 			let html="";
-// 			list.foreach(function(data){
-// 				html+=data.knowSeq+"/"+data.title+"/"+data.insertDate+"/"+data.viewcount
-// 			});
-// 			if(pageNum ==1){
-// 				html +="<button disabled>&lt;</button>"
-// 			}else{
-// 				html +="<button onclick='getPageMinus()'>&lt;</button>"
-// 			}
-// 			if(list == ""){
-// 				html +="<button disabled>&lt;</button>"
-// 			}else{
-// 				html +="<button onclick='getPagePlus()'>&lt;</button>"
-// 			}
-// 			$("#reply").html(html)
-// 		}//success
-				
-// 	});
-// }
-
-
-// $(document).ready(function() {
-// 	$("#page").click(function(){
-// // 		var a = $('#page').val();
-// // 		console.log(a);
-		
-// 		$.ajax({
-// 			url : "${pageContext.request.contextPath}/list",
-// 			type : 'get',
-// 			data : {
-// 				page : "1"
-// 			},
-// 			success : function(data) {
-// 				alert(data.knowSeq);
-//             	alert(data.title); 
-//                 alert(data.insertDate);
-//                 alert(data.viewcount);		
-// 		     },
-// 			error : function() {
-// 				alert("error");
-// 			}
-// 		});
-		
-// // 		alert('페이징');
-// 	});
-
-// });	
 </script>
 </body>
 </html>

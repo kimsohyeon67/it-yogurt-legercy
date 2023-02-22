@@ -46,15 +46,17 @@
 										<div class="hideDiv">
 										<br><b>정답: ${list.answer }</b><br>
 										<c:forEach items="${learnList}" var="learn" begin="${i-1}" end="${i-1}">
-												<br><b>내가 입력한 답: ${learn.userChoice}</b><br>
+												
 												
 												<!-- isRight가 1이면 정답 0이면 오답 -->
 												<c:choose>
 													<c:when test="${learn.isRight == 1}">
-														<br>정답입니다.<br>
+														<br>내가 입력한 답: <b style="color:blue;">${learn.userChoice}<br>
+														<br>정답입니다.</b><br>
 													</c:when>
 													<c:otherwise>
-														<br>틀렸습니다.<br>
+														<br>내가 입력한 답: <b style="color:red;">${learn.userChoice}<br>
+														<br>틀렸습니다.</b><br>
 													</c:otherwise>
 												</c:choose>
 											</c:forEach>
