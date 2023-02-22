@@ -44,7 +44,7 @@ public class EmailConfig {
 
     //이메일 전송 API
     // @RequestMapping("/aws/email")
-    @Scheduled(cron = "0 31 14 * * ?", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 53 14 * * ?", zone = "Asia/Seoul")
     public String sendEmail() throws Exception {
         // 유저의 이메일과 유저가 선택한 소분류를 map에 담은 것을 반환한다.
         List<Map<String, Object>> subEmailMap = emailService.getEmailAndSub();
@@ -102,11 +102,7 @@ public class EmailConfig {
 
         // 예외처리 해야 함 : 카테고리 18번에 퀴즈가 없다.
         categoryMap.forEach((key, value) -> {
-            System.out.println(value);
             KnowledgeDTO knowledgeDTO = knowledgeService.getKnowledgeByCategorySeq(value);
-            System.out.println(knowledgeDTO);
-            System.out.println("getQuiz()" + quizService.getQuiz(17));
-            System.out.println("getQuiz()" + quizService.getQuiz(17).size());
             emailService.send("오늘의 지식은 " + knowledgeDTO.getTitle() + "이야!",
                     headerText() + knowledgeDTO.getContent() + buttonText(knowledgeDTO.getKnowSeq()) + footerText(),
                     (List<String>) subEmailList.get(key));
@@ -154,14 +150,5 @@ public class EmailConfig {
                 "</div>";
         return footerText;
     }
-
-    @GetMapping("user/email")
-    public String checkEmail(String email) {
-        userService.setIsPassByUserSeq(31);
-        return "true";
-    }
-
-
-
 }
 
