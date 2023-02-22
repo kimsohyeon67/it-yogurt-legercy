@@ -1,9 +1,11 @@
 package com.starters.ityogurt.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.starters.ityogurt.dto.KnowledgeDTO;
 import com.starters.ityogurt.dto.QuizDTO;
+import com.starters.ityogurt.util.Criteria;
 
 public interface KnowledgeService {
 
@@ -22,6 +24,7 @@ public interface KnowledgeService {
 	List<KnowledgeDTO> getSearchList(String keyword);
   
 	KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq);
+
 
 
 }

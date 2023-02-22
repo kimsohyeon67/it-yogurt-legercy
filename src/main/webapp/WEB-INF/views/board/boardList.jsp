@@ -76,6 +76,7 @@ line-height: inherit;
 			
 	<div class="paging">
 	<nav aria-label="Page navigation example" style="margin: 10px;">
+			
 		<ul class="pagination justify-content-center">
 		<!-- 페이지 처음으로 가기 -->
 	        <li class="page-item">
@@ -101,6 +102,7 @@ line-height: inherit;
 			</c:choose>	        
 	    </c:forEach>
 	    <%-- <c:if test="${paging.next && paging.endPage>0}"> --%>
+
 	        <li class="page-item">
 	        	<a href='javascript:void(0);' onclick="go_page(${paging.endPage+1});return false;" class="page-link">
 	        		<i class="fas fa-angle-right"></i>
@@ -113,6 +115,7 @@ line-height: inherit;
 	        	</a>
 	        </li>
 		</ul>
+
 	</nav>
 	</div>
 	
@@ -126,9 +129,7 @@ line-height: inherit;
 
 <script>
 function go_page(pageNum){
-	
-	
-	
+
 	$.ajax({
 		url: "${pageContext.request.contextPath}/board/list/a?page="+pageNum,
 		type: "GET",
@@ -154,8 +155,7 @@ function go_page(pageNum){
 				content2 += '<nav aria-label="Page navigation example" style="margin: 10px;">';
 				content2 += '<ul class="pagination justify-content-center">';
 				content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page(1); return false;" class="page-link"><i class="fas fa-angle-double-left"></i></a></li>';
-				
-				
+								
 				/* if(paging.prev){ */
 					content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page('+(Number(paging.startPage)-1)+');return false;" class="page-link"><i class="fas fa-angle-left"></i></a></li>';
 				/* } */
@@ -169,6 +169,7 @@ function go_page(pageNum){
 					}
 				}
 				if (paging.next && paging.endPage>0){
+
 					content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page('+ (Number(paging.endPage)+1)+');return false;" class="page-link"><i class="fas fa-angle-right"></i></a></li>';
 				}
 				content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page('+ Number(result.maxPage) +');return false;" class="page-link"><i class="fas fa-angle-double-right"></i></a></li>';
@@ -183,6 +184,7 @@ function go_page(pageNum){
 		}
 	})
 }
+
 </script>
 
 <%-- 						"<tr id="+ajaxTr+">"+
