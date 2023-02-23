@@ -73,6 +73,7 @@ public class QuizController {
 		
 		//이미 insert된 내용이 있는지 확인하기
 		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
+		System.out.println("user"+userSeq);
 		int choiceRecord = learnRecordService.getUserChoice(userSeq, quizSeq[0], quizSeq[1], quizSeq[2]); //해당 유저 번호의 총 갯수 가져오기
 		System.out.println("유저 푼 문제 수"+choiceRecord);
 		
@@ -100,6 +101,9 @@ public class QuizController {
 	@GetMapping("/answerResult/{quizSeq1}/{quizSeq2}/{quizSeq3}/{knowSeq}")
 	public ModelAndView answerResult(@PathVariable("quizSeq1") int quizSeq1, @PathVariable("quizSeq2") int quizSeq2, @PathVariable("quizSeq3") int quizSeq3, @PathVariable("knowSeq") int knowSeq) {
 		ModelAndView mv = new ModelAndView();
+		//정답 갯수 가져오기
+//		int answerCnt = learnRecordService.getAnswerCnt(knowSeq);
+		
 		//답 보여줘야 하니 learn_record 불러오기
 		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
 		for(LearnRecordDTO d:learnList) {

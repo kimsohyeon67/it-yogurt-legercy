@@ -30,7 +30,7 @@
 						<c:set var="length" value="${fn:length(quizList) }" />
 							<input type="hidden" value="${list.knowSeq}" name="knowSeq">
 							<input type="hidden" value="${list.quizSeq}" name="quizSeq">
-							<input type="hidden" value="1" name="userSeq">
+							<input type="hidden" value="${sessionScope.user_seq}" name="userSeq">
 							<input type="hidden" value="${length}" name="length"><!-- 퀴즈 몇 개인지 -->
 							<c:set var="i" value="${i+1}" />
 						<table>

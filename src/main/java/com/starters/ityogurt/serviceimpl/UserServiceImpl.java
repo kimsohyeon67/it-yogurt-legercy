@@ -22,28 +22,29 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDAO dao;
 
-    @Autowired
-    EmailServiceImpl emailService;
 
-    @Override
-    public List<UserDTO> getAllUserlist() {
-        return dao.getAllUserlist();
-    }
+	  @Autowired
+	  EmailServiceImpl emailService;
 
-    @Override
-    public List<UserDTO> getAllUserlistLimit(Criteria cri) {
-        return dao.getAllUserlistLimit(cri);
-    }
+ 	  @Override
+	  public List<UserDTO> getAllUserlist(){
+		  return dao.getAllUserlist();
+	  }
+    
+	  @Override
+	  public List<UserDTO> getAllUserlistLimit(Criteria cri){
+		  return dao.getAllUserlistLimit(cri);
+	  }
 
-    @Override
-    public int countAllUser() {
-        return dao.countAllUser();
-    }
+	  @Override
+	  public int countAllUser(){
+		  return dao.countAllUser();
+	  }
 
-    @Override
-    public void deleteUser(int userSeq) {
-        dao.deleteUser(userSeq);
-    }
+	  @Override
+	  public void deleteUser(int userSeq) {
+		  dao.deleteUser(userSeq);
+	  }
 
     @Override
     public int insertUser(UserDTO dto) {
@@ -55,10 +56,15 @@ public class UserServiceImpl implements UserService {
         return dao.getUserByUserSeq(userSeq);
     }
 
-    @Override
-    public UserDTO getUserByUserEmail(String email) {
-        return dao.getUserByUserEmail(email);
-    }
+	  @Override
+	  public UserDTO getUserByUserEmail(String email) {
+		  return dao.getUserByUserEmail(email);
+	  }
+    
+//    @Override
+//    public int setIsPassByUserSeq(int userSeq) {
+//        return dao.setIsPassByUserSeq(userSeq);
+//    }
 
     @Override
     public int setLastLoginDateByUserSeq(int userSeq) {
