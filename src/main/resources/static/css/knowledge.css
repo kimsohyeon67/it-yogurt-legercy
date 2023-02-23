@@ -81,21 +81,33 @@ h3{
   border-color: #ccc;
 }
 
+#categoryDiv{
+	margin-bottom:10px;
+}
+
 /* detail */
 
-
-
-#subBtn, #knowList{
-  width: 250px;
-  height: 40px;
-  border-style: solid;
-  border-width: medium;
-  margin-top: 40px;
-  margin-left: 32%;
-  margin-bottom: 35px;
-  border-color: #91ACCC;
-  font-size: 20px;
+.detailInput{
+	width: 250px;
+    height: 40px;
+    border-style: solid;
+    border-width: medium;
+    margin: auto;
+    border-color: #91ACCC;
+    font-size: 20px;
 }
+
+/* #subBtn, #knowList{ */
+/*   width: 250px; */
+/*   height: 40px; */
+/*   border-style: solid; */
+/*   border-width: medium; */
+/*   margin-top: 40px; */
+/*   margin-left: 32%; */
+/*   margin-bottom: 35px; */
+/*   border-color: #91ACCC; */
+/*   font-size: 20px; */
+/* } */
 
 #category{
 	height:50px;

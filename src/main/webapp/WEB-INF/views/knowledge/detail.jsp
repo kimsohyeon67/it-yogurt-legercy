@@ -37,9 +37,11 @@
                         <td class="detailTd">${contents }</td>
                     </tr>
                     <tr>
-                        <td class="detailTd"><input type="submit" value="퀴즈 풀러가기" id="subBtn">
-                        <td class="detailTd"><input type="button" value="목록" id="knowList" onclick="goKnowList()">
-                            <input type="hidden" value="${knowSeq}" name="knowSeq"></td>
+                        <td class="detailTd" >
+	                        <input type="submit" value="퀴즈 풀러가기" id="subBtn" class="detailInput">
+	                        <input type="button" value="목록" id="knowList" class="detailInput" onclick="goKnowList()">
+                            <input type="hidden" value="${knowSeq}" name="knowSeq">
+                        </td>
                     </tr>
                 </table>
             </div>

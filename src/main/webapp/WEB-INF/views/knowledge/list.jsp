@@ -42,11 +42,13 @@
                 <button type="submit" id="search">검색</button>
 			</div>
 			<!-- 카테고리 선택 -->
+			<div id="categoryDiv">
 			<select id="categoryChoice" onchange="changeCategory()">
 				<option value="all" >전체</option>
 				<option value="프로그래밍언어" >프로그래밍언어</option>
 				<option value="데이터베이스" >데이터베이스</option>
 			</select>
+			</div>
 			<!-- 지식 목록 제목-->
 			<table id="listTbl">
 				<tr>
