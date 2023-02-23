@@ -1,5 +1,6 @@
 <%--<%@ include file="common/tag.jsp" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -30,7 +31,22 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/knowledge/list?category=all">매일지식</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/board/list">커뮤니티</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/myPage/${sessionScope.user_seq}">MyPage</a></li>
+                <c:choose>
+					<c:when test="${ sessionScope.user_seq eq 1 || sessionScope.user_seq eq 2 } ">	
+                		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/myPage/${sessionScope.user_seq}">MyPage</a></li>
+                	</c:when>
+					<c:otherwise>
+                		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/admin/page">회원관리</a></li>
+					</c:otherwise>
+				</c:choose>
+                <c:choose>
+					<c:when test="${ not empty sessionScope.user_seq}">	
+                		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/user/o" ><i class="fa-solid fa-right-from-bracket"></i></a></li>
+					</c:when>
+					<c:otherwise>
+                		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/user" ><i class="fa-solid fa-right-to-bracket"></i></a></li>
+            		</c:otherwise>
+				</c:choose>
             </ul>
         </div>
     </div>
