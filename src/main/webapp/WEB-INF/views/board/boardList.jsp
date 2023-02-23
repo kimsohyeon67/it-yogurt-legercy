@@ -14,6 +14,7 @@
      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 		    rel="stylesheet"/>
 <title> 커뮤니티 | 게시판 </title>
+
 <style>
 .tableList:hover {
 	background-color: #91ACCC;
@@ -41,12 +42,14 @@
 .fas {
 line-height: inherit;
 }
+.table {
+	margin-top: 20%;
+}
 </style>
 </head>
 <body>
-
+<%@include file="../common/nav.jsp"%>
 <div class="container">
-<%@include file="../common/header.jsp" %>
      <div class="form">
 		<h3 id="main" > 게시판 </h3> <br>
 		<table class="table">
@@ -131,7 +134,7 @@ line-height: inherit;
 </c:choose>
 </div>
 	</div>
-<%@include file="../common/footer.jsp" %>
+
 </div>
 </body>
 
@@ -242,5 +245,5 @@ $.ajax({
 },
 }
 </script> -->
-
+<%@include file="../common/footer.jsp" %>
 </html>

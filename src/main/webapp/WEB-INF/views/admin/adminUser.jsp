@@ -14,6 +14,7 @@
 
 <title> 관리자 | 유저관리 </title>
 </head>
+
 <style>
 .tableList:hover {
 	background-color: #91ACCC;
@@ -32,7 +33,6 @@
  font-weight:bold;
  background-color: #f1f1f1;
  border-color: #ccc;
- 
 }
 
 .page-link:focus, .page-link:hover {
@@ -41,12 +41,14 @@
   border-color: #ccc;
 }
 
+#user-form {
+	margin-top: 20%;
+}
 </style>
+<%@include file="../common/nav.jsp" %>
 <body>
-
 <div class="container">
-<%@include file="../common/header.jsp" %>
-    <div class="form">
+    <div class="form" id="user-form">
 		<button id="" onclick="location.href='/admin/user'">회원관리</button>
 		<button onclick="location.href='/admin/contents'">컨텐츠 관리</button> <br><br>
 		<h3 id="main" > 전체 회원 </h3> <br>
@@ -100,9 +102,10 @@
 	</nav>
 	</div>
 </div>
-<%@include file="../common/footer.jsp" %>
+
 </div>
 </body>
+<%@include file="../common/footer.jsp" %>
 <script>
 
 function clicked(clickedID,clickedName){

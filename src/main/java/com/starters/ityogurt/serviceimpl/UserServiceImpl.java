@@ -1,6 +1,7 @@
 package com.starters.ityogurt.serviceimpl;
 
 import com.starters.ityogurt.util.DateUtil;
+
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDAO dao;
+
 
 	  @Autowired
 	  EmailServiceImpl emailService;
@@ -49,10 +51,10 @@ public class UserServiceImpl implements UserService {
         return dao.insertUser(dto);
     }
 
-	  @Override
-	  public UserDTO getUserByUserSeq(int userSeq) {
-		  return dao.getUserByUserSeq(userSeq);
-	  }
+    @Override
+    public UserDTO getUserByUserSeq(int userSeq) {
+        return dao.getUserByUserSeq(userSeq);
+    }
 
 	  @Override
 	  public UserDTO getUserByUserEmail(String email) {
@@ -63,7 +65,7 @@ public class UserServiceImpl implements UserService {
 //    public int setIsPassByUserSeq(int userSeq) {
 //        return dao.setIsPassByUserSeq(userSeq);
 //    }
-        
+
     @Override
     public int setLastLoginDateByUserSeq(int userSeq) {
         return dao.setLastLoginDateByUserSeq(userSeq);
@@ -85,32 +87,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-	  public int setIsPassByUserSeq(int userSeq) {
-		  List<String> userDto = new ArrayList<>();
-		  userDto.add(getUserByUserSeq(userSeq).getEmail());
+    public int setIsPassByUserSeq(int userSeq) {
+        List<String> userDto = new ArrayList<>();
+        userDto.add(getUserByUserSeq(userSeq).getEmail());
 
-		  String title = "It-Yogurt 인증 메일입니다.";
-		  String content = "<div style=\"text-align : center;\">\n" +
-				"  <h1>IT-Yogurt!</h1>\n" +
-				"  <br><br><hr><br><br>\n" +
-				"  <h2>It-Yogurt 인증 메일입니다.</h2>\n" +
-				"  <br>\n" +
-				"	</div>\n" +
-				"	<div style=\"text-align: center;\"><br>\n" +
-				"  <a href='http://localhost:8818/user/verify/31'>\n" +
-				"    <button class=\"btn\" style=\"width: 200px; background-color: #86b7fe; padding: 15px 30px;\n" +
-				"                 border-radius: 5px; color:white; font-size: 18px; font-weight: bold; cursor: pointer;\" >이메일 인증하기</button>\n" +
-				"  </a><br><br>\n" +
-				"</div>\n" +
-				"<div class=\"footer\" style=\"text-align : center; background-color: #F9F2ED\">\n" +
-				"  <div class=\"info\" ><br>\n" +
-				"    ItYogurt / 대표: 김민지<br>\n" +
-				"    서울특별시 용산구 용산동2가 1 - 34<br><br><br><br>\n" +
-				"  </div>\n" +
-				"</div>";
+        String title = "It-Yogurt 인증 메일입니다.";
+        String content = "<div style=\"text-align : center;\">\n" +
+                "  <h1>IT-Yogurt!</h1>\n" +
+                "  <br><br><hr><br><br>\n" +
+                "  <h2>It-Yogurt 인증 메일입니다.</h2>\n" +
+                "  <br>\n" +
+                "	</div>\n" +
+                "	<div style=\"text-align: center;\"><br>\n" +
+                "  <a href='http://localhost:8818/user/verify/31'>\n" +
+                "    <button class=\"btn\" style=\"width: 200px; background-color: #86b7fe; padding: 15px 30px;\n" +
+                "                 border-radius: 5px; color:white; font-size: 18px; font-weight: bold; cursor: pointer;\" >이메일 인증하기</button>\n" +
+                "  </a><br><br>\n" +
+                "</div>\n" +
+                "<div class=\"footer\" style=\"text-align : center; background-color: #F9F2ED\">\n" +
+                "  <div class=\"info\" ><br>\n" +
+                "    ItYogurt / 대표: 김민지<br>\n" +
+                "    서울특별시 용산구 용산동2가 1 - 34<br><br><br><br>\n" +
+                "  </div>\n" +
+                "</div>";
 
-		  emailService.send(title, content, userDto);
+        emailService.send(title, content, userDto);
 
-		  return dao.setIsPassByUserSeq(userSeq);
-	  }
+        return dao.setIsPassByUserSeq(userSeq);
+    }
 }
