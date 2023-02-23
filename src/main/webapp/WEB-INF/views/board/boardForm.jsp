@@ -20,10 +20,10 @@
 }
 </style>
 </head>
+<%@include file="../common/nav.jsp" %>
 <body>
 
 <div class="container">
-<%@include file="../common/header.jsp" %>
 
 <div class="container mt-5">
             <div class="row">
@@ -78,7 +78,7 @@
 				<button type="submit" class="btn btn-primary" style="background-color: #91ACCC;">등록</button>
 			</form> -->
 	</div>
-<%@include file="../common/footer.jsp" %>
 </div>
 </body>
+<%@include file="../common/footer.jsp" %>
 </html>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" 
+<%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="../common/tag.jsp"%>
@@ -23,9 +23,14 @@
     </script>
 <title>매일지식 컨텐츠</title>
 </head>
+<style>
+	#tblDiv {
+		margin-top: 20%;
+	}
+</style>
+<%@include file="../common/nav.jsp"%>
 <body>
 	<div class="container">
-		<%@include file="../common/header.jsp"%>
 		<div class="content">
 			<div id="tblDiv">
 			<h3 style="text-align: center;">매일지식 목록</h3>
@@ -35,7 +40,7 @@
 			<div id="searchDiv">
 			<input type="text" placeholder="검색어 입력" name="keyword" id="keyword">
                 <button type="submit" id="search">검색</button>
-			</div>	
+			</div>
 			<!-- 카테고리 선택 -->
 			<select id="categoryChoice" onchange="changeCategory()">
 				<option value="all" >전체</option>
@@ -61,7 +66,7 @@
 						<td><a href="<%=request.getContextPath()%>/knowledge/detail/${list.knowSeq}">${list.title}</a></td>
 						<td>${list.insertDate }</td>
 						<td>${list.viewcount }</td>
-						<td>관리자</td>	
+						<td>관리자</td>
 						<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href='<%=request.getContextPath()%>/quiz/${list.knowSeq}'"></td>
 					</tr>
 					</c:forEach>
@@ -72,7 +77,7 @@
 				<nav aria-label="Page navigation example" style="margin: 10px;">
 					<ul class="pagination justify-content-center">
 			        <li class="page-item"><a href='javascript:void(0);' onclick="go_page(1); return false;" class="page-link">처음</a></li>
-	   				
+
 	   				 <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
 				    	<c:choose>
 				    		<c:when test= "${num==1 }">
@@ -81,7 +86,7 @@
 							<c:otherwise>
 				        		<li class="page-item" style="pagination-bg: #91ACCC"><span><a href='javascript:void(0);' onclick="go_page(${num}); return false;" class="page-link">${num}</a></span></li>
 							</c:otherwise>
-						</c:choose>	        
+						</c:choose>
 	    			 </c:forEach>
 	       			 <li class="page-item"><a href='javascript:void(0);' onclick="go_page(${maxpage});return false;" class="page-link">끝</a></li>
 					</ul>
@@ -89,7 +94,6 @@
 			</div><!-- 페이징 div -->
 			</form>
 		</div>
-		<%@include file="../common/footer.jsp"%>
 		</div>
 	</div>
 <script>
@@ -100,15 +104,15 @@ $("#categoryChoice").val(currentCategory).prop("selected", true);
 
 //검색
 // $("#search").click(function(e){
-//         $("form").attr("action","/knowledge/searchResult");	
+//         $("form").attr("action","/knowledge/searchResult");
 // });
 
 // select태그 카테고리 변경시 발생하는 이벤트
-function changeCategory(){	
+function changeCategory(){
 	var choice  = document.getElementById("categoryChoice");
 	var category = (choice.value);
 	location.href="${pageContext.request.contextPath}/knowledge/list?category="+category;
-	
+
 }
 
 //페이징
@@ -116,7 +120,7 @@ function go_page(pageNum){
 	console.log("click");
 	var choice  = document.getElementById("categoryChoice");
 	var category = (choice.value);
-	
+
 	$.ajax({
 		url: "${pageContext.request.contextPath}/knowledge/list/a?category="+category+"&page="+pageNum,
 		type: "GET",
@@ -131,25 +135,25 @@ function go_page(pageNum){
 				content +=	'<td>'+ list[i].insertDate +'</td>';
 				content +=	'<td>'+ list[i].viewcount +'</td>';
 				content +=	'<td> 관리자 </td>';
-				content +=	'<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href=\'/quiz/'+list[i].knowSeq+'\'"></td>';												
+				content +=	'<td><input type="button" id="quizBtn" value="퀴즈 풀러가기" onClick="location.href=\'/quiz/'+list[i].knowSeq+'\'"></td>';
 				content += '</tr>';
 			}
 			console.log(content);
-			$('.listData').html(content);	
-			
+			$('.listData').html(content);
+
 			let paging = result.paging;
 			let content2 = '';
-			
-				
+
+
 				content2 += '<nav aria-label="Page navigation example" style="margin: 10px;">';
 				content2 += '<ul class="pagination justify-content-center">';
 				content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page(1); return false;" class="page-link">처음</a></li>';
-				
-				
+
+
 				for (let num = Number(paging.startPage) ; num <=Number(paging.endPage); num++){
 					if (num == Number(paging.cri.page)){
 						content2 += '<li class="page-item active" style="pagination-bg: #91ACCC"><span><a href=\'javascript:void(0);\' onclick="go_page('+num+'); return false;" class="page-link">'+ num +'</a></span></li>';
-						
+
 					}
 					else{
 						content2 += '<li class="page-item" style="pagination-bg: #91ACCC"><span><a href=\'javascript:void(0);\' onclick="go_page('+num+'); return false;" class="page-link">'+ num +'</a></span></li>';
@@ -161,9 +165,9 @@ function go_page(pageNum){
 				content2 += '<li class="page-item"><a href=\'javascript:void(0);\' onclick="go_page('+ Number(result.maxPage) +');return false;" class="page-link">끝</a></li>';
 				content2 += '</ul>';
 				content2 += '</nav>';
-			
-			
-				$('.paging').html(content2);	
+
+
+				$('.paging').html(content2);
 		},
 		error: function(){
 			console.log('error');
@@ -173,4 +177,5 @@ function go_page(pageNum){
 
 </script>
 </body>
+<%@include file="../common/footer.jsp"%>
 </html>

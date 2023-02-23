@@ -25,9 +25,14 @@
     </script>
 <title>매일지식 컨텐츠</title>
 </head>
+<style>
+	#tblDiv {
+		margin-top: 20%;
+	}
+</style>
+<%@include file="../common/nav.jsp"%>
 <body>
 	<div class="container">
-		<%@include file="../common/header.jsp"%>
 		<div class="content">
 			<div id="tblDiv">
 			
@@ -88,7 +93,6 @@
 <!-- 			</div> -->
 			</form>
 		</div>
-		<%@include file="../common/footer.jsp"%>
 		</div>
 	</div>
 <script type="text/javascript">
@@ -191,4 +195,5 @@
 // });	
 </script>
 </body>
+<%@include file="../common/footer.jsp"%>
 </html>

@@ -12,11 +12,16 @@
     <link href="/css/admin.css" rel="stylesheet">
 <title>관리자 | 문제 관리</title>
 </head>
+<style>
+	#content-form {
+		margin-top: 20%;
+	}
+</style>
+<%@include file="../common/nav.jsp" %>
 <body>
 
 <div class="container">
-<%@include file="../common/header.jsp" %>
-	<div class="form">
+	<div class="form" id="content-form">
 		<button id="" onclick="location.href='/admin/user'">회원관리</button>
 		<button onclick="location.href='/admin/contents'">컨텐츠 관리</button>
 	</div>
@@ -62,7 +67,7 @@
 		
 		</form>
 	
-<%@include file="../common/footer.jsp" %>
 </div>
 </body>
+<%@include file="../common/footer.jsp" %>
 </html>

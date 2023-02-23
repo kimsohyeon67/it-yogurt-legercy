@@ -14,9 +14,14 @@
     <script src="/js/util/util.js"></script>
     <title>Title</title>
 </head>
+<style>
+    #signup_form {
+        margin-top: 20%;
+    }
+</style>
 <body>
+<%@include file="../common/nav.jsp" %>
 <div class="container">
-    <%@include file="../common/header.jsp" %>
     <%
         String email = (String) session.getAttribute("email");
         String isSNS = (String) session.getAttribute("isSNS");
@@ -74,8 +79,8 @@
             </div>
         </form>
     </div>
-    <%@include file="../common/footer.jsp" %>
 </div>
 </body>
+<%@include file="../common/footer.jsp" %>
 <script> isSNSUser = <%=isSNS != null ? true : false %>; </script>
 </html>
