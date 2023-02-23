@@ -22,6 +22,10 @@
 			<div>
 				<table id="quizTbl">
 					<c:set var="length" value="${fn:length(quizList) }" />
+					<div style="margin-top: 400px;">
+						정답수 : ${userAnswer}/3<br>
+					</div>
+					<div>
 					<c:forEach items="${quizList }" var="list">
 					
 						<!-- 퀴즈번호 기재하기 위한 변수 선언 -->
@@ -31,7 +35,6 @@
 								Q. ${i}번<br><br>
 								문제: ${list.question}<br> <br></td>
 							</tr>
-							
 							
 								<!-- 보기화면 -->
 								<div id="${i}">
@@ -101,6 +104,7 @@
 									</tr>
 									</c:if>
 								</c:forEach>
+								</div>
 							</table>
 					</div><!-- 전체 div -->
 		</div><!-- content -->

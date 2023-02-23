@@ -45,7 +45,6 @@ public class QuizController {
 	public String answer(int knowSeq, HttpServletRequest request, int radio1, int radio2, int radio3) {
 		ModelAndView mv = new ModelAndView();
 		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
-		System.out.println("유저번호1 "+userSeq);
 		//quiz번호들 저장하기
 		String[] s1 = request.getParameterValues("quizSeq");
 		int[] quizSeq = new int[s1.length]; 
@@ -65,10 +64,8 @@ public class QuizController {
 		for(int i=0;i<isRight.length;i++) {
 			if(userChoice[i] == answer[i]) {
 				isRight[i] = 1;						
-				System.out.println(isRight[i]);
 			}else {
 				isRight[i] = 0;
-				System.out.println(isRight[i]);
 			}
 		}
 		
@@ -117,7 +114,6 @@ public class QuizController {
 		ModelAndView mv = new ModelAndView();
 		
 		//정답 갯수 가져오기
-//		int answerCnt = learnRecordService.getAnswerCnt(knowSeq);
 		
 		//체크한 답 보여줘야 하니 learn_record 불러오기
 		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
@@ -141,11 +137,16 @@ public class QuizController {
 			ModelAndView mv = new ModelAndView();
 			
 			//정답 갯수 가져오기
-//			int answerCnt = learnRecordService.getAnswerCnt(knowSeq);
 			
 			int userSeq = 0; //비로그인 유저니까 임시로 값 0 넣어줌
 			int[] userChoice = {userChoice1, userChoice2, userChoice3};
 			int[] isRight = {isRight1, isRight2, isRight3};
+			int userAnswer = 0;
+			for(int i=0;i<isRight.length;i++) {
+				if(isRight[i] == 1) {
+					userAnswer+=1;
+				}
+			}
 			
 			//체크한 답 보여줘야 하니 learn_record 불러오기
 			List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
@@ -155,6 +156,7 @@ public class QuizController {
 			mv.addObject("isRight", isRight);
 			mv.addObject("quizList", quizList);
 			mv.addObject("userSeq", userSeq);
+			mv.addObject("userAnswer",userAnswer);
 			mv.setViewName("quiz/answer");
 			return mv;
 		}
