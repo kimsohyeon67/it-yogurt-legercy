@@ -1,5 +1,6 @@
 package com.starters.ityogurt.service;
 
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 import com.starters.ityogurt.dto.UserDTO;
@@ -27,4 +28,5 @@ public interface UserService {
   
 	int setLastLoginDateByUserSeq(int userSeq);
 
+	void AfterLoginProcess(UserDTO result, HttpSession session);
 }
