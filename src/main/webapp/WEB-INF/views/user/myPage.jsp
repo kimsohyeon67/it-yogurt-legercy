@@ -19,8 +19,11 @@
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
-				<h1>마이페이지</h1>
-		</div><!-- content -->
+		<div style="display: block;">
+			<h1>마이페이지</h1><br>
+			<input type="button" value="오답노트">
+		</div>
+		</div>
 		<%@include file="../common/footer.jsp"%>
 	</div>
 </body>

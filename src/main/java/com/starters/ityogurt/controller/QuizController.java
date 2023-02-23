@@ -101,6 +101,9 @@ public class QuizController {
 	@GetMapping("/answerResult/{quizSeq1}/{quizSeq2}/{quizSeq3}/{knowSeq}")
 	public ModelAndView answerResult(@PathVariable("quizSeq1") int quizSeq1, @PathVariable("quizSeq2") int quizSeq2, @PathVariable("quizSeq3") int quizSeq3, @PathVariable("knowSeq") int knowSeq) {
 		ModelAndView mv = new ModelAndView();
+		//정답 갯수 가져오기
+//		int answerCnt = learnRecordService.getAnswerCnt(knowSeq);
+		
 		//답 보여줘야 하니 learn_record 불러오기
 		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
 		for(LearnRecordDTO d:learnList) {
