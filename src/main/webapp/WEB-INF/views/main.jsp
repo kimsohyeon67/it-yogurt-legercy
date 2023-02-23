@@ -49,22 +49,6 @@
         <button type="button" class="button btn-login mt-5 mb-5" id="btn-login" onclick="window.location.href='/user'">JOIN US!</button>
     </div>
 </header>
-<!-- Ranking Section-->
-<section class="page-section portfolio mt-5" id="portfolio">
-    <div class="container">
-        <!-- Portfolio Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary">RANKING</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom mb-4 mt-4">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-        <!-- Portfolio Grid Items-->
-        <div class="row justify-content-center">
-        </div>
-    </div>
-</section>
 </body>
 <%@include file="common/footer.jsp" %>
 </html>

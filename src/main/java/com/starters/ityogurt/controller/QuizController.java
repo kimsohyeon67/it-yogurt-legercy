@@ -42,9 +42,10 @@ public class QuizController {
 	
 	//정답 페이지 보여주기(insert 관련)
 	@PostMapping("/answer") 
-	public String answer(int knowSeq, HttpServletRequest request, int radio1, int radio2,
-			int radio3) {
+	public String answer(int knowSeq, HttpServletRequest request, int radio1, int radio2, int radio3) {
 		ModelAndView mv = new ModelAndView();
+		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
+		System.out.println(userSeq);
 		//quiz번호들 저장하기
 		String[] s1 = request.getParameterValues("quizSeq");
 		int[] quizSeq = new int[s1.length]; 
@@ -53,10 +54,10 @@ public class QuizController {
 		}
 		
 		//정답 가져오기
-		int[] userChoice = {radio1,radio2,radio3};
+		int[] userChoice = {radio1,radio2,radio3}; //유저가 선택한 답 1, 2, 3번 
 		int[] answer = new int[3];
 		for(int i=0;i<userChoice.length;i++) {
-			answer[i] = service.getAnswer(quizSeq[i]);			
+			answer[i] = service.getAnswer(quizSeq[i]);	// 퀴즈 답 가져와서 배열에 넣기		
 		}
 		
 		//user 입력 답이랑 정답 비교해서 정답이면 1, 오답이면 0
@@ -71,55 +72,86 @@ public class QuizController {
 			}
 		}
 		
-		//이미 insert된 내용이 있는지 확인하기
-		int userSeq = Integer.parseInt(request.getParameter("userSeq"));
-		System.out.println("user"+userSeq);
-		int choiceRecord = learnRecordService.getUserChoice(userSeq, quizSeq[0], quizSeq[1], quizSeq[2]); //해당 유저 번호의 총 갯수 가져오기
-		System.out.println("유저 푼 문제 수"+choiceRecord);
-		
-		// 0보다 크면 update 진행, 아니면 insert 진행
-		if(choiceRecord == 0) {//insert
-			//leanrRecord 테이블 insert
-			for(int i=0;i<userChoice.length;i++) { 
-				learnRecordService.learnData(userChoice[i], isRight[i], userSeq, quizSeq[i]);
-			}			
-		}else {//update
-			for(int i=0;i<userChoice.length;i++) { 
-				learnRecordService.updateLearnData(userChoice[i], isRight[i], userSeq, quizSeq[i]);
-			}
-		}
 		int quizSeq1=quizSeq[0];
 		int quizSeq2=quizSeq[1];
 		int quizSeq3=quizSeq[2];
 		
-		// 새로운 페이지로 redirect, 대신 필요한 값들 모두 url에 전달해주기
-//		return "redirect:/answerResult?quizSeq="+quizSeq[0]+"&quizSeq="+quizSeq[1]+"&quizSeq="+quizSeq[2]+"&knowSeq="+knowSeq;
-		return "redirect:/answerResult/"+quizSeq1+"/"+quizSeq2+"/"+quizSeq3+"/"+knowSeq;
+		//로그인한 유저일경우(db 저장 필요)
+		if(userSeq != 0) {
+			//이미 insert된 내용이 있는지 확인하기
+			int choiceRecord = 0;
+					choiceRecord = learnRecordService.getUserChoice(userSeq, quizSeq[0], quizSeq[1], quizSeq[2]); //해당 유저 번호의 총 갯수 가져오기			
+					
+			// 0보다 크면 update 진행, 아니면 insert 진행
+			if(choiceRecord == 0) {//insert
+				for(int i=0;i<userChoice.length;i++) { 
+					learnRecordService.learnData(userChoice[i], isRight[i], userSeq, quizSeq[i]);
+				}			
+			}else {//update
+				for(int i=0;i<userChoice.length;i++) { 
+					learnRecordService.updateLearnData(userChoice[i], isRight[i], userSeq, quizSeq[i]);
+				}
+			}
+			
+			// 새로운 페이지로 redirect, 대신 필요한 값들 모두 url에 전달해주기
+	//		return "redirect:/answerResult?quizSeq="+quizSeq[0]+"&quizSeq="+quizSeq[1]+"&quizSeq="+quizSeq[2]+"&knowSeq="+knowSeq;
+			return "redirect:/answerResult/"+quizSeq1+"/"+quizSeq2+"/"+quizSeq3+"/"+knowSeq;
+		
+		}else{ //비로그인 유저인 경우(db저장 불필요)
+			return "redirect:/answerResult2/"+quizSeq1+"/"+quizSeq2+"/"+quizSeq3+"/"+userChoice[0]+"/"+userChoice[1]+"/"+userChoice[2]+"/"+isRight[0]+"/"+isRight[1]+"/"+isRight[2]+"/"+userSeq+"/"+knowSeq;
+		}
+
 	}
 
 	//정답 보여주기(가져와서 보여주기)
 	@GetMapping("/answerResult/{quizSeq1}/{quizSeq2}/{quizSeq3}/{knowSeq}")
-	public ModelAndView answerResult(@PathVariable("quizSeq1") int quizSeq1, @PathVariable("quizSeq2") int quizSeq2, @PathVariable("quizSeq3") int quizSeq3, @PathVariable("knowSeq") int knowSeq) {
+	public ModelAndView answerResult(@PathVariable("quizSeq1") int quizSeq1, @PathVariable("quizSeq2") int quizSeq2, @PathVariable("quizSeq3") int quizSeq3, int userSeq, @PathVariable("knowSeq") int knowSeq) {
 		ModelAndView mv = new ModelAndView();
 		//정답 갯수 가져오기
 //		int answerCnt = learnRecordService.getAnswerCnt(knowSeq);
 		
-		//답 보여줘야 하니 learn_record 불러오기
-		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
-		for(LearnRecordDTO d:learnList) {
-			System.out.println("퀴즈번호"+d.getQuizSeq());
-			System.out.println("유저 선택"+d.getUserChoice());
-		}
+//		if(userSeq != 0) {
+			//체크한 답 보여줘야 하니 learn_record 불러오기
+			List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
+			
+			//퀴즈 내용 불러와야 하니까 리스트 가져옴
+			List<QuizDTO> quizList = service.getQuiz(knowSeq);
+			mv.addObject("quizList", quizList);
+			mv.addObject("learnList", learnList);
+			mv.addObject("userSeq", userSeq);
+//		}else {
+//		}
 		
-		//퀴즈 내용 불러와야 하니까 리스트 가져옴
-		List<QuizDTO> quizList = service.getQuiz(knowSeq);
-		mv.addObject("quizList", quizList);
-		mv.addObject("learnList", learnList);
 		mv.setViewName("quiz/answer");
 		return mv;
 	}
 	
-	
+	//정답 보여주기(가져와서 보여주기)
+//		@GetMapping("/answerResult/{quizSeq1}/{quizSeq2}/{quizSeq3}/{knowSeq}")
+//		public ModelAndView answerResult2(@PathVariable("quizSeq1") int quizSeq1, @PathVariable("quizSeq2") int quizSeq2, @PathVariable("quizSeq3") int quizSeq3, int[] userChoice, int[] isRight, int userSeq, @PathVariable("knowSeq") int knowSeq) {
+//			ModelAndView mv = new ModelAndView();
+//			//정답 갯수 가져오기
+////			int answerCnt = learnRecordService.getAnswerCnt(knowSeq);
+//			
+//			
+//			if(userSeq != 0) {
+//				//체크한 답 보여줘야 하니 learn_record 불러오기
+//				List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
+//				
+//				//퀴즈 내용 불러와야 하니까 리스트 가져옴
+//				List<QuizDTO> quizList = service.getQuiz(knowSeq);
+//				mv.addObject("quizList", quizList);
+//				mv.addObject("learnList", learnList);			
+//			}else {
+//				List<QuizDTO> quizList = service.getQuiz(knowSeq);
+//				mv.addObject("userChoice",userChoice);
+//				mv.addObject("isRight", isRight);
+//				mv.addObject("quizList", quizList);
+//			}
+//			
+//			mv.setViewName("quiz/answer");
+//			return mv;
+//		}
 	
 	
 }

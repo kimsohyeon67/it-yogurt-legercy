@@ -30,5 +30,7 @@ public interface KnowledgeDAO {
   
 	KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq);
 
+	int getCategoryCnt(String category);
+
 	
 }
