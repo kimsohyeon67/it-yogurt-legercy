@@ -13,9 +13,14 @@
     <script src="/js/util/util.js"></script>
     <title>Title</title>
 </head>
+<style>
+    #login_form {
+        margin-top: 20%;
+    }
+</style>
 <body>
+<%@include file="../common/nav.jsp" %>
 <div class="container">
-    <%@include file="../common/header.jsp" %>
     <div class="content">
         <form id="login_form">
             <div class="login" type="POST" href="/user">
@@ -43,7 +48,7 @@
             </div>
         </div>
     </div>
-    <%@include file="../common/footer.jsp" %>
 </div>
+<%@include file="../common/footer.jsp" %>
 </body>
 </html>

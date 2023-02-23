@@ -14,19 +14,18 @@
      <link href="/css/admin.css" rel="stylesheet">
 <title> 커뮤니티 | 게시판 </title>
 <style>
-
-
+    .divCss {
+        margin-top: 15%;
+    }
 </style>
 </head>
-<body>
-
-
-<div class="container">
-<%@include file="../common/header.jsp" %>
+<%@include file="../common/nav.jsp" %>
+<body style="background-color: #F9F2ED">
+<div class="container divCss">
         <!-- Page content-->
-        <div class="container mt-5">
+        <div class="container mt-5 ">
             <div class="row">
-                <div class="col-lg-auto">
+                <div class="col-lg-auto ">
                     <!-- Post content-->
                     <article>
                         <!-- Post header-->

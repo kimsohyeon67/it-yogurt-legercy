@@ -10,9 +10,14 @@
     <script src="/js/jquery-3.6.1.min.js"></script>
     <title>Title</title>
 </head>
+<style>
+    content {
+        margin-top: 20%;
+    }
+</style>
+<%@include file="../common/nav.jsp" %>
 <body>
 <div class="container">
-    <%@include file="../common/header.jsp" %>
     <div class="content">
         <img id="logo" src="/image/logo.png">
         <div id="message">${result}</div>
@@ -21,9 +26,9 @@
             <div id="main" onclick="window.location.href='/'">메인 화면으로 돌아가기</div>
         </div>
     </div>
-    <%@include file="../common/footer.jsp" %>
 </div>
 </body>
+<%@include file="../common/footer.jsp" %>
 </html>
 <style>
   .content {

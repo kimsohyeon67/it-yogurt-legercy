@@ -13,11 +13,16 @@
 <link href="/css/login.css" rel="stylesheet">
 <link href="/css/quiz.css" rel="stylesheet">
 <title>퀴즈 풀기</title>
-
 </head>
+<style>
+	.content {
+		margin-top: 20%;
+	}
+</style>
+
+<%@include file="../common/nav.jsp"%>
 <body>
-	<div class="container">
-		<%@include file="../common/header.jsp"%>
+<div class="container">
 		<div class="content">
 				<div>
 				<form action="<%=request.getContextPath()%>" id="quizForm" method=post>
@@ -25,7 +30,7 @@
 						<c:set var="length" value="${fn:length(quizList) }" />
 							<input type="hidden" value="${list.knowSeq}" name="knowSeq">
 							<input type="hidden" value="${list.quizSeq}" name="quizSeq">
-							<input type="hidden" value="1" name="userSeq">
+							<input type="hidden" value="${sessionScope.user_seq}" name="userSeq">
 							<input type="hidden" value="${length}" name="length"><!-- 퀴즈 몇 개인지 -->
 							<c:set var="i" value="${i+1}" />
 						<table>
@@ -59,9 +64,7 @@
 				</form>
 					</div><!-- 전체 div -->
 		</div><!-- content -->
-		<%@include file="../common/footer.jsp"%>
 	</div>
-	
 <script>
 //수정 필요
 	$(document).ready(function() {
@@ -73,7 +76,7 @@
 			var chk3 = $('input[name=radio3]:checked').val(); //3번 문제 체크된 값 가져오기
 
 			var answer = 0;
-			
+
 			if(chk1 != undefined){ //1번 문제 체크되어있으면
 				answer+=1; // +=1해주기
 			}
@@ -83,7 +86,7 @@
 			if(chk3 != undefined){
 				answer+=1;
 			}
-			 
+
 			//문제 길이(3)와 체크된 값(answer) 길이가 동일하지 않으면 체크되지 않은 값이 있다는 것 
 			if(length != answer){
 				alert('답을 체크하세요.');
@@ -92,8 +95,8 @@
 				 $("form").attr("action","/answer");
 			}
 		});
-});	
-	
+});
+
 function removeAll() {
 	var obj = document.getElementsByClassName('radio');
 	for (var i = 0; i < obj.length; i++) {
@@ -102,4 +105,5 @@ function removeAll() {
 }
 </script>
 </body>
+<%@include file="../common/footer.jsp"%>
 </html>
