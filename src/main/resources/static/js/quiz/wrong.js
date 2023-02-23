@@ -62,7 +62,7 @@ $(document).ready(function () {
   }
 
   let success = (result) => {
-    list = result.quizList;
+    let list = result.quizList;
     let answer = {};
     let detail = {};
     $("#quizForm").html("");
@@ -73,8 +73,11 @@ $(document).ready(function () {
             <input type="hidden" value="${result.userSeq}" name="userSeq">
             <table id="${i}">
               <tr id="quizListTbl">
-                 <td id="num"><br><br><br> Q. ${list[i].quizSeq}번<br>
-                      <br>${list[i].question}<br><br></td>
+                 <td id="num"><br><br><br>
+                 <div class="badge bg-secondary text-decoration-none link-light">선택한 답: ${list[i].userChoice}</div>  
+                 <br><br> Q. ${list[i].quizSeq}번<br>
+                      <br>${list[i].question}<br><br>       
+                 </td>
               </tr>
             </table>`)
       // 보기화면
@@ -107,6 +110,32 @@ $(document).ready(function () {
             <tr>
               <td><input type="button" class="checkAnswer" id="answer-${i}" onclick="clickAnswerButton(event)" value="정답 확인"></td>
             </tr>
-            <tr class='answer-check'></tr>`)
+            <tr class='answer-check'></tr>
+      `)
     }
+    pageSetting(result);
+  }
+
+  let pageSetting = (result) => {
+    let paging = result.paging;
+    let maxPage = result.maxPage;
+    let pagingTag = `
+            <nav aria-label="Page navigation example" style="margin: 10px;">
+              <ul class="pagination justify-content-center">
+                <li class="page-item"><div onclick="go_page(1); return false;" class="page-link">처음</div></li>`
+
+    if(paging.prev)
+      pagingTag += `<li class="page-item"><div onclick="go_page(${paging.startPage-1})" class="page-link">이전</div></li>`
+
+    for(let i = paging.startPage; i<= paging.endPage; i++)
+    {
+      pagingTag +=`<li class="page-item" style="pagination-bg: #91ACCC"><span><div onclick="go_page(${i})" class="page-link">${i}</div></span></li>`
+    }
+
+    if(paging.next)
+      pagingTag += `<li class="page-item"><div onclick="go_page(${paging.endPage+1})" class="page-link">다음</div></li>`
+
+    pagingTag += `<li class="page-item"><div onclick="go_page(${maxPage})" class="page-link">끝</div></li></ul></nav>`
+
+    $('.paging').html(pagingTag);
   }

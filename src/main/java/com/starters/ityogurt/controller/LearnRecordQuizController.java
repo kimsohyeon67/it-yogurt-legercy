@@ -77,8 +77,7 @@ public class LearnRecordQuizController {
         List<LearnRecordQuizDTO> list = service.getWrongAnswerByUser(userSeq, cri.getPageStart(),
             cri.getPerPageNum());
         paging.setTotalCount(totalBoardCnt);
-
-        m.addAttribute("maxpage", maxPage);
+        m.addAttribute("maxPage", maxPage);
         m.addAttribute("paging", paging);
         m.addAttribute("quizList", list);
 
