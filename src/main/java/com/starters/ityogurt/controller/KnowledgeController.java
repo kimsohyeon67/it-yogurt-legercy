@@ -90,9 +90,13 @@ public class KnowledgeController {
 		int limit = (cri.getPage() - 1) * 9;
 		System.out.println("limit" + limit);
 		paging.setCri(cri); // 현재 페이지, 페이지당 보여줄 게시글의 개수
-		int totalCnt = service.getTotalCnt(); // 전체 게시글 수
-		int maxPage = (int) ((double) totalCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
-		paging.setTotalCount(totalCnt);
+//		int totalCnt = service.getTotalCnt(); // 전체 게시글 수
+//		int maxPage = (int) ((double) totalCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+//		paging.setTotalCount(totalCnt);
+		
+		int categoryCnt = service.getCategoryCnt(category);
+		int maxPage = (int) ((double) categoryCnt / cri.getPerPageNum() + 0.9); // 전체 페이지 수
+		paging.setTotalCount(categoryCnt);
 
 		Map<Object, Object> map = new HashMap<>();
 //		map.put("userSeq", userSeq);

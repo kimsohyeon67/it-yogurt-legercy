@@ -6,14 +6,14 @@
 
 <select id="getList" resultType="knowledgedto" parameterType="hashmap">
 	select * from knowledge 
-	where  
+	where category_seq in 
 	<choose>
 		<when test='category.equals("category") || category.equals("all")'>
-			category_seq in (select category_seq from category where middle in(#{category},'데이터베이스','프로그래밍언어'))
+		    (select category_seq from category where middle in(#{category},'데이터베이스','프로그래밍언어'))
 			order by know_seq limit #{limit},9
 		</when>
 		<otherwise>
-			category_seq in (select category_seq from category where middle like #{category})
+			(select category_seq from category where middle like #{category})
 			order by know_seq limit #{limit},9
 		</otherwise>
 	</choose>
@@ -49,6 +49,19 @@
 
 <select id="getKnowledgeByCategorySeq" parameterType="int" resultType="knowledgedto">
 	SELECT * FROM knowledge WHERE category_seq = #{categorySeq}
+</select>
+
+<select id="getCategoryCnt" parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM knowledge
+	WHERE category_seq 
+	<choose>
+		<when test='category.equals("category") || category.equals("all")'>
+			IN(SELECT category_seq FROM category WHERE middle IN(#{category},'데이터베이스','프로그래밍언어'))
+		</when>
+		<otherwise>
+			IN(SELECT category_seq FROM category WHERE middle IN(#{category}))
+		</otherwise>
+	</choose>
 </select>
 
 </mapper>

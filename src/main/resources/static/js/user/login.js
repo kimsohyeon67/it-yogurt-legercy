@@ -29,16 +29,26 @@ $(document).ready(function () {
       return;
     }
 
+    let params = (new URL(document.location)).searchParams;
+    let knowSeq = params.get('knowSeq');
+
+    let fd = new FormData($('#login_form')[0]);
+    if (knowSeq != null) {
+      fd.append("knowSeq", knowSeq);
+    }
+
     // 로그인 요청
-    window.ajax.sendForm("/user", new FormData($('#login_form')[0]),
+    window.ajax.sendForm("/user", fd,
         loginSuceess, loginError)
   })
 });
 
 loginSuceess = (result) => {
-  alert(result);
-  window.location.href="/";
+  alert("로그인 되었습니다.");
+  window.location.href = result;
 }
 loginError = (request) => {
-  alert(request.responseJSON.errorMessage);
+  let str = request ? request.responseJSON.errorMessage
+      : "요청을 처리하던 중 에러가 발생했습니다."
+  alert(str);
 }

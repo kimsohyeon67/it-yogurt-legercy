@@ -9,13 +9,16 @@ import com.starters.ityogurt.util.DateUtil;
 import com.starters.ityogurt.util.Encrypt;
 import com.starters.ityogurt.error.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
+import org.hamcrest.number.IsNaN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,7 +41,10 @@ public class UserRestController {
         CategoryDTO selectedCategory = categoryService.getCategoryByAllType(
             categoryDTO);
 
-        if (userDTO.getPassword() != null) {
+        if (userDTO.getPassword().equals("")) {
+            userDTO.setPassword(null);
+        }
+        else {
             userDTO.setPassword(ConvertPassword(userDTO.getPassword()));
         }
 
@@ -49,8 +55,10 @@ public class UserRestController {
 
     // 로그인
     @PostMapping("/user")
-    public String Login(UserDTO dto, HttpServletRequest request) throws Exception {
+    public String Login(String knowSeq, UserDTO dto, HttpServletRequest request, HttpServletResponse response
+    ) throws Exception {
         UserDTO result = userService.getUserByUserEmail(dto.getEmail());
+
         if (result == null) {
             throw new ApiException(ErrorCode.SIGNIN_INVALID_EMAIL);
         } else if (result.getPassword() == null || result.getPassword().equals("")) {
@@ -65,13 +73,14 @@ public class UserRestController {
             }
         }
 
-        userService.setAttendanceByUserSeq(result);
-        userService.setLastLoginDateByUserSeq(result.getUserSeq());
+        userService.AfterLoginProcess(result,request.getSession());
 
-        HttpSession session = request.getSession();
-        session.setAttribute("user_seq", result.getUserSeq());
+        if(!isStringEmpty(knowSeq))
+        {
+           return "/quiz/"+knowSeq;
+        }
 
-        return "로그인 성공";
+        return "/";
     }
     
     // 로그아웃 임시(작동은 하나 오류남)
@@ -89,4 +98,8 @@ public class UserRestController {
         return pw;
     }
     //endregion
+
+    boolean isStringEmpty(String str) {
+        return str == null || str.isEmpty() ;
+    }
 }
