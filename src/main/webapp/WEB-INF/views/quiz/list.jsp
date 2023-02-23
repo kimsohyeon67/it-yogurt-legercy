@@ -24,13 +24,22 @@
 <body>
 <div class="container">
 		<div class="content">
-				<div>
+				<div id="quizListDiv">
 				<form action="<%=request.getContextPath()%>" id="quizForm" method=post>
 					<c:forEach items="${quizList }" var="list">
 						<c:set var="length" value="${fn:length(quizList) }" />
 							<input type="hidden" value="${list.knowSeq}" name="knowSeq">
 							<input type="hidden" value="${list.quizSeq}" name="quizSeq">
-							<input type="hidden" value="${sessionScope.user_seq}" name="userSeq">
+							<c:choose>
+								<%--로그인했을때  --%>
+								<c:when test="${not empty sessionScope.user_seq}">
+									<input type="hidden" value="${sessionScope.user_seq}" name="userSeq">
+								</c:when>
+								<%-- 로그인 안했을때  --%>
+								<c:otherwise>
+									<input type="hidden" value="0" name="userSeq">									
+								</c:otherwise>
+							</c:choose>
 							<input type="hidden" value="${length}" name="length"><!-- 퀴즈 몇 개인지 -->
 							<c:set var="i" value="${i+1}" />
 						<table>
