@@ -69,7 +69,7 @@ line-height: inherit;
 				<td>
 				<span class="badge bg-secondary text-decoration-none link-light"> ${list.sub }</span>
 				</td>
-				<td style="display : flex;">${list.title }</td>
+				<td style="text-align: left;">${list.title }</td>
 				<td>${list.nickname }</td>
 				<td>${list.viewcount }</td>
 			</tr>
@@ -152,7 +152,7 @@ function go_page(pageNum){
 				content += '<tr class="tableList" onClick="window.location=\'/board/'+list[i].boardSeq+'\'">';
 				content += '<td id ="boardSeq">' + list[i].boardSeq +'</td>';
 				content += '<td><span class="badge bg-secondary text-decoration-none link-light"> '+ list[i].sub +'</span></td>';
-				content +=	'<td style="display : flex;">'+ list[i].title+ '</td>';
+				content +=	'<td style="text-align: left;">'+ list[i].title+ '</td>';
 				content +=	'<td>'+ list[i].nickname + '</td>';
 				content += '<td>' + list[i].viewcount + '</td>';
 				content += '</tr>';
