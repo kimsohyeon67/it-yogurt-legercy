@@ -94,7 +94,6 @@ public class QuizController {
 			}
 			
 			// 새로운 페이지로 redirect, 대신 필요한 값들 모두 url에 전달해주기
-	//		return "redirect:/answerResult?quizSeq="+quizSeq[0]+"&quizSeq="+quizSeq[1]+"&quizSeq="+quizSeq[2]+"&knowSeq="+knowSeq;
 			return "redirect:/answerResult/"+quizSeq1+"/"+quizSeq2+"/"+quizSeq3+"/"+knowSeq+"/"+userSeq;
 		
 		}else{ //비로그인 유저인 경우(db저장 불필요)
@@ -105,62 +104,57 @@ public class QuizController {
 			int isRight2=isRight[1];
 			int isRight3=isRight[2];
 			
-			System.out.println(userChoice1+"==userChoice1");
-			System.out.println(isRight1+"==isRight1");
-			
 			return "redirect:/answerResult2/"+quizSeq1+"/"+quizSeq2+"/"+quizSeq3+"/"+userChoice1+"/"+userChoice2+"/"+userChoice3+"/"+isRight1+"/"+isRight2+"/"+isRight3+"/"+knowSeq;
 		}
 
 	}
 
-	//정답 보여주기(가져와서 보여주기)
+	//로그인 유저 정답 보여주기(가져와서 보여주기)
 	@GetMapping("/answerResult/{quizSeq1}/{quizSeq2}/{quizSeq3}/{knowSeq}/{userSeq}")
 	public ModelAndView answerResult(@PathVariable("quizSeq1") int quizSeq1, @PathVariable("quizSeq2") int quizSeq2,
 			@PathVariable("quizSeq3") int quizSeq3, @PathVariable("knowSeq") int knowSeq, @PathVariable("userSeq") int userSeq, HttpServletRequest request) {
+		
 		ModelAndView mv = new ModelAndView();
+		
 		//정답 갯수 가져오기
 //		int answerCnt = learnRecordService.getAnswerCnt(knowSeq);
-		System.out.println("user2"+userSeq);
-		System.out.println("aa"+userSeq);
-//		if(userSeq != 0) {
-			//체크한 답 보여줘야 하니 learn_record 불러오기
-			List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
+		
+		//체크한 답 보여줘야 하니 learn_record 불러오기
+		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
 			
-			//퀴즈 내용 불러와야 하니까 리스트 가져옴
-			List<QuizDTO> quizList = service.getQuiz(knowSeq);
-			mv.addObject("quizList", quizList);
-			mv.addObject("learnList", learnList);
-			mv.addObject("userSeq", userSeq);
-//		}else {
-//		}
+		//퀴즈 내용 불러와야 하니까 리스트 가져옴
+		List<QuizDTO> quizList = service.getQuiz(knowSeq);
+		mv.addObject("quizList", quizList);
+		mv.addObject("learnList", learnList);
+		mv.addObject("userSeq", userSeq);
 		
 		mv.setViewName("quiz/answer");
 		return mv;
 	}
 	
-	//정답 보여주기(가져와서 보여주기)
+	//비로그인 유저 정답 보여주기
 		@GetMapping("/answerResult2/{quizSeq1}/{quizSeq2}/{quizSeq3}/{userChoice1}/{userChoice2}/{userChoice3}/{isRight1}/{isRight2}/{isRight3}/{knowSeq}")
 		public ModelAndView answerResult2(@PathVariable("quizSeq1") int quizSeq1, @PathVariable("quizSeq2") int quizSeq2, @PathVariable("quizSeq3") int quizSeq3, 
 				@PathVariable("userChoice1") int userChoice1, @PathVariable("userChoice2") int userChoice2, @PathVariable("userChoice3") int userChoice3, 
 				@PathVariable("isRight1") int isRight1, @PathVariable("isRight2") int isRight2, @PathVariable("isRight3") int isRight3, @PathVariable("knowSeq") int knowSeq, HttpServletRequest request) {
+			
 			ModelAndView mv = new ModelAndView();
+			
 			//정답 갯수 가져오기
 //			int answerCnt = learnRecordService.getAnswerCnt(knowSeq);
-			int userSeq = 0;
-			int[] userChoice = {userChoice1, userChoice2, userChoice3};
-			for(int a:userChoice) {
-				System.out.println("정답2 "+a);
-			}
-			int[] isRight = {isRight1, isRight2, isRight3};
-				//체크한 답 보여줘야 하니 learn_record 불러오기
-				List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
-				
-				List<QuizDTO> quizList = service.getQuiz(knowSeq);
-				mv.addObject("userChoice",userChoice);
-				mv.addObject("isRight", isRight);
-				mv.addObject("quizList", quizList);
-				mv.addObject("userSeq", userSeq);
 			
+			int userSeq = 0; //비로그인 유저니까 임시로 값 0 넣어줌
+			int[] userChoice = {userChoice1, userChoice2, userChoice3};
+			int[] isRight = {isRight1, isRight2, isRight3};
+			
+			//체크한 답 보여줘야 하니 learn_record 불러오기
+			List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
+				
+			List<QuizDTO> quizList = service.getQuiz(knowSeq);
+			mv.addObject("userChoice",userChoice);
+			mv.addObject("isRight", isRight);
+			mv.addObject("quizList", quizList);
+			mv.addObject("userSeq", userSeq);
 			mv.setViewName("quiz/answer");
 			return mv;
 		}
