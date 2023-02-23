@@ -29,4 +29,6 @@ public interface UserService {
 	int setLastLoginDateByUserSeq(int userSeq);
 
 	void AfterLoginProcess(UserDTO result, HttpSession session);
+
+	UserDTO getUserInfo(int userSeq);
 }

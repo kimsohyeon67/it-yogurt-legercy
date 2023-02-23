@@ -31,5 +31,7 @@ public interface UserDAO {
 
 	UserDTO getUserByUserSeq(int userSeq);
 
+	UserDTO getUserInfo(int userSeq);
+
 }
 

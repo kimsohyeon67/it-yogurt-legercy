@@ -70,5 +70,9 @@
 		SET lastlogin_date = NOW()
 		WHERE user_seq = #{userSeq};
 	</update>
+	
+	<select id="getUserInfo" parameterType="int" resultType="userdto">
+		select * from user where user_seq=#{user_seq}
+	</select>
 
 </mapper>

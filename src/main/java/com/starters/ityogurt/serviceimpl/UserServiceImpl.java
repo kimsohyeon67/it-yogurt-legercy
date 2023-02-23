@@ -127,4 +127,9 @@ public class UserServiceImpl implements UserService {
         return dao.setIsPassByUserSeq(userSeq);
     }
 
+	@Override
+	public UserDTO getUserInfo(int userSeq) {
+		return dao.getUserInfo(userSeq);
+	}
+
 }

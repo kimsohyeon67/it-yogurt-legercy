@@ -76,12 +76,16 @@ public class UserController {
         mv.setViewName("user/verify");
         return mv;
     }
-    
+
     @GetMapping("/myPage/{user_seq}")
-    public String myPage(@PathVariable("user_seq") String user_seq) {
-//    	ModelAndView mv = new ModelAndView();
-//    	System.out.println(user_seq);
-//    	mv.setViewName("user/myPage");
-        return "user/myPage";
+    public ModelAndView myPage(@PathVariable("user_seq") String user_seq) {
+    	ModelAndView mv = new ModelAndView();
+    	int userSeq = Integer.parseInt(user_seq);
+    	System.out.println("유저번호"+userSeq);
+    	UserDTO userDto = userService.getUserInfo(userSeq);
+//    	System.out.println(userDto);
+    	mv.addObject("userDto", userDto);
+    	mv.setViewName("user/myPage");
+        return mv;
     }
 }
