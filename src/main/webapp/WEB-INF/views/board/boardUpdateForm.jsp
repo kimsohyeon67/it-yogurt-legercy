@@ -43,7 +43,7 @@
                         <section class="mb-5">
                             <p class="fs-5 mb-4"> 내용</p>
                             
-                           <textarea  class="form-control" name="content" rows=10 >${oneBoard.content }</textarea>
+                           <textarea  class="form-control" id="content" name="content" rows=10 ><c:out value="${oneBoard.content }"/></textarea>
                       			
                       			<input type="hidden" name="userSeq" value="2">
 								<input type="hidden" name="categorySeq" value="3">
@@ -80,4 +80,8 @@
 <%@include file="../common/footer.jsp" %>
 </div>
 </body>
+<script type="text/javascript">
+var text = document.getElementById("content").value;
+text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+</script>
 </html>

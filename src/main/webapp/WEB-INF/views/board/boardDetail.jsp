@@ -44,7 +44,9 @@
                         </header>
    
                         <section class="mb-5">
-                            <p class="fs-5 mb-4">${oneboard.content }</p>
+                            <p class="fs-5 mb-4">
+                            	<div style="white-space:pre-wrap;"><c:out value="${oneboard.content }"/></div>
+                            </p>
                         </section>
                     </article>
                     
@@ -77,7 +79,7 @@
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
                                     	<div class="ms-3">
 			                				<div class="fw-bold">${List.nickname }</div>
-			                				${List.content}
+			                				<div style="white-space:pre-wrap;"><c:out value="${List.content}"/></div>
 			                			</div>	
 			                		</div>	
 		
