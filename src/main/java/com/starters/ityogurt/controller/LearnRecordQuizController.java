@@ -39,28 +39,6 @@ public class LearnRecordQuizController {
     @Autowired
     LearnRecordService recodeservice;
 
-    @GetMapping("/quiz/wrong/{user_seq}")
-    public ModelAndView setViewWrong(Criteria cri, @PathVariable("user_seq") int userSeq)
-        throws Exception {
-        ModelAndView mv = new ModelAndView();
-
-        Paging paging = new Paging();
-        cri.setPerPageNum(5);
-        paging.setCri(cri);
-
-        int totalBoardCnt = service.getWrongAnswerCountByUser(userSeq);
-        int maxPage = (int) ((double) totalBoardCnt / cri.getPerPageNum() + 0.9);
-        List<LearnRecordQuizDTO> list = service.getWrongAnswerByUser(userSeq, cri.getPage(),
-            cri.getPerPageNum());
-        paging.setTotalCount(totalBoardCnt);
-        mv.addObject("maxpage", maxPage);
-        mv.addObject("paging", paging);
-        mv.addObject("quizList", list);
-
-        mv.setViewName("quiz/wrong");
-        return mv;
-    }
-
     // 틀린 문제 개수 가져오기. limit 기본값 : 5
     @GetMapping("/quiz/wrong/{user_seq}/list")
     @ResponseBody
