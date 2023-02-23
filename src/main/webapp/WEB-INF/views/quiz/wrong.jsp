@@ -16,9 +16,9 @@
 
     <title>퀴즈 풀기</title>
 </head>
+<%@include file="../common/nav.jsp" %>
 <body>
 <div class="container">
-    <%@include file="../common/header.jsp" %>
     <div class="content">
         <div>
             <div class="filter">
@@ -49,10 +49,10 @@
             </ul>
         </nav>
     </div>
-    <%@include file="../common/footer.jsp" %>
 </div>
 </body>
 
+<%@include file="../common/footer.jsp" %>
 </html>
 <style>
 
@@ -83,4 +83,7 @@
     border-color: #ccc;
   }
 
+  .content {
+      margin-top: 20%;
+  }
 </style>
