@@ -21,7 +21,7 @@
         <a href="/">
             <img src="/image/logo_white.png" style="width: 50px; height: 50px">
         </a> &nbsp;
-        <a class="navbar-brand" href="/">It-Yogurt</a>
+        <a class="navbar-brand" href="/">It-Yogurt </a>
         <button class="navbar-toggler text-uppercase font-weight-bold text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
@@ -30,7 +30,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/knowledge/list?category=all">매일지식</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/board/list">커뮤니티</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#mypage">MyPage</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/myPage/${sessionScope.user_seq}">MyPage</a></li>
             </ul>
         </div>
     </div>
