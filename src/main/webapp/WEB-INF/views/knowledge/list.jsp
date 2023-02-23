@@ -35,7 +35,7 @@
 			<div id="tblDiv">
 			<h3 style="text-align: center;">매일지식 목록</h3>
 			<!-- 검색을 위한 form -->
-			<form action="<%=request.getContextPath()%>/knowledge/searchResult">
+			<form action="<%=request.getContextPath()%>/knowledge/searchResult" id="knowledgeForm">
 			<!-- 검색창 -->
 			<div id="searchDiv">
 			<input type="text" placeholder="검색어 입력" name="keyword" id="keyword">

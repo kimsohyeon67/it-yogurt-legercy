@@ -3,6 +3,11 @@
 }
 
 /* list.jsp */
+#knowledgeForm{
+	margin-top:200px;
+	margin-bottom:200px;
+}
+
 #quizBtn{
   width: 100%;
   height: 40px;

@@ -27,14 +27,14 @@
                 <table id="detailTbl">
                     <div>
                         <tr>
-                            <td class="detailTd">IT > 프로그래밍언어 > JAVA</td>
+                            <td class="detailTd">IT > 프로그래밍언어 > JAVA </td>
                         </tr>
                     </div>
                     <div>
                         <tr style="height: 100px;">
                             <td class="detailTd"><h1>${title}</h1></td>
                         </tr>
-                        <tr><td>작성자 : 관리자</td></tr>
+                        <tr><td>작성자 : 관리자 ${sessionScope.user_seq}</td></tr>
                     </div>
                     <tr>
                         <td class="detailTd">${contents }</td>

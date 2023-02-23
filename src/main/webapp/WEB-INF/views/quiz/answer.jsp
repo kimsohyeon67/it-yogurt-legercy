@@ -43,8 +43,8 @@
 								
 								<!-- 정답 및 해설 -->
 								<c:choose>
-									<!-- 로그인 -->
-<%-- 									<c:when test="${userSeq ne 0}"> --%>
+									<%-- 로그인sss --%>
+									<c:when test="${userSeq ne 0}">
 									<tr>
 										<td>
 											<div class="hideDiv">
@@ -70,13 +70,13 @@
 												</div>
 											</td>
 									</tr>
-<%-- 									</c:when> --%>
-									<!-- 비로그인 -->
-<%-- 									<c:otherwise> --%>
+									</c:when>
+									<%-- 비로그인 --%>
+									<c:otherwise>
 <!-- 										<tr> -->
 <!-- 										<td> -->
-<!-- 											<div class="hideDiv"> -->
-<%-- 											<br><b>정답: ${list.answer }</b><br> --%>
+											<div class="hideDiv">
+											<br><b>정답: ${list.answer }</b><br>
 <%-- 											<c:forEach items="${learnList}" var="learn" begin="${i-1}" end="${i-1}"> --%>
 													
 													
@@ -93,13 +93,13 @@
 <%-- 													</c:choose> --%>
 <%-- 												</c:forEach> --%>
 												
-<%-- 													${list.commentary } --%>
+													${list.commentary }
 												
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 									</tr> -->
-<%-- 									</c:otherwise> --%>
-<%-- 								</c:choose> --%>
+												</div>
+											</td>
+									</tr>
+									</c:otherwise>
+								</c:choose>
 								</c:forEach>
 							</table>
 					</div><!-- 전체 div -->
