@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.starters.ityogurt.dao.QuizDAO;
 import com.starters.ityogurt.dto.LearnRecordDTO;
 import com.starters.ityogurt.dto.QuizDTO;
+import com.starters.ityogurt.service.KnowledgeService;
 import com.starters.ityogurt.service.LearnRecordService;
 import com.starters.ityogurt.service.QuizService;
 
@@ -31,10 +32,16 @@ public class QuizController {
 	@Qualifier("learnrecordservice")
 	LearnRecordService learnRecordService;
 	
+	@Autowired
+	@Qualifier("knowledgeservice")
+	KnowledgeService knowledgeService;
+	
 	@GetMapping("/quiz/{knowSeq}") //매일지식 폼 확인
 	public ModelAndView quiz(@PathVariable("knowSeq") int knowSeq) {
 		ModelAndView mv = new ModelAndView();
 		List<QuizDTO> quizList = service.getQuiz(knowSeq);
+		String knowledgeTitle = knowledgeService.getKnowledgeTitle(knowSeq);
+		mv.addObject("title", knowledgeTitle);
 		mv.addObject("quizList", quizList);
 		mv.setViewName("quiz/list");		
 		return mv;
@@ -112,18 +119,22 @@ public class QuizController {
 			@PathVariable("quizSeq3") int quizSeq3, @PathVariable("knowSeq") int knowSeq, @PathVariable("userSeq") int userSeq, HttpServletRequest request) {
 		
 		ModelAndView mv = new ModelAndView();
-		
+		int userAnswerCnt = 0;
 		//정답 갯수 가져오기
 		
 		//체크한 답 보여줘야 하니 learn_record 불러오기
 		List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
-			
+		
+		for(LearnRecordDTO l : learnList) {
+			userAnswerCnt += l.getIsRight();
+		}
+		
 		//퀴즈 내용 불러와야 하니까 리스트 가져옴
 		List<QuizDTO> quizList = service.getQuiz(knowSeq);
 		mv.addObject("quizList", quizList);
 		mv.addObject("learnList", learnList);
 		mv.addObject("userSeq", userSeq);
-		
+		mv.addObject("userAnswerCnt", userAnswerCnt);
 		mv.setViewName("quiz/answer");
 		return mv;
 	}
@@ -141,10 +152,10 @@ public class QuizController {
 			int userSeq = 0; //비로그인 유저니까 임시로 값 0 넣어줌
 			int[] userChoice = {userChoice1, userChoice2, userChoice3};
 			int[] isRight = {isRight1, isRight2, isRight3};
-			int userAnswer = 0;
+			int userAnswerCnt = 0;
 			for(int i=0;i<isRight.length;i++) {
 				if(isRight[i] == 1) {
-					userAnswer+=1;
+					userAnswerCnt+=1;
 				}
 			}
 			
@@ -156,7 +167,7 @@ public class QuizController {
 			mv.addObject("isRight", isRight);
 			mv.addObject("quizList", quizList);
 			mv.addObject("userSeq", userSeq);
-			mv.addObject("userAnswer",userAnswer);
+			mv.addObject("userAnswerCnt",userAnswerCnt);
 			mv.setViewName("quiz/answer");
 			return mv;
 		}

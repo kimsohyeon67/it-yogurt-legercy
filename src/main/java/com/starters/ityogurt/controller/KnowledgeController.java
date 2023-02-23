@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dao.KnowledgeDAO;
+import com.starters.ityogurt.dto.CategoryDTO;
 import com.starters.ityogurt.dto.KnowledgeDTO;
+import com.starters.ityogurt.service.CategoryService;
 import com.starters.ityogurt.service.KnowledgeService;
 import com.starters.ityogurt.util.Criteria;
 import com.starters.ityogurt.util.Paging;
@@ -32,6 +34,10 @@ public class KnowledgeController {
 	@Autowired
 	@Qualifier("knowledgeservice")
 	KnowledgeService service;
+	
+	@Autowired
+	@Qualifier("categoryservice")
+	CategoryService categoryService;
 
 	// 게시판 리스트 화면
 	@GetMapping("/list")
@@ -92,6 +98,14 @@ public class KnowledgeController {
 		String contents = service.getContents(knowSeq);
 		service.viewCnt(knowSeq);
 		
+		String categorySeq = String.valueOf(service.getCategorySeq(knowSeq));
+		System.out.println(categorySeq);
+		CategoryDTO categoryInfo = categoryService.getCategoryByCategorySeq(categorySeq);
+		
+		System.out.println(categoryInfo.toString());
+		
+		
+		mv.addObject("categoryInfo", categoryInfo);
 		mv.addObject("knowSeq", knowSeq);
 		mv.addObject("title", title);
 		mv.addObject("contents", contents);
