@@ -6,11 +6,21 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <script src="/js/jquery-3.6.1.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+ <!-- <meta charset="UTF-8">
     <link href="/css/header.css" rel="stylesheet">
     <link href="/css/footer.css" rel="stylesheet">
     <link href="/css/container.css" rel="stylesheet">
-     <link href="/css/admin.css" rel="stylesheet">
+     <link href="/css/admin.css" rel="stylesheet"> -->
 <title> 커뮤니티 | 게시판 | 글쓰기 </title>
 <style>
 .tableList:hover {
@@ -23,31 +33,44 @@
 <%@include file="../common/nav.jsp" %>
 <body>
 
-<div class="container">
 
-<div class="container mt-5">
+
+<div class="container mt-5" style="margin-top: 80px; max-width: fit-content;">
             <div class="row">
                 <div class="col-lg-auto">
                     <!-- Post content-->
                             <form action="form" method="post">
                     <article>
                         <!-- Post header-->
-                        <header class="mb-4">
+                        <header class="masthead bg-self" style="background-color: #F9F2ED; max-width:none;" >
+    						<div class="mb-4">
+    							<h2> 게시글 작성 </h2>
+	                            <!-- Post title-->
+	                            <p>제목</p>
+	                            <h4 class="fw-bolder mb-1"><input type="text" class="fw-bolder mb-1" name="title"></h4>
+	                            <!-- Post meta content-->
+	                            <div class="text-muted fst-italic mb-2"> <table> <tr><td> 작성자  </td><td> | ${sessionUserInfo.nickname }</td></tr></table> </div>
+	                            <!-- Post categories-->
+	                     		
+    						</div>
+						</header>
+                        <%-- <header class="mb-4">
                             <!-- Post title-->
                             <p>제목</p>
                             <h1 class="fw-bolder mb-1"><input type="text" class="fw-bolder mb-1" name="title"></h1>
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2"> <table> <tr><td> 작성자  </td><td> | ${sessionUserInfo.nickname }</td></tr></table> </div>
                             <!-- Post categories-->
-                        </header>
+   
+                        </header> --%>
                        
                         <section class="mb-5">
                             <p class="fs-5 mb-4"> 내용</p>
                             
-                           <textarea  class="form-control" name="content" rows=10></textarea>
+                           <textarea  class="form-control" id="content" name="content" rows=10></textarea>
                       			
-                      			<input type="hidden" name="userSeq" value="31">
-								<input type="hidden" name="categorySeq" value="17">
+                      			<input type="hidden" name="userSeq" value=${sessionScope.user_seq }>
+								<input type="hidden" name="categorySeq" value="18">
                         
                         </section>
                     </article>
@@ -78,7 +101,11 @@
 				<button type="submit" class="btn btn-primary" style="background-color: #91ACCC;">등록</button>
 			</form> -->
 	</div>
-</div>
+
 </body>
+<script type="text/javascript">
+var text = document.getElementById("content").value;
+text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+</script>
 <%@include file="../common/footer.jsp" %>
 </html>
