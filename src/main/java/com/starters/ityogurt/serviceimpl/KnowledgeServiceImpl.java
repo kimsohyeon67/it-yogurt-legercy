@@ -58,6 +58,11 @@ public class KnowledgeServiceImpl implements KnowledgeService{
 		return dao.getKnowledgeByCategorySeq(categorySeq);
 	}
 
+@Override
+public int getCategoryCnt(String category) {
+	return dao.getCategoryCnt(category);
+}
+
 
 
 }

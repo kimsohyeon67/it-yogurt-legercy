@@ -25,6 +25,8 @@ public interface KnowledgeService {
   
 	KnowledgeDTO getKnowledgeByCategorySeq(int categorySeq);
 
+	int getCategoryCnt(String category);
+
 
 
 
