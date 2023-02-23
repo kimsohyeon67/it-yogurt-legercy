@@ -23,7 +23,7 @@
 				<table id="quizTbl">
 					<c:set var="length" value="${fn:length(quizList) }" />
 					<div style="margin-top: 400px;">
-						정답수 : ${userAnswer}/3<br>
+						<b>정답수 : ${userAnswerCnt}/3</b><br>
 					</div>
 					<div>
 					<c:forEach items="${quizList }" var="list">

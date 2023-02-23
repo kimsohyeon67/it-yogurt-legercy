@@ -26,10 +26,13 @@
 		<div class="content">
 				<div id="quizListDiv">
 				<form action="<%=request.getContextPath()%>" id="quizForm" method=post>
+				<h4>카테고리</h4>
+				<h1>${title}</h1>
 					<c:forEach items="${quizList }" var="list">
 						<c:set var="length" value="${fn:length(quizList) }" />
 							<input type="hidden" value="${list.knowSeq}" name="knowSeq">
 							<input type="hidden" value="${list.quizSeq}" name="quizSeq">
+							
 							<c:choose>
 								<%--로그인했을때  --%>
 								<c:when test="${sessionScope.user_seq ne null}">

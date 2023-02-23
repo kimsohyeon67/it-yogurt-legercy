@@ -85,7 +85,7 @@ h3{
 
 
 
-#subBtn{
+#subBtn, #knowList{
   width: 250px;
   height: 40px;
   border-style: solid;
@@ -101,4 +101,10 @@ h3{
 	height:50px;
 }
 
+/* #detailTbl { */
+/*     margin-top: 50%; */
+/* } */
 
+#knowledgeDetailDiv{
+	padding-top:50%;
+}
