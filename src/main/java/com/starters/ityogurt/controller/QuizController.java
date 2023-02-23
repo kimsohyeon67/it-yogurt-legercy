@@ -104,6 +104,10 @@ public class QuizController {
 			int isRight1=isRight[0];
 			int isRight2=isRight[1];
 			int isRight3=isRight[2];
+			
+			System.out.println(userChoice1+"==userChoice1");
+			System.out.println(isRight1+"==isRight1");
+			
 			return "redirect:/answerResult2/"+quizSeq1+"/"+quizSeq2+"/"+quizSeq3+"/"+userChoice1+"/"+userChoice2+"/"+userChoice3+"/"+isRight1+"/"+isRight2+"/"+isRight3+"/"+knowSeq;
 		}
 
@@ -135,7 +139,7 @@ public class QuizController {
 	}
 	
 	//정답 보여주기(가져와서 보여주기)
-		@GetMapping("/answerResult/{quizSeq1}/{quizSeq2}/{quizSeq3}/{userChoice1}/{userChoice2}/{userChoice3}/{isRight1}/{isRight2}/{isRight3}/{knowSeq}")
+		@GetMapping("/answerResult2/{quizSeq1}/{quizSeq2}/{quizSeq3}/{userChoice1}/{userChoice2}/{userChoice3}/{isRight1}/{isRight2}/{isRight3}/{knowSeq}")
 		public ModelAndView answerResult2(@PathVariable("quizSeq1") int quizSeq1, @PathVariable("quizSeq2") int quizSeq2, @PathVariable("quizSeq3") int quizSeq3, 
 				@PathVariable("userChoice1") int userChoice1, @PathVariable("userChoice2") int userChoice2, @PathVariable("userChoice3") int userChoice3, 
 				@PathVariable("isRight1") int isRight1, @PathVariable("isRight2") int isRight2, @PathVariable("isRight3") int isRight3, @PathVariable("knowSeq") int knowSeq, HttpServletRequest request) {
@@ -144,6 +148,9 @@ public class QuizController {
 //			int answerCnt = learnRecordService.getAnswerCnt(knowSeq);
 			int userSeq = 0;
 			int[] userChoice = {userChoice1, userChoice2, userChoice3};
+			for(int a:userChoice) {
+				System.out.println("정답2 "+a);
+			}
 			int[] isRight = {isRight1, isRight2, isRight3};
 				//체크한 답 보여줘야 하니 learn_record 불러오기
 				List<LearnRecordDTO> learnList = learnRecordService.getLearn(quizSeq1,quizSeq2,quizSeq3);
