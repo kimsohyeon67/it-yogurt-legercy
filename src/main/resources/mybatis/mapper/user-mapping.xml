@@ -75,4 +75,7 @@
 		select * from user where user_seq=#{user_seq}
 	</select>
 
+	<update id="updateUserInfo" parameterType="hashmap">
+		UPDATE user SET nickname=#{nickname}, phone=#{phone} WHERE user_seq=#{userSeq}
+	</update>
 </mapper>

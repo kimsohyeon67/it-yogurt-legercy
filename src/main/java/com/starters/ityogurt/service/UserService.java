@@ -2,6 +2,7 @@ package com.starters.ityogurt.service;
 
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 import com.starters.ityogurt.dto.UserDTO;
 import com.starters.ityogurt.util.Criteria;
@@ -31,4 +32,6 @@ public interface UserService {
 	void AfterLoginProcess(UserDTO result, HttpSession session);
 
 	UserDTO getUserInfo(int userSeq);
+
+	void updateUserInfo(Map<Object, Object> map);
 }
