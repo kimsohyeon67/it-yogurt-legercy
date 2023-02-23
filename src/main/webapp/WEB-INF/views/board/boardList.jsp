@@ -42,7 +42,7 @@
 .fas {
 line-height: inherit;
 }
-.table {
+.form {
 	margin-top: 20%;
 }
 </style>
