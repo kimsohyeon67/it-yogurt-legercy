@@ -44,7 +44,7 @@ label {
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 		<div style="display: block; width:100%;">
-		<form action="<%=request.getContextPath()%>/user/newInfo/${userDto.userSeq}" method="post">
+		<form action="<%=request.getContextPath()%>/mypage/newInfo/${userDto.userSeq}" method="post">
 			<br>
 			<p>당신의 새로운 정보를 입력해주세요!</p>
 			<h1>${userDto.nickname}님!</h1><br><br>

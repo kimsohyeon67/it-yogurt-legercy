@@ -73,49 +73,4 @@ public class UserController {
         mv.setViewName("user/verify");
         return mv;
     }
-
-    @GetMapping("/myPage/{user_seq}")
-    public ModelAndView myPage(@PathVariable("user_seq") String user_seq) {
-    	ModelAndView mv = new ModelAndView();
-    	int userSeq = Integer.parseInt(user_seq);
-    	System.out.println("유저번호"+userSeq);
-    	UserDTO userDto = userService.getUserInfo(userSeq);
-//    	System.out.println(userDto);
-    	mv.addObject("userDto", userDto);
-    	mv.setViewName("user/myPage");
-        return mv;
-    }
-    
-    @PostMapping("/user/info/{user_seq}")
-    public ModelAndView info(@PathVariable("user_seq") String user_seq) {
-    	ModelAndView mv = new ModelAndView();
-    	int userSeq = Integer.parseInt(user_seq);
-    	System.out.println("유저번호"+userSeq);
-    	UserDTO userDto = userService.getUserInfo(userSeq);
-//    	System.out.println(userDto);
-    	mv.addObject("userDto", userDto);
-    	mv.setViewName("user/info");
-        return mv;
-    }
-    
-    @PostMapping("/user/newInfo/{user_seq}")
-    public ModelAndView newInfo(@PathVariable("user_seq") String user_seq, UserDTO userDto) {
-    	ModelAndView mv = new ModelAndView();
-    	int userSeq = Integer.parseInt(user_seq);
-    	System.out.println("유저번호2"+userSeq);
-    	System.out.println(userDto.getNickname()+userDto.getEmail()+userDto.getPhone());
-    	Map<Object,Object> map = new HashMap<>();
-    	map.put("nickname", userDto.getNickname());
-    	map.put("phone", userDto.getPhone());
-    	map.put("userSeq", userSeq);
-    	userService.updateUserInfo(map);
-    	userDto = userService.getUserInfo(userSeq);
-//    	System.out.println(userDto);
-    	mv.addObject("userDto", userDto);
-    	mv.setViewName("user/myPage");
-        return mv;
-    }
-    
-    
-    
 }

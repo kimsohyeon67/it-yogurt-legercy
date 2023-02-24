@@ -38,7 +38,7 @@
                 	</c:when>
 					<c:otherwise>
                     <c:if test="${not empty sessionScope.user_seq}">
-                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/mypage">MyPage</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="<%=request.getContextPath()%>/mypage/${sessionScope.user_seq}">MyPage</a></li>
                      </c:if>
 					</c:otherwise>
 				</c:choose>

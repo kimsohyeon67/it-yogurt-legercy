@@ -50,6 +50,7 @@ public class UserRestController {
 
         userDTO.setCategorySeq(selectedCategory.getCategorySeq());
         int result = userService.insertUser(userDTO);
+        
         return true;
     }
 
