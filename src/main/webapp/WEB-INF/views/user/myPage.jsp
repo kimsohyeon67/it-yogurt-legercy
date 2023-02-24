@@ -50,8 +50,7 @@ a{/* 태그 색상 변경 */
 		<div class="content">
 		<div style="display: block; width:100%;">
     	<h1>마이페이지</h1><br>
-			<input type="button" value="오답노트" onclick="window.location.href='/mypage/wrong/${sessionScope.user_seq}'">
-		<form action="<%=request.getContextPath()%>/user/info/${userDto.userSeq}" method="post">
+		<form action="<%=request.getContextPath()%>/mypage/info/${userDto.userSeq}" method="post">
 			<br>
 			<p>오늘의 지식과 퀴즈를 확인해보셨나요?</p>
 			<h1>${userDto.nickname}님!</h1><br><br>
@@ -75,7 +74,7 @@ a{/* 태그 색상 변경 */
 			<a href="">구독 취소하기</a>
 			<div id="myBtnDiv">
 				<input type="submit" value="정보수정하기" class="myBtn">
-				<input type="button" value="오답노트" class="myBtn">
+				<input type="button" value="오답노트" class="myBtn"  onclick="window.location.href='/mypage/wrong/${sessionScope.user_seq}'">
 			</div>
 			</form>
 		</div>

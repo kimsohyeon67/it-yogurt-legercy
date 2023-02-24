@@ -31,44 +31,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class LearnRecordQuizController {
 
     @Autowired
-    LearnRecordQuizDTO dao;
+    LearnRecordQuizDTO dto;
 
-    @Autowired
-    @Qualifier("recodequizservice")
-    LearnRecordQuizService service;
-
-    @Autowired
-    LearnRecordService recodeservice;
-
-    // 틀린 문제 개수 가져오기. limit 기본값 : 5
-    @GetMapping("/mypage/wrong/{user_seq}/list")
-    @ResponseBody
-    public ModelMap getWrongQuiz(Criteria cri,
-        @PathVariable("user_seq") int userSeq,
-        @RequestParam(defaultValue = "5") String perPageNum) {
-        ModelMap m = new ModelMap();
-
-        Paging paging = new Paging();
-        cri.setPerPageNum(Integer.parseInt(perPageNum));
-        paging.setCri(cri);
-
-        int totalBoardCnt = service.getWrongAnswerCountByUser(userSeq);
-        int maxPage = (int) ((double) totalBoardCnt / cri.getPerPageNum() + 0.9);
-        List<LearnRecordQuizDTO> list = service.getWrongAnswerByUser(userSeq, cri.getPageStart(),
-            cri.getPerPageNum());
-        paging.setTotalCount(totalBoardCnt);
-        m.addAttribute("maxPage", maxPage);
-        m.addAttribute("paging", paging);
-        m.addAttribute("quizList", list);
-
-        return m;
-    }
-
-    //오답문제 정보 갱신 시
-    @PutMapping("/quiz/wrong/answer/1")
-    @ResponseBody
-    public void updateWrongQuiz(@RequestBody LearnRecordDTO data) {
-        recodeservice.updateLearnData(Integer.parseInt(data.getUserChoice()), data.getIsRight(),
-            data.getUserSeq(), data.getQuizSeq());
-    }
 }
