@@ -15,7 +15,7 @@
 <title> 커뮤니티 | 게시판 </title>
 <style>
     .divCss {
-        margin-top: 15%;
+        margin-top: 7%;
     }
 </style>
 </head>
@@ -23,7 +23,7 @@
 <body style="background-color: #F9F2ED">
 <div class="container divCss">
         <!-- Page content-->
-        <div class="container mt-5">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-auto ">
                     <!-- Post content-->
