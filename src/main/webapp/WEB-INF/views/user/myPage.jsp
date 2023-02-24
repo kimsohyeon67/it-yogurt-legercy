@@ -38,12 +38,12 @@ label {
 #myBtnDiv{
 	padding: 10% 10% 5% 10%;
 }
-a{
+a{/* 태그 색상 변경 */
 	float: right;
 	color: black;
 }
 </style>
-</head>
+</head> 
 <body>
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
