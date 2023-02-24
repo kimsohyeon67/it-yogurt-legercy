@@ -38,9 +38,10 @@ label {
 #myBtnDiv{
 	padding: 10% 10% 5% 10%;
 }
-a{/* 태그 색상 변경 */
+p{/* 태그 색상 변경 */
 	float: right;
 	color: black; 
+	text-decoration: underline;
 }
 </style>
 </head> 
@@ -71,7 +72,7 @@ a{/* 태그 색상 변경 */
 				<label>가입일자</label>
 				<div style="display: inline;"> ${userDto.insertDate}</div>
 			</div>
-			<a href="">구독 취소하기</a>
+			<p onclick="goDelete()">구독 취소하기</p>
 			<div id="myBtnDiv">
 				<input type="submit" value="정보수정하기" class="myBtn">
 				<input type="button" value="오답노트" class="myBtn"  onclick="window.location.href='/mypage/wrong/${sessionScope.user_seq}'">
@@ -81,5 +82,65 @@ a{/* 태그 색상 변경 */
 		</div>
 		<%@include file="../common/footer.jsp"%>
 	</div>
+<script type="text/javascript">
+	function goDelete(){
+		let con = confirm('정말 구독을 취소하시겠어요?');
+		if(con == true){
+			alert('구독 취소되었습니다.');
+			location.href="${pageContext.request.contextPath}/mypage";
+		}else{
+			location.href="#";
+		}
+	}
+</script>	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
