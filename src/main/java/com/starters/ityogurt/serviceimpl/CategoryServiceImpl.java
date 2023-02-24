@@ -40,4 +40,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+	@Override
+	public void insertCategory(CategoryDTO categoryDTO) {
+		dao.insertCategory(categoryDTO);
+	}
+
     }

@@ -30,5 +30,11 @@
 	<select id="getCategoryByAllType" resultType="categorydto" parameterType="categorydto">
 		SELECT * FROM category WHERE main = #{main} AND middle = #{middle} AND sub = #{sub} AND detail IS NULL;
 	</select>
+	
+<!-- 관리자가 새로운 컨텐츠 추가 (카테고리 추가) -->	
+	<insert id="insertCategory" parameterType="categorydto">
+		INSERT into category(main, middle, sub, detail)
+		values (#{main}, #{middle}, #{sub}, #{detail})
+	</insert>
 
 </mapper>
