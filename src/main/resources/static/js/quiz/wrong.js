@@ -32,20 +32,27 @@ $(document).ready(function () {
         {}, success)
   }
 
-  function clickAnswerButton(event) {
-    let index = $(event.currentTarget).attr("id").split('-')[1];
+  function clickAnswerButton(event, index, answer_data) {
+    // let index = $(event.currentTarget).attr("id").split('-')[1];
+    // let userChoice = $(`input[name=radio${index}]:checked`).val();
+    // let answer = list[index].answer;
+    // let isRight = userChoice == answer ? 1 :0;
+    // let str = isRight ? "정답입니다" : "틀렸습니다";
+
+    // let index = $(event.currentTarget).attr("id").split('-')[1];
+    answer_data = answer_data;
     let userChoice = $(`input[name=radio${index}]:checked`).val();
-    let answer = list[index].answer;
-    let isRight = userChoice == answer ? 1 :0;
+    // let answer = list[index].answer;
+    let isRight = userChoice == answer_data.answer ? 1 :0;
     let str = isRight ? "정답입니다" : "틀렸습니다";
 
     if (userChoice) {
       $(`#${index} tbody .answer-check`).html(`
       <tr><td><div>
-	      	  <br><b>정답: ${answer}</b><br>
+	      	  <br><b>정답: ${answer_data.answer }</b><br>
 	      		<br><b>내가 입력한 답: ${userChoice}</b><br>
             ${str}<br>
-            ${list[index].commentary}
+            ${answer_data.commentary}
 	    </div></td></tr> 
     `)
     }
@@ -55,8 +62,8 @@ $(document).ready(function () {
       "data" : {
         "userChoice": userChoice,
         "isRight" : isRight,
-        "userSeq" :list[index].userSeq,
-        "quizSeq" :list[index].quizSeq
+        "userSeq" :answer_data.userSeq,
+        "quizSeq" :answer_data.quizSeq
       }
     },()=>{},(error)=>{alert(error.responseJSON.errorMessage);})
   }
@@ -67,8 +74,8 @@ $(document).ready(function () {
     let detail = {};
     $("#quizForm").html("");
     for (let i = 0; i < list.length; i++) {
-      answer[i] = list[i].answer;
-      detail[i] = list[i].detail;
+      // answer[i] = list[i].answer;
+      // detail[i] = list[i].detail;
       $("#quizForm").append(`
             <input type="hidden" value="${result.userSeq}" name="userSeq">
             <table id="${i}">
@@ -106,10 +113,12 @@ $(document).ready(function () {
                 </td>
             </tr>`)
       }
+      let str = JSON.stringify(list[i]);
       $("#" + i + " tbody").append(`
             <tr>
-              <td><input type="button" class="checkAnswer" id="answer-${i}" onclick="clickAnswerButton(event)" value="정답 확인"></td>
+              <td><input type="button" class="checkAnswer" id="answer-${i}" onclick='clickAnswerButton(event, ${i}, ${str})' value="정답 확인"></td>
             </tr>
+            
             <tr class='answer-check'></tr>
       `)
     }

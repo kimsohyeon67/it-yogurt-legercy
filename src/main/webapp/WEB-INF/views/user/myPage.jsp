@@ -21,7 +21,7 @@
 		<div class="content">
 		<div style="display: block;">
 			<h1>마이페이지</h1><br>
-			<input type="button" value="오답노트">
+			<input type="button" value="오답노트" onclick="window.location.href='/mypage/wrong/${sessionScope.user_seq}'">
 		</div>
 		</div>
 		<%@include file="../common/footer.jsp"%>

@@ -13,6 +13,7 @@ import java.util.List;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 public class LearnRecordQuizController {
 
     @Autowired
@@ -40,10 +41,11 @@ public class LearnRecordQuizController {
     LearnRecordService recodeservice;
 
     // 틀린 문제 개수 가져오기. limit 기본값 : 5
-    @GetMapping("/quiz/wrong/{user_seq}/list")
+    @GetMapping("/mypage/wrong/{user_seq}/list")
     @ResponseBody
     public ModelMap getWrongQuiz(Criteria cri,
-        @PathVariable("user_seq") int userSeq, @RequestParam(defaultValue = "5") String perPageNum) {
+        @PathVariable("user_seq") int userSeq,
+        @RequestParam(defaultValue = "5") String perPageNum) {
         ModelMap m = new ModelMap();
 
         Paging paging = new Paging();
@@ -66,6 +68,7 @@ public class LearnRecordQuizController {
     @PutMapping("/quiz/wrong/answer/1")
     @ResponseBody
     public void updateWrongQuiz(@RequestBody LearnRecordDTO data) {
-        recodeservice.updateLearnData(Integer.parseInt(data.getUserChoice()),data.getIsRight(),data.getUserSeq(), data.getQuizSeq());
+        recodeservice.updateLearnData(Integer.parseInt(data.getUserChoice()), data.getIsRight(),
+            data.getUserSeq(), data.getQuizSeq());
     }
 }
