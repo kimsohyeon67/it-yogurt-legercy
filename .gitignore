@@ -196,3 +196,6 @@ local.properties
 
 # 사용자 추가
 application.properties
+application_backup.properties
+DBConfig
+DBSecureTest
