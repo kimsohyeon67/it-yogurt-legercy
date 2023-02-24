@@ -58,8 +58,12 @@ label {
 				<div style="display: inline;"> ${userDto.email}</div>
 			</div>
 			<div class="myDiv">
-				<label>phone</label>
+				<label>연락처</label>
 				<div style="display: inline;"> <input type="text" value="${userDto.phone}" name="phone"></div>
+			</div>
+			<div class="myDiv">
+				<label>카테고리</label>
+				<div style="display: inline;" id="category"> ${categoryDto.main} > ${categoryDto.middle} > ${categoryDto.sub}</div>
 			</div>
 			<div class="myDiv">
 				<label>가입일자</label>

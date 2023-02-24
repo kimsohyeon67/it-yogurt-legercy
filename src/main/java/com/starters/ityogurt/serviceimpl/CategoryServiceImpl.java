@@ -40,8 +40,8 @@ public class CategoryServiceImpl implements CategoryService {
         return dao.getCategoryByAllType(categoryDTO);
 
     }
-    
-    	@Override
+
+  @Override
 	public void insertCategory(CategoryDTO categoryDTO) {
 		dao.insertCategory(categoryDTO);
 	}
@@ -50,4 +50,15 @@ public class CategoryServiceImpl implements CategoryService {
     public int findWeakCategoryByCategorySeq(int userSeq) {
         return dao.findWeakCategoryByCategorySeq(userSeq);
     }
+
+		@Override
+		public int countAllCategory() {
+			  return dao.countAllCategory();
+    }
+  
+  	@Override
+		public CategoryDTO getCategoryByUserSeq(int userSeq) {
+			return dao.getCategoryByUserSeq(userSeq);
+
+		}
 }

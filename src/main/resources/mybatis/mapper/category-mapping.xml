@@ -19,6 +19,12 @@
 		FROM category
 		WHERE detail IS NULL
 	</select>
+	
+	<!-- 전체 카테고리 개수 -->
+	<select id="countAllCategory" resultType="int">
+		SELECT count(*)
+		FROM category
+	</select>
 
 
 <!-- 카테고리 각 type으로 카테고리 목록 찾기,	type = main, middle, sub, detail -->
@@ -48,5 +54,11 @@
 		GROUP BY category_seq
 		ORDER BY COUNT(*) DESC, category_seq LIMIT 0,1
 	</select>
-
+	
+	<select id="getCategoryByUserSeq" parameterType="int" resultType="categorydto">
+		SELECT * FROM category c 
+		JOIN user u
+		ON c.category_seq = u.category_seq
+		WHERE user_seq=#{userSeq}
+	</select>
 </mapper>
