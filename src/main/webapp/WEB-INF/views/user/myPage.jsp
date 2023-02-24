@@ -38,17 +38,23 @@ label {
 #myBtnDiv{
 	padding: 10% 10% 5% 10%;
 }
+a{/* 태그 색상 변경 */
+	float: right;
+	color: black; 
+}
 </style>
-</head>
+</head> 
 <body>
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 		<div style="display: block; width:100%;">
-		<form action="<%=request.getContextPath()%>/user/info/${userDto.userSeq}" method="post">
+    	<h1>마이페이지</h1><br>
+		<form action="<%=request.getContextPath()%>/mypage/info/${userDto.userSeq}" method="post">
 			<br>
 			<p>오늘의 지식과 퀴즈를 확인해보셨나요?</p>
-			<h1>${userDto.nickname}님!</h1><br>
+			<h1>${userDto.nickname}님!</h1><br><br>
+			<b>유저정보</b>
 			<div class="myDiv">
 				<label>닉네임</label>
 				<div style="display: inline;"> ${userDto.nickname}</div>
@@ -65,9 +71,10 @@ label {
 				<label>가입일자</label>
 				<div style="display: inline;"> ${userDto.insertDate}</div>
 			</div>
+			<a href="">구독 취소하기</a>
 			<div id="myBtnDiv">
 				<input type="submit" value="정보수정하기" class="myBtn">
-				<input type="button" value="오답노트" class="myBtn">
+				<input type="button" value="오답노트" class="myBtn"  onclick="window.location.href='/mypage/wrong/${sessionScope.user_seq}'">
 			</div>
 			</form>
 		</div>
