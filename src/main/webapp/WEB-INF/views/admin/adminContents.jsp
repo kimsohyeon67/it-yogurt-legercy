@@ -49,10 +49,10 @@
             
             <div class="input-group mb-3">
             <div>
-	            <label for="main"><h2>카테고리</h2></label>
+	            <!-- <label for="main"><h2>카테고리</h2></label> -->
 	        </div>
 	        <br>
-	         <label for="main">대분류</label>
+	        <!--  <label for="main">대분류</label> -->
 <!--             	<input type="text" name="main" id="main" class="form-control">
               <label for="middle">중분류</label>
             	<input type="text" name="middle" id="middle" class="form-control">
@@ -65,7 +65,7 @@
 		
 		<!-- 임시 -->
 					<input type="hidden" name ="categorySeq" value="2" >
-					<input type="hidden" name ="userSeq" value="2" >
+					<input type="hidden" name ="userSeq" value="${sessionScope.user_seq }" >
 		<!--  -->			
 		<div>
 			<h3>정보글 등록 </h3>

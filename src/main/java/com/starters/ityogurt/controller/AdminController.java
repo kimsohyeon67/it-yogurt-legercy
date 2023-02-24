@@ -150,55 +150,80 @@ public class AdminController {
 	 //컨텐츠 업로드
    @PostMapping("/contents")
    @ResponseBody
-	  	public void UploadContents(@RequestBody String data /*List<KnowledgeDTO> knowledgeDto, @RequestBody List<QuizDTO> quizDto*/  /*,@RequestParam("formData") String formData*/) {
-	   		//ModelAndView mv = new ModelAndView();
+	  	public void UploadContents(@RequestBody String data) {
 	   		
-	   		System.out.println(data);
 	   		JSONParser jsonParser = new JSONParser();
 			JSONArray insertParam = null;
 			try {
 				insertParam = (JSONArray) jsonParser.parse(data);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(insertParam.size());
 			JSONObject insertData = new JSONObject();
 			
+			KnowledgeDTO knowledgeDto = new KnowledgeDTO();
+			QuizDTO quizDto = new QuizDTO();
+			String [] knowledgeData = new String [4]; 
+			String [] quizData = new String[28]; 
 			for(int i=0; i<4; i++){
 				insertData = (JSONObject) insertParam.get(i);
-				
-			}
-			for(int i=4; i<insertParam.size(); i++){
-				//배열 안에 있는것도 JSON형식 이기 때문에 JSON Object 로 추출            
-				insertData = (JSONObject) insertParam.get(i);
-				System.out.println(insertData);
-				String name = (String) insertData.get("name"); 
 				String value = (String) insertData.get("value");
+				knowledgeData[i]= value;
 				
 			}
+			knowledgeDto.setCategorySeq(Integer.parseInt(knowledgeData[0]));
+			knowledgeDto.setUserSeq(Integer.parseInt(knowledgeData[1]));
+			knowledgeDto.setTitle(knowledgeData[2]);
+			knowledgeDto.setContent(knowledgeData[3]);
+			knowledgeService.uploadKnowledge(knowledgeDto);
+
+			
+			for(int i=4; i<12; i++){
+				insertData = (JSONObject) insertParam.get(i);
+				String value = (String) insertData.get("value");
+				quizData[i]= value;
+				
+			}
+			quizDto.setQuestion(quizData[4]);
+			quizDto.setChoice1(quizData[5]);
+			quizDto.setChoice2(quizData[6]);
+			quizDto.setChoice3(quizData[7]);
+			quizDto.setChoice4(quizData[8]);
+			quizDto.setAnswer(Integer.parseInt(quizData[9]));
+			quizDto.setCommentary(quizData[10]);
+			quizDto.setKnowSeq(Integer.parseInt(quizData[11]));
+			quizService.uploadQuiz(quizDto);
+			for(int i=12; i<20; i++){
+				insertData = (JSONObject) insertParam.get(i);
+				String value = (String) insertData.get("value");
+				quizData[i]= value;
+				
+			}
+			quizDto.setQuestion(quizData[12]);
+			quizDto.setChoice1(quizData[13]);
+			quizDto.setChoice2(quizData[14]);
+			quizDto.setChoice3(quizData[15]);
+			quizDto.setChoice4(quizData[16]);
+			quizDto.setAnswer(Integer.parseInt(quizData[17]));
+			quizDto.setCommentary(quizData[18]);
+			quizDto.setKnowSeq(Integer.parseInt(quizData[19]));
+			quizService.uploadQuiz(quizDto);
+			for(int i=20; i<insertParam.size(); i++){
+				insertData = (JSONObject) insertParam.get(i);
+				String value = (String) insertData.get("value");
+				quizData[i]= value;
+				
+			}
+			quizDto.setQuestion(quizData[20]);
+			quizDto.setChoice1(quizData[21]);
+			quizDto.setChoice2(quizData[22]);
+			quizDto.setChoice3(quizData[23]);
+			quizDto.setChoice4(quizData[24]);
+			quizDto.setAnswer(Integer.parseInt(quizData[25]));
+			quizDto.setCommentary(quizData[26]);
+			quizDto.setKnowSeq(Integer.parseInt(quizData[27]));
+			quizService.uploadQuiz(quizDto);
+			
    		}
-		   //knowledgeService.uploadKnowledge(knowledgeDto);
-//	   		for(int k =0; k<knowledgeDto.size();k++) {
-//	   			knowledgeService.uploadKnowledge(knowledgeDto.get(k));
-//	   		}
-//		 	for(int i =0; i<quizDto.size();i++) {
-//		 		quizService.uploadQuiz(quizDto.get(i));
-//		 	}
-		 	//quizService.uploadQuiz(quizDto);
-		 	//mv.setViewName("redirect:page");
-		 	//return mv;
-//	 }
-//   @PostMapping("/contents")
-//   public ModelAndView UploadContents(@RequestBody List<QuizDTO> quizDto, @RequestBody KnowledgeDTO knowledgeDto /*,@RequestParam("formData") String formData*/) {
-//	   System.out.println(quizDto.get(0).getCommentary());
-//	   ModelAndView mv = new ModelAndView();
-//	   knowledgeService.uploadKnowledge(knowledgeDto);
-//	   for(int i =0; i<quizDto.size();i++) {
-//		   quizService.uploadQuiz(quizDto.get(i));
-//		   
-//	   }
-//	   mv.setViewName("redirect:page");
-//	   return mv;
-//   }
-}
+	 
+	}
