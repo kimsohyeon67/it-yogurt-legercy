@@ -38,5 +38,6 @@ public interface UserDAO {
 
 	void updateUserInfo(Map<Object, Object> map);
 
+	int setWeakCategoryByUser(UserDTO userdto);
 }
 

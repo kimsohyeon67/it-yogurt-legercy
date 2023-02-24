@@ -57,7 +57,7 @@ $(document).ready(function () {
     `)
     }
 
-    window.ajax.request('/quiz/wrong/answer/1',{
+    window.ajax.request('/mypage/wrong/answer/1',{
       "type" : "PUT",
       "data" : {
         "userChoice": userChoice,

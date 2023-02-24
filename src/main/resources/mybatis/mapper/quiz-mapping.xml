@@ -32,4 +32,10 @@
     WHERE is_right = 0
       AND l.user_seq = #{userSeq};
   </select>
+
+  <select id="getWeakByUser">
+    SELECT* FROM quiz q
+        INNER JOIN (SELECT category_seq, know_seq FROM knowledge) AS c ON c.know_seq = q.know_seq
+    WHERE category_seq = #{userSeq};
+  </select>
 </mapper>
