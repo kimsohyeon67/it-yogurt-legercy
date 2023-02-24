@@ -78,6 +78,17 @@ public class MyPageController {
         mv.setViewName("user/myPage");
         return mv;
     }
+    
+    @GetMapping("/mypage/cancel/{user_seq}")
+    public ModelAndView cancel(@PathVariable("user_seq") String user_seq) {
+    	ModelAndView mv = new ModelAndView();
+    	int userSeq = Integer.parseInt(user_seq);
+    	userService.deleteUser(userSeq);
+    	
+    	mv.setViewName("user/login");
+    	return mv;
+    }
+    
 
     // 오답노트
 
@@ -120,4 +131,5 @@ public class MyPageController {
         recodeservice.updateLearnData(Integer.parseInt(data.getUserChoice()), data.getIsRight(),
             data.getUserSeq(), data.getQuizSeq());
     }
+  
 }
