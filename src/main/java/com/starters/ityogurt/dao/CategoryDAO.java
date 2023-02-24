@@ -18,6 +18,7 @@ public interface CategoryDAO {
 	CategoryDTO getCategoryByAllType(CategoryDTO categoryDTO);
 	
 	void insertCategory(CategoryDTO categoryDTO);
-	
-	
+
+	CategoryDTO getCategoryByUserSeq(int userSeq);
+
 }
