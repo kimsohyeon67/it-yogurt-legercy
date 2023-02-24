@@ -40,7 +40,7 @@ label {
 }
 a{/* 태그 색상 변경 */
 	float: right;
-	color: black;
+	color: black; 
 }
 </style>
 </head> 
