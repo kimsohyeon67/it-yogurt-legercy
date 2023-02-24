@@ -25,6 +25,18 @@ label {
     margin-top: 23px;
     margin-left: 50px;
 }
+#infoBtn{
+	width: 250px;
+    height: 40px;
+    border-style: solid;
+    border-width: medium;
+    margin: auto;
+    border-color: #91ACCC;
+    font-size: 20px;
+}
+#infoDiv{
+	padding: 10% 30% 5% 30%;
+}
 </style>
 </head>
 <body>
@@ -33,14 +45,17 @@ label {
 		<div class="content">
 		<div style="display: block; width:100%;">
 		<form action="<%=request.getContextPath()%>/user/newInfo/${userDto.userSeq}" method="post">
-			<h1>내 정보 수정 페이지</h1><br>
+			<br>
+			<p>당신의 새로운 정보를 입력해주세요!</p>
+			<h1>${userDto.nickname}님!</h1><br><br>
+			<b>유저정보</b>
 			<div class="myDiv">
 				<label>닉네임</label>
 				<div style="display: inline;"> <input type="text" value="${userDto.nickname}" name="nickname"></div>
 			</div>
 			<div class="myDiv">
 				<label>이메일</label>
-				<div style="display: inline;"> <input type="text" value="${userDto.email}" name="email" readonly><input type="button" value="중복체크"></div>
+				<div style="display: inline;"> ${userDto.email}</div>
 			</div>
 			<div class="myDiv">
 				<label>phone</label>
@@ -50,7 +65,9 @@ label {
 				<label>가입일자</label>
 				<div style="display: inline;"> ${userDto.insertDate}</div>
 			</div>
-				<input type="submit" value="수정하기" >
+			<div id="infoDiv">
+				<input type="submit" value="수정하기" id="infoBtn">
+			</div>	
 			</form>
 		</div>
 		</div>
