@@ -49,6 +49,8 @@ a{/* 태그 색상 변경 */
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 		<div style="display: block; width:100%;">
+    	<h1>마이페이지</h1><br>
+			<input type="button" value="오답노트" onclick="window.location.href='/mypage/wrong/${sessionScope.user_seq}'">
 		<form action="<%=request.getContextPath()%>/user/info/${userDto.userSeq}" method="post">
 			<br>
 			<p>오늘의 지식과 퀴즈를 확인해보셨나요?</p>
