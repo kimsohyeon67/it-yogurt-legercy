@@ -26,7 +26,7 @@
 		<div class="content">
 				<div id="quizListDiv">
 				<form action="<%=request.getContextPath()%>" id="quizForm" method=post>
-				<h4>카테고리</h4>
+				<h4>${categoryInfo.main} > ${categoryInfo.middle} > ${categoryInfo.sub}</h4>
 				<h1>${title}</h1>
 					<c:forEach items="${quizList }" var="list">
 						<c:set var="length" value="${fn:length(quizList) }" />

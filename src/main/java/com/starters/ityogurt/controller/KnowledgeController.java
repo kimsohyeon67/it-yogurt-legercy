@@ -99,10 +99,7 @@ public class KnowledgeController {
 		service.viewCnt(knowSeq);
 		
 		String categorySeq = String.valueOf(service.getCategorySeq(knowSeq));
-		System.out.println(categorySeq);
 		CategoryDTO categoryInfo = categoryService.getCategoryByCategorySeq(categorySeq);
-		
-		System.out.println(categoryInfo.toString());
 		
 		
 		mv.addObject("categoryInfo", categoryInfo);

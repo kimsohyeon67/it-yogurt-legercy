@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.starters.ityogurt.dao.QuizDAO;
+import com.starters.ityogurt.dto.CategoryDTO;
 import com.starters.ityogurt.dto.LearnRecordDTO;
 import com.starters.ityogurt.dto.QuizDTO;
+import com.starters.ityogurt.service.CategoryService;
 import com.starters.ityogurt.service.KnowledgeService;
 import com.starters.ityogurt.service.LearnRecordService;
 import com.starters.ityogurt.service.QuizService;
@@ -36,11 +38,19 @@ public class QuizController {
 	@Qualifier("knowledgeservice")
 	KnowledgeService knowledgeService;
 	
+	@Autowired
+	@Qualifier("categoryservice")
+	CategoryService categoryService;
+	
 	@GetMapping("/quiz/{knowSeq}") //매일지식 폼 확인
 	public ModelAndView quiz(@PathVariable("knowSeq") int knowSeq) {
 		ModelAndView mv = new ModelAndView();
 		List<QuizDTO> quizList = service.getQuiz(knowSeq);
 		String knowledgeTitle = knowledgeService.getKnowledgeTitle(knowSeq);
+		String categorySeq = String.valueOf(knowledgeService.getCategorySeq(knowSeq));
+		CategoryDTO categoryInfo = categoryService.getCategoryByCategorySeq(categorySeq);
+		
+		mv.addObject("categoryInfo", categoryInfo);
 		mv.addObject("title", knowledgeTitle);
 		mv.addObject("quizList", quizList);
 		mv.setViewName("quiz/list");		
