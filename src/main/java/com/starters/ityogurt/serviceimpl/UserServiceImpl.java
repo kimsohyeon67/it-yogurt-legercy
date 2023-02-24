@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.starters.ityogurt.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,5 +127,17 @@ public class UserServiceImpl implements UserService {
 
         return dao.setIsPassByUserSeq(userSeq);
     }
+
+	@Override
+	public UserDTO getUserInfo(int userSeq) {
+		return dao.getUserInfo(userSeq);
+	}
+
+
+	@Override
+	public void updateUserInfo(Map<Object, Object> map) {
+		dao.updateUserInfo(map);
+		
+	}
 
 }

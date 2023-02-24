@@ -25,19 +25,6 @@ label {
     margin-top: 23px;
     margin-left: 50px;
 }
-.myBtn{
-	width: 250px;
-    height: 40px;
-    border-style: solid;
-    border-width: medium;
-    margin: auto;
-    border-color: #91ACCC;
-    font-size: 20px;
-}
-
-#myBtnDiv{
-	padding: 10% 10% 5% 10%;
-}
 </style>
 </head>
 <body>
@@ -45,30 +32,25 @@ label {
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 		<div style="display: block; width:100%;">
-		<form action="<%=request.getContextPath()%>/user/info/${userDto.userSeq}" method="post">
-			<br>
-			<p>오늘의 지식과 퀴즈를 확인해보셨나요?</p>
-			<h1>${userDto.nickname}님!</h1><br>
+		<form action="<%=request.getContextPath()%>/user/newInfo/${userDto.userSeq}" method="post">
+			<h1>내 정보 수정 페이지</h1><br>
 			<div class="myDiv">
 				<label>닉네임</label>
-				<div style="display: inline;"> ${userDto.nickname}</div>
+				<div style="display: inline;"> <input type="text" value="${userDto.nickname}" name="nickname"></div>
 			</div>
 			<div class="myDiv">
 				<label>이메일</label>
-				<div style="display: inline;"> ${userDto.email}</div>
+				<div style="display: inline;"> <input type="text" value="${userDto.email}" name="email" readonly><input type="button" value="중복체크"></div>
 			</div>
 			<div class="myDiv">
 				<label>phone</label>
-				<div style="display: inline;"> ${userDto.phone}</div>
+				<div style="display: inline;"> <input type="text" value="${userDto.phone}" name="phone"></div>
 			</div>
 			<div class="myDiv">
 				<label>가입일자</label>
 				<div style="display: inline;"> ${userDto.insertDate}</div>
 			</div>
-			<div id="myBtnDiv">
-				<input type="submit" value="정보수정하기" class="myBtn">
-				<input type="button" value="오답노트" class="myBtn">
-			</div>
+				<input type="submit" value="수정하기" >
 			</form>
 		</div>
 		</div>
