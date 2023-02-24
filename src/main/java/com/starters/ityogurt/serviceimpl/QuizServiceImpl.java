@@ -29,4 +29,14 @@ public class QuizServiceImpl implements QuizService {
 	public int getAnswer(int quizSeq) {
 		return dao.getAnswer(quizSeq);
 	}
+
+	@Override
+	public List<QuizDTO> getWeakByUser(int weakCategorySeq) {
+		return dao.getWeakByUser(weakCategorySeq);
+	}
+
+//	@Override
+//	public int getWeakCategoryByCategorySeq(int userSeq) {
+//		return dao.getWrongAnswerCountByUser(userSeq);
+//	}
 }

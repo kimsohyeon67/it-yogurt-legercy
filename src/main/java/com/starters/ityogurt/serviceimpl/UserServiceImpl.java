@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
         setAttendanceByUserSeq(result);
         setLastLoginDateByUserSeq(result.getUserSeq());
         session.setAttribute("user_seq", result.getUserSeq());
+
     }
 
     @Override
@@ -105,7 +106,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUserInfo(Map<Object, Object> map) {
 		dao.updateUserInfo(map);
-		
 	}
 
+    @Override
+    public int setWeakCategoryByUser(UserDTO userDto) {
+        return dao.setWeakCategoryByUser(userDto);
+    }
 }

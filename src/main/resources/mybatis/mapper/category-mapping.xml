@@ -38,7 +38,7 @@
 	</insert>
 
 <!--사용자가 가장 많이 틀린 카테고리 -->
-	<select id="getWeakCategoryByCategorySeq" resultType="categorydto" parameterType="categorydto">
+	<select id="findWeakCategoryByCategorySeq" resultType="int" parameterType="int">
 		SELECT c.category_seq
 		FROM learn_record l
 					 INNER JOIN quiz q ON l.quiz_seq = q.quiz_seq
@@ -48,4 +48,5 @@
 		GROUP BY category_seq
 		ORDER BY COUNT(*) DESC, category_seq LIMIT 0,1
 	</select>
+
 </mapper>

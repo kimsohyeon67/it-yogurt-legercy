@@ -78,4 +78,8 @@
 	<update id="updateUserInfo" parameterType="hashmap">
 		UPDATE user SET nickname=#{nickname}, phone=#{phone} WHERE user_seq=#{userSeq}
 	</update>
+
+	<update id="setWeakCategoryByUser" parameterType="userdto">
+		UPDATE user SET weak_category_seq=#{weakCategorySeq} WHERE user_seq = #{userSeq};
+	</update>
 </mapper>

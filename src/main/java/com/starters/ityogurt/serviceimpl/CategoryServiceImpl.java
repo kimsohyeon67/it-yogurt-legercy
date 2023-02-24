@@ -1,5 +1,6 @@
 package com.starters.ityogurt.serviceimpl;
 
+import com.starters.ityogurt.dto.UserDTO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,9 @@ public class CategoryServiceImpl implements CategoryService {
 	public void insertCategory(CategoryDTO categoryDTO) {
 		dao.insertCategory(categoryDTO);
 	}
+
+    @Override
+    public int findWeakCategoryByCategorySeq(int userSeq) {
+        return dao.findWeakCategoryByCategorySeq(userSeq);
+    }
 }

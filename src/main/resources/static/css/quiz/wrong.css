@@ -28,8 +28,9 @@
 #main {
   width: 100%;
 }
-.quiz-filter {
 
+.content {
+  margin-top: 200px;
 }
 
 .checkAnswer {
