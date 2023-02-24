@@ -1,16 +1,9 @@
 package com.starters.ityogurt.controller;
 
-import com.starters.ityogurt.dto.LearnRecordDTO;
-import com.starters.ityogurt.dto.LearnRecordQuizDTO;
-import com.starters.ityogurt.dto.UserDTO;
-import com.starters.ityogurt.service.LearnRecordQuizService;
-import com.starters.ityogurt.service.LearnRecordService;
-import com.starters.ityogurt.service.UserService;
-import com.starters.ityogurt.util.Criteria;
-import com.starters.ityogurt.util.Paging;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -22,8 +15,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.starters.ityogurt.dto.CategoryDTO;
+import com.starters.ityogurt.dto.LearnRecordDTO;
+import com.starters.ityogurt.dto.LearnRecordQuizDTO;
+import com.starters.ityogurt.dto.UserDTO;
+import com.starters.ityogurt.service.CategoryService;
+import com.starters.ityogurt.service.LearnRecordQuizService;
+import com.starters.ityogurt.service.LearnRecordService;
+import com.starters.ityogurt.service.UserService;
+import com.starters.ityogurt.util.Criteria;
+import com.starters.ityogurt.util.Paging;
 
 @Controller
 public class MyPageController {
@@ -31,6 +34,10 @@ public class MyPageController {
     @Autowired
     @Qualifier("userservice")
     UserService userService;
+    
+    @Autowired
+    @Qualifier("categoryservice")
+    CategoryService categoryService;
 
     @GetMapping("/mypage/wrong/{user_seq}")
     public String moveWrongQuizPage(){
@@ -43,7 +50,8 @@ public class MyPageController {
         int userSeq = Integer.parseInt(user_seq);
         System.out.println("유저번호"+userSeq);
         UserDTO userDto = userService.getUserInfo(userSeq);
-//    	System.out.println(userDto);
+        CategoryDTO categoryDto = categoryService.getCategoryByUserSeq(userSeq);
+        mv.addObject("categoryDto", categoryDto);
         mv.addObject("userDto", userDto);
         mv.setViewName("user/myPage");
         return mv;
@@ -55,7 +63,8 @@ public class MyPageController {
         int userSeq = Integer.parseInt(user_seq);
         System.out.println("유저번호"+userSeq);
         UserDTO userDto = userService.getUserInfo(userSeq);
-//    	System.out.println(userDto);
+        CategoryDTO categoryDto = categoryService.getCategoryByUserSeq(userSeq);
+        mv.addObject("categoryDto", categoryDto);
         mv.addObject("userDto", userDto);
         mv.setViewName("user/info");
         return mv;
@@ -73,7 +82,7 @@ public class MyPageController {
         map.put("userSeq", userSeq);
         userService.updateUserInfo(map);
         userDto = userService.getUserInfo(userSeq);
-//    	System.out.println(userDto);
+       
         mv.addObject("userDto", userDto);
         mv.setViewName("user/myPage");
         return mv;
