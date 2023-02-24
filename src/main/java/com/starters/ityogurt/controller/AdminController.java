@@ -4,14 +4,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -143,11 +149,56 @@ public class AdminController {
 
 	 //컨텐츠 업로드
    @PostMapping("/contents")
-	  	public ModelAndView UploadContents(QuizDTO quizDto, KnowledgeDTO knowledgeDto) {
-		 	ModelAndView mv = new ModelAndView();
-		 	knowledgeService.uploadKnowledge(knowledgeDto);
-		 	quizService.uploadQuiz(quizDto);
-		 	mv.setViewName("redirect:page");
-		 	return mv;
-	 }
+   @ResponseBody
+	  	public void UploadContents(@RequestBody String data /*List<KnowledgeDTO> knowledgeDto, @RequestBody List<QuizDTO> quizDto*/  /*,@RequestParam("formData") String formData*/) {
+	   		//ModelAndView mv = new ModelAndView();
+	   		
+	   		System.out.println(data);
+	   		JSONParser jsonParser = new JSONParser();
+			JSONArray insertParam = null;
+			try {
+				insertParam = (JSONArray) jsonParser.parse(data);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(insertParam.size());
+			JSONObject insertData = new JSONObject();
+			
+			for(int i=0; i<4; i++){
+				insertData = (JSONObject) insertParam.get(i);
+				
+			}
+			for(int i=4; i<insertParam.size(); i++){
+				//배열 안에 있는것도 JSON형식 이기 때문에 JSON Object 로 추출            
+				insertData = (JSONObject) insertParam.get(i);
+				System.out.println(insertData);
+				String name = (String) insertData.get("name"); 
+				String value = (String) insertData.get("value");
+				
+			}
+   		}
+		   //knowledgeService.uploadKnowledge(knowledgeDto);
+//	   		for(int k =0; k<knowledgeDto.size();k++) {
+//	   			knowledgeService.uploadKnowledge(knowledgeDto.get(k));
+//	   		}
+//		 	for(int i =0; i<quizDto.size();i++) {
+//		 		quizService.uploadQuiz(quizDto.get(i));
+//		 	}
+		 	//quizService.uploadQuiz(quizDto);
+		 	//mv.setViewName("redirect:page");
+		 	//return mv;
+//	 }
+//   @PostMapping("/contents")
+//   public ModelAndView UploadContents(@RequestBody List<QuizDTO> quizDto, @RequestBody KnowledgeDTO knowledgeDto /*,@RequestParam("formData") String formData*/) {
+//	   System.out.println(quizDto.get(0).getCommentary());
+//	   ModelAndView mv = new ModelAndView();
+//	   knowledgeService.uploadKnowledge(knowledgeDto);
+//	   for(int i =0; i<quizDto.size();i++) {
+//		   quizService.uploadQuiz(quizDto.get(i));
+//		   
+//	   }
+//	   mv.setViewName("redirect:page");
+//	   return mv;
+//   }
 }

@@ -25,7 +25,7 @@ label {
     margin-top: 23px;
     margin-left: 50px;
 }
-.myBtn{
+#infoBtn{
 	width: 250px;
     height: 40px;
     border-style: solid;
@@ -34,31 +34,24 @@ label {
     border-color: #91ACCC;
     font-size: 20px;
 }
-
-#myBtnDiv{
-	padding: 10% 10% 5% 10%;
-}
-a{/* 태그 색상 변경 */
-	float: right;
-	color: black; 
+#infoDiv{
+	padding: 10% 30% 5% 30%;
 }
 </style>
-</head> 
+</head>
 <body>
 	<div class="container">
 		<%@include file="../common/header.jsp"%>
 		<div class="content">
 		<div style="display: block; width:100%;">
-    	<h1>마이페이지</h1><br>
-			<input type="button" value="오답노트" onclick="window.location.href='/mypage/wrong/${sessionScope.user_seq}'">
-		<form action="<%=request.getContextPath()%>/user/info/${userDto.userSeq}" method="post">
+		<form action="<%=request.getContextPath()%>/user/newInfo/${userDto.userSeq}" method="post">
 			<br>
-			<p>오늘의 지식과 퀴즈를 확인해보셨나요?</p>
+			<p>당신의 새로운 정보를 입력해주세요!</p>
 			<h1>${userDto.nickname}님!</h1><br><br>
 			<b>유저정보</b>
 			<div class="myDiv">
 				<label>닉네임</label>
-				<div style="display: inline;"> ${userDto.nickname}</div>
+				<div style="display: inline;"> <input type="text" value="${userDto.nickname}" name="nickname"></div>
 			</div>
 			<div class="myDiv">
 				<label>이메일</label>
@@ -66,17 +59,15 @@ a{/* 태그 색상 변경 */
 			</div>
 			<div class="myDiv">
 				<label>phone</label>
-				<div style="display: inline;"> ${userDto.phone}</div>
+				<div style="display: inline;"> <input type="text" value="${userDto.phone}" name="phone"></div>
 			</div>
 			<div class="myDiv">
 				<label>가입일자</label>
 				<div style="display: inline;"> ${userDto.insertDate}</div>
 			</div>
-			<a href="">구독 취소하기</a>
-			<div id="myBtnDiv">
-				<input type="submit" value="정보수정하기" class="myBtn">
-				<input type="button" value="오답노트" class="myBtn">
-			</div>
+			<div id="infoDiv">
+				<input type="submit" value="수정하기" id="infoBtn">
+			</div>	
 			</form>
 		</div>
 		</div>
