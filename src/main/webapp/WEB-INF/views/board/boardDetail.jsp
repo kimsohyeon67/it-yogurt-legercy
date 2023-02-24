@@ -87,7 +87,13 @@
                                     <c:set var="boardSeq" value="${List.boardSeq}"/>
                                     <c:set var="commentSeq" value="${List.commentSeq}"/>
                                         <%-- <a style="font-size:small" href="/board/comment/${List.commentSeq}">수정</a>  --%>
-                                        <a style="font-size:small; text-decoration: none;" href="/board/comment/${boardSeq }/${commentSeq}">삭제</a>
+                                        <c:choose>
+											<c:when test="${sessionScope.user_seq eq 1 || sessionScope.user_seq eq List.userSeq}">
+                                       			<a style="font-size:small; text-decoration: none;" href="/board/comment/${boardSeq }/${commentSeq}">삭제</a>
+                                       		</c:when>
+                                       		<c:otherwise>
+                                       		</c:otherwise>
+                                       	</c:choose>
                                     </div>
                                 </div>
                                 <div class="card-body">
