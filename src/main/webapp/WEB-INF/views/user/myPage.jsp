@@ -77,7 +77,7 @@ label {
 				<label>가입일자</label>
 				<div style="display: inline;"> ${userDto.insertDate}</div>
 			</div>
-			<p id="deleteInfo"onclick="goDelete()">구독 취소하기</p>
+			<p id="deleteInfo"onclick="goDelete()">회원탈퇴</p>
 			<div id="myBtnDiv">
 				<input type="submit" value="정보수정하기" class="myBtn">
 				<input type="button" value="오답노트" class="myBtn"  onclick="window.location.href='/mypage/wrong/${sessionScope.user_seq}'">
@@ -89,13 +89,13 @@ label {
 		<%@include file="../common/footer.jsp"%>
 	</div>
 <script type="text/javascript">
-	function goDelete(){
-		let con = confirm('정말 구독을 취소하시겠어요?');
+	function goDelete(e){
+		let con = confirm('정말 IT-Yogurt를 떠나시겠어요...?');
 		if(con == true){
-			alert('구독 취소되었습니다.');
+			alert('탈퇴되었습니다. 나중에 또 공부하러 오세요!');
 			location.href="${pageContext.request.contextPath}/mypage/cancel/${sessionScope.user_seq}";
 		}else{
-			location.href="${pageContext.request.contextPath}/mypage/info/${userDto.userSeq}";
+			e.preventDefalut();
 		}
 	}
 </script>	
