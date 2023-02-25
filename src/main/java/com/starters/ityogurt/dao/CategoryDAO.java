@@ -13,12 +13,16 @@ public interface CategoryDAO {
 	CategoryDTO getCategoryByCategorySeq(String categorySeq);
 
 	int countAllSub();
+	int countAllCategory();
+	
 	List<CategoryDTO> getCategoryByType(String type, String typeValue);
 	CategoryDTO getCategoryByAllType(CategoryDTO categoryDTO);
 	
 	void insertCategory(CategoryDTO categoryDTO);
 
 	int findWeakCategoryByCategorySeq(int userSeq);
+
+	CategoryDTO getCategoryByUserSeq(int userSeq);
 
 
 }
