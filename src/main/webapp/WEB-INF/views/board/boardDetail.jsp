@@ -227,8 +227,11 @@ function delboard(boardSeq){
 		alert("삭제가 취소되었습니다.");		
 	}
 }
+// 개행 => <br>
+var text = document.getElementById("content").value;
+text = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
 //<br> => enter
-var text = document.getElementById("textarea").value;
+var text = document.getElementById("content").value;
 text = text.replaceAll("<br>", "\r\n");
 </script>
 </html>

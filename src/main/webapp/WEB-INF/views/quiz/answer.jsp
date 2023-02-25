@@ -121,6 +121,7 @@
 							</table>
 							<div style="width:100%;margin-bottom:80px;">
 								<input type="button" value="매일지식 목록 바로가기" onclick="goKnowledgeList()" id="listBtn">
+								<input type="button" value="목록" onclick="goKnowledgeList()" id="listBtn">
 							</div>
 					</div><!-- 전체 div -->
 		</div><!-- content -->
