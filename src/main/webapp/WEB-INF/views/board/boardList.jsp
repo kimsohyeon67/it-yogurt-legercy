@@ -45,6 +45,9 @@ line-height: inherit;
 .form {
 	margin-top: 20%;
 }
+th{
+	width: 300px;
+}
 </style>
 </head>
 <body>

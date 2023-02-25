@@ -21,4 +21,6 @@ public interface CategoryService {
 
 	CategoryDTO getCategoryByUserSeq(int userSeq);
     
+	CategoryDTO getCategoryByUserSeq(int userSeq);
+    
 }

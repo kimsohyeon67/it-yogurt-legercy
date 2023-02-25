@@ -37,6 +37,9 @@ import com.starters.ityogurt.service.UserService;
 import com.starters.ityogurt.util.Criteria;
 import com.starters.ityogurt.util.Paging;
 
+import jakarta.servlet.http.HttpSession;
+
+
 @Controller
 public class MyPageController {
 
@@ -47,13 +50,6 @@ public class MyPageController {
     @Autowired
     @Qualifier("categoryservice")
     CategoryService categoryService;
-
-    @Autowired
-    @Qualifier("recodequizservice")
-    LearnRecordQuizService service;
-
-    @Autowired
-    LearnRecordService recodeservice;
 
     @Autowired
     QuizService quizservice;
@@ -90,14 +86,17 @@ public class MyPageController {
     }
 
     @PostMapping("/mypage/newInfo/{user_seq}")
-    public ModelAndView newInfo(@PathVariable("user_seq") String user_seq, UserDTO userDto) {
+    public ModelAndView newInfo(@PathVariable("user_seq") String user_seq, UserDTO userDto, String newPass) throws Exception {
         ModelAndView mv = new ModelAndView();
+        UserRestController userRestController = new UserRestController();//암호화때문에 객체 생성해줌
+        
         int userSeq = Integer.parseInt(user_seq);
-        System.out.println("유저번호2"+userSeq);
-        System.out.println(userDto.getNickname()+userDto.getEmail()+userDto.getPhone());
+        String pwd = userRestController.ConvertPassword(newPass); //수정한 암호는 암호화 해주기
+        
         Map<Object,Object> map = new HashMap<>();
         map.put("nickname", userDto.getNickname());
         map.put("phone", userDto.getPhone());
+        map.put("password", pwd);
         map.put("userSeq", userSeq);
         userService.updateUserInfo(map);
         userDto = userService.getUserInfo(userSeq);
@@ -108,16 +107,24 @@ public class MyPageController {
     }
     
     @GetMapping("/mypage/cancel/{user_seq}")
-    public ModelAndView cancel(@PathVariable("user_seq") String user_seq) {
+    public ModelAndView cancel(@PathVariable("user_seq") String user_seq, HttpSession session) {
     	ModelAndView mv = new ModelAndView();
     	int userSeq = Integer.parseInt(user_seq);
     	userService.deleteUser(userSeq);
-    	
-    	mv.setViewName("user/login");
+    	session.invalidate();
+    	mv.setViewName("/main");
     	return mv;
     }
-    
 
+    // 오답노트
+    
+    @Autowired
+    @Qualifier("recodequizservice")
+    LearnRecordQuizService service;
+
+    @Autowired
+    LearnRecordService recodeservice;
+    
     // 틀린 문제 개수 가져오기. limit 기본값 : 5
     @GetMapping("/mypage/wrong/{user_seq}/list")
     @ResponseBody
@@ -149,6 +156,7 @@ public class MyPageController {
         recodeservice.updateLearnData(Integer.parseInt(data.getUserChoice()), data.getIsRight(),
             data.getUserSeq(), data.getQuizSeq());
     }
+
 
     // 많이 틀린 문제 페이지
     @GetMapping("/mypage/weak/{user_seq}/list")
